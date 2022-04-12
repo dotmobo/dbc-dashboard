@@ -84,16 +84,26 @@ const DeadBros = () => {
       <h3>My tokens</h3>
       <div className='row'>
         <div className='col'>
-          <div>
-            <b>{dead !== undefined && dead.name}: </b>
-            {dead !== undefined && Math.floor(dead.balance / 1e18)}
-          </div>
+          {dead === undefined && (
+            <div>No Dead tokens found in your wallet !</div>
+          )}
+          {dead !== undefined && (
+            <div>
+              <b>{dead.name}</b>: {Math.floor(dead.balance / 1e18)}
+            </div>
+          )}
         </div>
       </div>
       <hr />
       <h3>My cimetary</h3>
       <div className='row'>
+        {bros !== undefined && bros.length === 0 && (
+          <div className='col'>
+            <div>No DeadBrothers found in your wallet !</div>
+          </div>
+        )}
         {bros !== undefined &&
+          bros.length > 0 &&
           bros.map((bro) => (
             <div key={bro.identifier} className='col mt-4 mx-auto'>
               <div>
