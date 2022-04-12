@@ -3,9 +3,13 @@ import { useGetAccountInfo, DappUI } from '@elrondnetwork/dapp-core';
 import { contractAddress } from 'config';
 import axios from 'axios';
 
-import { faArrowUp, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowUp,
+  faCheck,
+  faGamepad
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 interface Bro {
   identifier: string;
@@ -64,13 +68,13 @@ const DeadBros = () => {
   };
 
   const getAttributes = (bro: Bro): Array<string> => {
-    return bro.metadata.attributes.map(
+    return bro.metadata?.attributes?.map(
       (x: any) => `${x.trait_type} ${x.value}`
     );
   };
 
   const getAttributesDiv = (bro: Bro) => {
-    return getAttributes(bro).map((attribute) => (
+    return getAttributes(bro)?.map((attribute) => (
       <div key={attribute}>{attribute}</div>
     ));
   };
@@ -95,7 +99,7 @@ const DeadBros = () => {
               <div>
                 <b>{bro.name}</b>
               </div>
-              <div>Rarity {Math.floor(bro.metadata.rarity.rarityScore)}</div>
+              <div>Rarity {Math.floor(bro.metadata?.rarity?.rarityScore)}</div>
               <div>
                 <div>
                   <OverlayTrigger
@@ -122,7 +126,7 @@ const DeadBros = () => {
                 </button>
                 <button className='btn-primary ml-1' onClick={play}>
                   PLAY&nbsp;
-                  <FontAwesomeIcon icon={faCheck} className='text' />
+                  <FontAwesomeIcon icon={faGamepad} className='text' />
                 </button>
               </div>
             </div>
