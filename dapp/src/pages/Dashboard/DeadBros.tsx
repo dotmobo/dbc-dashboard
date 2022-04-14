@@ -16,7 +16,8 @@ import {
   faGamepad,
   faBolt,
   faShoppingCart,
-  faSkull
+  faSkull,
+  faCoins
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -75,7 +76,9 @@ const DeadBros = () => {
 
   return (
     <div className='col mt-4 col-md-12'>
-      <h3>$DEAD Token</h3>
+      <h3>
+        $DEAD Token <FontAwesomeIcon icon={faCoins} className='text' />
+      </h3>
       <div className='row'>
         <div className='col'>
           {dead === undefined && (
