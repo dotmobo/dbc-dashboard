@@ -17,7 +17,8 @@ import {
   faBolt,
   faShoppingCart,
   faSkull,
-  faCoins
+  faCoins,
+  faDownload
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -74,6 +75,16 @@ const DeadBros = () => {
     ));
   };
 
+  const downloadImg = (bro: Bro) => {
+    axios.get<any>(bro.url, { responseType: 'blob' }).then((response) => {
+      const blob = new Blob([response.data], { type: 'image/png' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `${bro.name}.png`;
+      link.click();
+    });
+  };
+
   return (
     <div className='col mt-4 col-md-12'>
       <h3>
@@ -128,6 +139,14 @@ const DeadBros = () => {
                 </div>
               </div>
               <div>
+                <div className='w-100'></div>
+                <button
+                  className='btn btn-primary ml-1 mt-2'
+                  onClick={() => downloadImg(bro)}
+                >
+                  DOWNLOAD&nbsp;
+                  <FontAwesomeIcon icon={faDownload} className='text' />
+                </button>
                 <div className='w-100'></div>
                 <a
                   className='btn btn-primary ml-1 mt-2'
