@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useGetAccountInfo, DappUI } from '@elrondnetwork/dapp-core';
-import { contractAddress } from 'config';
+import { contractAddress, elrondExplorerUrl } from 'config';
 
 const TopInfo = () => {
   const { address, account } = useGetAccountInfo();
@@ -9,13 +9,35 @@ const TopInfo = () => {
     <div className='text-white' data-testid='topInfo'>
       <div className='mb-1'>
         <span className='mr-1'>Your address:</span>
-        <span data-testid='accountAddress'> {address}</span>
+        <span data-testid='accountAddress'>
+          <a
+            className='addressLink'
+            href={elrondExplorerUrl + '/accounts/' + address}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {address.substring(0, 8) +
+              '...' +
+              address.substring(address.length - 4)}
+          </a>
+        </span>
       </div>
-      {/* <div className='mb-4'>
-        <span className='opacity-6 mr-1'>Contract address:</span>
-        <span data-testid='contractAddress'> {contractAddress}</span>
+      <div className='mb-1'>
+        <span className='mr-1'>Contract address:</span>
+        <span data-testid='contractAddress'>
+          <a
+            className='addressLink'
+            href={elrondExplorerUrl + '/accounts/' + contractAddress}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {contractAddress.substring(0, 8) +
+              '...' +
+              contractAddress.substring(contractAddress.length - 4)}
+          </a>
+        </span>
       </div>
-      <div>
+      {/* <div>
         <h3 className='py-2'>
           <DappUI.Denominate value={account.balance} data-testid='balance' />
         </h3>

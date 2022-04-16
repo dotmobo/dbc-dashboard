@@ -77,6 +77,34 @@ html {
 
 /* Dashboard
 -------------------------------------------------- */
+.addressLink {
+  color: $white;
+  &:hover {
+    color: $white;
+  }
+}
+
+.tooltip-inner {
+  background-color: $primary !important; /* Set box color to red */
+  color: $white !important; /* Set text color to black */
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: $primary; /* Set arrow color to red */
+}
+
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: $primary; /* Set arrow color to red */
+}
+
+.tooltip.bs-tooltip-start .tooltip-arrow::before {
+  border-left-color: $primary; /* Set arrow color to red */
+}
+
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+  border-right-color: $primary; /* Set arrow color to red */
+}
+
 .action-btn {
   display: flex;
   flex-direction: column;

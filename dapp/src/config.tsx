@@ -8,3 +8,4 @@ export const nftsCollectionId = 'DEADBROS-bf822f';
 export const deadTokenId = 'DEADBROS-388e63';
 export const deadRareUrl = 'https://deadrare.io';
 export const trustMarketUrl = 'https://trust.market';
+export const elrondExplorerUrl = 'https://explorer.elrond.com';
