@@ -1,7 +1,7 @@
 export const contractAddress =
   'erd1qqqqqqqqqqqqqpgqzau4u3scnqtthpu7p6fjp0fpwvpcagqtys5sezss7w';
 
-export const dAppName = 'DeadBrothers Club Dashboard';
+export const dAppName = 'DeadBrothers Dashboard';
 
 export const elrondApiUrl = 'https://api.elrond.com';
 export const nftsCollectionId = 'DEADBROS-bf822f';

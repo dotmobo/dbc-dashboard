@@ -15,7 +15,7 @@ const Home = () => {
               </h2>
 
               <p className='mb-3'>
-                Welcome to the DeadBrothers Club Dashboard.
+                Welcome to the DeadBrothers Dashboard.
                 <br /> Login using your Elrond wallet.
               </p>
 
