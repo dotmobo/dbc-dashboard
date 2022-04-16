@@ -127,7 +127,7 @@ const DeadBros = () => {
                 <div>
                   <OverlayTrigger
                     key='attributes'
-                    placement='right'
+                    placement='bottom'
                     overlay={
                       <Tooltip id='tooltip-attributes'>
                         {getAttributesDiv(bro)}
