@@ -47,7 +47,7 @@ const DeadBros = () => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${elrondApiUrl}/accounts/${address}/nfts?collections=${nftsCollectionId}`
+        `${elrondApiUrl}/accounts/${address}/nfts?size=10000&collections=${nftsCollectionId}`
       )
       .then((response) => {
         setBrosList(response.data);
@@ -70,9 +70,12 @@ const DeadBros = () => {
   };
 
   const getAttributesDiv = (bro: Bro) => {
-    return getAttributes(bro)?.map((attribute) => (
-      <div key={attribute}>{attribute}</div>
-    ));
+    const attributes = getAttributes(bro);
+    return !!attributes ? (
+      attributes?.map((attribute) => <div key={attribute}>{attribute}</div>)
+    ) : (
+      <div>Attributes not found</div>
+    );
   };
 
   const downloadImg = (bro: Bro) => {
@@ -105,6 +108,8 @@ const DeadBros = () => {
       <hr />
       <h3>
         #DeadBrothers <FontAwesomeIcon icon={faSkull} className='text' />
+        &nbsp;
+        {bros !== undefined && bros.length > 0 && <span>({bros.length})</span>}
       </h3>
       <div className='row'>
         {bros !== undefined && bros.length === 0 && (
@@ -122,7 +127,12 @@ const DeadBros = () => {
               <div>
                 <b>{bro.name}</b>
               </div>
-              <div>Rarity {Math.floor(bro.metadata?.rarity?.rarityScore)}</div>
+              <div>
+                Rarity&nbsp;
+                {!!bro.metadata?.rarity?.rarityScore
+                  ? Math.floor(bro.metadata?.rarity?.rarityScore)
+                  : 'unknown'}
+              </div>
               <div>
                 <div>
                   <OverlayTrigger
