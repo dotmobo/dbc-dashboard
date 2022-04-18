@@ -5,7 +5,9 @@ import {
   deadRareUrl,
   deadTokenId,
   elrondApiUrl,
+  lkFarmName,
   nftsCollectionId,
+  distributionAddress,
   trustMarketUrl
 } from 'config';
 import axios from 'axios';
@@ -18,7 +20,8 @@ import {
   faShoppingCart,
   faSkull,
   faCoins,
-  faDownload
+  faDownload,
+  faTractor
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -37,11 +40,18 @@ interface Dead {
   balance: number;
 }
 
+interface LockedLPStaked {
+  balance: string;
+  decimals: number;
+  name: string;
+}
+
 const DeadBros = () => {
   const { address, account } = useGetAccountInfo();
 
   const [bros, setBrosList] = React.useState<TBrosList>();
   const [dead, setDeadToken] = React.useState<Dead>();
+  const [lkFarm, setLKMexFarm] = React.useState<LockedLPStaked>();
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -60,6 +70,17 @@ const DeadBros = () => {
       .get<any>(`${elrondApiUrl}/accounts/${address}/tokens/${deadTokenId}`)
       .then((response) => {
         setDeadToken(response.data);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    axios
+      .get<any>(
+        `${elrondApiUrl}/accounts/${distributionAddress}/nfts/${lkFarmName}`
+      )
+      .then((response) => {
+        setLKMexFarm(response.data);
       });
   }, []);
 
@@ -88,10 +109,33 @@ const DeadBros = () => {
     });
   };
 
+  const formatBigNumber = (x: number) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   return (
     <div className='col mt-4 col-md-12'>
       <h3>
-        $DEAD Token <FontAwesomeIcon icon={faCoins} className='text' />
+        Staking Farms for rewards&nbsp;
+        <FontAwesomeIcon icon={faTractor} className='text' />
+      </h3>
+      <div className='row'>
+        <div className='col'>
+          {lkFarm === undefined && (
+            <div>No MEX/LKMEX farms found for rewards !</div>
+          )}
+          {lkFarm !== undefined && (
+            <div>
+              <b>MEX/LKMEX</b>:&nbsp;
+              {formatBigNumber(Math.floor(parseInt(lkFarm.balance) / 1e18))}
+              &nbsp;{lkFarm.name}
+            </div>
+          )}
+        </div>
+      </div>
+      <hr />
+      <h3>
+        My $DEAD Tokens <FontAwesomeIcon icon={faCoins} className='text' />
       </h3>
       <div className='row'>
         <div className='col'>
@@ -100,14 +144,15 @@ const DeadBros = () => {
           )}
           {dead !== undefined && (
             <div>
-              <b>{dead.name}</b>: {Math.floor(dead.balance / 1e18)}
+              <b>{dead.name}</b>:&nbsp;
+              {formatBigNumber(Math.floor(dead.balance / 1e18))}
             </div>
           )}
         </div>
       </div>
       <hr />
       <h3>
-        #DeadBrothers <FontAwesomeIcon icon={faSkull} className='text' />
+        My #DeadBrothers <FontAwesomeIcon icon={faSkull} className='text' />
         &nbsp;
         {bros !== undefined && bros.length > 0 && <span>({bros.length})</span>}
       </h3>
