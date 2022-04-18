@@ -8,7 +8,8 @@ import {
   lkFarmName,
   nftsCollectionId,
   distributionAddress,
-  trustMarketUrl
+  trustMarketUrl,
+  gatewayDeadRareUrl
 } from 'config';
 import axios from 'axios';
 
@@ -21,7 +22,8 @@ import {
   faSkull,
   faCoins,
   faDownload,
-  faTractor
+  faTractor,
+  faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -46,12 +48,17 @@ interface LockedLPStaked {
   name: string;
 }
 
+interface FloorPriceDR {
+  floorPrice: string;
+}
+
 const DeadBros = () => {
   const { address, account } = useGetAccountInfo();
 
   const [bros, setBrosList] = React.useState<TBrosList>();
   const [dead, setDeadToken] = React.useState<Dead>();
   const [lkFarm, setLKMexFarm] = React.useState<LockedLPStaked>();
+  const [floorPriceDR, setFloorPriceDR] = React.useState<FloorPriceDR>();
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -82,6 +89,19 @@ const DeadBros = () => {
       .then((response) => {
         setLKMexFarm(response.data);
       });
+  }, []);
+
+  React.useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    axios({
+      url: `${gatewayDeadRareUrl}`,
+      method: 'post',
+      data: {
+        query: `{floorPrice(collection: "${nftsCollectionId}")}`
+      }
+    }).then((response) => {
+      setFloorPriceDR(response.data.data);
+    });
   }, []);
 
   const getAttributes = (bro: Bro): Array<string> => {
@@ -115,6 +135,26 @@ const DeadBros = () => {
 
   return (
     <div className='col mt-4 col-md-12'>
+      <h3>
+        Floor Price&nbsp;
+        <FontAwesomeIcon icon={faDollarSign} className='text' />
+      </h3>
+      <div className='row'>
+        <div className='col'>
+          {floorPriceDR === undefined && <div>No floor price found !</div>}
+          {floorPriceDR !== undefined && (
+            <div>
+              <img
+                src='https://deadrare.io/_next/image?url=%2Ffavicon.png&w=16&q=75'
+                alt='deadrare'
+              />
+              <b>DeadRare</b>:&nbsp;
+              {floorPriceDR?.floorPrice}&nbsp;EGLD
+            </div>
+          )}
+        </div>
+      </div>
+      <hr />
       <h3>
         Staking Farms for rewards&nbsp;
         <FontAwesomeIcon icon={faTractor} className='text' />
