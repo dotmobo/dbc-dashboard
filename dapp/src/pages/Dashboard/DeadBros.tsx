@@ -9,7 +9,8 @@ import {
   nftsCollectionId,
   distributionAddress,
   trustMarketUrl,
-  gatewayDeadRareUrl
+  gatewayDeadRareUrl,
+  gatewayTrustMarket
 } from 'config';
 import axios from 'axios';
 
@@ -27,6 +28,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { values, min } from 'lodash-es';
 
 interface Bro {
   identifier: string;
@@ -48,7 +50,7 @@ interface LockedLPStaked {
   name: string;
 }
 
-interface FloorPriceDR {
+interface FloorPrice {
   floorPrice: string;
 }
 
@@ -58,7 +60,8 @@ const DeadBros = () => {
   const [bros, setBrosList] = React.useState<TBrosList>();
   const [dead, setDeadToken] = React.useState<Dead>();
   const [lkFarm, setLKMexFarm] = React.useState<LockedLPStaked>();
-  const [floorPriceDR, setFloorPriceDR] = React.useState<FloorPriceDR>();
+  const [floorPriceDR, setFloorPriceDR] = React.useState<FloorPrice>();
+  const [floorPriceTR, setFloorPriceTR] = React.useState<FloorPrice>();
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -104,6 +107,34 @@ const DeadBros = () => {
     });
   }, []);
 
+  React.useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    axios
+      .get<any>(
+        `${gatewayTrustMarket}/getTokenItemsForSale/${nftsCollectionId}`
+      )
+      .then((response) => {
+        setFloorPriceTR({
+          floorPrice: calculateFloorPriceTR(response.data)
+        } as FloorPrice);
+      });
+  }, []);
+
+  const calculateFloorPriceTR = (data: any): string => {
+    const getMin = !!data
+      ? min(
+          values(data)
+            .filter((x: any) =>
+              x.deadline !== undefined ? parseInt(x.deadline) === 0 : false
+            )
+            .map((x: any) =>
+              x.min_bid !== undefined ? parseInt(x.min_bid) / 1e18 : 0
+            )
+        )?.toString()
+      : 'unknown';
+    return !!getMin ? getMin : 'unknown';
+  };
+
   const getAttributes = (bro: Bro): Array<string> => {
     return bro.metadata?.attributes?.map(
       (x: any) => `${x.trait_type} ${x.value}`
@@ -141,15 +172,28 @@ const DeadBros = () => {
       </h3>
       <div className='row'>
         <div className='col'>
-          {floorPriceDR === undefined && <div>No floor price found !</div>}
+          {floorPriceDR === undefined && <div>No DR floor price found !</div>}
           {floorPriceDR !== undefined && (
             <div>
               <img
                 src='https://deadrare.io/_next/image?url=%2Ffavicon.png&w=16&q=75'
                 alt='deadrare'
+                height={16}
               />
               <b>DeadRare</b>:&nbsp;
               {floorPriceDR?.floorPrice}&nbsp;EGLD
+            </div>
+          )}
+          {floorPriceTR === undefined && <div>No TR floor price found !</div>}
+          {floorPriceTR !== undefined && (
+            <div>
+              <img
+                src='https://trust.market/static/media/TR.badc882b.webp'
+                alt='trustmarket'
+                height={16}
+              />
+              <b>TrustMarket</b>:&nbsp;
+              {floorPriceTR?.floorPrice}&nbsp;EGLD
             </div>
           )}
         </div>
