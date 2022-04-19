@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Actions from './Actions';
+import Mint from './Mint';
 import TopInfo from './TopInfo';
 import Transactions from './Transactions';
 import DeadBros from './DeadBros';
@@ -14,7 +14,7 @@ const Dashboard = () => {
               <div className='card rounded border-0 bg-primary'>
                 <div className='card-body text-center p-4'>
                   <TopInfo />
-                  {/* <Actions /> */}
+                  {/* <Mint /> */}
                 </div>
               </div>
               <DeadBros />
