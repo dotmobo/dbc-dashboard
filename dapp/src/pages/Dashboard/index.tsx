@@ -18,6 +18,7 @@ const Dashboard = () => {
                 </div>
               </div>
               <DeadBros />
+              <Transactions />
             </div>
           </div>
         </div>
