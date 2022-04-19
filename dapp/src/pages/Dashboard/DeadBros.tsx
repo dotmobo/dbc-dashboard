@@ -29,6 +29,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { values, min } from 'lodash-es';
+import { ReactComponent as MexIcon } from '../../assets/img/mex.svg';
+import { ReactComponent as DeadIcon } from '../../assets/img/dead.svg';
 
 interface Bro {
   identifier: string;
@@ -206,11 +208,12 @@ const DeadBros = () => {
       <div className='row'>
         <div className='col'>
           {lkFarm === undefined && (
-            <div>No MEX/LKMEX farms found for rewards !</div>
+            <div>No LKMEX farms found for rewards !</div>
           )}
           {lkFarm !== undefined && (
             <div>
-              <b>MEX/LKMEX</b>:&nbsp;
+              <MexIcon className='mx-1' height={16} width={16} />
+              <b>LKMEX</b>:&nbsp;
               {formatBigNumber(Math.floor(parseInt(lkFarm.balance) / 1e18))}
               &nbsp;{lkFarm.name}
             </div>
@@ -228,6 +231,7 @@ const DeadBros = () => {
           )}
           {dead !== undefined && (
             <div>
+              <DeadIcon className='mx-1' height={16} width={16} />
               <b>{dead.name}</b>:&nbsp;
               {formatBigNumber(Math.floor(dead.balance / 1e18))}
             </div>
