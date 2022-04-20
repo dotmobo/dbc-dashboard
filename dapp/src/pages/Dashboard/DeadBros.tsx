@@ -10,7 +10,9 @@ import {
   distributionAddress,
   trustMarketUrl,
   gatewayDeadRareUrl,
-  gatewayTrustMarket
+  gatewayTrustMarket,
+  trustMarketIconUrl,
+  deadRareIconUrl
 } from 'config';
 import axios from 'axios';
 
@@ -177,11 +179,7 @@ const DeadBros = () => {
           {floorPriceDR === undefined && <div>No DR floor price found !</div>}
           {floorPriceDR !== undefined && (
             <div>
-              <img
-                src='https://deadrare.io/_next/image?url=%2Ffavicon.png&w=16&q=75'
-                alt='deadrare'
-                height={16}
-              />
+              <img src={deadRareIconUrl} alt='deadrare' height={16} />
               <b>DeadRare</b>:&nbsp;
               {floorPriceDR?.floorPrice}&nbsp;EGLD
             </div>
@@ -189,11 +187,7 @@ const DeadBros = () => {
           {floorPriceTR === undefined && <div>No TR floor price found !</div>}
           {floorPriceTR !== undefined && (
             <div>
-              <img
-                src='https://trust.market/static/media/TR.badc882b.webp'
-                alt='trustmarket'
-                height={16}
-              />
+              <img src={trustMarketIconUrl} alt='trustmarket' height={16} />
               <b>TrustMarket</b>:&nbsp;
               {floorPriceTR?.floorPrice}&nbsp;EGLD
             </div>

@@ -1,3 +1,4 @@
+import { deadBrothersClubUrl } from 'config';
 import React from 'react';
 import { ReactComponent as HeartIcon } from '../../../assets/img/heart.svg';
 
@@ -10,7 +11,7 @@ const Footer = () => {
             target: '_blank'
           }}
           className='d-flex align-items-center'
-          href='https://www.deadbrothers.club/'
+          href={deadBrothersClubUrl}
         >
           Made with <HeartIcon className='mx-1' /> by DeadBrothers Club.
         </a>
