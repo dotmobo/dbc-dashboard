@@ -25,7 +25,7 @@ const Mint = () => {
   const sendMintTransaction = async () => {
     const mintTransaction = {
       value: '300000000000000000',
-      data: 'mint one deadbrother',
+      data: 'Buy',
       receiver: contractAddress
     };
     await refreshAccount();
