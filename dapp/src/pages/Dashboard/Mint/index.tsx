@@ -9,6 +9,13 @@ import {
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { contractAddress } from 'config';
+import {
+  Address,
+  AddressValue,
+  ContractFunction,
+  ProxyProvider,
+  Query
+} from '@elrondnetwork/erdjs';
 
 const Mint = () => {
   const account = useGetAccountInfo();
@@ -20,12 +27,44 @@ const Mint = () => {
       string | null
     >(null);
 
+  // TODO we need to know the TM source code to decode SC reponse of getListings ...
+  // React.useEffect(() => {
+  //   const query = new Query({
+  //     address: new Address(contractAddress),
+  //     func: new ContractFunction('getListings'),
+  //     args: []
+  //   });
+  //   const proxy = new ProxyProvider(network.apiAddress);
+  //   proxy
+  //     .queryContract(query)
+  //     .then(({ returnData }) => {
+  //       const [encoded] = returnData;
+  //       switch (encoded) {
+  //         case undefined:
+  //           console.log('UNDEFINED');
+  //           break;
+  //         case '':
+  //           console.log('EMPTY');
+  //           break;
+  //         default: {
+  //           const decoded = Buffer.from(encoded, 'base64').toString('hex');
+  //           console.log(decoded);
+  //           break;
+  //         }
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error('Unable to call VM query', err);
+  //     });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
   const { sendTransactions } = transactionServices;
 
   const sendMintTransaction = async () => {
     const mintTransaction = {
       value: '300000000000000000',
-      data: 'Buy',
+      data: 'buy@4465616442726f7468657273@01',
       receiver: contractAddress
     };
     await refreshAccount();
