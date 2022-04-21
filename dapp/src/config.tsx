@@ -1,5 +1,5 @@
 // Elrond Network
-export const elrondNetwork = 'devnet'; // mainnet, testnet or devnet
+export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'DeadBrothers Dashboard';
 // Addresses
