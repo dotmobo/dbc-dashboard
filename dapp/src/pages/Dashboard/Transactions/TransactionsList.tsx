@@ -82,7 +82,14 @@ const TransactionList = ({
                       }}
                       title='View in Explorer'
                     >
-                      <DappUI.Trim data-testid='txHash' text={tx.txHash} />
+                      <DappUI.Trim
+                        data-testid='txHash'
+                        text={
+                          tx.txHash.substring(0, 8) +
+                          '...' +
+                          tx.txHash.substring(tx.txHash.length - 4)
+                        }
+                      />
                     </a>
                   </td>
                   <td>
