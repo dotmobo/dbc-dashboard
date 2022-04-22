@@ -33,6 +33,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { values, min } from 'lodash-es';
 import { ReactComponent as MexIcon } from '../../assets/img/mex.svg';
 import { ReactComponent as DeadIcon } from '../../assets/img/dead.svg';
+import { floor, divide } from 'mathjs';
 
 interface Bro {
   identifier: string;
@@ -177,7 +178,7 @@ const DeadBros = () => {
       <div className='row'>
         <div className='col'>
           {floorPriceDR === undefined && <div>No DR floor price found !</div>}
-          {floorPriceDR !== undefined && (
+          {floorPriceDR !== undefined && floorPriceDR.floorPrice !== undefined && (
             <div>
               <img src={deadRareIconUrl} alt='deadrare' height={16} />
               <b>DeadRare</b>:&nbsp;
@@ -185,7 +186,7 @@ const DeadBros = () => {
             </div>
           )}
           {floorPriceTR === undefined && <div>No TR floor price found !</div>}
-          {floorPriceTR !== undefined && (
+          {floorPriceTR !== undefined && floorPriceTR.floorPrice !== undefined && (
             <div>
               <img src={trustMarketIconUrl} alt='trustmarket' height={16} />
               <b>TrustMarket</b>:&nbsp;
@@ -204,14 +205,16 @@ const DeadBros = () => {
           {lkFarm === undefined && (
             <div>No LKMEX farms found for rewards !</div>
           )}
-          {lkFarm !== undefined && (
-            <div>
-              <MexIcon className='mx-1' height={16} width={16} />
-              <b>LKMEX</b>:&nbsp;
-              {formatBigNumber(Math.floor(parseInt(lkFarm.balance) / 1e18))}
-              &nbsp;{lkFarm.name}
-            </div>
-          )}
+          {lkFarm !== undefined &&
+            lkFarm.balance !== undefined &&
+            lkFarm.name !== undefined && (
+              <div>
+                <MexIcon className='mx-1' height={16} width={16} />
+                <b>LKMEX</b>:&nbsp;
+                {formatBigNumber(floor(divide(parseInt(lkFarm.balance), 1e18)))}
+                &nbsp;{lkFarm.name}
+              </div>
+            )}
         </div>
       </div>
       <hr />
@@ -223,13 +226,15 @@ const DeadBros = () => {
           {dead === undefined && (
             <div>No Dead tokens found in your wallet !</div>
           )}
-          {dead !== undefined && (
-            <div>
-              <DeadIcon className='mx-1' height={16} width={16} />
-              <b>{dead.name}</b>:&nbsp;
-              {formatBigNumber(Math.floor(dead.balance / 1e18))}
-            </div>
-          )}
+          {dead !== undefined &&
+            dead.balance !== undefined &&
+            dead.name !== undefined && (
+              <div>
+                <DeadIcon className='mx-1' height={16} width={16} />
+                <b>{dead.name}</b>:&nbsp;
+                {formatBigNumber(floor(divide(dead.balance, 1e18)))}
+              </div>
+            )}
         </div>
       </div>
       <hr />
@@ -257,7 +262,7 @@ const DeadBros = () => {
               <div>
                 Rarity&nbsp;
                 {!!bro.metadata?.rarity?.rarityScore
-                  ? Math.floor(bro.metadata?.rarity?.rarityScore)
+                  ? floor(bro.metadata?.rarity?.rarityScore)
                   : 'unknown'}
               </div>
               <div>
