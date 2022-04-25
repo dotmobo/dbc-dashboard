@@ -17,10 +17,9 @@ export const deadBrothersClubUrl = 'https://www.deadbrothers.club/';
 export const elrondApiUrl = 'https://api.elrond.com';
 export const deadRareUrl = 'https://deadrare.io';
 export const gatewayDeadRareUrl = 'https://gateway.deadrare.io';
-export const deadRareIconUrl =
-  'https://deadrare.io/_next/image?url=%2Ffavicon.png&w=16&q=75';
+export const deadRareIconUrl = process.env.PUBLIC_URL + '/deadrare.webp';
 export const trustMarketUrl = 'https://trust.market';
-export const gatewayTrustMarket = 'https://trustmarket.z01.azurefd.net';
-export const trustMarketIconUrl =
-  'https://www.trust.market/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ftrust.3c5a36bf.webp&w=128&q=75';
+export const gatewayTrustMarket =
+  'https://trustmarket-staging.azurewebsites.net';
+export const trustMarketIconUrl = process.env.PUBLIC_URL + '/trust.webp';
 export const elrondExplorerUrl = 'https://explorer.elrond.com';

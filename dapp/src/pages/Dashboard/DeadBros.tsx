@@ -132,30 +132,28 @@ const DeadBros = () => {
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
-      .get<any>(
-        `${gatewayTrustMarket}/getTokenItemsForSale/${nftsCollectionId}`
-      )
+      .get<any>(`${gatewayTrustMarket}/getFloorPrice/${nftsCollectionId}/EGLD`)
       .then((response) => {
         setFloorPriceTR({
-          floorPrice: calculateFloorPriceTR(response.data)
+          floorPrice: response.data
         } as FloorPrice);
       });
   }, []);
 
-  const calculateFloorPriceTR = (data: any): string => {
-    const getMin = !!data
-      ? min(
-          values(data)
-            .filter((x: any) =>
-              x.deadline !== undefined ? parseInt(x.deadline) === 0 : false
-            )
-            .map((x: any) =>
-              x.min_bid !== undefined ? parseInt(x.min_bid) / 1e18 : 0
-            )
-        )?.toString()
-      : 'unknown';
-    return !!getMin ? getMin : 'unknown';
-  };
+  // const calculateFloorPriceTR = (data: any): string => {
+  //   const getMin = !!data
+  //     ? min(
+  //         values(data)
+  //           .filter((x: any) =>
+  //             x.deadline !== undefined ? parseInt(x.deadline) === 0 : false
+  //           )
+  //           .map((x: any) =>
+  //             x.min_bid !== undefined ? parseInt(x.min_bid) / 1e18 : 0
+  //           )
+  //       )?.toString()
+  //     : 'unknown';
+  //   return !!getMin ? getMin : 'unknown';
+  // };
 
   const getAttributes = (bro: Bro): Array<string> => {
     return bro.metadata?.attributes?.map(
