@@ -279,3 +279,24 @@ footer {
 img:hover {
   cursor: zoom-in;
 }
+
+.dapp-core-ui-component .btn-primary {
+  background-color: $primary !important;
+  border-color: $primary !important;
+  color: $white !important;
+}
+
+.dapp-core-ui-component .btn-primary:hover, .dapp-core-ui-component .btn-primary:focus {
+  background-color: $primary !important;
+  border-color: $primary !important;
+  color: $white !important;
+  opacity: 0.9 !important;
+}
+
+
+.dapp-core-ui-component .btn-primary:active {
+  background-color: $primary !important;
+  border-color: $primary !important;
+  color: $white !important;
+  opacity: 0.8 !important;
+}
