@@ -303,7 +303,12 @@ const DeadBros = () => {
                       </Tooltip>
                     }
                   >
-                    <img src={bro.url} alt={bro.identifier} width='222' />
+                    <img
+                      src={bro.url}
+                      alt={bro.identifier}
+                      width='222'
+                      className='imgBorder'
+                    />
                   </OverlayTrigger>
                 </div>
               </div>
