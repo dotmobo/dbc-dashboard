@@ -264,12 +264,21 @@ const DeadBros = () => {
       </h3>
       <div className='row'>
         <div className='col'>
-          {rewards === undefined && <div>No rewards found for rewards !</div>}
+          {(rewards === undefined || rewards.length === 0) && (
+            <div>No weekly rewards found !</div>
+          )}
           {rewards !== undefined && rewards.length > 0 && (
             <div>
-              <i>Since {getLastMonday().format('YYYY-MM-DD')}</i>
+              <i>Since {getLastMonday().format('YYYY-MM-DD')}:</i>
               {rewards.map((reward: any) => (
                 <div key={reward.txHash}>
+                  {reward.action?.arguments?.transfers[0]?.name === 'DEAD' && (
+                    <DeadIcon className='mx-1' height={16} width={16} />
+                  )}
+                  {reward.action?.arguments?.transfers[0]?.name ===
+                    'LockedMEX' && (
+                    <MexIcon className='mx-1' height={16} width={16} />
+                  )}
                   <b>{reward.action?.arguments?.transfers[0]?.name}</b>
                   :&nbsp;
                   {formatBigNumber(
