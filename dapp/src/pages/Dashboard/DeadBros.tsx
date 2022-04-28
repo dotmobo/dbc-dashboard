@@ -18,9 +18,7 @@ import {
 import axios from 'axios';
 
 import {
-  faArrowUp,
-  faCheck,
-  faGamepad,
+  faGift,
   faBolt,
   faShoppingCart,
   faSkull,
@@ -35,6 +33,7 @@ import { values, min } from 'lodash-es';
 import { ReactComponent as MexIcon } from '../../assets/img/mex.svg';
 import { ReactComponent as DeadIcon } from '../../assets/img/dead.svg';
 import { divide, floor } from 'mathjs';
+import moment from 'moment';
 
 interface Bro {
   identifier: string;
@@ -60,6 +59,13 @@ interface FloorPrice {
   floorPrice: string;
 }
 
+interface Reward {
+  txHash: string;
+  action: any;
+}
+
+type Rewards = Array<Reward>;
+
 const DeadBros = () => {
   const { address, account } = useGetAccountInfo();
 
@@ -69,6 +75,7 @@ const DeadBros = () => {
   const [egldMexFarm, setEgldMexFarm] = React.useState<LockedLPStaked>();
   const [floorPriceDR, setFloorPriceDR] = React.useState<FloorPrice>();
   const [floorPriceTR, setFloorPriceTR] = React.useState<FloorPrice>();
+  const [rewards, setRewards] = React.useState<Rewards>();
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -99,6 +106,22 @@ const DeadBros = () => {
         )
         .then((response) => {
           setLKMexFarm(response.data);
+        });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    if (!!elrondApiUrl && !!distributionAddress) {
+      axios
+        .get<any>(
+          `${elrondApiUrl}/accounts/${distributionAddress}/transactions?size=10000&sender=${distributionAddress}&status=success&after=${getLastMonday().unix()}&withLogs=false`
+        )
+        .then((response) => {
+          const rewards = response.data.filter(
+            (tx: any) => tx.action?.arguments?.receiver === address
+          );
+          setRewards(rewards);
         });
     }
   }, []);
@@ -140,21 +163,6 @@ const DeadBros = () => {
       });
   }, []);
 
-  // const calculateFloorPriceTR = (data: any): string => {
-  //   const getMin = !!data
-  //     ? min(
-  //         values(data)
-  //           .filter((x: any) =>
-  //             x.deadline !== undefined ? parseInt(x.deadline) === 0 : false
-  //           )
-  //           .map((x: any) =>
-  //             x.min_bid !== undefined ? parseInt(x.min_bid) / 1e18 : 0
-  //           )
-  //       )?.toString()
-  //     : 'unknown';
-  //   return !!getMin ? getMin : 'unknown';
-  // };
-
   const getAttributes = (bro: Bro): Array<string> => {
     return bro.metadata?.attributes?.map(
       (x: any) => `${x.trait_type} ${x.value}`
@@ -182,6 +190,10 @@ const DeadBros = () => {
 
   const formatBigNumber = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  const getLastMonday = () => {
+    return moment().startOf('isoWeek').startOf('day');
   };
 
   return (
@@ -244,6 +256,37 @@ const DeadBros = () => {
             )}
         </div>
       </div>
+
+      <hr />
+      <h3>
+        My weekly rewards &nbsp;
+        <FontAwesomeIcon icon={faGift} className='text' />
+      </h3>
+      <div className='row'>
+        <div className='col'>
+          {rewards === undefined && <div>No rewards found for rewards !</div>}
+          {rewards !== undefined && rewards.length > 0 && (
+            <div>
+              <i>Since {getLastMonday().format('YYYY-MM-DD')}</i>
+              {rewards.map((reward: any) => (
+                <div key={reward.txHash}>
+                  <b>{reward.action?.arguments?.transfers[0]?.name}</b>
+                  :&nbsp;
+                  {formatBigNumber(
+                    floor(
+                      divide(
+                        parseInt(reward.action?.arguments?.transfers[0]?.value),
+                        1e18
+                      )
+                    )
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
       <hr />
       <h3>
         My $DEAD Tokens <FontAwesomeIcon icon={faCoins} className='text' />
