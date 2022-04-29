@@ -26,7 +26,7 @@ const Rewards = () => {
     if (!!elrondApiUrl && address && !!distributionAddress) {
       axios
         .get<any>(
-          `${elrondApiUrl}/accounts/${address}/transfers?size=10000&sender=${distributionAddress}&status=success&after=${getLastMonday().unix()}&withLogs=false`
+          `${elrondApiUrl}/accounts/${address}/transfers?size=10000&sender=${distributionAddress}&status=success&after=${getLastMonday().unix()}`
         )
         .then((response) => {
           setRewards(response.data);
