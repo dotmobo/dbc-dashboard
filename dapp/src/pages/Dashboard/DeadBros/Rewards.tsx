@@ -23,16 +23,13 @@ const Rewards = () => {
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
-    if (!!elrondApiUrl && !!distributionAddress) {
+    if (!!elrondApiUrl && address && !!distributionAddress) {
       axios
         .get<any>(
-          `${elrondApiUrl}/accounts/${distributionAddress}/transactions?size=10000&sender=${distributionAddress}&status=success&after=${getLastMonday().unix()}&withLogs=false`
+          `${elrondApiUrl}/accounts/${address}/transfers?size=10000&sender=${distributionAddress}&status=success&after=${getLastMonday().unix()}&withLogs=false`
         )
         .then((response) => {
-          const rewards = response.data.filter(
-            (tx: any) => tx.action?.arguments?.receiver === address
-          );
-          setRewards(rewards);
+          setRewards(response.data);
         });
     }
   }, []);
