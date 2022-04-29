@@ -17,6 +17,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { floor } from 'mathjs';
+import LazyLoad from 'react-lazyload';
 
 interface Bro {
   identifier: string;
@@ -88,69 +89,71 @@ const Bros = () => {
               key={bro.identifier}
               className='col-12 col-sm-12 col-md-6 col-lg-4 mt-4 mx-auto'
             >
-              <div>
-                <b>{bro.name}</b>
-              </div>
-              <div>
-                Rarity&nbsp;
-                {!!bro.metadata?.rarity?.rarityScore
-                  ? floor(bro.metadata?.rarity?.rarityScore)
-                  : 'unknown'}
-              </div>
-              <div>
+              <LazyLoad height={200} offset={100} once>
                 <div>
-                  <OverlayTrigger
-                    key='attributes'
-                    placement='bottom'
-                    overlay={
-                      <Tooltip id='tooltip-attributes'>
-                        {getAttributesDiv(bro)}
-                      </Tooltip>
-                    }
-                  >
-                    <img
-                      src={bro.url}
-                      alt={bro.identifier}
-                      width='222'
-                      className='imgBorder'
-                    />
-                  </OverlayTrigger>
+                  <b>{bro.name}</b>
                 </div>
-              </div>
-              <div>
-                <div className='w-100'></div>
-                <button
-                  className='btn btn-primary ml-1 mt-2'
-                  onClick={() => downloadImg(bro)}
-                >
-                  DOWNLOAD&nbsp;
-                  <FontAwesomeIcon icon={faDownload} className='text' />
-                </button>
-                <div className='w-100'></div>
-                <a
-                  className='btn btn-primary ml-1 mt-2'
-                  role='button'
-                  aria-pressed='true'
-                  href={deadRareUrl + '/nft/' + bro.identifier}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  DEADRARE&nbsp;
-                  <FontAwesomeIcon icon={faBolt} className='text' />
-                </a>
-                <div className='w-100'></div>
-                <a
-                  className='btn btn-primary ml-1 mt-2'
-                  role='button'
-                  aria-pressed='true'
-                  href={trustMarketUrl + '/nft/' + bro.identifier}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  TRUSTMARKET&nbsp;
-                  <FontAwesomeIcon icon={faShoppingCart} className='text' />
-                </a>
-              </div>
+                <div>
+                  Rarity&nbsp;
+                  {!!bro.metadata?.rarity?.rarityScore
+                    ? floor(bro.metadata?.rarity?.rarityScore)
+                    : 'unknown'}
+                </div>
+                <div>
+                  <div>
+                    <OverlayTrigger
+                      key='attributes'
+                      placement='bottom'
+                      overlay={
+                        <Tooltip id='tooltip-attributes'>
+                          {getAttributesDiv(bro)}
+                        </Tooltip>
+                      }
+                    >
+                      <img
+                        src={bro.url}
+                        alt={bro.identifier}
+                        width='222'
+                        className='imgBorder'
+                      />
+                    </OverlayTrigger>
+                  </div>
+                </div>
+                <div>
+                  <div className='w-100'></div>
+                  <button
+                    className='btn btn-primary ml-1 mt-2'
+                    onClick={() => downloadImg(bro)}
+                  >
+                    DOWNLOAD&nbsp;
+                    <FontAwesomeIcon icon={faDownload} className='text' />
+                  </button>
+                  <div className='w-100'></div>
+                  <a
+                    className='btn btn-primary ml-1 mt-2'
+                    role='button'
+                    aria-pressed='true'
+                    href={deadRareUrl + '/nft/' + bro.identifier}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    DEADRARE&nbsp;
+                    <FontAwesomeIcon icon={faBolt} className='text' />
+                  </a>
+                  <div className='w-100'></div>
+                  <a
+                    className='btn btn-primary ml-1 mt-2'
+                    role='button'
+                    aria-pressed='true'
+                    href={trustMarketUrl + '/nft/' + bro.identifier}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    TRUSTMARKET&nbsp;
+                    <FontAwesomeIcon icon={faShoppingCart} className='text' />
+                  </a>
+                </div>
+              </LazyLoad>
             </div>
           ))}
       </div>
