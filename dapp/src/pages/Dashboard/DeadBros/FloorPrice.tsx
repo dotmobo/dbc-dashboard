@@ -4,10 +4,12 @@ import {
   gatewayDeadRareUrl,
   gatewayTrustMarket,
   trustMarketIconUrl,
-  deadRareIconUrl
+  deadRareIconUrl,
+  deadRareUrl,
+  trustMarketUrl
 } from 'config';
 import axios from 'axios';
-
+import { faBolt, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -56,7 +58,18 @@ const FloorPrice = () => {
             <div>
               <img src={deadRareIconUrl} alt='deadrare' height={16} />
               <b>DeadRare</b>:&nbsp;
-              {floorPriceDR?.floorPrice}&nbsp;EGLD
+              <span>{floorPriceDR?.floorPrice}&nbsp;EGLD</span>
+              <a
+                className='btn btn-primary ml-3 btn-sm'
+                role='button'
+                aria-pressed='true'
+                href={deadRareUrl + '/collection/' + nftsCollectionId}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                BUY&nbsp;
+                <FontAwesomeIcon icon={faBolt} className='text' />
+              </a>
             </div>
           )}
           {floorPriceTR === undefined && <div>No TR floor price found !</div>}
@@ -64,7 +77,18 @@ const FloorPrice = () => {
             <div>
               <img src={trustMarketIconUrl} alt='trustmarket' height={16} />
               <b>TrustMarket</b>:&nbsp;
-              {floorPriceTR?.floorPrice}&nbsp;EGLD
+              <span>{floorPriceTR?.floorPrice}&nbsp;EGLD</span>
+              <a
+                className='btn btn-primary ml-3 mt-1 btn-sm'
+                role='button'
+                aria-pressed='true'
+                href={trustMarketUrl + '/collection/' + nftsCollectionId}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                BUY&nbsp;
+                <FontAwesomeIcon icon={faShoppingCart} className='text' />
+              </a>
             </div>
           )}
         </div>
