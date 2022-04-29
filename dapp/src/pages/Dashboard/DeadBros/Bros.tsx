@@ -114,7 +114,7 @@ const Bros = () => {
                         src={bro.url}
                         alt={bro.identifier}
                         width='222'
-                        className='imgBorder'
+                        className='nftImg'
                       />
                     </OverlayTrigger>
                   </div>
