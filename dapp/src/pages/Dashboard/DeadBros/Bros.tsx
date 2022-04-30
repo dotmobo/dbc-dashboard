@@ -15,7 +15,6 @@ import {
   faDownload
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { floor } from 'mathjs';
 import LazyLoad from 'react-lazyload';
 
@@ -53,9 +52,9 @@ const Bros = () => {
   const getAttributesDiv = (bro: Bro) => {
     const attributes = getAttributes(bro);
     return !!attributes ? (
-      attributes?.map((attribute) => <div key={attribute}>{attribute}</div>)
+      attributes?.map((attribute) => <span key={attribute}>{attribute}</span>)
     ) : (
-      <div>Attributes not found</div>
+      <span>Attributes not found</span>
     );
   };
 
@@ -99,24 +98,17 @@ const Bros = () => {
                     ? floor(bro.metadata?.rarity?.rarityScore)
                     : 'unknown'}
                 </div>
-                <div>
-                  <div>
-                    <OverlayTrigger
-                      key='attributes'
-                      placement='bottom'
-                      overlay={
-                        <Tooltip id='tooltip-attributes'>
-                          {getAttributesDiv(bro)}
-                        </Tooltip>
-                      }
-                    >
-                      <img
-                        src={bro.url}
-                        alt={bro.identifier}
-                        width='222'
-                        className='nftImg'
-                      />
-                    </OverlayTrigger>
+                <div className='nft'>
+                  <div className='back'>
+                    <h4>Attributes:</h4>
+                    {getAttributesDiv(bro)}
+                  </div>
+                  <div className='front'>
+                    <img
+                      src={bro.url}
+                      alt={bro.identifier}
+                      className='nftImg'
+                    />
                   </div>
                 </div>
                 <div>

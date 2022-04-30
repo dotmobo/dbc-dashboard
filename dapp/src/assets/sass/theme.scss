@@ -1,13 +1,13 @@
 /* Bootstrap overrides
 -------------------------------------------------- */
 
-  $body: #000;
-  $headings-font-weight: 300 !important;
+$body: #000;
+$headings-font-weight: 300 !important;
 $primary: #7711d0;
-  $light: #faf5fe;
+$light: #faf5fe;
 
-  $headings-font-weight: 300 !important;
-  $a: #7711d0;
+$headings-font-weight: 300 !important;
+$a: #7711d0;
 
 /* Do not move the imports from here.
 Override Bootstrap variables only above.
@@ -34,9 +34,9 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -87,13 +87,74 @@ body {
 
 /* Dashboard
 -------------------------------------------------- */
-.nftImg {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  &:hover {
-    cursor: zoom-in;
-  }
 
+
+/*
+ *  NFT Image effect
+ */
+ .nft {
+  color: hsla(0, 0%, 100%, 0.8);
+  position: relative;
+  -webkit-perspective: 600px;
+  perspective: 600px;
 }
+
+.nft div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  transition: 0.8s;
+}
+
+.nft .back {
+  outline: 1px solid transparent;
+  background: $primary;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: rotatey(-180deg);
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: rotatey(-180deg);
+}
+
+.nft div.front {
+  outline: 1px solid transparent;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  background: $primary;
+}
+
+.nft:hover .back {
+  cursor: zoom-in;
+  transform: rotatey(0);
+  -webkit-transform: rotatey(0);
+}
+
+.nft:hover div.front {
+  cursor: zoom-in;
+  -webkit-transform: rotatey(180deg);
+  transform: rotatey(180deg);
+}
+
+.back span, .back h4 {
+  display: block;
+  color: $light;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.nft, .nft div, .nftImg {
+  height: 222px;
+  width: 222px;
+}
+
+// Address link
 
 .addressLink {
   color: $white;
@@ -151,7 +212,6 @@ body {
   }
 
   &.table {
-
     .transaction-hash .trim {
       @include media-breakpoint-down(xl) {
         max-width: none;
@@ -167,7 +227,8 @@ body {
       }
     }
 
-    td, tr {
+    td,
+    tr {
       padding: 0.65rem;
     }
 
@@ -289,13 +350,13 @@ footer {
   color: $white !important;
 }
 
-.dapp-core-ui-component .btn-primary:hover, .dapp-core-ui-component .btn-primary:focus {
+.dapp-core-ui-component .btn-primary:hover,
+.dapp-core-ui-component .btn-primary:focus {
   background-color: $primary !important;
   border-color: $primary !important;
   color: $white !important;
   opacity: 0.9 !important;
 }
-
 
 .dapp-core-ui-component .btn-primary:active {
   background-color: $primary !important;

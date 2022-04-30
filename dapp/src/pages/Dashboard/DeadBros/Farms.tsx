@@ -51,7 +51,7 @@ const Farms = () => {
           {lkFarms !== undefined &&
             lkFarms.length > 0 &&
             lkFarms.map((lkFarm: any) => (
-              <div key={lkFarm.name}>
+              <div key={lkFarm.name + '-' + lkFarm.balance}>
                 {lkFarm.balance !== undefined && lkFarm.name !== undefined && (
                   <div>
                     <MexIcon className='mx-1' height={16} width={16} />
