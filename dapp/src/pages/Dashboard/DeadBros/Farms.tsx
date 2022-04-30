@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  elrondApiUrl,
-  lkFarmName,
-  distributionAddress,
-  egldMexFarmName
-} from 'config';
+import { elrondApiUrl, lkFarmsNames, distributionAddress } from 'config';
 import axios from 'axios';
 
 import { faTractor } from '@fortawesome/free-solid-svg-icons';
@@ -18,32 +13,20 @@ interface LockedLPStaked {
   name: string;
 }
 
+type LKFarmsList = Array<LockedLPStaked>;
+
 const Farms = () => {
-  const [lkFarm, setLKMexFarm] = React.useState<LockedLPStaked>();
-  const [egldMexFarm, setEgldMexFarm] = React.useState<LockedLPStaked>();
+  const [lkFarms, setLKMexFarms] = React.useState<LKFarmsList>();
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
-    if (!!elrondApiUrl && !!distributionAddress && !!lkFarmName) {
+    if (!!elrondApiUrl && !!distributionAddress && !!lkFarmsNames) {
       axios
         .get<any>(
-          `${elrondApiUrl}/accounts/${distributionAddress}/nfts/${lkFarmName}`
+          `${elrondApiUrl}/accounts/${distributionAddress}/nfts?collections=${lkFarmsNames}`
         )
         .then((response) => {
-          setLKMexFarm(response.data);
-        });
-    }
-  }, []);
-
-  React.useEffect(() => {
-    // Use [] as second argument in useEffect for not rendering each time
-    if (!!elrondApiUrl && !!distributionAddress && !!egldMexFarmName) {
-      axios
-        .get<any>(
-          `${elrondApiUrl}/accounts/${distributionAddress}/nfts/${egldMexFarmName}`
-        )
-        .then((response) => {
-          setEgldMexFarm(response.data);
+          setLKMexFarms(response.data);
         });
     }
   }, []);
@@ -52,6 +35,7 @@ const Farms = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
+  // use the balance to show lkmex or mex-egld label, because lkfarm token can be on mex-egld farm too ...
   return (
     <div>
       <h3>
@@ -60,31 +44,29 @@ const Farms = () => {
       </h3>
       <div className='row'>
         <div className='col'>
-          {lkFarm === undefined && egldMexFarm === undefined && (
-            <div>No LKMEX farms found for rewards !</div>
-          )}
-          {lkFarm !== undefined &&
-            lkFarm.balance !== undefined &&
-            lkFarm.name !== undefined && (
-              <div>
-                <MexIcon className='mx-1' height={16} width={16} />
-                <b>LKMEX</b>:&nbsp;
-                {formatBigNumber(floor(divide(parseInt(lkFarm.balance), 1e18)))}
-                &nbsp;{lkFarm.name}
-              </div>
-            )}
-          {egldMexFarm !== undefined &&
-            egldMexFarm.balance !== undefined &&
-            egldMexFarm.name !== undefined && (
-              <div>
-                <MexIcon className='mx-1' height={16} width={16} />
-                <b>MEX-EGLD</b>:&nbsp;
-                {formatBigNumber(
-                  floor(divide(parseInt(egldMexFarm.balance), 1e18), 2) as any
+          {lkFarms === undefined ||
+            (lkFarms.length === 0 && (
+              <div>No LKMEX farms found for rewards !</div>
+            ))}
+          {lkFarms !== undefined &&
+            lkFarms.length > 0 &&
+            lkFarms.map((lkFarm: any) => (
+              <div key={lkFarm.name}>
+                {lkFarm.balance !== undefined && lkFarm.name !== undefined && (
+                  <div>
+                    <MexIcon className='mx-1' height={16} width={16} />
+                    <b>
+                      {lkFarm.balance > 10000 * 1e18 ? 'LKMEX' : 'MEX-EGLD'}
+                    </b>
+                    :&nbsp;
+                    {formatBigNumber(
+                      floor(divide(parseInt(lkFarm.balance), 1e18), 2) as any
+                    )}
+                    &nbsp;{lkFarm.name}
+                  </div>
                 )}
-                &nbsp;{egldMexFarm.name}
               </div>
-            )}
+            ))}
         </div>
       </div>
     </div>

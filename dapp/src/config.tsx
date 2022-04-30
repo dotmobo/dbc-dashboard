@@ -8,8 +8,7 @@ export const contractAddress =
 export const distributionAddress =
   'erd1wd6ksxyzd4qge374azc2jp8pelv04g2atjeldkmc7ly7gpf3zg7qup2dns';
 // Token ids
-export const lkFarmName = 'LKFARM-9d1ea8-782ec6';
-export const egldMexFarmName = 'LKFARM-9d1ea8-789292';
+export const lkFarmsNames = 'LKFARM-9d1ea8,EGLDMEXFL-ef2065';
 export const nftsCollectionId = 'DEADBROS-bf822f';
 export const deadTokenId = 'DEADBROS-388e63';
 // Urls
