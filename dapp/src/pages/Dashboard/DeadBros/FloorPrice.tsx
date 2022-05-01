@@ -53,7 +53,14 @@ const FloorPrice = () => {
       </h3>
       <div className='row'>
         <div className='col'>
-          {floorPriceDR === undefined && <div>No DR floor price found !</div>}
+          {floorPriceDR === undefined && (
+            <div>
+              <div className='spinner-border text-primary mr-2' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+              No DR floor price found !
+            </div>
+          )}
           {floorPriceDR !== undefined && floorPriceDR.floorPrice !== undefined && (
             <div>
               <img src={deadRareIconUrl} alt='deadrare' height={16} />
@@ -72,7 +79,14 @@ const FloorPrice = () => {
               </a>
             </div>
           )}
-          {floorPriceTR === undefined && <div>No TR floor price found !</div>}
+          {floorPriceTR === undefined && (
+            <div>
+              <div className='spinner-border text-primary mr-2' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+              No TR floor price found !
+            </div>
+          )}
           {floorPriceTR !== undefined && floorPriceTR.floorPrice !== undefined && (
             <div>
               <img src={trustMarketIconUrl} alt='trustmarket' height={16} />
