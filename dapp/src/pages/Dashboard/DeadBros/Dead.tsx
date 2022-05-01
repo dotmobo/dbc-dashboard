@@ -11,6 +11,7 @@ import { divide, floor } from 'mathjs';
 interface Dead {
   name: string;
   balance: number;
+  decimals: number;
 }
 
 const Dead = () => {
@@ -47,7 +48,9 @@ const Dead = () => {
               <div>
                 <DeadIcon className='mx-1' height={16} width={16} />
                 <b>{dead.name}</b>:&nbsp;
-                {formatBigNumber(floor(divide(dead.balance, 1e18)))}
+                {formatBigNumber(
+                  floor(divide(dead.balance, 10 ** dead.decimals))
+                )}
               </div>
             )}
         </div>

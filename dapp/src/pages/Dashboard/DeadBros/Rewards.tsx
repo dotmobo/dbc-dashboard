@@ -71,7 +71,7 @@ const Rewards = () => {
                     floor(
                       divide(
                         parseInt(reward.action?.arguments?.transfers[0]?.value),
-                        1e18
+                        10 ** reward.action?.arguments?.transfers[0]?.decimals
                       )
                     )
                   )}

@@ -8,6 +8,7 @@ import { ReactComponent as MexIcon } from '../../../assets/img/mex.svg';
 import { divide, floor } from 'mathjs';
 
 interface LockedLPStaked {
+  identifier: string;
   balance: string;
   decimals: number;
   name: string;
@@ -51,16 +52,21 @@ const Farms = () => {
           {lkFarms !== undefined &&
             lkFarms.length > 0 &&
             lkFarms.map((lkFarm: any) => (
-              <div key={lkFarm.name + '-' + lkFarm.balance}>
+              <div key={lkFarm.identifier}>
                 {lkFarm.balance !== undefined && lkFarm.name !== undefined && (
                   <div>
                     <MexIcon className='mx-1' height={16} width={16} />
                     <b>
-                      {lkFarm.balance > 10000 * 1e18 ? 'LKMEX' : 'MEX-EGLD'}
+                      {lkFarm.balance > 10000 * 10 ** lkFarm.decimals
+                        ? 'LKMEX'
+                        : 'MEX-EGLD'}
                     </b>
                     :&nbsp;
                     {formatBigNumber(
-                      floor(divide(parseInt(lkFarm.balance), 1e18), 2) as any
+                      floor(
+                        divide(parseInt(lkFarm.balance), 10 ** lkFarm.decimals),
+                        2
+                      ) as any
                     )}
                     &nbsp;{lkFarm.name}
                   </div>
