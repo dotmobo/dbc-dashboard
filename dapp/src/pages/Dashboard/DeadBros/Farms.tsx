@@ -45,10 +45,16 @@ const Farms = () => {
       </h3>
       <div className='row'>
         <div className='col'>
-          {lkFarms === undefined ||
-            (lkFarms.length === 0 && (
-              <div>No LKMEX farms found for rewards !</div>
-            ))}
+          {lkFarms === undefined && (
+            <div>
+              <div className='spinner-border text-primary mr-2' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+            </div>
+          )}
+          {lkFarms !== undefined && lkFarms.length === 0 && (
+            <div>No LKMEX farms found for rewards !</div>
+          )}
           {lkFarms !== undefined &&
             lkFarms.length > 0 &&
             lkFarms.map((lkFarm: any) => (

@@ -76,6 +76,13 @@ const Bros = () => {
         {bros !== undefined && bros.length > 0 && <span>({bros.length})</span>}
       </h3>
       <div className='row'>
+        {bros === undefined && (
+          <div className='col'>
+            <div className='spinner-border text-primary mr-2' role='status'>
+              <span className='sr-only'>Loading...</span>
+            </div>
+          </div>
+        )}
         {bros !== undefined && bros.length === 0 && (
           <div className='col'>
             <div>No DeadBrothers found in your wallet !</div>

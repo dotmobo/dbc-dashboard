@@ -58,7 +58,6 @@ const FloorPrice = () => {
               <div className='spinner-border text-primary mr-2' role='status'>
                 <span className='sr-only'>Loading...</span>
               </div>
-              No DR floor price found !
             </div>
           )}
           {floorPriceDR !== undefined && floorPriceDR.floorPrice !== undefined && (
@@ -84,7 +83,6 @@ const FloorPrice = () => {
               <div className='spinner-border text-primary mr-2' role='status'>
                 <span className='sr-only'>Loading...</span>
               </div>
-              No TR floor price found !
             </div>
           )}
           {floorPriceTR !== undefined && floorPriceTR.floorPrice !== undefined && (

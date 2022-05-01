@@ -40,7 +40,11 @@ const Dead = () => {
       <div className='row'>
         <div className='col'>
           {dead === undefined && (
-            <div>No Dead tokens found in your wallet !</div>
+            <div>
+              <div className='spinner-border text-primary mr-2' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+            </div>
           )}
           {dead !== undefined &&
             dead.balance !== undefined &&

@@ -50,7 +50,14 @@ const Rewards = () => {
       </h3>
       <div className='row'>
         <div className='col'>
-          {(rewards === undefined || rewards.length === 0) && (
+          {rewards === undefined && (
+            <div>
+              <div className='spinner-border text-primary mr-2' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+            </div>
+          )}
+          {rewards !== undefined && rewards.length === 0 && (
             <div>No weekly rewards found !</div>
           )}
           {rewards !== undefined && rewards.length > 0 && (
