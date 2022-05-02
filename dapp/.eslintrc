@@ -58,7 +58,7 @@
       }
     ],
     "prettier/prettier": [
-      "error",
+      "warn",
       {
         "endOfLine": "lf"
       }

@@ -25,6 +25,15 @@ const Dead = () => {
       .get<any>(`${elrondApiUrl}/accounts/${address}/tokens/${deadTokenId}`)
       .then((response) => {
         setDeadToken(response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          setDeadToken({
+            name: 'DEAD',
+            balance: 0,
+            decimals: 18
+          });
+        }
       });
   }, []);
 
