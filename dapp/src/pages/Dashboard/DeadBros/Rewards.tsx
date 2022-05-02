@@ -58,7 +58,10 @@ const Rewards = () => {
             </div>
           )}
           {rewards !== undefined && rewards.length === 0 && (
-            <div>No weekly rewards found !</div>
+            <div>
+              <i>Since {getLastMonday().format('YYYY-MM-DD')}:</i>
+              <div>No weekly rewards found !</div>
+            </div>
           )}
           {rewards !== undefined && rewards.length > 0 && (
             <div>
