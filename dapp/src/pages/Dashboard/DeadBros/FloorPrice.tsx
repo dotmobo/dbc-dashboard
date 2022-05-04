@@ -130,12 +130,7 @@ const FloorPrice = () => {
           )}
           {floorPriceFI !== undefined && floorPriceFI.floorPrice !== undefined && (
             <div>
-              <img
-                className='mr-1'
-                src={frameItIconUrl}
-                alt='frameit'
-                height={16}
-              />
+              <img src={frameItIconUrl} alt='frameit' height={16} />
               <b>FrameIt</b>:&nbsp;
               <span>{floorPriceFI?.floorPrice}&nbsp;EGLD</span>
               <a
