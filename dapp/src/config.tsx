@@ -22,3 +22,7 @@ export const gatewayTrustMarket =
   'https://trustmarket-staging.azurewebsites.net';
 export const trustMarketIconUrl = process.env.PUBLIC_URL + '/trust.webp';
 export const elrondExplorerUrl = 'https://explorer.elrond.com';
+// Frame it
+export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
+export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
+export const frameItUrl = 'https://www.frameit.gg';
