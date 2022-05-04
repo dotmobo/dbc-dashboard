@@ -3,6 +3,7 @@ import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
 import {
   deadRareUrl,
   elrondApiUrl,
+  frameItUrl,
   nftsCollectionId,
   trustMarketUrl
 } from 'config';
@@ -12,7 +13,8 @@ import {
   faBolt,
   faShoppingCart,
   faSkull,
-  faDownload
+  faDownload,
+  faCropSimple
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { floor } from 'mathjs';
@@ -150,6 +152,18 @@ const Bros = () => {
                   >
                     TRUSTMARKET&nbsp;
                     <FontAwesomeIcon icon={faShoppingCart} className='text' />
+                  </a>
+                  <div className='w-100'></div>
+                  <a
+                    className='btn btn-primary ml-1 mt-2'
+                    role='button'
+                    aria-pressed='true'
+                    href={frameItUrl + '/marketplace/nft/' + bro.identifier}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    FRAMEIT&nbsp;
+                    <FontAwesomeIcon icon={faCropSimple} className='text' />
                   </a>
                 </div>
               </LazyLoad>

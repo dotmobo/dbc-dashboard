@@ -6,10 +6,17 @@ import {
   trustMarketIconUrl,
   deadRareIconUrl,
   deadRareUrl,
-  trustMarketUrl
+  trustMarketUrl,
+  gatewayFrameIt,
+  frameItIconUrl,
+  frameItUrl
 } from 'config';
 import axios from 'axios';
-import { faBolt, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBolt,
+  faShoppingCart,
+  faCropSimple
+} from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -20,6 +27,7 @@ interface FloorPrice {
 const FloorPrice = () => {
   const [floorPriceDR, setFloorPriceDR] = React.useState<FloorPrice>();
   const [floorPriceTR, setFloorPriceTR] = React.useState<FloorPrice>();
+  const [floorPriceFI, setFloorPriceFI] = React.useState<FloorPrice>();
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -43,6 +51,15 @@ const FloorPrice = () => {
           floorPrice: response.data
         } as FloorPrice);
       });
+  }, []);
+
+  React.useEffect(() => {
+    // Use [] as second argument in useEffect for not rendering each time
+    axios.get<any>(`${gatewayFrameIt}/${nftsCollectionId}`).then((response) => {
+      setFloorPriceFI({
+        floorPrice: response.data.statistics.floorPrice
+      } as FloorPrice);
+    });
   }, []);
 
   return (
@@ -100,6 +117,37 @@ const FloorPrice = () => {
               >
                 BUY&nbsp;
                 <FontAwesomeIcon icon={faShoppingCart} className='text' />
+              </a>
+            </div>
+          )}
+
+          {floorPriceFI === undefined && (
+            <div>
+              <div className='spinner-border text-primary mr-2' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+            </div>
+          )}
+          {floorPriceFI !== undefined && floorPriceFI.floorPrice !== undefined && (
+            <div>
+              <img
+                className='mr-1'
+                src={frameItIconUrl}
+                alt='frameit'
+                height={16}
+              />
+              <b>FrameIt</b>:&nbsp;
+              <span>{floorPriceFI?.floorPrice}&nbsp;EGLD</span>
+              <a
+                className='btn btn-primary ml-3 mt-1 btn-sm'
+                role='button'
+                aria-pressed='true'
+                href={frameItUrl + '/marketplace/' + nftsCollectionId}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                BUY&nbsp;
+                <FontAwesomeIcon icon={faCropSimple} className='text' />
               </a>
             </div>
           )}
