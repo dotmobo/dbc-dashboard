@@ -10,6 +10,7 @@ export const distributionAddress =
 // Token ids
 export const lkFarmsNames = 'LKFARM-9d1ea8,EGLDMEXFL-ef2065';
 export const nftsCollectionId = 'DEADBROS-bf822f';
+export const nftsSerumCollectionId = 'TESTSERUM-39a388';
 export const deadTokenId = 'DEADBROS-388e63';
 // Urls
 export const deadBrothersClubUrl = 'https://www.deadbrothers.club/';

@@ -5,6 +5,7 @@ import {
   elrondApiUrl,
   frameItUrl,
   nftsCollectionId,
+  nftsSerumCollectionId,
   trustMarketUrl
 } from 'config';
 import axios from 'axios';
@@ -19,18 +20,21 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { floor } from 'mathjs';
 import LazyLoad from 'react-lazyload';
+import { orderBy } from 'lodash-es';
 
 interface Bro {
   identifier: string;
   url: string;
   name: string;
   metadata: any;
+  collection: string;
+  nonce: number;
 }
 
 export type TBrosList = Bro[];
 
 const Bros = () => {
-  const { address, account } = useGetAccountInfo();
+  const { address } = useGetAccountInfo();
 
   const [bros, setBrosList] = React.useState<TBrosList>();
 
@@ -38,10 +42,12 @@ const Bros = () => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${elrondApiUrl}/accounts/${address}/nfts?size=10000&collections=${nftsCollectionId}`
+        `${elrondApiUrl}/accounts/${address}/nfts?size=10000&collections=${nftsSerumCollectionId},${nftsCollectionId}`
       )
       .then((response) => {
-        setBrosList(response.data);
+        setBrosList(
+          orderBy(response.data, ['collection', 'nonce'], ['desc', 'asc'])
+        );
       });
   }, []);
 
@@ -107,7 +113,13 @@ const Bros = () => {
                     ? floor(bro.metadata?.rarity?.rarityScore)
                     : 'unknown'}
                 </div>
-                <div className='nft'>
+                <div
+                  className={
+                    bro.collection === nftsSerumCollectionId
+                      ? 'nft serum'
+                      : 'nft deadbrother'
+                  }
+                >
                   <div className='back'>
                     <h4>Attributes:</h4>
                     {getAttributesDiv(bro)}
