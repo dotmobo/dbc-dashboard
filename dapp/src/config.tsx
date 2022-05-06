@@ -1,5 +1,5 @@
 // Elrond Network
-export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
+export const elrondNetwork = 'devnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'DeadBrothers Dashboard';
 // Addresses
@@ -19,11 +19,13 @@ export const deadRareUrl = 'https://deadrare.io';
 export const gatewayDeadRareUrl = 'https://gateway.deadrare.io';
 export const deadRareIconUrl = process.env.PUBLIC_URL + '/deadrare.webp';
 export const trustMarketUrl = 'https://trust.market';
-export const gatewayTrustMarket =
-  'https://api.trust.market';
+export const gatewayTrustMarket = 'https://api.trust.market';
 export const trustMarketIconUrl = process.env.PUBLIC_URL + '/trust.webp';
 export const elrondExplorerUrl = 'https://explorer.elrond.com';
 // Frame it
 export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
 export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
 export const frameItUrl = 'https://www.frameit.gg';
+
+export const voteAddress =
+  'erd1qqqqqqqqqqqqqpgqv23rngzlezaxly4d68u364xsav03qamk0jpqll763y';
