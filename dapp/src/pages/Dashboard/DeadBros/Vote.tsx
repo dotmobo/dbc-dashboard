@@ -274,7 +274,7 @@ const Vote = () => {
   return (
     <div>
       <h3>
-        My Vote <FontAwesomeIcon icon={faPersonBooth} className='text' />
+        DAO Vote <FontAwesomeIcon icon={faPersonBooth} className='text' />
       </h3>
       <div className='row'>
         <div className='col'>
