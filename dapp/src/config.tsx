@@ -20,7 +20,7 @@ export const gatewayDeadRareUrl = 'https://gateway.deadrare.io';
 export const deadRareIconUrl = process.env.PUBLIC_URL + '/deadrare.webp';
 export const trustMarketUrl = 'https://trust.market';
 export const gatewayTrustMarket =
-  'https://trustmarket-staging.azurewebsites.net';
+  'https://api.trust.market';
 export const trustMarketIconUrl = process.env.PUBLIC_URL + '/trust.webp';
 export const elrondExplorerUrl = 'https://explorer.elrond.com';
 // Frame it
