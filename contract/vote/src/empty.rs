@@ -66,9 +66,15 @@ pub trait Vote {
     }
 
     // Seul le owner du contrat peut récupérer les tokens qui ont été envoyés
+    // Le vote doit être fini
     #[only_owner]
     #[endpoint]
     fn withdraw(&self) -> SCResult<()> {
+        require!(
+            self.in_progress().get() == 0u32,
+            "the vote is not over"
+        );
+
         let caller = self.blockchain().get_caller();
 
         let yes = self.yes().get();

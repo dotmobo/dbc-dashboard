@@ -10,7 +10,12 @@ import {
   deadTokenId,
   elrondApiUrl,
   elrondExplorerUrl,
-  voteAddress
+  voteAddress,
+  voteFinishData,
+  voteNoData,
+  voteOwnerAddress,
+  voteWithdrawData,
+  voteYesData
 } from 'config';
 import axios from 'axios';
 
@@ -18,7 +23,9 @@ import {
   faCircleQuestion,
   faPersonBooth,
   faCheckCircle,
-  faXmarkCircle
+  faXmarkCircle,
+  faCircleStop,
+  faMoneyBillTransfer
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
@@ -175,8 +182,9 @@ const Vote = () => {
   const sendYesTransaction = async () => {
     const yesTransaction = {
       value: '0',
-      data: 'ESDTTransfer@5745422d356430386265@02540be400@766f74655f796573',
-      receiver: voteAddress
+      data: voteYesData,
+      receiver: voteAddress,
+      gasLimit: '5000000'
     };
     await refreshAccount();
 
@@ -197,8 +205,9 @@ const Vote = () => {
   const sendNoTransaction = async () => {
     const noTransaction = {
       value: '0',
-      data: 'ESDTTransfer@5745422d356430386265@02540be400@766f74655f796573',
-      receiver: voteAddress
+      data: voteNoData,
+      receiver: voteAddress,
+      gasLimit: '5000000'
     };
     await refreshAccount();
 
@@ -216,8 +225,50 @@ const Vote = () => {
     }
   };
 
-  const formatBigNumber = (x: number) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const sendFinishTransaction = async () => {
+    const finishTransaction = {
+      value: '0',
+      data: voteFinishData,
+      receiver: voteAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: finishTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing yes vote transaction',
+        errorMessage: 'An error has occured during yes vote',
+        successMessage: 'Yes vote transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
+  const sendWithdrawTransaction = async () => {
+    const withdrawTransaction = {
+      value: '0',
+      data: voteWithdrawData,
+      receiver: voteAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: withdrawTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing yes vote transaction',
+        errorMessage: 'An error has occured during yes vote',
+        successMessage: 'Yes vote transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
   };
 
   return (
@@ -264,15 +315,14 @@ const Vote = () => {
                   <FontAwesomeIcon icon={faCheckCircle} />
                 </button>
                 {yes !== undefined && (
-                  //   <i>{floor(divide(yes, 10 ** 18), 2) as any} $DEAD</i>
-                  <i>{yes} $DEAD</i>
+                  <i>{floor(divide(yes, 10 ** 18), 2) as any} $DEAD</i>
                 )}
               </div>
             )}
             {!hasPendingTransactions && (
               <div className='mt-4'>
                 <button
-                    onClick={sendNoTransaction}
+                  onClick={sendNoTransaction}
                   className='btn btn-primary mr-4'
                   disabled={inProgress !== 1}
                 >
@@ -280,8 +330,7 @@ const Vote = () => {
                   <FontAwesomeIcon icon={faXmarkCircle} />
                 </button>
                 {no !== undefined && (
-                  //   <i>{floor(divide(no, 10 ** 18), 2) as any} $DEAD</i>
-                  <i>{no} $DEAD</i>
+                  <i>{floor(divide(no, 10 ** 18), 2) as any} $DEAD</i>
                 )}
               </div>
             )}
@@ -299,6 +348,34 @@ const Vote = () => {
                 </a>
               </span>
             </div>
+            {address !== undefined &&
+              address === voteOwnerAddress &&
+              !hasPendingTransactions && (
+                <div className='mt-4'>
+                  <button
+                    onClick={sendFinishTransaction}
+                    className='btn btn-primary mr-4'
+                    disabled={inProgress !== 1}
+                  >
+                    FINISH&nbsp;
+                    <FontAwesomeIcon icon={faCircleStop} />
+                  </button>
+                </div>
+              )}
+            {address !== undefined &&
+              address === voteOwnerAddress &&
+              !hasPendingTransactions && (
+                <div className='mt-4'>
+                  <button
+                    onClick={sendWithdrawTransaction}
+                    className='btn btn-primary mr-4'
+                    disabled={inProgress !== 0}
+                  >
+                    WITHDRAW&nbsp;
+                    <FontAwesomeIcon icon={faMoneyBillTransfer} />
+                  </button>
+                </div>
+              )}
           </div>
         </div>
       </div>

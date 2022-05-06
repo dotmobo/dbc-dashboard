@@ -27,5 +27,15 @@ export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
 export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
 export const frameItUrl = 'https://www.frameit.gg';
 
+// Vote component DEVNET
 export const voteAddress =
-  'erd1qqqqqqqqqqqqqpgqv23rngzlezaxly4d68u364xsav03qamk0jpqll763y';
+  'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke';
+export const voteTokenId = 'DEADBROS-fa8f0f';
+export const voteYesData =
+  'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573';
+export const voteNoData =
+  'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766F74655F6E6F';
+export const voteFinishData = 'finish_vote';
+export const voteWithdrawData = 'withdraw';
+export const voteOwnerAddress =
+  'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
