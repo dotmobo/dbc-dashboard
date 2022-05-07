@@ -37,6 +37,7 @@ import {
   ProxyProvider,
   Query
 } from '@elrondnetwork/erdjs';
+import { ProgressBar } from 'react-bootstrap';
 
 const Vote = () => {
   const account = useGetAccountInfo();
@@ -303,37 +304,49 @@ const Vote = () => {
               )}
             </div>
           )}
+          {yes !== undefined && no !== undefined && (
+            <ProgressBar className='mt-2'>
+              <ProgressBar
+                key={1}
+                variant='success'
+                now={divide(yes, yes + no) * 100}
+                label={`${floor(divide(yes, 10 ** 18), 2) as any}`}
+              />
+              <ProgressBar
+                key={2}
+                variant='danger'
+                now={divide(no, yes + no) * 100}
+                label={`${floor(divide(no, 10 ** 18), 2) as any}`}
+              />
+            </ProgressBar>
+          )}
           <div className='mt-4'>
-            {!hasPendingTransactions && (
-              <div>
-                <button
-                  onClick={sendYesTransaction}
-                  className='btn btn-primary mr-4'
-                  disabled={inProgress !== 1}
-                >
-                  YES&nbsp;
-                  <FontAwesomeIcon icon={faCheckCircle} />
-                </button>
-                {yes !== undefined && (
-                  <i>{floor(divide(yes, 10 ** 18), 2) as any} $DEAD</i>
-                )}
-              </div>
-            )}
-            {!hasPendingTransactions && (
-              <div className='mt-4'>
-                <button
-                  onClick={sendNoTransaction}
-                  className='btn btn-primary mr-4'
-                  disabled={inProgress !== 1}
-                >
-                  NO&nbsp;
-                  <FontAwesomeIcon icon={faXmarkCircle} />
-                </button>
-                {no !== undefined && (
-                  <i>{floor(divide(no, 10 ** 18), 2) as any} $DEAD</i>
-                )}
-              </div>
-            )}
+            <div className='row'>
+              {!hasPendingTransactions && (
+                <div className='col-3'>
+                  <button
+                    onClick={sendYesTransaction}
+                    className='btn btn-success'
+                    disabled={inProgress !== 1}
+                  >
+                    YES&nbsp;
+                    <FontAwesomeIcon icon={faCheckCircle} />
+                  </button>
+                </div>
+              )}
+              {!hasPendingTransactions && (
+                <div className='col-3'>
+                  <button
+                    onClick={sendNoTransaction}
+                    className='btn btn-danger'
+                    disabled={inProgress !== 1}
+                  >
+                    NO&nbsp;
+                    <FontAwesomeIcon icon={faXmarkCircle} />
+                  </button>
+                </div>
+              )}
+            </div>
             <div className='mb-1 mt-4'>
               <span className='mr-1'>Vote address:</span>
               <span data-testid='voteAddress'>
