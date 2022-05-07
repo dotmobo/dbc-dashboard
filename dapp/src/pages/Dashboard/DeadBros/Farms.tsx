@@ -65,7 +65,7 @@ const Farms = () => {
                     <b>
                       {lkFarm.balance > 10000 * 10 ** lkFarm.decimals
                         ? 'LKMEX'
-                        : 'MEX-EGLD'}
+                        : (lkFarm.name === 'ITHWEGLDLPStakedLK' ? 'ITHEUM-EGLD' : 'MEX-EGLD')}
                     </b>
                     :&nbsp;
                     {formatBigNumber(
