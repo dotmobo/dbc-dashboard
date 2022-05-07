@@ -321,8 +321,8 @@ const Vote = () => {
             </ProgressBar>
           )}
           <div className='mt-4'>
-            <div className='row'>
-              {!hasPendingTransactions && (
+            {!hasPendingTransactions && inProgress === 1 && (
+              <div className='row'>
                 <div className='col-3'>
                   <button
                     onClick={sendYesTransaction}
@@ -333,8 +333,6 @@ const Vote = () => {
                     <FontAwesomeIcon icon={faCheckCircle} />
                   </button>
                 </div>
-              )}
-              {!hasPendingTransactions && (
                 <div className='col-3'>
                   <button
                     onClick={sendNoTransaction}
@@ -345,8 +343,8 @@ const Vote = () => {
                     <FontAwesomeIcon icon={faXmarkCircle} />
                   </button>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
             <div className='mb-1 mt-4'>
               <span className='mr-1'>Vote address:</span>
               <span data-testid='voteAddress'>
