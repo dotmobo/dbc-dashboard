@@ -1,0 +1,23 @@
+{
+    "configurations": {
+        "default": {
+            "proxy": "https://devnet-api.elrond.com",
+            "chainID": "D"
+        }
+    },
+    "contract":{
+        "deploy":{
+            "verbose": true,
+            "bytecode": "output/vote.wasm",
+            "recall-nonce": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:Should the staking rewards that are being distributed be in $DEAD ?",
+                "str:DEADBROS-fa8f0f"
+            ],
+            "send": true,
+            "outfile": "deploy-testnet.interaction.json"
+        }
+     }
+}
