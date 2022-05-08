@@ -36,6 +36,28 @@ const Farms = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
+  const getFarmName = (lkFarm: LockedLPStaked) => {
+    let name = 'UNKNOWN FARM';
+    if (lkFarm.name === 'ITHWEGLDLPStakedLK') {
+      name = 'ITHEUM-EGLD';
+    } else if (lkFarm.name === 'EGLDMEXLPStakedLK') {
+      name = 'MEX-EGLD';
+    } else if (lkFarm.name === 'LockedLPStaked') {
+      if (parseInt(lkFarm.balance) > 10000 * 10 ** lkFarm.decimals) {
+        name = 'LKMEX';
+      } else {
+        name = 'MEX-EGLD';
+      }
+    } else if (lkFarm.name === 'StakedZPAY') {
+      name = 'ZPAY';
+    } else if (lkFarm.name === 'StakedRIDE') {
+      name = 'RIDE';
+    } else if (lkFarm.name === 'StakedITHEUM') {
+      name = 'ITHEUM';
+    }
+    return name;
+  };
+
   // use the balance to show lkmex or mex-egld label, because lkfarm token can be on mex-egld farm too ...
   return (
     <div>
@@ -62,11 +84,7 @@ const Farms = () => {
                 {lkFarm.balance !== undefined && lkFarm.name !== undefined && (
                   <div>
                     <MexIcon className='mx-1' height={16} width={16} />
-                    <b>
-                      {lkFarm.balance > 10000 * 10 ** lkFarm.decimals
-                        ? 'LKMEX'
-                        : (lkFarm.name === 'ITHWEGLDLPStakedLK' ? 'ITHEUM-EGLD' : 'MEX-EGLD')}
-                    </b>
+                    <b>{getFarmName(lkFarm)}</b>
                     :&nbsp;
                     {formatBigNumber(
                       floor(
