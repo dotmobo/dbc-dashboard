@@ -26,10 +26,9 @@ export const elrondExplorerUrl = 'https://explorer.elrond.com';
 export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
 export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
 export const frameItUrl = 'https://www.frameit.gg';
-
-// Vote component DEVNET
+// Vote component
 export const enableVote = false;
-// devnet test
+// DEVNET test
 // export const voteAddress =
 //   'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke';
 // export const voteYesData =
