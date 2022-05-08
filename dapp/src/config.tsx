@@ -1,5 +1,5 @@
 // Elrond Network
-export const elrondNetwork = 'devnet'; // mainnet, testnet or devnet
+export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'DeadBrothers Dashboard';
 // Addresses
@@ -29,13 +29,18 @@ export const frameItUrl = 'https://www.frameit.gg';
 
 // Vote component DEVNET
 export const enableVote = false;
-export const voteAddress =
-  'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke';
+// devnet test
+// export const voteAddress =
+//   'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke';
+// export const voteYesData =
+//   'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573';
+// export const voteNoData =
+//   'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766F74655F6E6F';
+export const voteAddress = 'PUT VOTE SMART CONTRACT ADDRESS HERE';
 export const voteYesData =
-  'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573';
+  'ESDTTransfer@4445414442524f532d626638323266@021e19e0c9bab2400000@766f74655f796573';
 export const voteNoData =
-  'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766F74655F6E6F';
+  'ESDTTransfer@4445414442524f532d626638323266@021e19e0c9bab2400000@766F74655F6E6F';
 export const voteFinishData = 'finish_vote';
 export const voteWithdrawData = 'withdraw';
-export const voteOwnerAddress =
-  'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
+export const voteOwnerAddress = 'PUT OWNER SMART CONTRACT ADDRESS HERE';
