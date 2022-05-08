@@ -9,7 +9,7 @@ export const distributionAddress =
   'erd1wd6ksxyzd4qge374azc2jp8pelv04g2atjeldkmc7ly7gpf3zg7qup2dns';
 // Token ids
 export const lkFarmsNames = 'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38';
-export const nftsCollectionId = 'DEADBROS-bf822f';
+export const nftsCollectionId = 'DEADBROS-bf822f'; // DEADBROS-fa8f0f in devnet
 export const nftsSerumCollectionId = 'TESTSERUM-39a388';
 export const deadTokenId = 'DEADBROS-388e63';
 // Urls
@@ -28,9 +28,9 @@ export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
 export const frameItUrl = 'https://www.frameit.gg';
 
 // Vote component DEVNET
+export const enableVote = false;
 export const voteAddress =
   'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke';
-export const voteTokenId = 'DEADBROS-fa8f0f';
 export const voteYesData =
   'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573';
 export const voteNoData =
