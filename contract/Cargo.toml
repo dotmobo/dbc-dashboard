@@ -1,7 +1,5 @@
 [workspace]
 members = [
-  "ping-pong",
-  "ping-pong/meta",
   "vote",
   "vote/meta"
 ]

@@ -81,5 +81,10 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "node-sass": "6.0.1",
     "prettier": "2.3.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^lodash-es$": "lodash"
+    }
   }
 }
