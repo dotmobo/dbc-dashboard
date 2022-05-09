@@ -13,6 +13,7 @@ import moment from 'moment';
 interface Reward {
   txHash: string;
   action: any;
+  value: string;
 }
 
 type Rewards = Array<Reward>;
@@ -75,16 +76,24 @@ const Rewards = () => {
                     'LockedMEX' && (
                     <MexIcon className='mx-1' height={16} width={16} />
                   )}
-                  <b>{reward.action?.arguments?.transfers[0]?.name}</b>
-                  :&nbsp;
-                  {formatBigNumber(
-                    floor(
-                      divide(
-                        parseInt(reward.action?.arguments?.transfers[0]?.value),
-                        10 ** reward.action?.arguments?.transfers[0]?.decimals
-                      )
-                    )
+                  {reward.action === undefined && <b>EGLD</b>}
+                  {reward.action !== undefined && (
+                    <b>{reward.action?.arguments?.transfers[0]?.name}</b>
                   )}
+                  :&nbsp;
+                  {reward.action === undefined &&
+                    formatBigNumber(divide(parseInt(reward.value), 10 ** 18))}
+                  {reward.action !== undefined &&
+                    formatBigNumber(
+                      floor(
+                        divide(
+                          parseInt(
+                            reward.action?.arguments?.transfers[0]?.value
+                          ),
+                          10 ** reward.action?.arguments?.transfers[0]?.decimals
+                        )
+                      )
+                    )}
                 </div>
               ))}
             </div>
