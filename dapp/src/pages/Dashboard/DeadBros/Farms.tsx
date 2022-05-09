@@ -59,6 +59,26 @@ const Farms = () => {
     return name;
   };
 
+  const isMexIcon = (lkFarm: LockedLPStaked) => {
+    let isMex = false;
+    if (lkFarm.name === 'ITHWEGLDLPStakedLK') {
+      isMex = true;
+    } else if (lkFarm.name === 'EGLDMEXLPStakedLK') {
+      isMex = true;
+    } else if (lkFarm.name === 'LockedLPStaked') {
+      isMex = true;
+    }
+    return isMex;
+  };
+
+  const isZPayIcon = (lkFarm: LockedLPStaked) => {
+    let isZPay = false;
+    if (lkFarm.name === 'StakedZPAY') {
+      isZPay = true;
+    }
+    return isZPay;
+  };
+
   // use the balance to show lkmex or mex-egld label, because lkfarm token can be on mex-egld farm too ...
   return (
     <div>
@@ -84,12 +104,10 @@ const Farms = () => {
               <div key={lkFarm.identifier}>
                 {lkFarm.balance !== undefined && lkFarm.name !== undefined && (
                   <div>
-                    {(lkFarm.name === 'LockedLPStaked' ||
-                      lkFarm.name === 'EGLDMEXLPStakedLK' ||
-                      lkFarm.name === 'ITHWEGLDLPStakedLK') && (
+                    {isMexIcon(lkFarm) && (
                       <MexIcon className='mx-1' height={16} width={16} />
                     )}
-                    {lkFarm.name === 'StakedZPAY' && (
+                    {isZPayIcon(lkFarm) && (
                       <ZPayIcon className='mx-1' height={16} width={16} />
                     )}
                     <b>{getFarmName(lkFarm)}</b>
