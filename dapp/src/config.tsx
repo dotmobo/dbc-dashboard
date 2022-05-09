@@ -8,7 +8,7 @@ export const contractAddress =
 export const distributionAddress =
   'erd1wd6ksxyzd4qge374azc2jp8pelv04g2atjeldkmc7ly7gpf3zg7qup2dns';
 // Token ids
-export const lkFarmsNames = 'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38';
+export const lkFarmsNames = 'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39';
 export const nftsCollectionId = 'DEADBROS-bf822f'; // DEADBROS-fa8f0f in devnet
 export const nftsSerumCollectionId = 'TESTSERUM-39a388';
 export const deadTokenId = 'DEADBROS-388e63';
