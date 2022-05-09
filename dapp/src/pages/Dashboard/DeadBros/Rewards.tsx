@@ -45,6 +45,27 @@ const Rewards = () => {
     return moment().startOf('isoWeek').startOf('day');
   };
 
+  const getRewardName = (reward: Reward) => {
+    return reward.action === undefined
+      ? 'EGLD'
+      : reward.action?.arguments?.transfers[0]?.name;
+  };
+
+  const getRewardValue = (reward: Reward) => {
+    return reward.action === undefined
+      ? formatBigNumber(divide(parseInt(reward.value), 10 ** 18))
+      : formatBigNumber(
+          floor(
+            divide(
+              parseInt(reward.action?.arguments?.transfers[0]?.value),
+              !!reward.action?.arguments?.transfers[0]?.decimals
+                ? 10 ** reward.action?.arguments?.transfers[0]?.decimals
+                : 1
+            )
+          )
+        );
+  };
+
   return (
     <div>
       <h3>
@@ -84,24 +105,8 @@ const Rewards = () => {
                   {reward.action === undefined && (
                     <EgldIcon className='mx-1' height={16} width={16} />
                   )}
-                  {reward.action === undefined && <b>EGLD</b>}
-                  {reward.action !== undefined && (
-                    <b>{reward.action?.arguments?.transfers[0]?.name}</b>
-                  )}
-                  :&nbsp;
-                  {reward.action === undefined &&
-                    formatBigNumber(divide(parseInt(reward.value), 10 ** 18))}
-                  {reward.action !== undefined &&
-                    formatBigNumber(
-                      floor(
-                        divide(
-                          parseInt(
-                            reward.action?.arguments?.transfers[0]?.value
-                          ),
-                          10 ** reward.action?.arguments?.transfers[0]?.decimals
-                        )
-                      )
-                    )}
+                  {getRewardName(reward)}:&nbsp;
+                  {getRewardValue(reward)}
                 </div>
               ))}
             </div>
