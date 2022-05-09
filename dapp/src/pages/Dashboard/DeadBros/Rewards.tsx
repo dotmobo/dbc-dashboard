@@ -7,6 +7,7 @@ import { faGift } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as MexIcon } from '../../../assets/img/mex.svg';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
+import { ReactComponent as EgldIcon } from '../../../assets/img/egld.svg';
 import { divide, floor } from 'mathjs';
 import moment from 'moment';
 
@@ -75,6 +76,9 @@ const Rewards = () => {
                   {reward.action?.arguments?.transfers[0]?.name ===
                     'LockedMEX' && (
                     <MexIcon className='mx-1' height={16} width={16} />
+                  )}
+                  {reward.action === undefined && (
+                    <EgldIcon className='mx-1' height={16} width={16} />
                   )}
                   {reward.action === undefined && <b>EGLD</b>}
                   {reward.action !== undefined && (

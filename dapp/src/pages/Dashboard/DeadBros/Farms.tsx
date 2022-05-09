@@ -5,6 +5,7 @@ import axios from 'axios';
 import { faTractor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as MexIcon } from '../../../assets/img/mex.svg';
+import { ReactComponent as ZPayIcon } from '../../../assets/img/zpay.svg';
 import { divide, floor } from 'mathjs';
 
 interface LockedLPStaked {
@@ -87,6 +88,9 @@ const Farms = () => {
                       lkFarm.name === 'EGLDMEXLPStakedLK' ||
                       lkFarm.name === 'ITHWEGLDLPStakedLK') && (
                       <MexIcon className='mx-1' height={16} width={16} />
+                    )}
+                    {lkFarm.name === 'StakedZPAY' && (
+                      <ZPayIcon className='mx-1' height={16} width={16} />
                     )}
                     <b>{getFarmName(lkFarm)}</b>
                     :&nbsp;
