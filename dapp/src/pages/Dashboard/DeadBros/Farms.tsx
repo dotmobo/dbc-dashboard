@@ -83,7 +83,11 @@ const Farms = () => {
               <div key={lkFarm.identifier}>
                 {lkFarm.balance !== undefined && lkFarm.name !== undefined && (
                   <div>
-                    <MexIcon className='mx-1' height={16} width={16} />
+                    {(lkFarm.name === 'LockedLPStaked' ||
+                      lkFarm.name === 'EGLDMEXLPStakedLK' ||
+                      lkFarm.name === 'ITHWEGLDLPStakedLK') && (
+                      <MexIcon className='mx-1' height={16} width={16} />
+                    )}
                     <b>{getFarmName(lkFarm)}</b>
                     :&nbsp;
                     {formatBigNumber(
