@@ -12,12 +12,7 @@ const Stats = () => {
       </h3>
       <div className='row'>
         <div className='col'>
-          <div className='embed-responsive embed-responsive-1by1'>
-            <iframe
-              className='embed-responsive-item'
-              src={omniscientUrl}
-            ></iframe>
-          </div>
+          <iframe width='100%' height='660' src={omniscientUrl}></iframe>
         </div>
       </div>
     </div>
