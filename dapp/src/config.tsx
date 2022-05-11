@@ -8,7 +8,8 @@ export const contractAddress =
 export const distributionAddress =
   'erd1wd6ksxyzd4qge374azc2jp8pelv04g2atjeldkmc7ly7gpf3zg7qup2dns';
 // Token ids
-export const lkFarmsNames = 'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39';
+export const lkFarmsNames =
+  'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39';
 export const nftsCollectionId = 'DEADBROS-bf822f'; // DEADBROS-fa8f0f in devnet
 export const nftsSerumCollectionId = 'TESTSERUM-39a388';
 export const deadTokenId = 'DEADBROS-388e63';
@@ -26,6 +27,10 @@ export const elrondExplorerUrl = 'https://explorer.elrond.com';
 export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
 export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
 export const frameItUrl = 'https://www.frameit.gg';
+// Omniscient
+export const omniscientIconUrl = process.env.PUBLIC_URL + '/omniscient.png';
+export const omniscientUrl =
+  'https://omniscient.tools/collections/deadbrothers';
 // Vote component
 export const enableVote = false;
 // DEVNET test
