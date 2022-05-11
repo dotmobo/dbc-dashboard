@@ -10,15 +10,12 @@ import {
   gatewayFrameIt,
   frameItIconUrl,
   frameItUrl,
-  omniscientUrl,
-  omniscientIconUrl
 } from 'config';
 import axios from 'axios';
 import {
   faBolt,
   faShoppingCart,
   faCropSimple,
-  faChartBar
 } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -148,21 +145,6 @@ const FloorPrice = () => {
               </a>
             </div>
           )}
-          <div>
-            <img src={omniscientIconUrl} alt='omniscient' height={16} />
-            <b>Omnicient</b>:&nbsp;
-            <a
-              className='btn btn-primary ml-3 mt-1 btn-sm'
-              role='button'
-              aria-pressed='true'
-              href={omniscientUrl}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              STATS&nbsp;
-              <FontAwesomeIcon icon={faChartBar} className='text' />
-            </a>
-          </div>
         </div>
       </div>
     </div>

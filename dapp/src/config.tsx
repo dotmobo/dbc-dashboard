@@ -28,9 +28,7 @@ export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
 export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
 export const frameItUrl = 'https://www.frameit.gg';
 // Omniscient
-export const omniscientIconUrl = process.env.PUBLIC_URL + '/omniscient.png';
-export const omniscientUrl =
-  'https://omniscient.tools/collections/deadbrothers';
+export const omniscientUrl = 'https://omniscient.tools/partners/deadbrothers';
 // Vote component
 export const enableVote = false;
 // DEVNET test
