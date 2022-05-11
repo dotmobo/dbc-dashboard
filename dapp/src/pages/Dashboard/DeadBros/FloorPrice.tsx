@@ -149,7 +149,7 @@ const FloorPrice = () => {
             </div>
           )}
           <div>
-            <img src={omniscientIconUrl} alt='frameit' height={16} />
+            <img src={omniscientIconUrl} alt='omniscient' height={16} />
             <b>Omnicient</b>:&nbsp;
             <a
               className='btn btn-primary ml-3 mt-1 btn-sm'
