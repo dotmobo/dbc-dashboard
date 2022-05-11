@@ -1,6 +1,6 @@
 import React from 'react';
 import { logout, useGetAccountInfo } from '@elrondnetwork/dapp-core';
-import { Navbar as BsNavbar, NavItem, Nav } from 'react-bootstrap';
+import { Navbar as BsNavbar, NavItem, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { dAppName } from 'config';
 import { routeNames } from 'routes';
@@ -27,6 +27,29 @@ const Navbar = () => {
           <DeadbrothersLogo className='deadbrothers-logo ' />
           <span className='dapp-name text-muted'>{dAppName}</span>
         </Link>
+
+        <Container>
+          <Nav className='me-auto'>
+            <Link
+              className='nav-link'
+              to={isLoggedIn ? routeNames.dashboard : routeNames.home}
+            >
+              Board
+            </Link>
+            <Link
+              className='nav-link'
+              to={isLoggedIn ? routeNames.info : routeNames.home}
+            >
+              Info
+            </Link>
+            <Link
+              className='nav-link'
+              to={isLoggedIn ? routeNames.dao : routeNames.home}
+            >
+              DAO
+            </Link>
+          </Nav>
+        </Container>
 
         <Nav className='ml-auto'>
           {isLoggedIn && (

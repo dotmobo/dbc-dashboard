@@ -1,12 +1,16 @@
 import { dAppName } from 'config';
 import withPageTitle from './components/PageTitle';
 import Dashboard from './pages/Dashboard';
+import Info from './pages/Info';
+import Dao from './pages/Dao';
 import Home from './pages/Home';
 import Transaction from './pages/Transaction';
 
 export const routeNames = {
   home: '/',
   dashboard: '/dashboard',
+  info: '/info',
+  dao: '/dao',
   transaction: '/transaction',
   unlock: '/unlock',
   ledger: '/ledger',
@@ -23,6 +27,18 @@ const routes: Array<any> = [
     path: routeNames.dashboard,
     title: 'Dashboard',
     component: Dashboard,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.info,
+    title: 'Info',
+    component: Info,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.dao,
+    title: 'DAO',
+    component: Dao,
     authenticatedRoute: true
   },
   {
