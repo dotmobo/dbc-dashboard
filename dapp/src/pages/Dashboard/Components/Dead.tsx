@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
-import { deadTokenId, elrondApiUrl } from 'config';
+import { deadTokenId, elrondApiUrl, esdtMarketUrl } from 'config';
 import axios from 'axios';
 
-import { faCoins } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCoins,
+  faArrowRightArrowLeft
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 import { divide, floor } from 'mathjs';
@@ -66,6 +69,17 @@ const Dead = () => {
                 )}
               </div>
             )}
+          <a
+            className='btn btn-primary mt-3 btn-sm'
+            role='button'
+            aria-pressed='true'
+            href={esdtMarketUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            SWAP&nbsp;
+            <FontAwesomeIcon icon={faArrowRightArrowLeft} className='text' />
+          </a>
         </div>
       </div>
     </div>

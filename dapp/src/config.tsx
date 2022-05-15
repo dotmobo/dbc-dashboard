@@ -29,6 +29,7 @@ export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
 export const frameItUrl = 'https://www.frameit.gg';
 // Omniscient
 export const omniscientUrl = 'https://omniscient.tools/partners/deadbrothers';
+export const esdtMarketUrl = 'https://esdt.market/app/esdt/listings';
 // Vote component
 export const enableVote = false;
 // DEVNET test
