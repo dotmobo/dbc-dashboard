@@ -2,7 +2,7 @@ import * as React from 'react';
 import TopInfo from './TopInfo';
 import Transactions from './Transactions';
 import Components from './Components';
-import { enableVote } from 'config';
+import { enableMarket } from 'config';
 
 const Market = () => {
   return (
@@ -16,10 +16,18 @@ const Market = () => {
                   <TopInfo />
                 </div>
               </div>
-              <div>
-                <Components />
-                <Transactions />
-              </div>
+              {!!enableMarket && (
+                <div>
+                  <Components />
+                  <Transactions />
+                </div>
+              )}
+              {!enableMarket && (
+                <div>
+                  <hr />
+                  <p>Market is not currently available !</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
