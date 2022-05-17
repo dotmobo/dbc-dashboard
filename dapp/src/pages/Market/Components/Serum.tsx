@@ -7,11 +7,11 @@ import {
   useGetPendingTransactions
 } from '@elrondnetwork/dapp-core';
 import {
+  deadTokenId,
   elrondApiUrl,
+  nftsSerumCollectionId,
   serumMarketAddress,
   serumMarketBuyFn,
-  serumMarketCollectionId,
-  serumMarketTokenId,
   serumOwnerAddress,
   serumWithdrawData
 } from 'config';
@@ -88,7 +88,7 @@ const Serum = () => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${elrondApiUrl}/accounts/${serumMarketAddress}/nfts?size=10000&collections=${serumMarketCollectionId}`
+        `${elrondApiUrl}/accounts/${serumMarketAddress}/nfts?size=10000&collections=${nftsSerumCollectionId}`
       )
       .then((response) => {
         setSerumsList(
@@ -121,7 +121,7 @@ const Serum = () => {
   const getBuySerumData = (serum: Serum) => {
     return (
       'ESDTTransfer@' +
-      strtoHex(serumMarketTokenId) +
+      strtoHex(deadTokenId) +
       '@' +
       numtoHex(!!price ? price : 0) +
       '@' +

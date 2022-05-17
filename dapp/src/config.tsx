@@ -10,9 +10,9 @@ export const distributionAddress =
 // Token ids
 export const lkFarmsNames =
   'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39';
-export const nftsCollectionId = 'DEADBROS-bf822f'; // DEADBROS-fa8f0f in devnet
-export const nftsSerumCollectionId = 'TESTSERUM-39a388';
-export const deadTokenId = 'DEADBROS-388e63';
+export const nftsCollectionId = 'DEADBROS-bf822f';
+export const nftsSerumCollectionId = 'TESTSERUM-39a388'; // BACKGROUND-35c061 to test the market
+export const deadTokenId = 'DEADBROS-388e63'; // DEADBROS-fa8f0f in devnet
 // Urls
 export const deadBrothersClubUrl = 'https://www.deadbrothers.club/';
 export const elrondApiUrl =
@@ -52,11 +52,12 @@ export const voteWithdrawData = 'withdraw';
 export const voteOwnerAddress =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 // Market
+// DEVNET test
+// export const serumMarketAddress =
+//   'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8';
 export const enableMarket = false;
 export const serumMarketAddress =
   'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8';
-export const serumMarketCollectionId = 'BACKGROUND-35c061'; // put the right serum id here
-export const serumMarketTokenId = 'DEADBROS-fa8f0f';
 export const serumMarketBuyFn = 'buy';
 export const serumWithdrawData = 'withdraw';
 export const serumOwnerAddress =
