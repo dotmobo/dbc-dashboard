@@ -7,45 +7,21 @@ import {
   useGetPendingTransactions
 } from '@elrondnetwork/dapp-core';
 import {
-  deadTokenId,
   elrondApiUrl,
-  elrondExplorerUrl,
   serumMarketAddress,
   serumMarketBuyFn,
   serumMarketCollectionId,
   serumMarketPrice,
   serumMarketTokenId,
   serumOwnerAddress,
-  serumWithdrawData,
-  voteAddress,
-  voteFinishData,
-  voteNoData,
-  voteOwnerAddress,
-  voteWithdrawData,
-  voteYesData
+  serumWithdrawData
 } from 'config';
 import axios from 'axios';
 
-import {
-  faCircleQuestion,
-  faPersonBooth,
-  faCheckCircle,
-  faXmarkCircle,
-  faCircleStop,
-  faShop,
-  faMoneyBillTransfer
-} from '@fortawesome/free-solid-svg-icons';
+import { faShop, faMoneyBillTransfer } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
-import { divide, floor } from 'mathjs';
-import {
-  Address,
-  AddressValue,
-  ContractFunction,
-  ProxyProvider,
-  Query
-} from '@elrondnetwork/erdjs';
-import { ProgressBar } from 'react-bootstrap';
+import { floor, divide } from 'mathjs';
 import { orderBy } from 'lodash-es';
 import LazyLoad from 'react-lazyload';
 
@@ -63,11 +39,6 @@ const Serum = () => {
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { network } = useGetNetworkConfig();
   const { address } = account;
-
-  const [question, setQuestion] = React.useState<string>();
-  const [inProgress, setInProgress] = React.useState<number>();
-  const [yes, setYes] = React.useState<number>();
-  const [no, setNo] = React.useState<number>();
 
   const /*transactionSessionId*/ [, setTransactionSessionId] = React.useState<
       string | null
@@ -186,6 +157,10 @@ const Serum = () => {
     );
   };
 
+  const formatBigNumber = (x: number) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   return (
     <div>
       <h3>
@@ -248,9 +223,14 @@ const Serum = () => {
                   </div>
                 </div>
                 <div>
+                  <div className='mt-4'>
+                    <b>Price</b>:&nbsp;
+                    {formatBigNumber(floor(divide(serumMarketPrice, 10 ** 18)))}
+                    <DeadIcon className='mx-1' height={16} width={16} />
+                  </div>
                   <div className='w-100'></div>
                   <button
-                    className='btn btn-primary ml-1 mt-2'
+                    className='btn btn-primary ml-1 mt-4'
                     onClick={() => sendBuySerumTransaction(serum)}
                   >
                     BUY&nbsp;
