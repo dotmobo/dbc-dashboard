@@ -5,12 +5,14 @@ import Info from './pages/Info';
 import Dao from './pages/Dao';
 import Home from './pages/Home';
 import Transaction from './pages/Transaction';
+import Market from 'pages/Market';
 
 export const routeNames = {
   home: '/',
   dashboard: '/dashboard',
   info: '/info',
   dao: '/dao',
+  market: '/market',
   transaction: '/transaction',
   unlock: '/unlock',
   ledger: '/ledger',
@@ -45,6 +47,11 @@ const routes: Array<any> = [
     path: routeNames.transaction,
     title: 'Transaction',
     component: Transaction
+  },
+  {
+    path: routeNames.market,
+    title: 'Market',
+    component: Market
   }
 ];
 

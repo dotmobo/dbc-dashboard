@@ -1,5 +1,7 @@
 [workspace]
 members = [
   "vote",
-  "vote/meta"
+  "vote/meta",
+  "buy_serum",
+  "buy_serum/meta"
 ]

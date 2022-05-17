@@ -1,5 +1,5 @@
 // Elrond Network
-export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
+export const elrondNetwork = 'devnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'DBC';
 // Addresses
@@ -15,7 +15,10 @@ export const nftsSerumCollectionId = 'TESTSERUM-39a388';
 export const deadTokenId = 'DEADBROS-388e63';
 // Urls
 export const deadBrothersClubUrl = 'https://www.deadbrothers.club/';
-export const elrondApiUrl = 'https://api.elrond.com';
+export const elrondApiUrl =
+  elrondNetwork === 'devnet'
+    ? 'https://devnet-api.elrond.com'
+    : 'https://api.elrond.com';
 export const deadRareUrl = 'https://deadrare.io';
 export const gatewayDeadRareUrl = 'https://gateway.deadrare.io';
 export const deadRareIconUrl = process.env.PUBLIC_URL + '/deadrare.webp';
@@ -47,3 +50,14 @@ export const voteNoData =
 export const voteFinishData = 'finish_vote';
 export const voteWithdrawData = 'withdraw';
 export const voteOwnerAddress = 'PUT OWNER SMART CONTRACT ADDRESS HERE';
+
+// Market
+export const serumMarketAddress =
+  'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8';
+export const serumMarketCollectionId = 'BACKGROUND-35c061';
+export const serumMarketTokenId = 'DEADBROS-fa8f0f';
+export const serumMarketPrice = 100;
+export const serumMarketBuyFn = 'buy';
+export const serumWithdrawData = 'withdraw';
+export const serumOwnerAddress =
+  'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';

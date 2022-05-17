@@ -48,6 +48,12 @@ const Navbar = () => {
             >
               DAO
             </Link>
+            <Link
+              className='nav-link'
+              to={isLoggedIn ? routeNames.market : routeNames.home}
+            >
+              Market
+            </Link>
           </Nav>
         </Container>
 

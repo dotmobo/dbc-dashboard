@@ -1,0 +1,14 @@
+[package]
+name = "buy_serum-meta"
+version = "0.0.0"
+edition = "2018"
+publish = false
+authors = [ "you",]
+
+[dev-dependencies]
+
+[dependencies.buy_serum]
+path = ".."
+
+[dependencies.elrond-wasm-debug]
+version = "0.31.1"
