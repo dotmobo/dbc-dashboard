@@ -119,7 +119,7 @@ const Serum = () => {
       '@' +
       strtoHex(serumMarketBuyFn) +
       '@' +
-      strtoHex(serumMarketCollectionId) +
+      strtoHex(serum.collection) +
       '@' +
       numtoHex(serum.nonce)
     );
