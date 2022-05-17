@@ -11,7 +11,6 @@ import {
   serumMarketAddress,
   serumMarketBuyFn,
   serumMarketCollectionId,
-  serumMarketPrice,
   serumMarketTokenId,
   serumOwnerAddress,
   serumWithdrawData
@@ -24,6 +23,13 @@ import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 import { floor, divide } from 'mathjs';
 import { orderBy } from 'lodash-es';
 import LazyLoad from 'react-lazyload';
+import {
+  Address,
+  AddressValue,
+  ContractFunction,
+  ProxyProvider,
+  Query
+} from '@elrondnetwork/erdjs';
 
 interface Serum {
   identifier: string;
@@ -45,6 +51,38 @@ const Serum = () => {
     >(null);
 
   const [serums, setSerumsList] = React.useState<Serum[]>();
+  const [price, setPrice] = React.useState<number>();
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(serumMarketAddress),
+      func: new ContractFunction('getPrice'),
+      args: []
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setPrice(0);
+            break;
+          case '':
+            setPrice(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setPrice(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -85,8 +123,7 @@ const Serum = () => {
       'ESDTTransfer@' +
       strtoHex(serumMarketTokenId) +
       '@' +
-      // numtoHex(serumMarketPrice * 10 ** 18) +
-      numtoHex(serumMarketPrice) +
+      numtoHex(!!price ? price : 0) +
       '@' +
       strtoHex(serumMarketBuyFn) +
       '@' +
@@ -194,6 +231,7 @@ const Serum = () => {
           )}
         {serums !== undefined &&
           serums.length > 0 &&
+          price !== undefined &&
           serums.map((serum) => (
             <div
               key={serum.identifier}
@@ -225,7 +263,7 @@ const Serum = () => {
                 <div>
                   <div className='mt-4'>
                     <b>Price</b>:&nbsp;
-                    {formatBigNumber(floor(divide(serumMarketPrice, 10 ** 18)))}
+                    {formatBigNumber(floor(divide(price, 10 ** 18)))}
                     <DeadIcon className='mx-1' height={16} width={16} />
                   </div>
                   <div className='w-100'></div>

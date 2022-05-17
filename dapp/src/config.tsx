@@ -57,7 +57,6 @@ export const serumMarketAddress =
   'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8';
 export const serumMarketCollectionId = 'BACKGROUND-35c061'; // put the right serum id here
 export const serumMarketTokenId = 'DEADBROS-fa8f0f';
-export const serumMarketPrice = 100;
 export const serumMarketBuyFn = 'buy';
 export const serumWithdrawData = 'withdraw';
 export const serumOwnerAddress =
