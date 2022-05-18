@@ -18,7 +18,7 @@ import {
 } from 'config';
 import axios from 'axios';
 
-import { faShop, faMoneyBillTransfer } from '@fortawesome/free-solid-svg-icons';
+import { faShop, faMoneyBillTransfer, faCreditCard, faBarcode } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 import { floor, divide } from 'mathjs';
@@ -281,7 +281,7 @@ const Serum = () => {
                 className='btn btn-primary mr-4 mt-2'
               >
                 CHANGE PRICE&nbsp;
-                <FontAwesomeIcon icon={faMoneyBillTransfer} />
+                <FontAwesomeIcon icon={faBarcode} />
               </button>
             </div>
           )}
@@ -328,7 +328,7 @@ const Serum = () => {
                     onClick={() => sendBuySerumTransaction(serum)}
                   >
                     BUY&nbsp;
-                    <FontAwesomeIcon icon={faShop} className='text' />
+                    <FontAwesomeIcon icon={faCreditCard} className='text' />
                   </button>
                 </div>
               </LazyLoad>
