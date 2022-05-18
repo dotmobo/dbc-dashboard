@@ -10,6 +10,7 @@ elrond_wasm_node::wasm_endpoints! {
         buy
         change_price
         getBank
+        getNftIdentifier
         getPrice
         getTokenId
         withdraw

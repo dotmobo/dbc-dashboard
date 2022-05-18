@@ -6,9 +6,10 @@ elrond_wasm::imports!();
 #[elrond_wasm::contract]
 pub trait EmptyContract {
     #[init]
-    fn init(&self, token_id: TokenIdentifier, price: BigUint) {
+    fn init(&self, token_id: TokenIdentifier, price: BigUint, nft_identifier: TokenIdentifier) {
         self.token_id().set(&token_id);
         self.price().set(&price);
+        self.nft_identifier().set(&nft_identifier);
         self.bank().set(BigUint::from(0u32));
     }
 
@@ -31,6 +32,11 @@ pub trait EmptyContract {
         require!(
             payment_amount == self.price().get(),
             "Invalid payment amount"
+        );
+
+        require!(
+            nft_identifier == self.nft_identifier().get(),
+            "Invalid nft identifier"
         );
 
         let caller = self.blockchain().get_caller();
@@ -81,6 +87,10 @@ pub trait EmptyContract {
     #[view(getTokenId)]
     #[storage_mapper("token_id")]
     fn token_id(&self) -> SingleValueMapper<TokenIdentifier>;
+
+    #[view(getNftIdentifier)]
+    #[storage_mapper("nft_identifier")]
+    fn nft_identifier(&self) -> SingleValueMapper<TokenIdentifier>;
 
     #[view(getPrice)]
     #[storage_mapper("price")]
