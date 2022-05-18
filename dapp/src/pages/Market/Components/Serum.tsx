@@ -9,6 +9,7 @@ import {
 import {
   deadTokenId,
   elrondApiUrl,
+  elrondExplorerUrl,
   nftsSerumCollectionId,
   serumMarketAddress,
   serumMarketBuyFn,
@@ -232,15 +233,29 @@ const Serum = () => {
         Buy Serum <FontAwesomeIcon icon={faShop} className='text' />
       </h3>
       <div className='row'>
+        <div className='col-12'>
+          <span className='mr-1'>Market address:</span>
+          <span data-testid='serumMarketAddress'>
+            <a
+              href={elrondExplorerUrl + '/accounts/' + serumMarketAddress}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {serumMarketAddress.substring(0, 8) +
+                '...' +
+                serumMarketAddress.substring(serumMarketAddress.length - 4)}
+            </a>
+          </span>
+        </div>
         {serums === undefined && (
-          <div className='col'>
+          <div className='col-12'>
             <div className='spinner-border text-primary mr-2' role='status'>
               <span className='sr-only'>Loading...</span>
             </div>
           </div>
         )}
         {serums !== undefined && serums.length === 0 && (
-          <div className='col'>
+          <div className='col-12'>
             <div>No Serums found in the market !</div>
           </div>
         )}

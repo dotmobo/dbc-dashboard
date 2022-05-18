@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
 import {
+  contractAddress,
   deadRareUrl,
   elrondApiUrl,
+  elrondExplorerUrl,
   frameItUrl,
   nftsCollectionId,
   nftsSerumCollectionId,
@@ -84,6 +86,20 @@ const Bros = () => {
         {bros !== undefined && bros.length > 0 && <span>({bros.length})</span>}
       </h3>
       <div className='row'>
+        <div className='col-12'>
+          <span className='mr-1'>Mint address:</span>
+          <span data-testid='serumMarketAddress'>
+            <a
+              href={elrondExplorerUrl + '/accounts/' + contractAddress}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {contractAddress.substring(0, 8) +
+                '...' +
+                contractAddress.substring(contractAddress.length - 4)}
+            </a>
+          </span>
+        </div>
         {bros === undefined && (
           <div className='col'>
             <div className='spinner-border text-primary mr-2' role='status'>

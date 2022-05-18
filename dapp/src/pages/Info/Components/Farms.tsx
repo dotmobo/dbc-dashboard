@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { elrondApiUrl, lkFarmsNames, distributionAddress } from 'config';
+import { elrondApiUrl, lkFarmsNames, distributionAddress, elrondExplorerUrl } from 'config';
 import axios from 'axios';
 
 import { faTractor } from '@fortawesome/free-solid-svg-icons';
@@ -87,6 +87,20 @@ const Farms = () => {
         <FontAwesomeIcon icon={faTractor} className='text' />
       </h3>
       <div className='row'>
+        <div className='col-12'>
+          <span className='mr-1'>Farms address:</span>
+          <span data-testid='distributionAddress'>
+            <a
+              href={elrondExplorerUrl + '/accounts/' + distributionAddress}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {distributionAddress.substring(0, 8) +
+                '...' +
+                distributionAddress.substring(distributionAddress.length - 4)}
+            </a>
+          </span>
+        </div>
         <div className='col'>
           {lkFarms === undefined && (
             <div>
