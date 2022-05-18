@@ -64,6 +64,15 @@ pub trait EmptyContract {
         Ok(())
     }
 
+    #[only_owner]
+    #[endpoint]
+    fn change_price(&self, price: BigUint) -> SCResult<()> {
+
+        self.price().set(&price);
+
+        Ok(())
+    }
+
 
     #[view(getBank)]
     #[storage_mapper("bank")]

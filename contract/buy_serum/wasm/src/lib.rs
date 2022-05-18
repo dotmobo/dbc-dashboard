@@ -8,6 +8,7 @@ elrond_wasm_node::wasm_endpoints! {
     buy_serum
     (
         buy
+        change_price
         getBank
         getPrice
         getTokenId

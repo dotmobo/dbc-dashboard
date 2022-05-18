@@ -52,6 +52,7 @@ const Serum = () => {
 
   const [serums, setSerumsList] = React.useState<Serum[]>();
   const [price, setPrice] = React.useState<number>();
+  const [newPrice, setNewPrice] = React.useState<number>(0);
 
   React.useEffect(() => {
     const query = new Query({
@@ -134,7 +135,7 @@ const Serum = () => {
   };
 
   const sendBuySerumTransaction = async (serum: Serum) => {
-    const yesTransaction = {
+    const buySerumTransaction = {
       value: '0',
       data: getBuySerumData(serum),
       receiver: serumMarketAddress,
@@ -143,11 +144,11 @@ const Serum = () => {
     await refreshAccount();
 
     const { sessionId /*, error*/ } = await sendTransactions({
-      transactions: yesTransaction,
+      transactions: buySerumTransaction,
       transactionsDisplayInfo: {
-        processingMessage: 'Processing yes vote transaction',
-        errorMessage: 'An error has occured during yes vote',
-        successMessage: 'Yes vote transaction successful'
+        processingMessage: 'Processing buy serum transaction',
+        errorMessage: 'An error has occured during buy serum',
+        successMessage: 'Buy serum transaction successful'
       },
       redirectAfterSign: false
     });
@@ -167,6 +168,29 @@ const Serum = () => {
 
     const { sessionId /*, error*/ } = await sendTransactions({
       transactions: withdrawTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing withdraw transaction',
+        errorMessage: 'An error has occured during withdraw',
+        successMessage: 'Withdraw transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
+  const sendChangePriceTransaction = async () => {
+    const changePriceTransaction = {
+      value: '0',
+      data: 'change_price@' + numtoHex(!!newPrice ? newPrice * 10 ** 18 : 0),
+      receiver: serumMarketAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: changePriceTransaction,
       transactionsDisplayInfo: {
         processingMessage: 'Processing yes vote transaction',
         errorMessage: 'An error has occured during yes vote',
@@ -198,6 +222,10 @@ const Serum = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
+  const handleNewPriceChange = (event: any) => {
+    setNewPrice(event.target.value);
+  };
+
   return (
     <div>
       <h3>
@@ -225,6 +253,19 @@ const Serum = () => {
                 className='btn btn-primary mr-4'
               >
                 WITHDRAW&nbsp;
+                <FontAwesomeIcon icon={faMoneyBillTransfer} />
+              </button>
+              <input
+                type='number'
+                className='mt-2 form-control'
+                value={newPrice}
+                onChange={handleNewPriceChange}
+              />
+              <button
+                onClick={sendChangePriceTransaction}
+                className='btn btn-primary mr-4 mt-2'
+              >
+                CHANGE PRICE&nbsp;
                 <FontAwesomeIcon icon={faMoneyBillTransfer} />
               </button>
             </div>
