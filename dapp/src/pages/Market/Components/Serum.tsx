@@ -231,6 +231,8 @@ const Serum = () => {
     <div>
       <h3>
         Buy Serum <FontAwesomeIcon icon={faShop} className='text' />
+        &nbsp;
+        {serums !== undefined && serums.length > 0 && <span>({serums.length})</span>}
       </h3>
       <div className='row'>
         <div className='col-12'>
