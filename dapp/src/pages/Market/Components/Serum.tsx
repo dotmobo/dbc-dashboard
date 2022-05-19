@@ -18,11 +18,16 @@ import {
 } from 'config';
 import axios from 'axios';
 
-import { faShop, faMoneyBillTransfer, faCreditCard, faBarcode } from '@fortawesome/free-solid-svg-icons';
+import {
+  faShop,
+  faMoneyBillTransfer,
+  faCreditCard,
+  faBarcode
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 import { floor, divide } from 'mathjs';
-import { orderBy } from 'lodash-es';
+import { orderBy, shuffle } from 'lodash-es';
 import LazyLoad from 'react-lazyload';
 import {
   Address,
@@ -93,9 +98,7 @@ const Serum = () => {
         `${elrondApiUrl}/accounts/${serumMarketAddress}/nfts?size=10000&collections=${nftsSerumCollectionId}`
       )
       .then((response) => {
-        setSerumsList(
-          orderBy(response.data, ['collection', 'nonce'], ['desc', 'asc'])
-        );
+        setSerumsList(shuffle(response.data));
       });
   }, [hasPendingTransactions]);
 
@@ -232,7 +235,9 @@ const Serum = () => {
       <h3>
         Buy Serum <FontAwesomeIcon icon={faShop} className='text' />
         &nbsp;
-        {serums !== undefined && serums.length > 0 && <span>({serums.length})</span>}
+        {serums !== undefined && serums.length > 0 && (
+          <span>({serums.length})</span>
+        )}
       </h3>
       <div className='row'>
         <div className='col-12'>
