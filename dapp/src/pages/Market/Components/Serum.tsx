@@ -295,7 +295,7 @@ const Serum = () => {
         {serums !== undefined &&
           serums.length > 0 &&
           price !== undefined &&
-          serums.map((serum) => (
+          serums.slice(0, 1).map((serum) => (
             <div
               key={serum.identifier}
               className='col-12 col-sm-12 col-md-6 col-lg-4 mt-4 mx-auto'
