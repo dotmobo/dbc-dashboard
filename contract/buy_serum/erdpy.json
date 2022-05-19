@@ -15,8 +15,8 @@
             "gas-limit": 59999999,
             "arguments": [
                 "str:DEADBROS-fa8f0f",
-                "100",
-                "str:BACKGROUND-35c061"
+                "100000000000000000000",
+                "str:DEAD1-2d86a5"
             ],
             "send": true,
             "outfile": "deploy-testnet.interaction.json"
@@ -30,8 +30,8 @@
             "gas-limit": 59999999,
             "arguments": [
                 "str:DEADBROS-fa8f0f",
-                "100",
-                "str:BACKGROUND-35c061"
+                "100000000000000000000",
+                "str:DEAD1-2d86a5"
             ],
             "send": true,
             "outfile": "deploy-testnet.interaction.json"

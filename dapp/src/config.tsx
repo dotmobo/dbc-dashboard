@@ -11,7 +11,7 @@ export const distributionAddress =
 export const lkFarmsNames =
   'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39';
 export const nftsCollectionId = 'DEADBROS-bf822f';
-export const nftsSerumCollectionId = 'TESTSERUM-39a388'; // BACKGROUND-35c061 to test the market
+export const nftsSerumCollectionId = 'TESTSERUM-39a388'; // DEAD1-2d86a5 to test the market
 export const deadTokenId = 'DEADBROS-388e63'; // DEADBROS-fa8f0f in devnet
 // Urls
 export const deadBrothersClubUrl = 'https://www.deadbrothers.club/';
