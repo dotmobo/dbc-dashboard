@@ -1,0 +1,524 @@
+import * as React from 'react';
+import {
+  refreshAccount,
+  transactionServices,
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  useGetPendingTransactions
+} from '@elrondnetwork/dapp-core';
+import {
+  deadTokenId,
+  elrondApiUrl,
+  elrondExplorerUrl,
+  nftsSerumCollectionId,
+  serumMarketAddress,
+  serumMarketBuyFn,
+  serumOwnerAddress,
+  serumWithdrawData,
+  tokenStakingAddress
+} from 'config';
+import axios from 'axios';
+
+import {
+  faShop,
+  faMoneyBillTransfer,
+  faCreditCard,
+  faBarcode,
+  faCoins
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
+import { floor, divide } from 'mathjs';
+import { orderBy, shuffle } from 'lodash-es';
+import LazyLoad from 'react-lazyload';
+import {
+  Address,
+  AddressValue,
+  BytesValue,
+  ContractFunction,
+  ProxyProvider,
+  Query
+} from '@elrondnetwork/erdjs';
+import moment from 'moment';
+
+const TokenStaking = () => {
+  const account = useGetAccountInfo();
+  const { hasPendingTransactions } = useGetPendingTransactions();
+  const { network } = useGetNetworkConfig();
+  const { address } = account;
+
+  const /*transactionSessionId*/ [, setTransactionSessionId] = React.useState<
+      string | null
+    >(null);
+
+  const [stakingTokenId, setStakingTokenId] = React.useState<string>();
+  const [minimumStakingAmount, setMinimumStakingAmount] =
+    React.useState<number>();
+
+  const [stakeAmount, setStakeAmount] = React.useState<number>();
+  const [lockTime, setLockTime] = React.useState<number>();
+  const [unstakeTime, setUnstakeTime] = React.useState<number>();
+  const [newStakeAmount, setNewStakeAmount] = React.useState<number>(0);
+  const [currentRewards, setCurrentRewards] = React.useState<number>();
+
+  const [minimumStakingDays, setMinimumStakingDays] = React.useState<number>();
+  const [rewardsPerDayPercent, setRewardsPerDayPercent] =
+    React.useState<number>();
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(tokenStakingAddress),
+      func: new ContractFunction('getStakingTokenId'),
+      args: []
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setStakingTokenId(undefined);
+            break;
+          case '':
+            setStakingTokenId('');
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString();
+            setStakingTokenId(decoded);
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(tokenStakingAddress),
+      func: new ContractFunction('getMinimumStakingAmount'),
+      args: []
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setMinimumStakingAmount(0);
+            break;
+          case '':
+            setMinimumStakingAmount(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setMinimumStakingAmount(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(tokenStakingAddress),
+      func: new ContractFunction('getStakeAmount'),
+      args: [new AddressValue(new Address(address))]
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setStakeAmount(0);
+            break;
+          case '':
+            setStakeAmount(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setStakeAmount(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(tokenStakingAddress),
+      func: new ContractFunction('getLockTime'),
+      args: [new AddressValue(new Address(address))]
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setLockTime(0);
+            break;
+          case '':
+            setLockTime(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setLockTime(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(tokenStakingAddress),
+      func: new ContractFunction('getUnstakeTime'),
+      args: [new AddressValue(new Address(address))]
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setUnstakeTime(0);
+            break;
+          case '':
+            setUnstakeTime(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setUnstakeTime(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(tokenStakingAddress),
+      func: new ContractFunction('getCurrentRewards'),
+      args: [new AddressValue(new Address(address))]
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setCurrentRewards(0);
+            break;
+          case '':
+            setCurrentRewards(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setCurrentRewards(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(tokenStakingAddress),
+      func: new ContractFunction('getMinimumStakingDays'),
+      args: []
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setMinimumStakingDays(0);
+            break;
+          case '':
+            setMinimumStakingDays(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setMinimumStakingDays(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(tokenStakingAddress),
+      func: new ContractFunction('getRewardsPerDayPercent'),
+      args: []
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setRewardsPerDayPercent(0);
+            break;
+          case '':
+            setRewardsPerDayPercent(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setRewardsPerDayPercent(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  function strtoHex(str: string) {
+    let result = '';
+    for (let i = 0; i < str.length; i++) {
+      result += str.charCodeAt(i).toString(16);
+    }
+    if (result.length % 2 == 1) {
+      result = '0' + result;
+    }
+    return result;
+  }
+
+  function numtoHex(num: number) {
+    let result = num.toString(16);
+    if (result.length % 2 == 1) {
+      result = '0' + result;
+    }
+    return result;
+  }
+
+  const { sendTransactions } = transactionServices;
+
+  const sendStakeTransaction = async () => {
+    const stakeTransaction = {
+      value: '0',
+      data:
+        'ESDTTransfer@' +
+        strtoHex(deadTokenId) +
+        '@' +
+        numtoHex(!!newStakeAmount ? newStakeAmount * 10 ** 18 : 0) +
+        '@' +
+        strtoHex('stake'),
+      receiver: tokenStakingAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: stakeTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing stake transaction',
+        errorMessage: 'An error has occured during stake',
+        successMessage: 'Stake transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
+  const sendUnstakeTransaction = async () => {
+    const unstakeTransaction = {
+      value: '0',
+      data: 'unstake',
+      receiver: tokenStakingAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: unstakeTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing unstake transaction',
+        errorMessage: 'An error has occured during unstake',
+        successMessage: 'Unstake transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
+  const formatBigNumber = (x: number) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  const handleNewStakeAmountChange = (event: any) => {
+    setNewStakeAmount(event.target.value);
+  };
+
+  return (
+    <div>
+      <h3>
+        Stake $DEAD Tokens <FontAwesomeIcon icon={faCoins} className='text' />
+      </h3>
+      <div className='row'>
+        <div className='col-12'>
+          <span className='mr-1'>Staking address:</span>
+          <span data-testid='tokenStakingAddress'>
+            <a
+              href={elrondExplorerUrl + '/accounts/' + tokenStakingAddress}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {tokenStakingAddress.substring(0, 8) +
+                '...' +
+                tokenStakingAddress.substring(tokenStakingAddress.length - 4)}
+            </a>
+          </span>
+        </div>
+        {stakingTokenId === undefined &&
+          minimumStakingAmount === undefined &&
+          minimumStakingDays === undefined &&
+          rewardsPerDayPercent === undefined && (
+            <div className='col-12 mt-3'>
+              <div className='spinner-border text-primary mr-2' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+            </div>
+          )}
+        {stakingTokenId !== undefined &&
+          minimumStakingAmount !== undefined &&
+          minimumStakingDays !== undefined &&
+          rewardsPerDayPercent !== undefined && (
+            <div className='col-12 mt-3'>
+              <h4>Staking details</h4>
+              <div className='mr-1'>Token: {stakingTokenId}</div>
+              <div className='mr-1'>
+                Minimum staking amount:&nbsp;
+                {formatBigNumber(
+                  floor(divide(minimumStakingAmount, 10 ** 18), 2) as any
+                )}
+              </div>
+              <div className='mr-1'>
+                Minimum staking days: {minimumStakingDays}
+              </div>
+              <div className='mr-1'>
+                Rewards per day: {rewardsPerDayPercent}%
+              </div>
+            </div>
+          )}
+        {stakeAmount === undefined &&
+          lockTime === undefined &&
+          unstakeTime === undefined &&
+          currentRewards === undefined && (
+            <div className='col-12 mt-3'>
+              <div className='spinner-border text-primary mr-2' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+            </div>
+          )}
+        {stakeAmount !== undefined &&
+          lockTime !== undefined &&
+          unstakeTime !== undefined &&
+          currentRewards !== undefined && (
+            <div className='col-12 mt-3'>
+              <h4>My staking</h4>
+              <div className='mr-1'>
+                Staked amount:&nbsp;
+                {formatBigNumber(
+                  floor(divide(stakeAmount, 10 ** 18), 2) as any
+                )}
+              </div>
+              <div className='mr-1'>
+                Lock time:&nbsp;
+                {moment.unix(lockTime).format('MMMM Do YYYY, h:mm:ss a')}
+              </div>
+              <div className='mr-1'>
+                Unstake time:&nbsp;
+                {moment.unix(unstakeTime).format('MMMM Do YYYY, h:mm:ss a')}
+              </div>
+              <div className='mr-1'>
+                Current rewards:&nbsp;
+                {formatBigNumber(
+                  floor(divide(currentRewards, 10 ** 18), 2) as any
+                )}
+              </div>
+            </div>
+          )}
+        {stakeAmount !== undefined &&
+          lockTime !== undefined &&
+          unstakeTime !== undefined &&
+          !hasPendingTransactions && (
+            <div className='mt-3 col-12'>
+              {stakeAmount === 0 && (
+                <div>
+                  <input
+                    type='number'
+                    className='form-control mb-3'
+                    value={newStakeAmount}
+                    onChange={handleNewStakeAmountChange}
+                  />
+                  <button
+                    onClick={sendStakeTransaction}
+                    className='btn btn-primary mr-4'
+                  >
+                    STAKE
+                  </button>
+                </div>
+              )}
+              {stakeAmount !== 0 && (
+                <div>
+                  <button
+                    onClick={sendUnstakeTransaction}
+                    className='btn btn-primary mr-4 mt-2'
+                  >
+                    UNSTAKE
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+      </div>
+    </div>
+  );
+};
+
+export default TokenStaking;

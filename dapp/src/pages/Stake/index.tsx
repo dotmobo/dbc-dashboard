@@ -2,9 +2,9 @@ import * as React from 'react';
 import TopInfo from './TopInfo';
 import Transactions from './Transactions';
 import Components from './Components';
-import { enableVote } from 'config';
+import { enableStaking } from 'config';
 
-const Dashboard = () => {
+const Stake = () => {
   return (
     <div className='container py-4'>
       <div className='row'>
@@ -16,16 +16,16 @@ const Dashboard = () => {
                   <TopInfo />
                 </div>
               </div>
-              {!!enableVote && (
+              {!!enableStaking && (
                 <div>
                   <Components />
                   <Transactions />
                 </div>
               )}
-              {!enableVote && (
+              {!enableStaking && (
                 <div>
                   <hr />
-                  <p>DAO is not currently available !</p>
+                  <p>Staking is not currently available !</p>
                 </div>
               )}
             </div>
@@ -36,4 +36,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Stake;

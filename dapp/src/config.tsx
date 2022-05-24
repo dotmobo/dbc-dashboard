@@ -62,3 +62,8 @@ export const serumMarketBuyFn = 'buy';
 export const serumWithdrawData = 'withdraw';
 export const serumOwnerAddress =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
+
+// Staking
+export const enableStaking = false;
+export const tokenStakingAddress =
+  'erd1qqqqqqqqqqqqqpgqhqs38zquy8e3zpfsgf46srrespmlapmv0jpqcg4np3';

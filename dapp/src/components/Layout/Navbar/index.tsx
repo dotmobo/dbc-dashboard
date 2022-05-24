@@ -2,7 +2,7 @@ import React from 'react';
 import { logout, useGetAccountInfo } from '@elrondnetwork/dapp-core';
 import { Navbar as BsNavbar, NavItem, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { dAppName } from 'config';
+import { dAppName, enableMarket, enableStaking, enableVote } from 'config';
 import { routeNames } from 'routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadbrothersLogo } from './../../../assets/img/deadbrothers.svg';
@@ -42,18 +42,30 @@ const Navbar = () => {
             >
               Info
             </Link>
-            <Link
-              className='nav-link'
-              to={isLoggedIn ? routeNames.dao : routeNames.home}
-            >
-              DAO
-            </Link>
-            <Link
-              className='nav-link'
-              to={isLoggedIn ? routeNames.market : routeNames.home}
-            >
-              Market
-            </Link>
+            {!!enableVote && (
+              <Link
+                className='nav-link'
+                to={isLoggedIn ? routeNames.dao : routeNames.home}
+              >
+                DAO
+              </Link>
+            )}
+            {!!enableMarket && (
+              <Link
+                className='nav-link'
+                to={isLoggedIn ? routeNames.market : routeNames.home}
+              >
+                Market
+              </Link>
+            )}
+            {!!enableStaking && (
+              <Link
+                className='nav-link'
+                to={isLoggedIn ? routeNames.stake : routeNames.home}
+              >
+                Stake
+              </Link>
+            )}
           </Nav>
         </Container>
 
