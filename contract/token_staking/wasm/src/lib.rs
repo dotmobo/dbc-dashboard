@@ -13,10 +13,13 @@ elrond_wasm_node::wasm_endpoints! {
         getMinimumStakingDays
         getRewardsPerDayPercent
         getStakeAmount
+        getStakingEndTime
         getStakingInfo
+        getStakingStatus
         getStakingTokenId
         getUnstakeTime
         stake
+        stopStaking
         unstake
         withdraw
     )

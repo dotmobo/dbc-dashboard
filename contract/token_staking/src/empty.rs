@@ -25,6 +25,8 @@ pub trait TokenStaking {
         self.minimum_staking_amount().set(&minimum_staking_amount);
         self.minimum_staking_days().set(&minimum_staking_days);
         self.rewards_per_day_percent().set(&rewards_per_day_percent);
+        self.staking_status().set(true);
+        self.staking_end_time().set(0);
     }
 
     #[payable("*")]
@@ -34,6 +36,7 @@ pub trait TokenStaking {
         #[payment_token] payment_token: TokenIdentifier,
         #[payment_amount] payment_amount: BigUint,
     ) -> SCResult<()> {
+        require!(self.staking_status().get(), "The staking is stopped");
         require!(
             payment_token == self.staking_token_id().get(),
             "Invalid staking token"
@@ -83,7 +86,11 @@ pub trait TokenStaking {
         let unstake_amount: BigUint = stake_info.stake_amount;
 
         // calculate rewards
-        let staked_days = (cur_time - stake_info.lock_time) / 86400;
+        let mut from_time = cur_time;
+        if !self.staking_status().get() {
+            from_time = self.staking_end_time().get();
+        }
+        let staked_days = (from_time - stake_info.lock_time) / 86400;
         let mut reward_tokens = BigUint::from(staked_days)
             .mul(&unstake_amount)
             .mul(&BigUint::from(self.rewards_per_day_percent().get()))
@@ -111,6 +118,14 @@ pub trait TokenStaking {
         Ok(())
     }
 
+    #[only_owner]
+    #[endpoint(stopStaking)]
+    fn stop_staking(&self) {
+        let cur_time: u64 = self.blockchain().get_block_timestamp();
+        self.staking_end_time().set(cur_time);
+        self.staking_status().set(false);
+    }
+
     #[view(getCurrentRewards)]
     fn get_current_rewards(&self, address: &ManagedAddress) -> BigUint {
         require!(!self.staking_info(&address).is_empty(), "You didn't stake!");
@@ -121,7 +136,11 @@ pub trait TokenStaking {
 
         // calculate rewards
         let unstake_amount: BigUint = stake_info.stake_amount;
-        let staked_days = (cur_time - stake_info.lock_time) / 86400;
+        let mut from_time = cur_time;
+        if !self.staking_status().get() {
+            from_time = self.staking_end_time().get();
+        }
+        let staked_days = (from_time - stake_info.lock_time) / 86400;
         let reward_tokens = BigUint::from(staked_days)
             .mul(&unstake_amount)
             .mul(&BigUint::from(self.rewards_per_day_percent().get()))
@@ -173,4 +192,12 @@ pub trait TokenStaking {
     #[view(getRewardsPerDayPercent)]
     #[storage_mapper("rewardsPerDayPercent")]
     fn rewards_per_day_percent(&self) -> SingleValueMapper<u64>;
+
+    #[view(getStakingStatus)]
+    #[storage_mapper("stakingStatus")]
+    fn staking_status(&self) -> SingleValueMapper<bool>;
+
+    #[view(getStakingEndTime)]
+    #[storage_mapper("stakingEndTime")]
+    fn staking_end_time(&self) -> SingleValueMapper<u64>;
 }

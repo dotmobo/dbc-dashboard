@@ -64,6 +64,7 @@ const TokenStaking = () => {
   const [minimumStakingDays, setMinimumStakingDays] = React.useState<number>();
   const [rewardsPerDayPercent, setRewardsPerDayPercent] =
     React.useState<number>();
+  const [stakingStatus, setStakingStatus] = React.useState<boolean>();
 
   React.useEffect(() => {
     const query = new Query({
@@ -313,6 +314,38 @@ const TokenStaking = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
 
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(tokenStakingAddress),
+      func: new ContractFunction('getStakingStatus'),
+      args: []
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setStakingStatus(false);
+            break;
+          case '':
+            setStakingStatus(false);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            console.log(parseInt(decoded, 16));
+            setStakingStatus(parseInt(decoded, 16) === 1 ? true : false);
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
   function strtoHex(str: string) {
     let result = '';
     for (let i = 0; i < str.length; i++) {
@@ -417,7 +450,8 @@ const TokenStaking = () => {
         {stakingTokenId === undefined &&
           minimumStakingAmount === undefined &&
           minimumStakingDays === undefined &&
-          rewardsPerDayPercent === undefined && (
+          rewardsPerDayPercent === undefined &&
+          stakingStatus === undefined && (
             <div className='col-12 mt-3'>
               <div className='spinner-border text-primary mr-2' role='status'>
                 <span className='sr-only'>Loading...</span>
@@ -427,9 +461,13 @@ const TokenStaking = () => {
         {stakingTokenId !== undefined &&
           minimumStakingAmount !== undefined &&
           minimumStakingDays !== undefined &&
-          rewardsPerDayPercent !== undefined && (
+          rewardsPerDayPercent !== undefined &&
+          stakingStatus !== undefined && (
             <div className='col-12 mt-3'>
               <h4>Staking details</h4>
+              <div className='mr-1'>
+                Running: {stakingStatus ? 'yes' : 'no'}
+              </div>
               <div className='mr-1'>Token: {stakingTokenId}</div>
               <div className='mr-1'>
                 Minimum staking amount:&nbsp;
