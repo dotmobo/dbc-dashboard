@@ -103,6 +103,25 @@ pub trait TokenStaking {
         Ok(())
     }
 
+    #[view(getCurrentRewards)]
+    fn get_current_rewards(&self) -> BigUint {
+        let caller: ManagedAddress = self.blockchain().get_caller();
+        let cur_time: u64 = self.blockchain().get_block_timestamp();
+
+        require!(!self.staking_info(&caller).is_empty(), "You didn't stake!");
+        let stake_info = self.staking_info(&caller).get();
+
+        // calculate rewards
+        let unstake_amount: BigUint = stake_info.stake_amount;
+        let staked_days = (cur_time - stake_info.lock_time) / 86400;
+        let reward_tokens = BigUint::from(staked_days)
+            .mul(&unstake_amount)
+            .mul(&BigUint::from(REWARDS_PER_DAY_PERCENT))
+            .div(100u64);
+
+        return reward_tokens;
+    }
+
     #[view(getStakingTokenId)]
     #[storage_mapper("stakingTokenId")]
     fn staking_token_id(&self) -> SingleValueMapper<TokenIdentifier>;

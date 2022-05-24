@@ -7,6 +7,7 @@
 elrond_wasm_node::wasm_endpoints! {
     token_staking
     (
+        getCurrentRewards
         getMinimumStakingAmount
         getStakingInfo
         getStakingTokenId
