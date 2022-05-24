@@ -3,5 +3,7 @@ members = [
   "vote",
   "vote/meta",
   "buy_serum",
-  "buy_serum/meta"
+  "buy_serum/meta",
+  "token_staking",
+  "token_staking/meta"
 ]
