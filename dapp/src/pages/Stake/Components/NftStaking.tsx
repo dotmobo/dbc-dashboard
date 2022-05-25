@@ -351,7 +351,7 @@ const NftStaking = () => {
   return (
     <div>
       <h3>
-        Stake a #DeadBrother <FontAwesomeIcon icon={faSkull} className='text' />
+        Stake a #Dawn DB <FontAwesomeIcon icon={faSkull} className='text' />
       </h3>
       <div className='row'>
         <div className='col-12'>
@@ -388,13 +388,14 @@ const NftStaking = () => {
                   floor(divide(rewardsTokenAmountPerDay, 10 ** 18), 2) as any
                 )}{' '}
                 $DEAD
+                <DeadIcon className='mx-1' height={16} width={16} />
               </div>
             </div>
           )}
       </div>
       <div className='row mt-3'>
         <div className='col-12'>
-          <h4>Staked #DeadBrother</h4>
+          <h4>Staked #Dawn DB</h4>
         </div>
         {stakeds === undefined && (
           <div className='col'>
@@ -405,7 +406,7 @@ const NftStaking = () => {
         )}
         {stakeds !== undefined && stakeds.length === 0 && (
           <div className='col'>
-            <div>No staked DeadBrother found !</div>
+            <div>No staked #Dawn DB found !</div>
           </div>
         )}
         {stakeds !== undefined &&
@@ -438,7 +439,8 @@ const NftStaking = () => {
                           {formatBigNumber(
                             floor(divide(currentRewards, 10 ** 18), 2) as any
                           )}
-                          $DEAD
+                          &nbsp; $DEAD
+                          <DeadIcon className='mx-1' height={16} width={16} />
                         </div>
                         <div className='mr-1'>
                           Lock date:&nbsp;
@@ -491,7 +493,7 @@ const NftStaking = () => {
       </div>
       <div className='row mt-3'>
         <div className='col-12'>
-          <h4>Unstaked #DeadBrothers</h4>
+          <h4>Unstaked #Dawn DB</h4>
         </div>
         {bros === undefined && (
           <div className='col'>
@@ -502,7 +504,7 @@ const NftStaking = () => {
         )}
         {bros !== undefined && bros.length === 0 && (
           <div className='col'>
-            <div>No DeadBrothers found in your wallet !</div>
+            <div>No #Dawn DB found in your wallet !</div>
           </div>
         )}
         {bros !== undefined &&
