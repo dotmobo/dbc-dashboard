@@ -518,6 +518,7 @@ const TokenStaking = () => {
                 {formatBigNumber(
                   floor(divide(currentRewards, 10 ** 18), 2) as any
                 )}
+                &nbsp;$DEAD
               </div>
             </div>
           )}
@@ -548,7 +549,7 @@ const TokenStaking = () => {
                     onClick={sendUnstakeTransaction}
                     className='btn btn-primary mr-4 mt-2'
                   >
-                    UNSTAKE
+                    CLAIM + UNSTAKE
                   </button>
                 </div>
               )}

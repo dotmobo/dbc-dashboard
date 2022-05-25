@@ -65,5 +65,10 @@ export const serumOwnerAddress =
 
 // Staking
 export const enableStaking = false;
+export const enableTokenStaking = false;
 export const tokenStakingAddress =
   'erd1qqqqqqqqqqqqqpgqhqs38zquy8e3zpfsgf46srrespmlapmv0jpqcg4np3';
+export const nftStakingAddress =
+  'erd1qqqqqqqqqqqqqpgqgus6jqr5vsdarny080crct0l42jwc8cu0jpqhe4u9r';
+export const nftStakingCollection = 'BACKGROUND-35c061';
+

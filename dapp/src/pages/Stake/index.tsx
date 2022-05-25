@@ -19,7 +19,7 @@ const Stake = () => {
               {!!enableStaking && (
                 <div>
                   <Components />
-                  <Transactions />
+                  {/* <Transactions /> */}
                 </div>
               )}
               {!enableStaking && (

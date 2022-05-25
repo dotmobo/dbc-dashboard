@@ -5,5 +5,7 @@ members = [
   "buy_serum",
   "buy_serum/meta",
   "token_staking",
-  "token_staking/meta"
+  "token_staking/meta",
+  "nft_staking",
+  "nft_staking/meta"
 ]
