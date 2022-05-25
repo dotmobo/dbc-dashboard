@@ -10,7 +10,7 @@ import {
   elrondApiUrl,
   elrondExplorerUrl,
   nftStakingAddress,
-  nftStakingCollection,
+  nftStakingCollection
 } from 'config';
 import axios from 'axios';
 
@@ -432,46 +432,58 @@ const NftStaking = () => {
                   {currentRewards !== undefined &&
                     lockTime !== undefined &&
                     unstakeTime && (
-                      <div>
+                      <div className='mt-2'>
                         <div>
-                          Rewards:&nbsp;
+                          Claimable rewards:&nbsp;
                           {formatBigNumber(
                             floor(divide(currentRewards, 10 ** 18), 2) as any
                           )}
                           $DEAD
                         </div>
                         <div className='mr-1'>
-                          Lock time:&nbsp;
+                          Lock date:&nbsp;
                           {moment
                             .unix(lockTime)
                             .format('MMMM Do YYYY, h:mm:ss a')}
                         </div>
                         <div className='mr-1'>
-                          Unstake time:&nbsp;
+                          Unstake date:&nbsp;
                           {moment
                             .unix(unstakeTime)
                             .format('MMMM Do YYYY, h:mm:ss a')}
                         </div>
                       </div>
                     )}
-                  {!hasPendingTransactions && (
-                    <div>
-                      <div className='w-100'></div>
-                      <button
-                        className='btn btn-primary ml-1 mt-2'
-                        onClick={() => sendClaimTransaction()}
-                      >
-                        CLAIM <FontAwesomeIcon icon={faDollarSign} className='text' />
-                      </button>
-                      <div className='w-100'></div>
-                      <button
-                        className='btn btn-primary ml-1 mt-2'
-                        onClick={() => sendUnstakeTransaction()}
-                      >
-                        UNSTAKE <FontAwesomeIcon icon={faArrowDown} className='text' />
-                      </button>
-                    </div>
-                  )}
+                  {!hasPendingTransactions &&
+                    currentRewards !== undefined &&
+                    unstakeTime !== undefined && (
+                      <div>
+                        <div className='w-100'></div>
+                        <button
+                          className='btn btn-primary ml-1 mt-2'
+                          disabled={currentRewards === 0}
+                          onClick={() => sendClaimTransaction()}
+                        >
+                          CLAIM{' '}
+                          <FontAwesomeIcon
+                            icon={faDollarSign}
+                            className='text'
+                          />
+                        </button>
+                        <div className='w-100'></div>
+                        <button
+                          className='btn btn-primary ml-1 mt-2'
+                          disabled={moment.unix(unstakeTime).isAfter(moment())}
+                          onClick={() => sendUnstakeTransaction()}
+                        >
+                          UNSTAKE{' '}
+                          <FontAwesomeIcon
+                            icon={faArrowDown}
+                            className='text'
+                          />
+                        </button>
+                      </div>
+                    )}
                 </div>
               </LazyLoad>
             </div>
@@ -522,7 +534,8 @@ const NftStaking = () => {
                         className='btn btn-primary ml-1 mt-2'
                         onClick={() => sendStakeTransaction(bro)}
                       >
-                        STAKE <FontAwesomeIcon icon={faArrowUp} className='text' />
+                        STAKE{' '}
+                        <FontAwesomeIcon icon={faArrowUp} className='text' />
                       </button>
                     </div>
                   )}
