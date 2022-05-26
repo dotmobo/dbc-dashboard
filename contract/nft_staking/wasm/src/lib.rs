@@ -15,9 +15,12 @@ elrond_wasm_node::wasm_endpoints! {
         getNftNonce
         getRewardsTokenAmountPerDay
         getRewardsTokenId
+        getStakingEndTime
         getStakingInfo
+        getStakingStatus
         getUnstakeTime
         stake
+        stopStaking
         unstake
         withdraw
     )

@@ -17,7 +17,7 @@
                 "str:BACKGROUND-35c061",
                 "10",
                 "str:DEADBROS-fa8f0f",
-                "100000000000000000000"
+                "50000000000000000000"
             ],
             "send": true,
             "outfile": "deploy-testnet.interaction.json"
@@ -33,7 +33,7 @@
                 "str:BACKGROUND-35c061",
                 "10",
                 "str:DEADBROS-fa8f0f",
-                "100000000000000000000"
+                "50000000000000000000"
             ],
             "send": true,
             "outfile": "deploy-testnet.interaction.json"

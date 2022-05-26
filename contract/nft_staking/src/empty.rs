@@ -26,6 +26,8 @@ pub trait NftStaking {
         self.rewards_token_id().set(&rewards_token_id);
         self.rewards_token_amount_per_day()
             .set(&rewards_token_amount_per_day);
+        self.staking_status().set(true);
+        self.staking_end_time().set(0);
     }
 
     #[payable("*")]
@@ -35,7 +37,7 @@ pub trait NftStaking {
         let payment_token = payment.token_identifier;
         let payment_nonce = payment.token_nonce;
         let payment_amount = payment.amount;
-
+        require!(self.staking_status().get(), "The staking is stopped");
         require!(
             payment_token == self.nft_identifier().get(),
             "Invalid nft identifier"
@@ -108,7 +110,11 @@ pub trait NftStaking {
         let reward_token_id = self.rewards_token_id().get();
 
         // calculate rewards
-        let staked_days = (cur_time - stake_info.lock_time) / 86400;
+        let mut from_time = cur_time;
+        if !self.staking_status().get() {
+            from_time = self.staking_end_time().get();
+        }
+        let staked_days = (from_time - stake_info.lock_time) / 86400;
         let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days;
 
         self.send()
@@ -118,7 +124,7 @@ pub trait NftStaking {
         let stake_info = StakeInfo {
             address: self.blockchain().get_caller(),
             nft_nonce: nft_nonce,
-            lock_time: cur_time,
+            lock_time: from_time,
             unstake_time: unstake_time,
         };
         self.staking_info(&self.blockchain().get_caller())
@@ -140,6 +146,14 @@ pub trait NftStaking {
         Ok(())
     }
 
+    #[only_owner]
+    #[endpoint(stopStaking)]
+    fn stop_staking(&self) {
+        let cur_time: u64 = self.blockchain().get_block_timestamp();
+        self.staking_end_time().set(cur_time);
+        self.staking_status().set(false);
+    }
+
     #[view(getCurrentRewards)]
     fn get_current_rewards(&self, address: &ManagedAddress) -> BigUint {
         require!(!self.staking_info(&address).is_empty(), "You didn't stake!");
@@ -149,7 +163,11 @@ pub trait NftStaking {
         let stake_info = self.staking_info(&address).get();
 
         // calculate rewards
-        let staked_days = (cur_time - stake_info.lock_time) / 86400;
+        let mut from_time = cur_time;
+        if !self.staking_status().get() {
+            from_time = self.staking_end_time().get();
+        }
+        let staked_days = (from_time - stake_info.lock_time) / 86400;
         let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days;
 
         return rewards_amount;
@@ -198,4 +216,12 @@ pub trait NftStaking {
     #[view(getStakingInfo)]
     #[storage_mapper("stakingInfo")]
     fn staking_info(&self, address: &ManagedAddress) -> SingleValueMapper<StakeInfo<Self::Api>>;
+
+    #[view(getStakingStatus)]
+    #[storage_mapper("stakingStatus")]
+    fn staking_status(&self) -> SingleValueMapper<bool>;
+
+    #[view(getStakingEndTime)]
+    #[storage_mapper("stakingEndTime")]
+    fn staking_end_time(&self) -> SingleValueMapper<u64>;
 }
