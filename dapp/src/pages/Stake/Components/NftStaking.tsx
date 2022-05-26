@@ -251,7 +251,7 @@ const NftStaking = () => {
     const query = new Query({
       address: new Address(nftStakingAddress),
       func: new ContractFunction('getCurrentRewards'),
-      args: []
+      args: [new AddressValue(new Address(address))]
     });
     const proxy = new ProxyProvider(network.apiAddress);
     proxy
