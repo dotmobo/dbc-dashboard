@@ -6,26 +6,10 @@ import {
   useGetNetworkConfig,
   useGetPendingTransactions
 } from '@elrondnetwork/dapp-core';
-import {
-  deadTokenId,
-  elrondApiUrl,
-  elrondExplorerUrl,
-  nftsSerumCollectionId,
-  serumMarketAddress,
-  serumMarketBuyFn,
-  serumOwnerAddress,
-  serumWithdrawData,
-  tokenStakingAddress
-} from 'config';
+import { deadTokenId, elrondExplorerUrl, tokenStakingAddress } from 'config';
 import axios from 'axios';
 
-import {
-  faShop,
-  faMoneyBillTransfer,
-  faCreditCard,
-  faBarcode,
-  faCoins
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faCoins } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 import { floor, divide } from 'mathjs';
@@ -466,7 +450,12 @@ const TokenStaking = () => {
             <div className='col-12 mt-3'>
               <h4>Staking details</h4>
               <div className='mr-1'>
-                Running: {stakingStatus ? 'yes' : 'no'}
+                Running:{' '}
+                {stakingStatus ? (
+                  <FontAwesomeIcon icon={faCircle} className='running-on' />
+                ) : (
+                  <FontAwesomeIcon icon={faCircle} className='running-off' />
+                )}
               </div>
               <div className='mr-1'>Token: {stakingTokenId}</div>
               <div className='mr-1'>

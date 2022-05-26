@@ -18,7 +18,8 @@ import {
   faDollarSign,
   faSkull,
   faArrowDown,
-  faArrowUp
+  faArrowUp,
+  faCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
@@ -404,7 +405,8 @@ const NftStaking = () => {
       </div>
       <div className='row mt-3'>
         {minimumStakingDays === undefined &&
-          rewardsTokenAmountPerDay === undefined && stakingStatus === undefined && (
+          rewardsTokenAmountPerDay === undefined &&
+          stakingStatus === undefined && (
             <div className='col'>
               <div className='spinner-border text-primary mr-2' role='status'>
                 <span className='sr-only'>Loading...</span>
@@ -412,10 +414,16 @@ const NftStaking = () => {
             </div>
           )}
         {minimumStakingDays !== undefined &&
-          rewardsTokenAmountPerDay !== undefined && stakingStatus !== undefined && (
+          rewardsTokenAmountPerDay !== undefined &&
+          stakingStatus !== undefined && (
             <div className='col'>
               <div className='mr-1'>
-                Running: {stakingStatus ? 'yes' : 'no'}
+                Running:{' '}
+                {stakingStatus ? (
+                  <FontAwesomeIcon icon={faCircle} className='running-on' />
+                ) : (
+                  <FontAwesomeIcon icon={faCircle} className='running-off' />
+                )}
               </div>
               <div className=''>Minimum staking days: {minimumStakingDays}</div>
               <div className=''>
