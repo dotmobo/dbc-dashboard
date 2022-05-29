@@ -180,11 +180,20 @@ pub trait NftStaking {
     }
 
     #[only_owner]
-    #[endpoint(stopStaking)]
-    fn stop_staking(&self) {
+    #[endpoint]
+    fn restart_staking(&self) -> SCResult<()> {
+        self.staking_end_time().set(0);
+        self.staking_status().set(true);
+        Ok(())
+    }
+
+    #[only_owner]
+    #[endpoint]
+    fn stop_staking(&self) -> SCResult<()> {
         let cur_time: u64 = self.blockchain().get_block_timestamp();
         self.staking_end_time().set(cur_time);
         self.staking_status().set(false);
+        Ok(())
     }
 
     // Views and storage
