@@ -142,9 +142,13 @@ pub trait NftStaking {
             .direct(&caller, &reward_token_id, 0, &rewards_amount, &[]);
 
         // remove rewards amount from rewards_token_total_supply
-        let new_rewards_token_total_supply = rewards_token_total_supply - rewards_amount;
-        self.rewards_token_total_supply()
-            .set(&new_rewards_token_total_supply);
+        if rewards_token_total_supply >= rewards_amount {
+            self.rewards_token_total_supply().set(
+                &(rewards_token_total_supply - rewards_amount),
+            );
+        } else {
+            self.rewards_token_total_supply().set(&BigUint::from(0u32));
+        }
 
         // update staking_info
         self.staking_info(&caller).clear();
