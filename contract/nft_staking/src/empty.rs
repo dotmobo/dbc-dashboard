@@ -31,6 +31,10 @@ pub trait NftStaking {
         if self.staking_end_time().is_empty() {
             self.staking_end_time().set(0);
         }
+        // if nbr of stakers is empty, set it to 0
+        if self.nbr_of_stakers().is_empty() {
+            self.nbr_of_stakers().set(0);
+        }
     }
 
     #[payable("*")]
@@ -68,6 +72,8 @@ pub trait NftStaking {
         self.staking_info(&self.blockchain().get_caller())
             .set(&stake_info);
 
+        self.nbr_of_stakers().set(self.nbr_of_stakers().get() + 1);
+
         Ok(())
     }
 
@@ -96,6 +102,10 @@ pub trait NftStaking {
         );
 
         self.staking_info(&caller).clear();
+
+        if self.nbr_of_stakers().get() > 0 {
+            self.nbr_of_stakers().set(self.nbr_of_stakers().get() - 1);
+        }
 
         Ok(())
     }
@@ -273,4 +283,9 @@ pub trait NftStaking {
     #[view(getRewardsTokenTotalSupply)]
     #[storage_mapper("rewards_token_total_supply")]
     fn rewards_token_total_supply(&self) -> SingleValueMapper<BigUint>;
+
+    #[view(getNbrOfStakers)]
+    #[storage_mapper("nbrOfStakers")]
+    fn nbr_of_stakers(&self) -> SingleValueMapper<u64>;
+
 }

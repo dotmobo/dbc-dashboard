@@ -68,6 +68,7 @@ const NftStaking = () => {
   const [stakingStatus, setStakingStatus] = React.useState<boolean>();
   const [rewardsTokenTotalSupply, setRewardsTokenTotalSupply] =
     React.useState<number>();
+  const [nbrOfStakers, setNbrOfStakers] = React.useState<number>();
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -146,6 +147,37 @@ const NftStaking = () => {
           default: {
             const decoded = Buffer.from(encoded, 'base64').toString('hex');
             setRewardsTokenTotalSupply(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(nftStakingAddress),
+      func: new ContractFunction('getNbrOfStakers'),
+      args: []
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setNbrOfStakers(0);
+            break;
+          case '':
+            setNbrOfStakers(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setNbrOfStakers(parseInt(decoded, 16));
             break;
           }
         }
@@ -440,7 +472,8 @@ const NftStaking = () => {
         {minimumStakingDays === undefined &&
           rewardsTokenAmountPerDay === undefined &&
           stakingStatus === undefined &&
-          rewardsTokenTotalSupply === undefined && (
+          rewardsTokenTotalSupply === undefined &&
+          nbrOfStakers === undefined && (
             <div className='col'>
               <div className='spinner-border text-primary mr-2' role='status'>
                 <span className='sr-only'>Loading...</span>
@@ -450,7 +483,8 @@ const NftStaking = () => {
         {minimumStakingDays !== undefined &&
           rewardsTokenAmountPerDay !== undefined &&
           stakingStatus !== undefined &&
-          rewardsTokenTotalSupply !== undefined && (
+          rewardsTokenTotalSupply !== undefined &&
+          nbrOfStakers !== undefined && (
             <div className='col'>
               <div className='mr-1'>
                 Running:{' '}
@@ -460,6 +494,7 @@ const NftStaking = () => {
                   <FontAwesomeIcon icon={faCircle} className='running-off' />
                 )}
               </div>
+              <div className=''>Number of stakers: {nbrOfStakers}</div>
               <div className=''>Minimum staking days: {minimumStakingDays}</div>
               <div>
                 Remaining supply:&nbsp;
