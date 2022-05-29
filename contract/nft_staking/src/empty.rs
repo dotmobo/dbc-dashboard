@@ -20,12 +20,14 @@ pub trait NftStaking {
         minimum_staking_days: u64,
         rewards_token_id: TokenIdentifier,
         rewards_token_amount_per_day: BigUint,
+        rewards_token_total_supply: BigUint,
     ) {
         self.nft_identifier().set(&nft_identifier);
         self.minimum_staking_days().set(&minimum_staking_days);
         self.rewards_token_id().set(&rewards_token_id);
         self.rewards_token_amount_per_day()
             .set(&rewards_token_amount_per_day);
+        self.rewards_token_total_supply().set(&rewards_token_total_supply);
         self.staking_status().set(true);
         self.staking_end_time().set(0);
     }
@@ -101,6 +103,7 @@ pub trait NftStaking {
     fn claim(&self) -> SCResult<()> {
         let caller: ManagedAddress = self.blockchain().get_caller();
         let cur_time: u64 = self.blockchain().get_block_timestamp();
+        let rewards_token_total_supply = self.rewards_token_total_supply().get();
 
         require!(!self.staking_info(&caller).is_empty(), "You didn't stake!");
         let stake_info = self.staking_info(&caller).get();
@@ -117,9 +120,21 @@ pub trait NftStaking {
         let staked_days = (from_time - stake_info.lock_time) / 86400;
         let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days;
 
+        // check the supply
+        require!(
+            rewards_amount <= rewards_token_total_supply,
+            "You can't claim rewards more than total supply."
+        );
+
+        // send rewards
         self.send()
             .direct(&caller, &reward_token_id, 0, &rewards_amount, &[]);
 
+        // remove rewards amount from rewards_token_total_supply
+        let new_rewards_token_total_supply = rewards_token_total_supply - rewards_amount;
+        self.rewards_token_total_supply().set(&new_rewards_token_total_supply);
+
+        // update staking_info
         self.staking_info(&caller).clear();
         let stake_info = StakeInfo {
             address: self.blockchain().get_caller(),
@@ -130,6 +145,16 @@ pub trait NftStaking {
         self.staking_info(&self.blockchain().get_caller())
             .set(&stake_info);
 
+        Ok(())
+    }
+
+
+    // Owner endpoints
+
+    #[only_owner]
+    #[endpoint]
+    fn set_rewards_token_total_supply(&self, total_supply: BigUint) -> SCResult<()> {
+        self.rewards_token_total_supply().set(&total_supply);
         Ok(())
     }
 
@@ -153,6 +178,8 @@ pub trait NftStaking {
         self.staking_end_time().set(cur_time);
         self.staking_status().set(false);
     }
+
+    // Views and storage
 
     #[view(getCurrentRewards)]
     fn get_current_rewards(&self, address: &ManagedAddress) -> BigUint {
@@ -224,4 +251,8 @@ pub trait NftStaking {
     #[view(getStakingEndTime)]
     #[storage_mapper("stakingEndTime")]
     fn staking_end_time(&self) -> SingleValueMapper<u64>;
+
+    #[view(getRewardsTokenTotalSupply)]
+    #[storage_mapper("rewards_token_total_supply")]
+    fn rewards_token_total_supply(&self) -> SingleValueMapper<BigUint>;
 }
