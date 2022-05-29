@@ -1,15 +1,9 @@
 #![no_std]
 
 elrond_wasm::imports!();
-elrond_wasm::derive_imports!();
 
-#[derive(TypeAbi, TopEncode, TopDecode, PartialEq, Debug)]
-pub struct StakeInfo<M: ManagedTypeApi> {
-    pub address: ManagedAddress<M>,
-    pub nft_nonce: u64,
-    pub lock_time: u64,
-    pub unstake_time: u64,
-}
+mod stake_info;
+use stake_info::StakeInfo;
 
 #[elrond_wasm::contract]
 pub trait NftStaking {
@@ -27,9 +21,16 @@ pub trait NftStaking {
         self.rewards_token_id().set(&rewards_token_id);
         self.rewards_token_amount_per_day()
             .set(&rewards_token_amount_per_day);
-        self.rewards_token_total_supply().set(&rewards_token_total_supply);
-        self.staking_status().set(true);
-        self.staking_end_time().set(0);
+        self.rewards_token_total_supply()
+            .set(&rewards_token_total_supply);
+        // if staking status is empty, set it to false
+        if self.staking_status().is_empty() {
+            self.staking_status().set(true);
+        }
+        // if staking end time is empty, set it to 0
+        if self.staking_end_time().is_empty() {
+            self.staking_end_time().set(0);
+        }
     }
 
     #[payable("*")]
@@ -132,7 +133,8 @@ pub trait NftStaking {
 
         // remove rewards amount from rewards_token_total_supply
         let new_rewards_token_total_supply = rewards_token_total_supply - rewards_amount;
-        self.rewards_token_total_supply().set(&new_rewards_token_total_supply);
+        self.rewards_token_total_supply()
+            .set(&new_rewards_token_total_supply);
 
         // update staking_info
         self.staking_info(&caller).clear();
@@ -147,7 +149,6 @@ pub trait NftStaking {
 
         Ok(())
     }
-
 
     // Owner endpoints
 
