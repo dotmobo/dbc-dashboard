@@ -158,6 +158,14 @@ pub trait NftStaking {
         Ok(())
     }
 
+    // set rewards_token_amount_per_day
+    #[only_owner]
+    #[endpoint]
+    fn set_rewards_token_amount_per_day(&self, amount: BigUint) -> SCResult<()> {
+        self.rewards_token_amount_per_day().set(&amount);
+        Ok(())
+    }
+
     #[only_owner]
     #[endpoint]
     fn withdraw(&self, amount: BigUint) -> SCResult<()> {

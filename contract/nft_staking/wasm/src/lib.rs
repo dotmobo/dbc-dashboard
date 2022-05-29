@@ -20,6 +20,7 @@ elrond_wasm_node::wasm_endpoints! {
         getStakingInfo
         getStakingStatus
         getUnstakeTime
+        set_rewards_token_amount_per_day
         set_rewards_token_total_supply
         stake
         stopStaking
