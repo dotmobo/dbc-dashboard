@@ -128,7 +128,10 @@ pub trait NftStaking {
         if !self.staking_status().get() {
             from_time = self.staking_end_time().get();
         }
-        let staked_days = (from_time - stake_info.lock_time) / 86400;
+        let mut staked_days = 0u64;
+        if from_time > stake_info.lock_time {
+            staked_days = (from_time - stake_info.lock_time) / 86400;
+        }
         let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days;
 
         // check the supply
@@ -143,9 +146,8 @@ pub trait NftStaking {
 
         // remove rewards amount from rewards_token_total_supply
         if rewards_token_total_supply >= rewards_amount {
-            self.rewards_token_total_supply().set(
-                &(rewards_token_total_supply - rewards_amount),
-            );
+            self.rewards_token_total_supply()
+                .set(&(rewards_token_total_supply - rewards_amount));
         } else {
             self.rewards_token_total_supply().set(&BigUint::from(0u32));
         }
@@ -226,7 +228,10 @@ pub trait NftStaking {
         if !self.staking_status().get() {
             from_time = self.staking_end_time().get();
         }
-        let staked_days = (from_time - stake_info.lock_time) / 86400;
+        let mut staked_days = 0u64;
+        if from_time > stake_info.lock_time {
+            staked_days = (from_time - stake_info.lock_time) / 86400;
+        }
         let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days;
 
         return rewards_amount;
@@ -291,5 +296,4 @@ pub trait NftStaking {
     #[view(getNbrOfStakers)]
     #[storage_mapper("nbrOfStakers")]
     fn nbr_of_stakers(&self) -> SingleValueMapper<u64>;
-
 }
