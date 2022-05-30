@@ -278,15 +278,15 @@ pub trait NftStaking {
     fn rewards_token_amount_per_day(&self) -> SingleValueMapper<BigUint>;
 
     #[view(getStakingInfo)]
-    #[storage_mapper("stakingInfo")]
+    #[storage_mapper("staking_info")]
     fn staking_info(&self, address: &ManagedAddress) -> SingleValueMapper<StakeInfo<Self::Api>>;
 
     #[view(getStakingStatus)]
-    #[storage_mapper("stakingStatus")]
+    #[storage_mapper("staking_status")]
     fn staking_status(&self) -> SingleValueMapper<bool>;
 
     #[view(getStakingEndTime)]
-    #[storage_mapper("stakingEndTime")]
+    #[storage_mapper("staking_end_time")]
     fn staking_end_time(&self) -> SingleValueMapper<u64>;
 
     #[view(getRewardsTokenTotalSupply)]
@@ -294,6 +294,6 @@ pub trait NftStaking {
     fn rewards_token_total_supply(&self) -> SingleValueMapper<BigUint>;
 
     #[view(getNbrOfStakers)]
-    #[storage_mapper("nbrOfStakers")]
+    #[storage_mapper("nbr_of_stakers")]
     fn nbr_of_stakers(&self) -> SingleValueMapper<u64>;
 }
