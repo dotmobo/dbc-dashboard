@@ -70,6 +70,9 @@ const FloorPrice = () => {
       </h3>
       <div className='row'>
         <div className='col'>
+          <div>
+            <small className='text-muted'>GENESIS</small>
+          </div>
           {floorPriceDR === undefined && (
             <div>
               <div className='spinner-border text-primary mr-2' role='status'>
@@ -79,9 +82,6 @@ const FloorPrice = () => {
           )}
           {floorPriceDR !== undefined && floorPriceDR.floorPrice !== undefined && (
             <div>
-              <div>
-                <small className='text-muted'>GENESIS</small>
-              </div>
               <img src={deadRareIconUrl} alt='deadrare' height={16} />
               <b>DeadRare</b>:&nbsp;
               <span>{floorPriceDR?.floorPrice}&nbsp;EGLD</span>
