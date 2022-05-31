@@ -9,13 +9,13 @@ import {
   trustMarketUrl,
   gatewayFrameIt,
   frameItIconUrl,
-  frameItUrl,
+  frameItUrl
 } from 'config';
 import axios from 'axios';
 import {
   faBolt,
   faShoppingCart,
-  faCropSimple,
+  faCropSimple
 } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -79,6 +79,9 @@ const FloorPrice = () => {
           )}
           {floorPriceDR !== undefined && floorPriceDR.floorPrice !== undefined && (
             <div>
+              <div>
+                <small className='text-muted'>GENESIS</small>
+              </div>
               <img src={deadRareIconUrl} alt='deadrare' height={16} />
               <b>DeadRare</b>:&nbsp;
               <span>{floorPriceDR?.floorPrice}&nbsp;EGLD</span>
