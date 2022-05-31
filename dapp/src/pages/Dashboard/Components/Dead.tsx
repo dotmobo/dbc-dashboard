@@ -67,6 +67,9 @@ const Dead = () => {
                 {formatBigNumber(
                   floor(divide(dead.balance, 10 ** dead.decimals))
                 )}
+                <div>
+                  <small className='text-muted'>{deadTokenId}</small>
+                </div>
               </div>
             )}
           <a
