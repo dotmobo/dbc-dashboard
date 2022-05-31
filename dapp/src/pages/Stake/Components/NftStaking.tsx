@@ -615,7 +615,7 @@ const NftStaking = () => {
                         </div>
                       )}
                   </div>
-                  {lockTime !== undefined && unstakeTime && (
+                  {lockTime !== undefined && unstakeTime !== undefined && (
                     <div className='card-footer'>
                       <small className='text-muted'>
                         Lock date:&nbsp;
