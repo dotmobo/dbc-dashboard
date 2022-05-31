@@ -114,7 +114,6 @@ const NftStaking = () => {
             break;
           default: {
             const decoded = Buffer.from(encoded, 'base64').toString('hex');
-            console.log(parseInt(decoded, 16));
             setStakingStatus(parseInt(decoded, 16) === 1 ? true : false);
             break;
           }
