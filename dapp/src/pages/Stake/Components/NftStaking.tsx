@@ -485,31 +485,44 @@ const NftStaking = () => {
           rewardsTokenTotalSupply !== undefined &&
           nbrOfStakers !== undefined && (
             <div className='col'>
-              <div className='mr-1'>
-                Running:{' '}
-                {stakingStatus ? (
-                  <FontAwesomeIcon icon={faCircle} className='running-on' />
-                ) : (
-                  <FontAwesomeIcon icon={faCircle} className='running-off' />
-                )}
-              </div>
-              <div className=''>Number of stakers: {nbrOfStakers}</div>
-              <div className=''>Minimum staking days: {minimumStakingDays}</div>
-              <div>
-                Remaining supply:&nbsp;
-                {formatBigNumber(
-                  floor(divide(rewardsTokenTotalSupply, 10 ** 18), 2) as any
-                )}
-                &nbsp;$DEAD
-                <DeadIcon className='mx-1' height={16} width={16} />
-              </div>
-              <div className=''>
-                Rewards per day:&nbsp;
-                {formatBigNumber(
-                  floor(divide(rewardsTokenAmountPerDay, 10 ** 18), 2) as any
-                )}{' '}
-                $DEAD
-                <DeadIcon className='mx-1' height={16} width={16} />
+              <div className='card'>
+                <div className='card-header'>
+                  Running:&nbsp;
+                  {stakingStatus ? (
+                    <FontAwesomeIcon icon={faCircle} className='running-on' />
+                  ) : (
+                    <FontAwesomeIcon icon={faCircle} className='running-off' />
+                  )}
+                </div>
+                <div className='card-body'>
+                  <div className='card-text'>
+                    Minimum staking days: {minimumStakingDays}
+                  </div>
+                  <div className='card-text'>
+                    Remaining supply:&nbsp;
+                    {formatBigNumber(
+                      floor(divide(rewardsTokenTotalSupply, 10 ** 18), 2) as any
+                    )}
+                    &nbsp;$DEAD
+                    <DeadIcon className='mx-1' height={16} width={16} />
+                  </div>
+                  <div className='card-text'>
+                    Rewards per day:&nbsp;
+                    {formatBigNumber(
+                      floor(
+                        divide(rewardsTokenAmountPerDay, 10 ** 18),
+                        2
+                      ) as any
+                    )}
+                    &nbsp;$DEAD
+                    <DeadIcon className='mx-1' height={16} width={16} />
+                  </div>
+                </div>
+                <div className='card-footer'>
+                  <small className='text-muted'>
+                    {nbrOfStakers} stakers in the pool
+                  </small>
+                </div>
               </div>
             </div>
           )}
