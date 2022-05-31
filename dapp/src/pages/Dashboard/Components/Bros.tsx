@@ -8,6 +8,7 @@ import {
   frameItUrl,
   nftsCollectionId,
   nftsSerumCollectionId,
+  nftsLegendaryCollectionId,
   trustMarketUrl
 } from 'config';
 import axios from 'axios';
@@ -44,7 +45,7 @@ const Bros = () => {
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${elrondApiUrl}/accounts/${address}/nfts?size=10000&collections=${nftsSerumCollectionId},${nftsCollectionId}`
+        `${elrondApiUrl}/accounts/${address}/nfts?size=10000&collections=${nftsLegendaryCollectionId},${nftsSerumCollectionId},${nftsCollectionId}`
       )
       .then((response) => {
         setBrosList(
@@ -133,6 +134,8 @@ const Bros = () => {
                   className={
                     bro.collection === nftsSerumCollectionId
                       ? 'nft serum'
+                      : bro.collection === nftsLegendaryCollectionId
+                      ? 'nft legendary'
                       : 'nft deadbrother'
                   }
                 >
