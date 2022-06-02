@@ -6,7 +6,10 @@ import { dAppName, enableMarket, enableStaking, enableVote } from 'config';
 import { routeNames } from 'routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadbrothersLogo } from './../../../assets/img/deadbrothers.svg';
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import {
+  faRightToBracket,
+  faPowerOff
+} from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const { address } = useGetAccountInfo();
@@ -79,6 +82,17 @@ const Navbar = () => {
               >
                 <FontAwesomeIcon icon={faPowerOff} className='text' />
               </button>
+            </NavItem>
+          )}
+          {!isLoggedIn && (
+            <NavItem>
+              <Link
+                to={routeNames.unlock}
+                className='btn btn-link'
+                data-testid='loginBtn'
+              >
+                <FontAwesomeIcon icon={faRightToBracket} className='text' />
+              </Link>
             </NavItem>
           )}
         </Nav>
