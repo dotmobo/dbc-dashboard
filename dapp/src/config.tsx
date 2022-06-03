@@ -10,23 +10,31 @@ export const distributionAddress =
 // Token ids
 export const lkFarmsNames =
   'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39';
-export const nftsCollectionId = 'DEADBROS-bf822f';
-export const nftsSerumCollectionId = 'TESTSERUM-39a388'; // DEAD1-2d86a5 to test the market
+export const nftsCollectionId =
+  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DEADBROS-bf822f';
+export const nftsSerumCollectionId =
+  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TESTSERUM-39a388';
 export const nftsLegendaryCollectionId = 'LDB-ada909';
-export const deadTokenId = 'DEADBROS-388e63'; // DEADBROS-fa8f0f in devnet
+export const deadTokenId =
+  elrondNetwork === ('devnet' as any) ? 'DEADBROS-fa8f0f' : 'DEADBROS-388e63';
 // Urls
 export const deadBrothersClubUrl = 'https://www.deadbrothers.club/';
+// Api
 export const elrondApiUrl =
   elrondNetwork === ('devnet' as any)
     ? 'https://devnet-api.elrond.com'
     : 'https://api.elrond.com';
+export const elrondExplorerUrl =
+  elrondNetwork === ('devnet' as any)
+    ? 'https://devnet-explorer.elrond.com'
+    : 'https://explorer.elrond.com';
+// deadrare and trustmarket
 export const deadRareUrl = 'https://deadrare.io';
 export const gatewayDeadRareUrl = 'https://gateway.deadrare.io';
 export const deadRareIconUrl = process.env.PUBLIC_URL + '/deadrare.webp';
 export const trustMarketUrl = 'https://trust.market';
 export const gatewayTrustMarket = 'https://new-api.trust.market';
 export const trustMarketIconUrl = process.env.PUBLIC_URL + '/trust.webp';
-export const elrondExplorerUrl = 'https://explorer.elrond.com';
 // Frame it
 export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
 export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
@@ -34,31 +42,32 @@ export const frameItUrl = 'https://www.frameit.gg';
 // Omniscient
 export const omniscientUrl = 'https://omniscient.tools/partners/deadbrothers';
 export const esdtMarketUrl = 'https://esdt.market/app/esdt/listings';
+
 // Vote component
 export const enableVote = false;
-// DEVNET test
-// export const voteAddress =
-//   'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke';
-// export const voteYesData =
-//   'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573';
-// export const voteNoData =
-//   'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766F74655F6E6F';
-export const voteAddress = 'PUT VOTE SMART CONTRACT ADDRESS HERE';
+export const voteAddress =
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke'
+    : 'PUT VOTE SMART CONTRACT ADDRESS HERE';
 export const voteYesData =
-  'ESDTTransfer@4445414442524f532d626638323266@021e19e0c9bab2400000@766f74655f796573';
+  elrondNetwork === ('devnet' as any)
+    ? 'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573'
+    : 'ESDTTransfer@4445414442524f532d626638323266@021e19e0c9bab2400000@766f74655f796573';
 export const voteNoData =
-  'ESDTTransfer@4445414442524f532d626638323266@021e19e0c9bab2400000@766F74655F6E6F';
+  elrondNetwork === ('devnet' as any)
+    ? 'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766F74655F6E6F'
+    : 'ESDTTransfer@4445414442524f532d626638323266@021e19e0c9bab2400000@766F74655F6E6F';
 export const voteFinishData = 'finish_vote';
 export const voteWithdrawData = 'withdraw';
 export const voteOwnerAddress =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
+
 // Market
-// DEVNET test
-// export const serumMarketAddress =
-//   'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8';
 export const enableMarket = false;
 export const serumMarketAddress =
-  'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8';
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8'
+    : 'SMART-CONTRACT-ADDRESS-HERE';
 export const serumMarketBuyFn = 'buy';
 export const serumWithdrawData = 'withdraw';
 export const serumOwnerAddress =
@@ -68,8 +77,16 @@ export const serumOwnerAddress =
 export const enableStaking = false;
 export const enableTokenStaking = false;
 export const tokenStakingAddress =
-  'erd1qqqqqqqqqqqqqpgqhqs38zquy8e3zpfsgf46srrespmlapmv0jpqcg4np3';
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqhqs38zquy8e3zpfsgf46srrespmlapmv0jpqcg4np3'
+    : 'SMART-CONTRACT-ADDRESS-FOR-TOKEN-STAKING';
 export const nftStakingAddress =
-  'erd1qqqqqqqqqqqqqpgqgus6jqr5vsdarny080crct0l42jwc8cu0jpqhe4u9r';
-export const nftStakingCollection = 'BACKGROUND-35c061';
-
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqgus6jqr5vsdarny080crct0l42jwc8cu0jpqhe4u9r'
+    : 'SMART-CONTRACT-ADDRESS-FOR-NFT-STAKING';
+export const nftStakingCollection =
+  elrondNetwork === ('devnet' as any)
+    ? 'BACKGROUND-35c061'
+    : 'DAWN-STAKING-COLLECTION-ID';
+export const nftStakingOwnerAddress =
+  'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
