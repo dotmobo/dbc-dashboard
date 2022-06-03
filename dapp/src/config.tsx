@@ -2,6 +2,7 @@
 export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'DBC';
+export const dAppLogo = process.env.PUBLIC_URL + '/new-logo-db.png';
 // Addresses
 export const contractAddress =
   'erd1qqqqqqqqqqqqqpgqzau4u3scnqtthpu7p6fjp0fpwvpcagqtys5sezss7w';
@@ -44,6 +45,7 @@ export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
 export const frameItUrl = 'https://www.frameit.gg';
 // Omniscient
 export const omniscientUrl = 'https://omniscient.tools/partners/deadbrothers';
+// Esdt market
 export const esdtMarketUrl = 'https://esdt.market/app/esdt/listings';
 
 // Vote component
