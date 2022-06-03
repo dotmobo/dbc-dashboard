@@ -11,10 +11,13 @@ export const distributionAddress =
 export const lkFarmsNames =
   'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39';
 export const nftsCollectionId =
-  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DEADBROS-bf822f';
+  elrondNetwork === ('devnet' as any) ? 'BEAK-35c061' : 'DEADBROS-bf822f';
 export const nftsSerumCollectionId =
   elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TESTSERUM-39a388';
-export const nftsLegendaryCollectionId = 'LDB-ada909';
+export const nftsLegendaryCollectionId =
+  elrondNetwork === ('devnet' as any) ? 'CLOTHES-35c061' : 'LDB-ada909';
+export const nftsDawnCollectionId =
+  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 export const deadTokenId =
   elrondNetwork === ('devnet' as any) ? 'DEADBROS-fa8f0f' : 'DEADBROS-388e63';
 // Urls
@@ -85,8 +88,6 @@ export const nftStakingAddress =
     ? 'erd1qqqqqqqqqqqqqpgqgus6jqr5vsdarny080crct0l42jwc8cu0jpqhe4u9r'
     : 'SMART-CONTRACT-ADDRESS-FOR-NFT-STAKING';
 export const nftStakingCollection =
-  elrondNetwork === ('devnet' as any)
-    ? 'BACKGROUND-35c061'
-    : 'DAWN-STAKING-COLLECTION-ID';
+  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 export const nftStakingOwnerAddress =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
