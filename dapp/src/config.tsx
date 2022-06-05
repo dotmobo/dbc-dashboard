@@ -88,7 +88,7 @@ export const tokenStakingAddress =
 export const nftStakingAddress =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqgus6jqr5vsdarny080crct0l42jwc8cu0jpqhe4u9r'
-    : 'SMART-CONTRACT-ADDRESS-FOR-NFT-STAKING';
+    : 'erd1qqqqqqqqqqqqqpgqdfjx4p3lld506l9uvurcz3z38wckqtjz0jpqygvq5m';
 export const nftStakingCollection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 export const nftStakingOwnerAddress =
