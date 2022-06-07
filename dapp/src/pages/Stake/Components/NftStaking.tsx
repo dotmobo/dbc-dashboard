@@ -556,12 +556,7 @@ const NftStaking = ({
               <LazyLoad height={200} offset={100} once>
                 <div className='card text-center nftStakeCard'>
                   <div className='card-header'>{bro.name}</div>
-                  <div
-                    style={{
-                      backgroundSize: '500%',
-                      backgroundImage: `url(${bro.url})`
-                    }}
-                  >
+                  <div className='nftStakedDiv'>
                     <img
                       src={bro.url}
                       alt={bro.identifier}
