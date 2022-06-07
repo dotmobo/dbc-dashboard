@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  deadTokenId,
+  nftsSerumCollectionId,
   serumMarketAddress,
   serumMarketBuyFn,
   serumOwnerAddress,
@@ -17,20 +19,8 @@ const Components = () => {
           serumOwnerAddress={serumOwnerAddress}
           serumMarketBuyFn={serumMarketBuyFn}
           serumWithdrawData={serumWithdrawData}
-        />
-        <hr />
-        <Serum
-          serumMarketAddress={serumMarketAddress}
-          serumOwnerAddress={serumOwnerAddress}
-          serumMarketBuyFn={serumMarketBuyFn}
-          serumWithdrawData={serumWithdrawData}
-        />
-        <hr />
-        <Serum
-          serumMarketAddress={serumMarketAddress}
-          serumOwnerAddress={serumOwnerAddress}
-          serumMarketBuyFn={serumMarketBuyFn}
-          serumWithdrawData={serumWithdrawData}
+          serumMarketCollectionId={nftsSerumCollectionId}
+          serumMarketTokenId={deadTokenId}
         />
       </div>
     </div>

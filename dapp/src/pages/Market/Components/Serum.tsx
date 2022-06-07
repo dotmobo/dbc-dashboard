@@ -23,12 +23,7 @@ import axios from 'axios';
 import { shuffle } from 'lodash-es';
 import { floor, divide } from 'mathjs';
 import LazyLoad from 'react-lazyload';
-import {
-  deadTokenId,
-  elrondApiUrl,
-  elrondExplorerUrl,
-  nftsSerumCollectionId
-} from 'config';
+import { elrondApiUrl, elrondExplorerUrl } from 'config';
 
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 
@@ -46,13 +41,17 @@ interface SerumType {
   serumOwnerAddress: string;
   serumMarketBuyFn: string;
   serumWithdrawData: string;
+  serumMarketCollectionId: string;
+  serumMarketTokenId: string;
 }
 
 const Serum = ({
   serumMarketAddress,
   serumOwnerAddress,
   serumMarketBuyFn,
-  serumWithdrawData
+  serumWithdrawData,
+  serumMarketCollectionId,
+  serumMarketTokenId
 }: SerumType) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
@@ -102,7 +101,7 @@ const Serum = ({
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${elrondApiUrl}/accounts/${serumMarketAddress}/nfts?size=10000&collections=${nftsSerumCollectionId}`
+        `${elrondApiUrl}/accounts/${serumMarketAddress}/nfts?size=10000&collections=${serumMarketCollectionId}`
       )
       .then((response) => {
         setSerumsList(shuffle(response.data));
@@ -133,7 +132,7 @@ const Serum = ({
   const getBuySerumData = (serum: Serum) => {
     return (
       'ESDTTransfer@' +
-      strtoHex(deadTokenId) +
+      strtoHex(serumMarketTokenId) +
       '@' +
       numtoHex(!!price ? price : 0) +
       '@' +
