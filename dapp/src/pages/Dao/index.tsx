@@ -19,7 +19,7 @@ const Dashboard = () => {
               {!!enableVote && (
                 <div>
                   <Components />
-                  <Transactions />
+                  {/* <Transactions /> */}
                 </div>
               )}
               {!enableVote && (

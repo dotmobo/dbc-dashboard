@@ -19,7 +19,7 @@ const Market = () => {
               {!!enableMarket && (
                 <div>
                   <Components />
-                  <Transactions />
+                  {/* <Transactions /> */}
                 </div>
               )}
               {!enableMarket && (

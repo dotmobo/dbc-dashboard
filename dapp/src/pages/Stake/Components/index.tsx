@@ -1,4 +1,9 @@
-import { enableTokenStaking } from 'config';
+import {
+  enableTokenStaking,
+  nftStakingAddress,
+  nftStakingCollection,
+  tokenStakingAddress
+} from 'config';
 import * as React from 'react';
 import NftStaking from './NftStaking';
 import TokenStaking from './TokenStaking';
@@ -10,11 +15,14 @@ const Components = () => {
         {enableTokenStaking && (
           <div>
             <hr />
-            <TokenStaking />
+            <TokenStaking tokenStakingAddress={tokenStakingAddress}/>
           </div>
         )}
         <hr />
-        <NftStaking />
+        <NftStaking
+          nftStakingAddress={nftStakingAddress}
+          nftStakingCollection={nftStakingCollection}
+        />
       </div>
     </div>
   );

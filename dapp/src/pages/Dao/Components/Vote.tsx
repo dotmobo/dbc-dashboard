@@ -7,18 +7,11 @@ import {
   useGetPendingTransactions
 } from '@elrondnetwork/dapp-core';
 import {
-  deadTokenId,
-  elrondApiUrl,
-  elrondExplorerUrl,
-  voteAddress,
-  voteFinishData,
-  voteNoData,
-  voteOwnerAddress,
-  voteWithdrawData,
-  voteYesData
-} from 'config';
-import axios from 'axios';
-
+  Address,
+  ContractFunction,
+  ProxyProvider,
+  Query
+} from '@elrondnetwork/erdjs';
 import {
   faCircleQuestion,
   faPersonBooth,
@@ -28,18 +21,27 @@ import {
   faMoneyBillTransfer
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 import { divide, floor } from 'mathjs';
-import {
-  Address,
-  AddressValue,
-  ContractFunction,
-  ProxyProvider,
-  Query
-} from '@elrondnetwork/erdjs';
 import { ProgressBar } from 'react-bootstrap';
+import { elrondExplorerUrl } from 'config';
 
-const Vote = () => {
+interface VoteType {
+  voteAddress: string;
+  voteOwnerAddress: string;
+  voteYesData: string;
+  voteNoData: string;
+  voteFinishData: string;
+  voteWithdrawData: string;
+}
+
+const Vote = ({
+  voteAddress,
+  voteOwnerAddress,
+  voteYesData,
+  voteNoData,
+  voteFinishData,
+  voteWithdrawData
+}: VoteType) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { network } = useGetNetworkConfig();

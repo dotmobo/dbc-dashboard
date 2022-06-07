@@ -6,12 +6,7 @@ import {
   useGetNetworkConfig,
   useGetPendingTransactions
 } from '@elrondnetwork/dapp-core';
-import {
-  elrondApiUrl,
-  elrondExplorerUrl,
-  nftStakingAddress,
-  nftStakingCollection
-} from 'config';
+import { elrondApiUrl, elrondExplorerUrl } from 'config';
 import axios from 'axios';
 
 import {
@@ -47,7 +42,15 @@ interface Bro {
 
 export type TBrosList = Bro[];
 
-const NftStaking = () => {
+interface NftStakingType {
+  nftStakingAddress: string;
+  nftStakingCollection: string;
+}
+
+const NftStaking = ({
+  nftStakingAddress,
+  nftStakingCollection
+}: NftStakingType) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { network } = useGetNetworkConfig();

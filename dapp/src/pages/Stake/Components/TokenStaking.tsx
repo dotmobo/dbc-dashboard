@@ -6,26 +6,24 @@ import {
   useGetNetworkConfig,
   useGetPendingTransactions
 } from '@elrondnetwork/dapp-core';
-import { deadTokenId, elrondExplorerUrl, tokenStakingAddress } from 'config';
-import axios from 'axios';
-
-import { faCircle, faCoins } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
-import { floor, divide } from 'mathjs';
-import { orderBy, shuffle } from 'lodash-es';
-import LazyLoad from 'react-lazyload';
 import {
   Address,
   AddressValue,
-  BytesValue,
   ContractFunction,
   ProxyProvider,
   Query
 } from '@elrondnetwork/erdjs';
+import { faCircle, faCoins } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { floor, divide } from 'mathjs';
 import moment from 'moment';
+import { deadTokenId, elrondExplorerUrl } from 'config';
 
-const TokenStaking = () => {
+interface TokenStakingType {
+  tokenStakingAddress: string;
+}
+
+const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { network } = useGetNetworkConfig();

@@ -7,17 +7,11 @@ import {
   useGetPendingTransactions
 } from '@elrondnetwork/dapp-core';
 import {
-  deadTokenId,
-  elrondApiUrl,
-  elrondExplorerUrl,
-  nftsSerumCollectionId,
-  serumMarketAddress,
-  serumMarketBuyFn,
-  serumOwnerAddress,
-  serumWithdrawData
-} from 'config';
-import axios from 'axios';
-
+  Address,
+  ContractFunction,
+  ProxyProvider,
+  Query
+} from '@elrondnetwork/erdjs';
 import {
   faShop,
   faMoneyBillTransfer,
@@ -25,17 +19,18 @@ import {
   faBarcode
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
+import axios from 'axios';
+import { shuffle } from 'lodash-es';
 import { floor, divide } from 'mathjs';
-import { orderBy, shuffle } from 'lodash-es';
 import LazyLoad from 'react-lazyload';
 import {
-  Address,
-  AddressValue,
-  ContractFunction,
-  ProxyProvider,
-  Query
-} from '@elrondnetwork/erdjs';
+  deadTokenId,
+  elrondApiUrl,
+  elrondExplorerUrl,
+  nftsSerumCollectionId
+} from 'config';
+
+import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 
 interface Serum {
   identifier: string;
@@ -46,7 +41,19 @@ interface Serum {
   nonce: number;
 }
 
-const Serum = () => {
+interface SerumType {
+  serumMarketAddress: string;
+  serumOwnerAddress: string;
+  serumMarketBuyFn: string;
+  serumWithdrawData: string;
+}
+
+const Serum = ({
+  serumMarketAddress,
+  serumOwnerAddress,
+  serumMarketBuyFn,
+  serumWithdrawData
+}: SerumType) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { network } = useGetNetworkConfig();

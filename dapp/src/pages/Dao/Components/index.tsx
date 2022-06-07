@@ -1,6 +1,14 @@
 import * as React from 'react';
+import {
+  enableVote,
+  voteAddress,
+  voteFinishData,
+  voteNoData,
+  voteOwnerAddress,
+  voteWithdrawData,
+  voteYesData
+} from 'config';
 import Vote from './Vote';
-import { enableVote } from 'config';
 
 const Components = () => {
   return (
@@ -8,7 +16,14 @@ const Components = () => {
       {!!enableVote && (
         <div>
           <hr />
-          <Vote />
+          <Vote
+            voteAddress={voteAddress}
+            voteOwnerAddress={voteOwnerAddress}
+            voteYesData={voteYesData}
+            voteNoData={voteNoData}
+            voteFinishData={voteFinishData}
+            voteWithdrawData={voteWithdrawData}
+          />
         </div>
       )}
     </div>
