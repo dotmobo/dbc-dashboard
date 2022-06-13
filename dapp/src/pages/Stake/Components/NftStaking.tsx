@@ -72,6 +72,7 @@ const NftStaking = ({
   const [rewardsTokenTotalSupply, setRewardsTokenTotalSupply] =
     React.useState<number>();
   const [nbrOfStakers, setNbrOfStakers] = React.useState<number>();
+  const [nftNonce, setNftNonce] = React.useState<number>();
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -345,6 +346,37 @@ const NftStaking = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
 
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(nftStakingAddress),
+      func: new ContractFunction('getNftNonce'),
+      args: [new AddressValue(new Address(address))]
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setNftNonce(0);
+            break;
+          case '':
+            setNftNonce(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setNftNonce(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
   function strtoHex(str: string) {
     let result = '';
     for (let i = 0; i < str.length; i++) {
@@ -534,106 +566,110 @@ const NftStaking = ({
         <div className='col-12'>
           <h4>Staked #Dawn DB</h4>
         </div>
-        {stakeds === undefined && (
+        {stakeds === undefined && nftNonce === undefined && (
           <div className='col'>
             <div className='spinner-border text-primary mr-2' role='status'>
               <span className='sr-only'>Loading...</span>
             </div>
           </div>
         )}
-        {stakeds !== undefined && stakeds.length === 0 && (
-          <div className='col'>
-            <div>No staked #Dawn DB found !</div>
-          </div>
-        )}
         {stakeds !== undefined &&
-          stakeds.length > 0 &&
-          stakeds.map((bro) => (
-            <div
-              key={bro.identifier}
-              className='col-12 col-sm-12 col-md-12 col-lg-12 mt-3 mx-auto'
-            >
-              <LazyLoad height={200} offset={100} once>
-                <div className='card text-center nftStakeCard'>
-                  <div className='card-header'>{bro.name}</div>
-                  <div className='nftStakedDiv'>
-                    <img
-                      src={bro.url}
-                      alt={bro.identifier}
-                      className='nftStakedImg card-img-top'
-                    />
-                  </div>
-                  <div className='card-body'>
-                    {currentRewards !== undefined && (
-                      <div className='card-title'>
-                        <div>
-                          Claimable rewards:&nbsp;
-                          {formatBigNumber(
-                            floor(divide(currentRewards, 10 ** 18), 2) as any
-                          )}
-                          &nbsp;$DEAD
-                          <DeadIcon className='mx-1' height={16} width={16} />
-                        </div>
-                      </div>
-                    )}
-                    {!hasPendingTransactions &&
-                      currentRewards !== undefined &&
-                      unstakeTime !== undefined &&
-                      rewardsTokenTotalSupply !== undefined && (
-                        <div>
-                          <div className='w-100'></div>
-                          <button
-                            className='btn btn-primary ml-1 mt-2'
-                            disabled={
-                              currentRewards === 0 ||
-                              rewardsTokenTotalSupply <= currentRewards
-                            }
-                            onClick={() => sendClaimTransaction()}
-                          >
-                            CLAIM{' '}
-                            <FontAwesomeIcon
-                              icon={faDollarSign}
-                              className='text'
-                            />
-                          </button>
-                          <div className='w-100'></div>
-                          <button
-                            className='btn btn-primary ml-1 mt-2'
-                            disabled={moment
-                              .unix(unstakeTime)
-                              .isAfter(moment())}
-                            onClick={() => sendUnstakeTransaction()}
-                          >
-                            UNSTAKE{' '}
-                            <FontAwesomeIcon
-                              icon={faArrowDown}
-                              className='text'
-                            />
-                          </button>
+          nftNonce !== undefined &&
+          stakeds.filter((x) => x.nonce === nftNonce).length === 0 && (
+            <div className='col'>
+              <div>No staked #Dawn DB found !</div>
+            </div>
+          )}
+        {stakeds !== undefined &&
+          stakeds.filter((x) => x.nonce === nftNonce).length > 0 &&
+          stakeds
+            .filter((x) => x.nonce === nftNonce)
+            .map((bro) => (
+              <div
+                key={bro.identifier}
+                className='col-12 col-sm-12 col-md-12 col-lg-12 mt-3 mx-auto'
+              >
+                <LazyLoad height={200} offset={100} once>
+                  <div className='card text-center nftStakeCard'>
+                    <div className='card-header'>{bro.name}</div>
+                    <div className='nftStakedDiv'>
+                      <img
+                        src={bro.url}
+                        alt={bro.identifier}
+                        className='nftStakedImg card-img-top'
+                      />
+                    </div>
+                    <div className='card-body'>
+                      {currentRewards !== undefined && (
+                        <div className='card-title'>
+                          <div>
+                            Claimable rewards:&nbsp;
+                            {formatBigNumber(
+                              floor(divide(currentRewards, 10 ** 18), 2) as any
+                            )}
+                            &nbsp;$DEAD
+                            <DeadIcon className='mx-1' height={16} width={16} />
+                          </div>
                         </div>
                       )}
-                  </div>
-                  {lockTime !== undefined && unstakeTime !== undefined && (
-                    <div className='card-footer'>
-                      <small className='text-muted'>
-                        Lock date:&nbsp;
-                        {moment
-                          .unix(lockTime)
-                          .format('MMMM Do YYYY, h:mm:ss a')}
-                      </small>
-                      <br />
-                      <small className='text-muted'>
-                        Unstake date:&nbsp;
-                        {moment
-                          .unix(unstakeTime)
-                          .format('MMMM Do YYYY, h:mm:ss a')}
-                      </small>
+                      {!hasPendingTransactions &&
+                        currentRewards !== undefined &&
+                        unstakeTime !== undefined &&
+                        rewardsTokenTotalSupply !== undefined && (
+                          <div>
+                            <div className='w-100'></div>
+                            <button
+                              className='btn btn-primary ml-1 mt-2'
+                              disabled={
+                                currentRewards === 0 ||
+                                rewardsTokenTotalSupply <= currentRewards
+                              }
+                              onClick={() => sendClaimTransaction()}
+                            >
+                              CLAIM{' '}
+                              <FontAwesomeIcon
+                                icon={faDollarSign}
+                                className='text'
+                              />
+                            </button>
+                            <div className='w-100'></div>
+                            <button
+                              className='btn btn-primary ml-1 mt-2'
+                              disabled={moment
+                                .unix(unstakeTime)
+                                .isAfter(moment())}
+                              onClick={() => sendUnstakeTransaction()}
+                            >
+                              UNSTAKE{' '}
+                              <FontAwesomeIcon
+                                icon={faArrowDown}
+                                className='text'
+                              />
+                            </button>
+                          </div>
+                        )}
                     </div>
-                  )}
-                </div>
-              </LazyLoad>
-            </div>
-          ))}
+                    {lockTime !== undefined && unstakeTime !== undefined && (
+                      <div className='card-footer'>
+                        <small className='text-muted'>
+                          Lock date:&nbsp;
+                          {moment
+                            .unix(lockTime)
+                            .format('MMMM Do YYYY, h:mm:ss a')}
+                        </small>
+                        <br />
+                        <small className='text-muted'>
+                          Unstake date:&nbsp;
+                          {moment
+                            .unix(unstakeTime)
+                            .format('MMMM Do YYYY, h:mm:ss a')}
+                        </small>
+                      </div>
+                    )}
+                  </div>
+                </LazyLoad>
+              </div>
+            ))}
       </div>
       <div className='row mt-3'>
         <div className='col-12'>
@@ -672,7 +708,8 @@ const NftStaking = ({
                   </div>
                 </div>
                 {stakeds !== undefined &&
-                  stakeds.length === 0 &&
+                  nftNonce !== undefined &&
+                  stakeds.filter((x) => x.nonce === nftNonce).length === 0 &&
                   !hasPendingTransactions && (
                     <div>
                       <div className='w-100'></div>
