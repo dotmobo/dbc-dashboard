@@ -48,17 +48,20 @@ const routes: Array<any> = [
   {
     path: routeNames.transaction,
     title: 'Transaction',
-    component: Transaction
+    component: Transaction,
+    authenticatedRoute: true
   },
   {
     path: routeNames.market,
     title: 'Market',
-    component: Market
+    component: Market,
+    authenticatedRoute: true
   },
   {
     path: routeNames.stake,
     title: 'Stake',
-    component: Stake
+    component: Stake,
+    authenticatedRoute: true
   }
 ];
 
