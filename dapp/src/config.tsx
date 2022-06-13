@@ -79,7 +79,7 @@ export const serumOwnerAddress =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 
 // Staking
-export const enableStaking = false;
+export const enableStaking = true;
 export const enableTokenStaking = false;
 export const tokenStakingAddress =
   elrondNetwork === ('devnet' as any)
