@@ -97,7 +97,13 @@ pub trait Vote {
         Ok(())
     }
 
+    #[only_owner]
+    #[endpoint]
+    fn change_question(&self, question: BoxedBytes) -> SCResult<()> {
+        self.question().set(&question);
 
+        Ok(())
+    }
 
     // Les données stockées
 

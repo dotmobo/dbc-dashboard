@@ -7,6 +7,7 @@
 elrond_wasm_node::wasm_endpoints! {
     vote
     (
+        change_question
         finish_vote
         getInProgress
         getNo
