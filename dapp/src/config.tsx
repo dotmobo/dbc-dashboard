@@ -36,9 +36,9 @@ export const elrondExplorerUrl =
 export const deadRareUrl = 'https://deadrare.io';
 export const gatewayDeadRareUrl = 'https://gateway.deadrare.io';
 export const deadRareIconUrl = process.env.PUBLIC_URL + '/deadrare.webp';
-export const trustMarketUrl = 'https://trust.market';
+export const trustMarketUrl = 'https://xoxno.com';
 export const gatewayTrustMarket = 'https://new-api.trust.market';
-export const trustMarketIconUrl = process.env.PUBLIC_URL + '/trust.webp';
+export const trustMarketIconUrl = process.env.PUBLIC_URL + '/trust.png';
 // Frame it
 export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
 export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';

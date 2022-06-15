@@ -17,7 +17,8 @@ import axios from 'axios';
 import {
   faBolt,
   faShoppingCart,
-  faCropSimple
+  faCropSimple,
+  faCandyCane
 } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -198,7 +199,7 @@ const FloorPrice = () => {
           {floorPriceTR !== undefined && floorPriceTR.floorPrice !== undefined && (
             <div>
               <img src={trustMarketIconUrl} alt='trustmarket' height={16} />
-              <b>TrustMarket</b>:&nbsp;
+              <b>Xoxno</b>:&nbsp;
               <span>{floorPriceTR?.floorPrice}&nbsp;EGLD</span>
               <a
                 className='btn btn-primary ml-3 mt-1 btn-sm'
@@ -281,7 +282,7 @@ const FloorPrice = () => {
             floorPriceLegendaryTR.floorPrice !== undefined && (
               <div>
                 <img src={trustMarketIconUrl} alt='trustmarket' height={16} />
-                <b>TrustMarket</b>:&nbsp;
+                <b>Xoxno</b>:&nbsp;
                 <span>{floorPriceLegendaryTR?.floorPrice}&nbsp;EGLD</span>
                 <a
                   className='btn btn-primary ml-3 mt-1 btn-sm'
@@ -367,7 +368,7 @@ const FloorPrice = () => {
             floorPriceDawnTR.floorPrice !== undefined && (
               <div>
                 <img src={trustMarketIconUrl} alt='trustmarket' height={16} />
-                <b>TrustMarket</b>:&nbsp;
+                <b>Xoxno</b>:&nbsp;
                 <span>{floorPriceDawnTR?.floorPrice}&nbsp;EGLD</span>
                 <a
                   className='btn btn-primary ml-3 mt-1 btn-sm'
@@ -379,6 +380,17 @@ const FloorPrice = () => {
                 >
                   BUY&nbsp;
                   <FontAwesomeIcon icon={faShoppingCart} className='text' />
+                </a>
+                <a
+                  className='btn btn-primary ml-3 mt-1 btn-sm'
+                  role='button'
+                  aria-pressed='true'
+                  href={trustMarketUrl + '/buy/NFTs/DeadBrothersIDawnI'}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  MINT&nbsp;
+                  <FontAwesomeIcon icon={faCandyCane} className='text' />
                 </a>
               </div>
             )}

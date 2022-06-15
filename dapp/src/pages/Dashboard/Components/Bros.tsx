@@ -184,7 +184,7 @@ const Bros = () => {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    TRUSTMARKET&nbsp;
+                    XOXNO&nbsp;
                     <FontAwesomeIcon icon={faShoppingCart} className='text' />
                   </a>
                   <div className='w-100'></div>
