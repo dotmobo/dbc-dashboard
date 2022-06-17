@@ -54,6 +54,10 @@ export const voteAddress =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke'
     : 'erd1qqqqqqqqqqqqqpgqldq8xj8zvzqyhvsjpsjq2k3z64ky6cqq0jpqty60v5';
+export const voteAddress2 =
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqn7ztmg7m7eg54yr39q7cpxzv2qqm5z700jpq5c3364'
+    : 'PUT_YOUR_ADDRESS_HERE';
 export const voteYesData =
   elrondNetwork === ('devnet' as any)
     ? 'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573'

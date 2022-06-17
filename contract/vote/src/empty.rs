@@ -2,6 +2,8 @@
 
 elrond_wasm::imports!();
 
+mod vote_info;
+use vote_info::VoteInfo;
 use elrond_wasm::types::heap::BoxedBytes;
 
 #[elrond_wasm::contract]
@@ -11,10 +13,16 @@ pub trait Vote {
     #[init]
     fn init(&self, question: BoxedBytes, token_id: TokenIdentifier) {
         self.question().set(&question);
-        self.yes().set(BigUint::from(0u32));
-        self.no().set(BigUint::from(0u32));
         self.token_id().set(&token_id);
-        self.in_progress().set(1u32);
+        if self.yes().is_empty() {
+            self.yes().set(BigUint::from(0u32));
+        }
+        if self.no().is_empty() {
+            self.no().set(BigUint::from(0u32));
+        }
+        if self.in_progress().is_empty() {
+            self.in_progress().set(1u32);
+        }
     }
 
     // On peut voter oui en envoyant autant de tokens que souhaité
@@ -37,6 +45,26 @@ pub trait Vote {
 
         let yes = self.yes().get();
         self.yes().set(&yes + &payment_amount);
+
+        // save info about the voter
+        let caller: ManagedAddress = self.blockchain().get_caller();
+
+        // if vote info exists, update it
+        if !self.vote_info(&caller).is_empty() {
+            let new_vote_info = VoteInfo {
+                address: self.blockchain().get_caller(),
+                amount: self.vote_info(&caller).get().amount + &payment_amount,
+            };
+            self.vote_info(&caller).clear();
+            self.vote_info(&caller).set(&new_vote_info);
+        } else {
+            // else create a new vote info
+            let new_vote_info = VoteInfo {
+                address: self.blockchain().get_caller(),
+                amount: payment_amount,
+            };
+            self.vote_info(&caller).set(&new_vote_info);
+        }
 
         Ok(())
     }
@@ -61,6 +89,50 @@ pub trait Vote {
 
         let no = self.no().get();
         self.no().set(&no + &payment_amount);
+
+        // save info about the voter
+        let caller: ManagedAddress = self.blockchain().get_caller();
+
+        // if vote info exists, update it
+        if !self.vote_info(&caller).is_empty() {
+            let new_vote_info = VoteInfo {
+                address: self.blockchain().get_caller(),
+                amount: self.vote_info(&caller).get().amount + &payment_amount,
+            };
+            self.vote_info(&caller).clear();
+            self.vote_info(&caller).set(&new_vote_info);
+        } else {
+            // else create a new vote info
+            let new_vote_info = VoteInfo {
+                address: self.blockchain().get_caller(),
+                amount: payment_amount,
+            };
+            self.vote_info(&caller).set(&new_vote_info);
+        }
+
+        Ok(())
+    }
+
+    #[endpoint]
+    fn withdraw_my_amount(&self) -> SCResult<()> {
+        require!(
+            self.in_progress().get() == 0u32,
+            "the vote is not over"
+        );
+
+        let caller: ManagedAddress = self.blockchain().get_caller();
+
+        require!(!self.vote_info(&caller).is_empty(), "Nothing to withdraw!");
+        let vote_info = self.vote_info(&caller).get();
+
+        let my_amount = vote_info.amount;
+        let token_id = self.token_id().get();
+
+        // send rewards
+        self.send()
+            .direct(&caller, &token_id, 0, &my_amount, &[]);
+
+        self.vote_info(&caller).clear();
 
         Ok(())
     }
@@ -105,6 +177,14 @@ pub trait Vote {
         Ok(())
     }
 
+    #[view(getMyAmount)]
+    fn get_my_amount(&self, address: &ManagedAddress) -> BigUint {
+        require!(!self.vote_info(&address).is_empty(), "Nothing to withdraw!");
+        let vote_info = self.vote_info(&address).get();
+        let amount = vote_info.amount;
+        return amount;
+    }
+
     // Les données stockées
 
     // La question
@@ -131,4 +211,8 @@ pub trait Vote {
     #[view(getInProgress)]
     #[storage_mapper("in_progress")]
     fn in_progress(&self) -> SingleValueMapper<u32>;
+
+    #[view(getVoteInfo)]
+    #[storage_mapper("vote_info")]
+    fn vote_info(&self, address: &ManagedAddress) -> SingleValueMapper<VoteInfo<Self::Api>>;
 }

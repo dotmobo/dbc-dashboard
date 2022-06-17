@@ -8,6 +8,7 @@ import {
 } from '@elrondnetwork/dapp-core';
 import {
   Address,
+  AddressValue,
   ContractFunction,
   ProxyProvider,
   Query
@@ -16,6 +17,7 @@ import {
   faCircleQuestion,
   faPersonBooth,
   faCheckCircle,
+  faArrowDown,
   faXmarkCircle,
   faCircleStop,
   faMoneyBillTransfer
@@ -51,6 +53,7 @@ const Vote = ({
   const [inProgress, setInProgress] = React.useState<number>();
   const [yes, setYes] = React.useState<number>();
   const [no, setNo] = React.useState<number>();
+  const [myAmount, setMyAmount] = React.useState<number>();
 
   const /*transactionSessionId*/ [, setTransactionSessionId] = React.useState<
       string | null
@@ -180,6 +183,37 @@ const Vote = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
 
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(voteAddress),
+      func: new ContractFunction('getMyAmount'),
+      args: [new AddressValue(new Address(address))]
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setMyAmount(0);
+            break;
+          case '':
+            setMyAmount(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setMyAmount(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
   const { sendTransactions } = transactionServices;
 
   const sendYesTransaction = async () => {
@@ -263,15 +297,41 @@ const Vote = ({
     const { sessionId /*, error*/ } = await sendTransactions({
       transactions: withdrawTransaction,
       transactionsDisplayInfo: {
-        processingMessage: 'Processing yes vote transaction',
-        errorMessage: 'An error has occured during yes vote',
-        successMessage: 'Yes vote transaction successful'
+        processingMessage: 'Processing withdraw transaction',
+        errorMessage: 'An error has occured during withdraw',
+        successMessage: 'Withdraw transaction successful'
       },
       redirectAfterSign: false
     });
     if (sessionId != null) {
       setTransactionSessionId(sessionId);
     }
+  };
+  const sendWithdrawMyAmountTransaction = async () => {
+    const withdrawMyAmountTransaction = {
+      value: '0',
+      data: 'withdraw_my_amount',
+      receiver: voteAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: withdrawMyAmountTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing withdraw my amount transaction',
+        errorMessage: 'An error has occured during withdraw my amount',
+        successMessage: 'Withdraw transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
+  const formatBigNumber = (x: number) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
   return (
@@ -347,6 +407,27 @@ const Vote = ({
                 </div>
               </div>
             )}
+            {!hasPendingTransactions &&
+              inProgress === 0 &&
+              myAmount !== undefined &&
+              myAmount !== 0 && (
+                <div className='row'>
+                  <div className='col-3'>
+                    <button
+                      onClick={sendWithdrawMyAmountTransaction}
+                      className='btn btn-primary'
+                      disabled={inProgress !== 0}
+                    >
+                      WITHDRAW{' '}
+                      {formatBigNumber(
+                        floor(divide(myAmount, 10 ** 18), 2) as any
+                      )}{' '}
+                      $DEAD&nbsp;
+                      <FontAwesomeIcon icon={faArrowDown} />
+                    </button>
+                  </div>
+                </div>
+              )}
             <div className='mb-1 mt-4'>
               <span className='mr-1'>Vote address:</span>
               <span data-testid='voteAddress'>

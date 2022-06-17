@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   enableVote,
   voteAddress,
+  voteAddress2,
   voteFinishData,
   voteNoData,
   voteOwnerAddress,
@@ -18,6 +19,15 @@ const Components = () => {
           <hr />
           <Vote
             voteAddress={voteAddress}
+            voteOwnerAddress={voteOwnerAddress}
+            voteYesData={voteYesData}
+            voteNoData={voteNoData}
+            voteFinishData={voteFinishData}
+            voteWithdrawData={voteWithdrawData}
+          />
+          <hr />
+          <Vote
+            voteAddress={voteAddress2}
             voteOwnerAddress={voteOwnerAddress}
             voteYesData={voteYesData}
             voteNoData={voteNoData}
