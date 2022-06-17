@@ -1,8 +1,8 @@
 {
     "configurations": {
         "default": {
-            "proxy": "https://api.elrond.com",
-            "chainID": "1"
+            "proxy": "https://devnet-api.elrond.com",
+            "chainID": "D"
         }
     },
     "contract":{
@@ -14,7 +14,7 @@
             "gas-limit": 59999999,
             "arguments": [
                 "str:Do you approve of the following plan regarding Dawn DeadBrothers funds: 35% EGLD staking, 35% LKMEX farming, 5% foundation, 5% charity, 10% marketing, 10% team ?",
-                "str:DEADBROS-388e63"
+                "str:DEADBROS-fa8f0f"
             ],
             "send": true,
             "outfile": "deploy-testnet.interaction.json"

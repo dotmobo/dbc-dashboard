@@ -49,11 +49,11 @@ export const omniscientUrl = 'https://omniscient.tools/partners/deadbrothers';
 export const esdtMarketUrl = 'https://esdt.market/app/esdt/listings';
 
 // Vote component
-export const enableVote = false;
+export const enableVote = true;
 export const voteAddress =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke'
-    : 'PUT VOTE SMART CONTRACT ADDRESS HERE';
+    : 'erd1qqqqqqqqqqqqqpgqldq8xj8zvzqyhvsjpsjq2k3z64ky6cqq0jpqty60v5';
 export const voteYesData =
   elrondNetwork === ('devnet' as any)
     ? 'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573'
