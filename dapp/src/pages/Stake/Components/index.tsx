@@ -1,7 +1,9 @@
 import {
   enableTokenStaking,
   nftStakingAddress,
+  nftStakingAddress2,
   nftStakingCollection,
+  nftStakingCollection2,
   tokenStakingAddress
 } from 'config';
 import * as React from 'react';
@@ -20,8 +22,15 @@ const Components = () => {
         )}
         <hr />
         <NftStaking
+          name="#Dawn DB"
           nftStakingAddress={nftStakingAddress}
           nftStakingCollection={nftStakingCollection}
+        />
+        <hr />
+        <NftStaking
+          name="#Legendary DB"
+          nftStakingAddress={nftStakingAddress2}
+          nftStakingCollection={nftStakingCollection2}
         />
       </div>
     </div>

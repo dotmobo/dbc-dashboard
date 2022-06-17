@@ -43,11 +43,13 @@ interface Bro {
 export type TBrosList = Bro[];
 
 interface NftStakingType {
+  name: string;
   nftStakingAddress: string;
   nftStakingCollection: string;
 }
 
 const NftStaking = ({
+  name,
   nftStakingAddress,
   nftStakingCollection
 }: NftStakingType) => {
@@ -484,7 +486,7 @@ const NftStaking = ({
   return (
     <div>
       <h3>
-        Stake a #Dawn DB <FontAwesomeIcon icon={faSkull} className='text' />
+        Stake a {name} <FontAwesomeIcon icon={faSkull} className='text' />
       </h3>
       <div className='row'>
         <div className='col-12'>
@@ -564,7 +566,7 @@ const NftStaking = ({
       </div>
       <div className='row mt-3'>
         <div className='col-12'>
-          <h4>Staked #Dawn DB</h4>
+          <h4>Staked {name}</h4>
         </div>
         {stakeds === undefined && nftNonce === undefined && (
           <div className='col'>
@@ -577,7 +579,7 @@ const NftStaking = ({
           nftNonce !== undefined &&
           stakeds.filter((x) => x.nonce === nftNonce).length === 0 && (
             <div className='col'>
-              <div>No staked #Dawn DB found !</div>
+              <div>No staked {name} found !</div>
             </div>
           )}
         {stakeds !== undefined &&
@@ -673,7 +675,7 @@ const NftStaking = ({
       </div>
       <div className='row mt-3'>
         <div className='col-12'>
-          <h4>Unstaked #Dawn DB</h4>
+          <h4>Unstaked {name}</h4>
         </div>
         {bros === undefined && (
           <div className='col'>
@@ -684,7 +686,7 @@ const NftStaking = ({
         )}
         {bros !== undefined && bros.length === 0 && (
           <div className='col'>
-            <div>No #Dawn DB found in your wallet !</div>
+            <div>No {name} found in your wallet !</div>
           </div>
         )}
         {bros !== undefined &&
