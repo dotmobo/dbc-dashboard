@@ -57,11 +57,11 @@ export const voteAddress =
 export const voteYesData =
   elrondNetwork === ('devnet' as any)
     ? 'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573'
-    : 'ESDTTransfer@4445414442524f532d626638323266@021e19e0c9bab2400000@766f74655f796573';
+    : 'ESDTTransfer@4445414442524f532d333838653633@021e19e0c9bab2400000@766f74655f796573';
 export const voteNoData =
   elrondNetwork === ('devnet' as any)
     ? 'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766F74655F6E6F'
-    : 'ESDTTransfer@4445414442524f532d626638323266@021e19e0c9bab2400000@766F74655F6E6F';
+    : 'ESDTTransfer@4445414442524f532d333838653633@021e19e0c9bab2400000@766F74655F6E6F';
 export const voteFinishData = 'finish_vote';
 export const voteWithdrawData = 'withdraw';
 export const voteOwnerAddress =
