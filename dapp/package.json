@@ -8,6 +8,7 @@
   "dependencies": {
     "@elrondnetwork/dapp-core": "1.1.21",
     "@elrondnetwork/erdjs": "9.2.6",
+    "@types/hex2dec": "^1.1.2",
     "@types/lodash-es": "^4.17.6",
     "@types/mathjs": "^9.4.2",
     "@types/react-lazyload": "^3.2.0",

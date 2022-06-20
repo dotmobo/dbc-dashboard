@@ -26,6 +26,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { divide, floor } from 'mathjs';
 import { ProgressBar } from 'react-bootstrap';
 import { elrondExplorerUrl } from 'config';
+import converter from 'hex2dec';
 
 interface VoteType {
   voteAddress: string;
@@ -34,6 +35,7 @@ interface VoteType {
   voteNoData: string;
   voteFinishData: string;
   voteWithdrawData: string;
+  deadTokenId: string;
 }
 
 const Vote = ({
@@ -42,7 +44,8 @@ const Vote = ({
   voteYesData,
   voteNoData,
   voteFinishData,
-  voteWithdrawData
+  voteWithdrawData,
+  deadTokenId
 }: VoteType) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
@@ -54,6 +57,7 @@ const Vote = ({
   const [yes, setYes] = React.useState<number>();
   const [no, setNo] = React.useState<number>();
   const [myAmount, setMyAmount] = React.useState<number>();
+  const [newVoteAmount, setNewVoteAmount] = React.useState<string>('10000');
 
   const /*transactionSessionId*/ [, setTransactionSessionId] = React.useState<
       string | null
@@ -219,7 +223,16 @@ const Vote = ({
   const sendYesTransaction = async () => {
     const yesTransaction = {
       value: '0',
-      data: voteYesData,
+      // data: voteYesData,
+      data:
+        'ESDTTransfer@' +
+        strtoHex(deadTokenId) +
+        '@' +
+        largeNumberToHex(
+          !!newVoteAmount ? newVoteAmount + '0'.repeat(18) : '0'
+        ) +
+        '@' +
+        strtoHex(voteYesData),
       receiver: voteAddress,
       gasLimit: '5000000'
     };
@@ -242,7 +255,15 @@ const Vote = ({
   const sendNoTransaction = async () => {
     const noTransaction = {
       value: '0',
-      data: voteNoData,
+      data:
+        'ESDTTransfer@' +
+        strtoHex(deadTokenId) +
+        '@' +
+        largeNumberToHex(
+          !!newVoteAmount ? newVoteAmount + '0'.repeat(18) : '0'
+        ) +
+        '@' +
+        strtoHex(voteNoData),
       receiver: voteAddress,
       gasLimit: '5000000'
     };
@@ -334,6 +355,29 @@ const Vote = ({
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
+  const handleNewVoteAmountChange = (event: any) => {
+    setNewVoteAmount(event.target.value);
+  };
+
+  function strtoHex(str: string) {
+    let result = '';
+    for (let i = 0; i < str.length; i++) {
+      result += str.charCodeAt(i).toString(16);
+    }
+    if (result.length % 2 == 1) {
+      result = '0' + result;
+    }
+    return result;
+  }
+
+  function largeNumberToHex(num: string) {
+    let result = converter.decToHex(num);
+    if (result !== null && result.length % 2 == 1) {
+      result = '0' + result;
+    }
+    return result;
+  }
+
   return (
     <div>
       <h3>
@@ -385,11 +429,29 @@ const Vote = ({
           <div className='mt-4'>
             {!hasPendingTransactions && inProgress === 1 && (
               <div className='row'>
+                <div className='col-12'>
+                  <div className='input-group mb-3'>
+                    <input
+                      type='text'
+                      className='form-control'
+                      value={newVoteAmount}
+                      onChange={handleNewVoteAmountChange}
+                      onKeyPress={(event) => {
+                        if (!/\d/.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }}
+                    />
+                    <div className='input-group-append'>
+                      <span className='input-group-text'>$DEAD</span>
+                    </div>
+                  </div>
+                </div>
                 <div className='col-3'>
                   <button
                     onClick={sendYesTransaction}
                     className='btn btn-success'
-                    disabled={inProgress !== 1}
+                    disabled={inProgress !== 1 || !newVoteAmount}
                   >
                     YES&nbsp;
                     <FontAwesomeIcon icon={faCheckCircle} />
@@ -399,7 +461,7 @@ const Vote = ({
                   <button
                     onClick={sendNoTransaction}
                     className='btn btn-danger'
-                    disabled={inProgress !== 1}
+                    disabled={inProgress !== 1 || !newVoteAmount}
                   >
                     NO&nbsp;
                     <FontAwesomeIcon icon={faXmarkCircle} />

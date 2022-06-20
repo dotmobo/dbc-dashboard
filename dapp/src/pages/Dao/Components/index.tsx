@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  deadTokenId,
   enableVote,
   voteAddress,
   voteAddress2,
@@ -24,6 +25,7 @@ const Components = () => {
             voteNoData={voteNoData}
             voteFinishData={voteFinishData}
             voteWithdrawData={voteWithdrawData}
+            deadTokenId={deadTokenId}
           />
           {/* <hr />
           <Vote
@@ -33,6 +35,7 @@ const Components = () => {
             voteNoData={voteNoData}
             voteFinishData={voteFinishData}
             voteWithdrawData={voteWithdrawData}
+            deadTokenId={deadTokenId}
           /> */}
         </div>
       )}

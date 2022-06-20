@@ -56,16 +56,10 @@ export const voteAddress =
     : 'erd1qqqqqqqqqqqqqpgqldq8xj8zvzqyhvsjpsjq2k3z64ky6cqq0jpqty60v5';
 export const voteAddress2 =
   elrondNetwork === ('devnet' as any)
-    ? 'erd1qqqqqqqqqqqqqpgqn7ztmg7m7eg54yr39q7cpxzv2qqm5z700jpq5c3364'
+    ? 'erd1qqqqqqqqqqqqqpgqqwz83uqnh2gcjylscwv088f364y9dmn70jpqz8w7dj'
     : 'PUT_YOUR_ADDRESS_HERE';
-export const voteYesData =
-  elrondNetwork === ('devnet' as any)
-    ? 'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766f74655f796573'
-    : 'ESDTTransfer@4445414442524f532d333838653633@021e19e0c9bab2400000@766f74655f796573';
-export const voteNoData =
-  elrondNetwork === ('devnet' as any)
-    ? 'ESDTTransfer@4445414442524f532d666138663066@021e19e0c9bab2400000@766F74655F6E6F'
-    : 'ESDTTransfer@4445414442524f532d333838653633@021e19e0c9bab2400000@766F74655F6E6F';
+export const voteYesData = 'vote_yes';
+export const voteNoData = 'vote_no';
 export const voteFinishData = 'finish_vote';
 export const voteWithdrawData = 'withdraw';
 export const voteOwnerAddress =
