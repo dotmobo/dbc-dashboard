@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { floor, divide } from 'mathjs';
 import moment from 'moment';
 import { deadTokenId, elrondExplorerUrl } from 'config';
+import converter from 'hex2dec';
 
 interface TokenStakingType {
   tokenStakingAddress: string;
@@ -40,7 +41,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
   const [stakeAmount, setStakeAmount] = React.useState<number>();
   const [lockTime, setLockTime] = React.useState<number>();
   const [unstakeTime, setUnstakeTime] = React.useState<number>();
-  const [newStakeAmount, setNewStakeAmount] = React.useState<number>(0);
+  const [newStakeAmount, setNewStakeAmount] = React.useState<string>('10000');
   const [currentRewards, setCurrentRewards] = React.useState<number>();
 
   const [minimumStakingDays, setMinimumStakingDays] = React.useState<number>();
@@ -338,9 +339,9 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
     return result;
   }
 
-  function numtoHex(num: number) {
-    let result = num.toString(16);
-    if (result.length % 2 == 1) {
+  function largeNumberToHex(num: string) {
+    let result = converter.decToHex(num, { prefix: false });
+    if (result !== null && result.length % 2 == 1) {
       result = '0' + result;
     }
     return result;
@@ -355,7 +356,9 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
         'ESDTTransfer@' +
         strtoHex(deadTokenId) +
         '@' +
-        numtoHex(!!newStakeAmount ? newStakeAmount * 10 ** 18 : 0) +
+        largeNumberToHex(
+          !!newStakeAmount ? newStakeAmount + '0'.repeat(18) : '0'
+        ) +
         '@' +
         strtoHex('stake'),
       receiver: tokenStakingAddress,
@@ -516,10 +519,15 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
               {stakeAmount === 0 && (
                 <div>
                   <input
-                    type='number'
+                    type='text'
                     className='form-control mb-3'
                     value={newStakeAmount}
                     onChange={handleNewStakeAmountChange}
+                    onKeyPress={(event) => {
+                      if (!/\d/.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }}
                   />
                   <button
                     onClick={sendStakeTransaction}
