@@ -371,7 +371,7 @@ const Vote = ({
   }
 
   function largeNumberToHex(num: string) {
-    let result = converter.decToHex(num);
+    let result = converter.decToHex(num, { prefix: false });
     if (result !== null && result.length % 2 == 1) {
       result = '0' + result;
     }
