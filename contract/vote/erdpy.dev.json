@@ -18,6 +18,19 @@
             ],
             "send": true,
             "outfile": "deploy-testnet.interaction.json"
+        },
+        "upgrade":{
+            "verbose": true,
+            "bytecode": "output/vote.wasm",
+            "recall-nonce": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:Do you approve of the following plan regarding Dawn DeadBrothers funds: 35% EGLD staking, 35% LKMEX farming, 5% foundation, 5% charity, 10% marketing, 10% team ?",
+                "str:DEADBROS-fa8f0f"
+            ],
+            "send": true,
+            "outfile": "deploy-testnet.interaction.json"
         }
      }
 }
