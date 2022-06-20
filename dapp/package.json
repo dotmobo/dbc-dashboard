@@ -14,6 +14,7 @@
     "@types/react-lazyload": "^3.2.0",
     "axios": "^0.26.1",
     "bootstrap": "4.6.0",
+    "hex2dec": "^1.1.2",
     "lodash-es": "^4.17.21",
     "mathjs": "^10.5.0",
     "moment": "^2.29.3",
