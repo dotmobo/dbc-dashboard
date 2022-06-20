@@ -24,8 +24,8 @@ import { shuffle } from 'lodash-es';
 import { floor, divide } from 'mathjs';
 import LazyLoad from 'react-lazyload';
 import { elrondApiUrl, elrondExplorerUrl } from 'config';
-
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
+import converter from 'hex2dec';
 
 interface Serum {
   identifier: string;
@@ -64,7 +64,7 @@ const Serum = ({
 
   const [serums, setSerumsList] = React.useState<Serum[]>();
   const [price, setPrice] = React.useState<number>();
-  const [newPrice, setNewPrice] = React.useState<number>(0);
+  const [newPrice, setNewPrice] = React.useState<string>('0');
 
   React.useEffect(() => {
     const query = new Query({
@@ -121,6 +121,14 @@ const Serum = ({
     return result;
   }
 
+  function largeNumberToHex(num: string) {
+    let result = converter.decToHex(num, { prefix: false });
+    if (result !== null && result.length % 2 == 1) {
+      result = '0' + result;
+    }
+    return result;
+  }
+
   function numtoHex(num: number) {
     let result = num.toString(16);
     if (result.length % 2 == 1) {
@@ -134,7 +142,9 @@ const Serum = ({
       'ESDTTransfer@' +
       strtoHex(serumMarketTokenId) +
       '@' +
-      numtoHex(!!price ? price : 0) +
+      largeNumberToHex(
+        !!price ? price.toLocaleString('fullwide', { useGrouping: false }) : '0'
+      ) +
       '@' +
       strtoHex(serumMarketBuyFn) +
       '@' +
@@ -193,7 +203,9 @@ const Serum = ({
   const sendChangePriceTransaction = async () => {
     const changePriceTransaction = {
       value: '0',
-      data: 'change_price@' + numtoHex(!!newPrice ? newPrice * 10 ** 18 : 0),
+      data:
+        'change_price@' +
+        largeNumberToHex(!!newPrice ? newPrice + '0'.repeat(18) : '0'),
       receiver: serumMarketAddress,
       gasLimit: '5000000'
     };
@@ -284,10 +296,15 @@ const Serum = ({
                 <FontAwesomeIcon icon={faMoneyBillTransfer} />
               </button>
               <input
-                type='number'
+                type='text'
                 className='mt-2 form-control'
                 value={newPrice}
                 onChange={handleNewPriceChange}
+                onKeyPress={(event) => {
+                  if (!/\d/.test(event.key)) {
+                    event.preventDefault();
+                  }
+                }}
               />
               <button
                 onClick={sendChangePriceTransaction}
