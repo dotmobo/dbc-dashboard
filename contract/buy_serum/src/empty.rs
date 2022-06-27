@@ -10,7 +10,9 @@ pub trait EmptyContract {
         self.token_id().set(&token_id);
         self.price().set(&price);
         self.nft_identifier().set(&nft_identifier);
-        self.bank().set(BigUint::from(0u32));
+        if self.bank().is_empty() {
+            self.bank().set(BigUint::from(0u32));
+        }
     }
 
 

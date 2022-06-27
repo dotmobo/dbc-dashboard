@@ -320,7 +320,7 @@ const Shop = ({
       </h3>
       <div className='row'>
         <div className='col-12'>
-          <span className='mr-1'>Market address:</span>
+          <span className='mr-1 mb-2'>Market address:</span>
           <span data-testid='shopMarketAddress'>
             <a
               href={elrondExplorerUrl + '/accounts/' + shopMarketAddress}
@@ -426,7 +426,7 @@ const Shop = ({
                 <div>
                   <div className='mt-4'>
                     <b>Price</b>:&nbsp;
-                    {formatBigNumber(floor(divide(price, 10 ** 18)))}
+                    {formatBigNumber(floor(divide(price, 10 ** 18)))} $DEAD
                     <DeadIcon className='mx-1' height={16} width={16} />
                   </div>
                   <div>

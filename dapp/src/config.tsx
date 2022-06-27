@@ -67,13 +67,13 @@ export const voteOwnerAddress =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 
 // Market
-export const enableMarket = false;
+export const enableMarket = true;
 export const shopCollectionId1 =
   elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TESTSERUM-39a388';
 export const shopMarketAddress1 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8'
-    : 'SMART-CONTRACT-ADDRESS-HERE';
+    : 'erd1qqqqqqqqqqqqqpgqhp0pexfxwurwqhx0ur2h8mytvag5q9mn0jpqevrscq';
 export const shopMarketBuyFn1 = 'buy';
 export const shopWithdrawData1 = 'withdraw';
 export const shopOwnerAddress1 =

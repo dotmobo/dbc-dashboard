@@ -1,0 +1,40 @@
+{
+    "configurations": {
+        "default": {
+            "proxy": "https://api.elrond.com",
+            "chainID": "1"
+        }
+    },
+    "contract":{
+        "deploy":{
+            "verbose": true,
+            "bytecode": "output/buy_serum.wasm",
+            "recall-nonce": true,
+            "metadata-payable": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:DEADBROS-388e63",
+                "35000000000000000000000",
+                "str:TESTSERUM-39a388"
+            ],
+            "send": true,
+            "outfile": "deploy.interaction.json"
+        },
+        "upgrade":{
+            "verbose": true,
+            "bytecode": "output/buy_serum.wasm",
+            "recall-nonce": true,
+            "metadata-payable": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:DEADBROS-388e63",
+                "35000000000000000000000",
+                "str:TESTSERUM-39a388"
+            ],
+            "send": true,
+            "outfile": "deploy.interaction.json"
+        }
+     }
+}
