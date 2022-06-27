@@ -16,7 +16,8 @@ import {
   faShop,
   faMoneyBillTransfer,
   faCreditCard,
-  faBarcode
+  faBarcode,
+  faIdBadge
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
@@ -64,7 +65,9 @@ const Shop = ({
 
   const [items, setItemsList] = React.useState<Shop[]>();
   const [price, setPrice] = React.useState<number>();
-  const [newPrice, setNewPrice] = React.useState<string>('0');
+  const [nftId, setNftId] = React.useState<string>('');
+  const [newPrice, setNewPrice] = React.useState<string>('');
+  const [newNftId, setNewNftId] = React.useState<string>('');
 
   React.useEffect(() => {
     const query = new Query({
@@ -87,6 +90,37 @@ const Shop = ({
           default: {
             const decoded = Buffer.from(encoded, 'base64').toString('hex');
             setPrice(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(shopMarketAddress),
+      func: new ContractFunction('getNftIdentifier'),
+      args: []
+    });
+    const proxy = new ProxyProvider(network.apiAddress);
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setNftId('');
+            break;
+          case '':
+            setNftId('');
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString();
+            setNftId(decoded);
             break;
           }
         }
@@ -214,9 +248,32 @@ const Shop = ({
     const { sessionId /*, error*/ } = await sendTransactions({
       transactions: changePriceTransaction,
       transactionsDisplayInfo: {
-        processingMessage: 'Processing yes vote transaction',
-        errorMessage: 'An error has occured during yes vote',
-        successMessage: 'Yes vote transaction successful'
+        processingMessage: 'Processing change price transaction',
+        errorMessage: 'An error has occured during change price',
+        successMessage: 'Change price transaction successful'
+      },
+      redirectAfterSign: false
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
+  };
+
+  const sendChangeNftIdTransaction = async () => {
+    const changeNftIdTransaction = {
+      value: '0',
+      data: 'change_nft_identifier@' + strtoHex(newNftId),
+      receiver: shopMarketAddress,
+      gasLimit: '5000000'
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: changeNftIdTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing change nft transaction',
+        errorMessage: 'An error has occured during change nft',
+        successMessage: 'Change nft transaction successful'
       },
       redirectAfterSign: false
     });
@@ -246,6 +303,10 @@ const Shop = ({
 
   const handleNewPriceChange = (event: any) => {
     setNewPrice(event.target.value);
+  };
+
+  const handleNewNftIdChange = (event: any) => {
+    setNewNftId(event.target.value);
   };
 
   return (
@@ -309,15 +370,31 @@ const Shop = ({
               <button
                 onClick={sendChangePriceTransaction}
                 className='btn btn-primary mr-4 mt-2'
+                disabled={newPrice === ''}
               >
                 CHANGE PRICE&nbsp;
                 <FontAwesomeIcon icon={faBarcode} />
+              </button>
+              <input
+                type='text'
+                className='mt-2 form-control'
+                value={newNftId}
+                onChange={handleNewNftIdChange}
+              />
+              <button
+                onClick={sendChangeNftIdTransaction}
+                disabled={newNftId === ''}
+                className='btn btn-primary mr-4 mt-2'
+              >
+                CHANGE NFT ID&nbsp;
+                <FontAwesomeIcon icon={faIdBadge} />
               </button>
             </div>
           )}
         {items !== undefined &&
           items.length > 0 &&
           price !== undefined &&
+          nftId !== undefined &&
           items.slice(0, 1).map((item) => (
             <div
               key={item.identifier}
@@ -351,6 +428,10 @@ const Shop = ({
                     <b>Price</b>:&nbsp;
                     {formatBigNumber(floor(divide(price, 10 ** 18)))}
                     <DeadIcon className='mx-1' height={16} width={16} />
+                  </div>
+                  <div>
+                    <b>Collection</b>:&nbsp;
+                    {nftId}
                   </div>
                   <div className='w-100'></div>
                   <button

@@ -79,6 +79,15 @@ pub trait EmptyContract {
         Ok(())
     }
 
+    #[only_owner]
+    #[endpoint]
+    fn change_nft_identifier(&self, nft_identifier: TokenIdentifier) -> SCResult<()> {
+
+        self.nft_identifier().set(&nft_identifier);
+
+        Ok(())
+    }
+
 
     #[view(getBank)]
     #[storage_mapper("bank")]
