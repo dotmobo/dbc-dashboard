@@ -2,7 +2,6 @@ import * as React from 'react';
 import FloorPrice from './FloorPrice';
 import Farms from './Farms';
 import Links from './Links';
-import { omniscientUrl } from 'config';
 import Stats from './Stats';
 
 const Components = () => {
