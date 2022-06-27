@@ -90,7 +90,7 @@ const Bros = () => {
       <div className='row'>
         <div className='col-12'>
           <span className='mr-1'>Mint address:</span>
-          <span data-testid='serumMarketAddress'>
+          <span data-testid='mintAddress'>
             <a
               href={elrondExplorerUrl + '/accounts/' + contractAddress}
               target='_blank'

@@ -87,7 +87,7 @@ const Farms = () => {
         <FontAwesomeIcon icon={faTractor} className='text' />
       </h3>
       <div className='row'>
-        <div className='col-12'>
+        <div className='col-12 mb-2'>
           <span className='mr-1'>Farms address:</span>
           <span data-testid='distributionAddress'>
             <a

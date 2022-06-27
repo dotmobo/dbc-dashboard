@@ -8,7 +8,7 @@ import {
 } from '@elrondnetwork/dapp-core';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
-import { serumMarketAddress, tokenStakingAddress, voteAddress } from 'config';
+import { tokenStakingAddress } from 'config';
 import TransactionsList from './TransactionsList';
 import { StateType } from './types';
 

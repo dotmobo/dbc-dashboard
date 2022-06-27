@@ -1,26 +1,26 @@
 import * as React from 'react';
 import {
   deadTokenId,
-  nftsSerumCollectionId,
-  serumMarketAddress,
-  serumMarketBuyFn,
-  serumOwnerAddress,
-  serumWithdrawData
+  shopCollectionId1,
+  shopMarketAddress1,
+  shopMarketBuyFn1,
+  shopOwnerAddress1,
+  shopWithdrawData1
 } from 'config';
-import Serum from './Serum';
+import Shop from './Shop';
 
 const Components = () => {
   return (
     <div className='col mt-4 col-md-12'>
       <div>
         <hr />
-        <Serum
-          serumMarketAddress={serumMarketAddress}
-          serumOwnerAddress={serumOwnerAddress}
-          serumMarketBuyFn={serumMarketBuyFn}
-          serumWithdrawData={serumWithdrawData}
-          serumMarketCollectionId={nftsSerumCollectionId}
-          serumMarketTokenId={deadTokenId}
+        <Shop
+          shopMarketAddress={shopMarketAddress1}
+          shopOwnerAddress={shopOwnerAddress1}
+          shopMarketBuyFn={shopMarketBuyFn1}
+          shopWithdrawData={shopWithdrawData1}
+          shopMarketCollectionId={shopCollectionId1}
+          shopMarketTokenId={deadTokenId}
         />
       </div>
     </div>

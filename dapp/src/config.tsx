@@ -67,13 +67,15 @@ export const voteOwnerAddress =
 
 // Market
 export const enableMarket = false;
-export const serumMarketAddress =
+export const shopCollectionId1 =
+  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TESTSERUM-39a388';
+export const shopMarketAddress1 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8'
     : 'SMART-CONTRACT-ADDRESS-HERE';
-export const serumMarketBuyFn = 'buy';
-export const serumWithdrawData = 'withdraw';
-export const serumOwnerAddress =
+export const shopMarketBuyFn1 = 'buy';
+export const shopWithdrawData1 = 'withdraw';
+export const shopOwnerAddress1 =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 
 // Staking

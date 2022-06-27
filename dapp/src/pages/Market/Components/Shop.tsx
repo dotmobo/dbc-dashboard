@@ -27,7 +27,7 @@ import { elrondApiUrl, elrondExplorerUrl } from 'config';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 import converter from 'hex2dec';
 
-interface Serum {
+interface Shop {
   identifier: string;
   url: string;
   name: string;
@@ -36,23 +36,23 @@ interface Serum {
   nonce: number;
 }
 
-interface SerumType {
-  serumMarketAddress: string;
-  serumOwnerAddress: string;
-  serumMarketBuyFn: string;
-  serumWithdrawData: string;
-  serumMarketCollectionId: string;
-  serumMarketTokenId: string;
+interface ShopType {
+  shopMarketAddress: string;
+  shopOwnerAddress: string;
+  shopMarketBuyFn: string;
+  shopWithdrawData: string;
+  shopMarketCollectionId: string;
+  shopMarketTokenId: string;
 }
 
-const Serum = ({
-  serumMarketAddress,
-  serumOwnerAddress,
-  serumMarketBuyFn,
-  serumWithdrawData,
-  serumMarketCollectionId,
-  serumMarketTokenId
-}: SerumType) => {
+const Shop = ({
+  shopMarketAddress,
+  shopOwnerAddress,
+  shopMarketBuyFn,
+  shopWithdrawData,
+  shopMarketCollectionId,
+  shopMarketTokenId
+}: ShopType) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { network } = useGetNetworkConfig();
@@ -62,13 +62,13 @@ const Serum = ({
       string | null
     >(null);
 
-  const [serums, setSerumsList] = React.useState<Serum[]>();
+  const [items, setItemsList] = React.useState<Shop[]>();
   const [price, setPrice] = React.useState<number>();
   const [newPrice, setNewPrice] = React.useState<string>('0');
 
   React.useEffect(() => {
     const query = new Query({
-      address: new Address(serumMarketAddress),
+      address: new Address(shopMarketAddress),
       func: new ContractFunction('getPrice'),
       args: []
     });
@@ -101,10 +101,10 @@ const Serum = ({
     // Use [] as second argument in useEffect for not rendering each time
     axios
       .get<any>(
-        `${elrondApiUrl}/accounts/${serumMarketAddress}/nfts?size=10000&collections=${serumMarketCollectionId}`
+        `${elrondApiUrl}/accounts/${shopMarketAddress}/nfts?size=10000&collections=${shopMarketCollectionId}`
       )
       .then((response) => {
-        setSerumsList(shuffle(response.data));
+        setItemsList(shuffle(response.data));
       });
   }, [hasPendingTransactions]);
 
@@ -137,38 +137,38 @@ const Serum = ({
     return result;
   }
 
-  const getBuySerumData = (serum: Serum) => {
+  const getBuyItemData = (item: Shop) => {
     return (
       'ESDTTransfer@' +
-      strtoHex(serumMarketTokenId) +
+      strtoHex(shopMarketTokenId) +
       '@' +
       largeNumberToHex(
         !!price ? price.toLocaleString('fullwide', { useGrouping: false }) : '0'
       ) +
       '@' +
-      strtoHex(serumMarketBuyFn) +
+      strtoHex(shopMarketBuyFn) +
       '@' +
-      strtoHex(serum.collection) +
+      strtoHex(item.collection) +
       '@' +
-      numtoHex(serum.nonce)
+      numtoHex(item.nonce)
     );
   };
 
-  const sendBuySerumTransaction = async (serum: Serum) => {
-    const buySerumTransaction = {
+  const sendBuyItemTransaction = async (item: Shop) => {
+    const buyItemTransaction = {
       value: '0',
-      data: getBuySerumData(serum),
-      receiver: serumMarketAddress,
+      data: getBuyItemData(item),
+      receiver: shopMarketAddress,
       gasLimit: '5000000'
     };
     await refreshAccount();
 
     const { sessionId /*, error*/ } = await sendTransactions({
-      transactions: buySerumTransaction,
+      transactions: buyItemTransaction,
       transactionsDisplayInfo: {
-        processingMessage: 'Processing buy serum transaction',
-        errorMessage: 'An error has occured during buy serum',
-        successMessage: 'Buy serum transaction successful'
+        processingMessage: 'Processing buy item transaction',
+        errorMessage: 'An error has occured during buy item',
+        successMessage: 'Buy item transaction successful'
       },
       redirectAfterSign: false
     });
@@ -180,8 +180,8 @@ const Serum = ({
   const sendWithdrawTransaction = async () => {
     const withdrawTransaction = {
       value: '0',
-      data: serumWithdrawData,
-      receiver: serumMarketAddress,
+      data: shopWithdrawData,
+      receiver: shopMarketAddress,
       gasLimit: '5000000'
     };
     await refreshAccount();
@@ -206,7 +206,7 @@ const Serum = ({
       data:
         'change_price@' +
         largeNumberToHex(!!newPrice ? newPrice + '0'.repeat(18) : '0'),
-      receiver: serumMarketAddress,
+      receiver: shopMarketAddress,
       gasLimit: '5000000'
     };
     await refreshAccount();
@@ -225,14 +225,14 @@ const Serum = ({
     }
   };
 
-  const getAttributes = (serum: Serum): Array<string> => {
-    return serum.metadata?.attributes?.map(
+  const getAttributes = (item: Shop): Array<string> => {
+    return item.metadata?.attributes?.map(
       (x: any) => `${x.trait_type} ${x.value}`
     );
   };
 
-  const getAttributesDiv = (serum: Serum) => {
-    const attributes = getAttributes(serum);
+  const getAttributesDiv = (item: Shop) => {
+    const attributes = getAttributes(item);
     return !!attributes ? (
       attributes?.map((attribute) => <span key={attribute}>{attribute}</span>)
     ) : (
@@ -251,41 +251,41 @@ const Serum = ({
   return (
     <div>
       <h3>
-        Buy Serum <FontAwesomeIcon icon={faShop} className='text' />
+        Buy Item <FontAwesomeIcon icon={faShop} className='text' />
         &nbsp;
-        {serums !== undefined && serums.length > 0 && (
-          <span>({serums.length})</span>
+        {items !== undefined && items.length > 0 && (
+          <span>({items.length})</span>
         )}
       </h3>
       <div className='row'>
         <div className='col-12'>
           <span className='mr-1'>Market address:</span>
-          <span data-testid='serumMarketAddress'>
+          <span data-testid='shopMarketAddress'>
             <a
-              href={elrondExplorerUrl + '/accounts/' + serumMarketAddress}
+              href={elrondExplorerUrl + '/accounts/' + shopMarketAddress}
               target='_blank'
               rel='noopener noreferrer'
             >
-              {serumMarketAddress.substring(0, 8) +
+              {shopMarketAddress.substring(0, 8) +
                 '...' +
-                serumMarketAddress.substring(serumMarketAddress.length - 4)}
+                shopMarketAddress.substring(shopMarketAddress.length - 4)}
             </a>
           </span>
         </div>
-        {serums === undefined && (
+        {items === undefined && (
           <div className='col-12'>
             <div className='spinner-border text-primary mr-2' role='status'>
               <span className='sr-only'>Loading...</span>
             </div>
           </div>
         )}
-        {serums !== undefined && serums.length === 0 && (
+        {items !== undefined && items.length === 0 && (
           <div className='col-12'>
-            <div>No Serums found in the market !</div>
+            <div>No Items found in the market !</div>
           </div>
         )}
         {address !== undefined &&
-          address === serumOwnerAddress &&
+          address === shopOwnerAddress &&
           !hasPendingTransactions && (
             <div className='mt-2 col-12'>
               <button
@@ -315,33 +315,33 @@ const Serum = ({
               </button>
             </div>
           )}
-        {serums !== undefined &&
-          serums.length > 0 &&
+        {items !== undefined &&
+          items.length > 0 &&
           price !== undefined &&
-          serums.slice(0, 1).map((serum) => (
+          items.slice(0, 1).map((item) => (
             <div
-              key={serum.identifier}
+              key={item.identifier}
               className='col-12 col-sm-12 col-md-6 col-lg-4 mt-4 mx-auto'
             >
               <LazyLoad height={200} offset={100} once>
                 <div>
-                  <b>{serum.name}</b>
+                  <b>{item.name}</b>
                 </div>
                 <div>
                   Rarity&nbsp;
-                  {!!serum.metadata?.rarity?.rarityScore
-                    ? floor(serum.metadata?.rarity?.rarityScore)
+                  {!!item.metadata?.rarity?.rarityScore
+                    ? floor(item.metadata?.rarity?.rarityScore)
                     : 'unknown'}
                 </div>
-                <div className='nft serum'>
+                <div className='nft'>
                   <div className='back'>
                     <h4>Attributes:</h4>
-                    {getAttributesDiv(serum)}
+                    {getAttributesDiv(item)}
                   </div>
                   <div className='front'>
                     <img
-                      src={serum.url}
-                      alt={serum.identifier}
+                      src={item.url}
+                      alt={item.identifier}
                       className='nftImg'
                     />
                   </div>
@@ -355,7 +355,7 @@ const Serum = ({
                   <div className='w-100'></div>
                   <button
                     className='btn btn-primary ml-1 mt-4'
-                    onClick={() => sendBuySerumTransaction(serum)}
+                    onClick={() => sendBuyItemTransaction(item)}
                   >
                     BUY&nbsp;
                     <FontAwesomeIcon icon={faCreditCard} className='text' />
@@ -369,4 +369,4 @@ const Serum = ({
   );
 };
 
-export default Serum;
+export default Shop;

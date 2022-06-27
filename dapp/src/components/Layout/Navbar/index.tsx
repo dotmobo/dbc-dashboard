@@ -8,7 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadbrothersLogo } from './../../../assets/img/deadbrothers.svg';
 import {
   faRightToBracket,
-  faPowerOff
+  faPowerOff,
+  faCircleUser,
+  faCircleInfo,
+  faPersonBooth,
+  faStore,
+  faCoins
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -37,28 +42,23 @@ const Navbar = () => {
               className='nav-link'
               to={isLoggedIn ? routeNames.dashboard : routeNames.home}
             >
-              Board
+              <span className='linkText mr-2'>Board</span>
+              <FontAwesomeIcon icon={faCircleUser} className='text mr-2' />
             </Link>
             <Link
               className='nav-link'
               to={isLoggedIn ? routeNames.info : routeNames.home}
             >
-              Info
+              <span className='linkText mr-2'>Info</span>
+              <FontAwesomeIcon icon={faCircleInfo} className='text mr-2' />
             </Link>
             {!!enableVote && (
               <Link
                 className='nav-link'
                 to={isLoggedIn ? routeNames.dao : routeNames.home}
               >
-                DAO
-              </Link>
-            )}
-            {!!enableMarket && (
-              <Link
-                className='nav-link'
-                to={isLoggedIn ? routeNames.market : routeNames.home}
-              >
-                Market
+                <span className='linkText mr-2'>DAO</span>
+                <FontAwesomeIcon icon={faPersonBooth} className='text mr-2' />
               </Link>
             )}
             {!!enableStaking && (
@@ -66,7 +66,17 @@ const Navbar = () => {
                 className='nav-link'
                 to={isLoggedIn ? routeNames.stake : routeNames.home}
               >
-                Stake
+                <span className='linkText mr-2'>Stake</span>
+                <FontAwesomeIcon icon={faCoins} className='text mr-2' />
+              </Link>
+            )}
+            {!!enableMarket && (
+              <Link
+                className='nav-link'
+                to={isLoggedIn ? routeNames.market : routeNames.home}
+              >
+                <span className='linkText mr-2'>Market</span>
+                <FontAwesomeIcon icon={faStore} className='text mr-2' />
               </Link>
             )}
           </Nav>
