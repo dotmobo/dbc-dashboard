@@ -1,5 +1,10 @@
 import * as React from 'react';
-import { elrondApiUrl, lkFarmsNames, distributionAddress, elrondExplorerUrl } from 'config';
+import {
+  elrondApiUrl,
+  lkFarmsNames,
+  distributionAddress,
+  elrondExplorerUrl
+} from 'config';
 import axios from 'axios';
 
 import { faTractor } from '@fortawesome/free-solid-svg-icons';
@@ -41,6 +46,8 @@ const Farms = () => {
     let name = 'UNKNOWN FARM';
     if (lkFarm.name === 'ITHWEGLDLPStakedLK') {
       name = 'ITHEUM-EGLD';
+    } else if (lkFarm.name === 'UTKWEGLDLPStakedLK') {
+      name = 'UTK-EGLD';
     } else if (lkFarm.name === 'EGLDMEXLPStakedLK') {
       name = 'MEX-EGLD';
     } else if (lkFarm.name === 'LockedLPStaked') {
@@ -64,6 +71,8 @@ const Farms = () => {
     if (lkFarm.name === 'ITHWEGLDLPStakedLK') {
       isMex = true;
     } else if (lkFarm.name === 'EGLDMEXLPStakedLK') {
+      isMex = true;
+    } else if (lkFarm.name === 'UTKWEGLDLPStakedLK') {
       isMex = true;
     } else if (lkFarm.name === 'LockedLPStaked') {
       isMex = true;
