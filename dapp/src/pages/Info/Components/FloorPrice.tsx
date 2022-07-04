@@ -22,6 +22,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { divide, number } from 'mathjs';
 
 interface FloorPrice {
   floorPrice: string;
@@ -175,7 +176,9 @@ const FloorPrice = () => {
             <div>
               <img src={deadRareIconUrl} alt='deadrare' height={16} />
               <b>DeadRare</b>:&nbsp;
-              <span>{floorPriceDR?.floorPrice}&nbsp;EGLD</span>
+              <span>
+                {divide(number(floorPriceDR?.floorPrice), 10 ** 18)}&nbsp;EGLD
+              </span>
               <a
                 className='btn btn-primary ml-3 btn-sm'
                 role='button'
@@ -255,7 +258,10 @@ const FloorPrice = () => {
               <div>
                 <img src={deadRareIconUrl} alt='deadrare' height={16} />
                 <b>DeadRare</b>:&nbsp;
-                <span>{floorPriceLegendaryDR?.floorPrice}&nbsp;EGLD</span>
+                <span>
+                  {divide(number(floorPriceLegendaryDR?.floorPrice), 10 ** 18)}
+                  &nbsp;EGLD
+                </span>
                 <a
                   className='btn btn-primary ml-3 btn-sm'
                   role='button'
@@ -343,7 +349,10 @@ const FloorPrice = () => {
               <div>
                 <img src={deadRareIconUrl} alt='deadrare' height={16} />
                 <b>DeadRare</b>:&nbsp;
-                <span>{floorPriceLegendaryDR?.floorPrice}&nbsp;EGLD</span>
+                <span>
+                  {divide(number(floorPriceDawnDR?.floorPrice), 10 ** 18)}
+                  &nbsp;EGLD
+                </span>
                 <a
                   className='btn btn-primary ml-3 btn-sm'
                   role='button'
@@ -385,7 +394,7 @@ const FloorPrice = () => {
                   className='btn btn-primary ml-3 mt-1 btn-sm'
                   role='button'
                   aria-pressed='true'
-                  href={trustMarketUrl + '/buy/NFTs/DeadBrothersIDawnI'}
+                  href={trustMarketUrl + '/collection/DAWNBROS-09395f?filters=%7B"name"%3A""%2C"order"%3A"Price%3A+Low+to+High"%2C"orderValue"%3A"saleInfoNft%2Fmin_bid_short+asc"%2C"tokens"%3A%5B%5D%2C"attributes"%3A%5B%5D%2C"saleType"%3A"Nft"%2C"tab"%3A"mint"%7D'}
                   target='_blank'
                   rel='noopener noreferrer'
                 >
