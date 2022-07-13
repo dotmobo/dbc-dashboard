@@ -75,7 +75,7 @@ const Shop = ({
       func: new ContractFunction('getPrice'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -106,7 +106,7 @@ const Shop = ({
       func: new ContractFunction('getNftIdentifier'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {

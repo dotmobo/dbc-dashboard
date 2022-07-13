@@ -69,7 +69,7 @@ const Vote = ({
       func: new ContractFunction('getQuestion'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -100,7 +100,7 @@ const Vote = ({
       func: new ContractFunction('getInProgress'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -131,7 +131,7 @@ const Vote = ({
       func: new ContractFunction('getYes'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -162,7 +162,7 @@ const Vote = ({
       func: new ContractFunction('getNo'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -193,7 +193,7 @@ const Vote = ({
       func: new ContractFunction('getMyAmount'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {

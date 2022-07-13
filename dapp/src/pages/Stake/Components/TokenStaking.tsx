@@ -55,7 +55,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
       func: new ContractFunction('getStakingTokenId'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -86,7 +86,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
       func: new ContractFunction('getMinimumStakingAmount'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -117,7 +117,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
       func: new ContractFunction('getStakeAmount'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -148,7 +148,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
       func: new ContractFunction('getLockTime'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -179,7 +179,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
       func: new ContractFunction('getUnstakeTime'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -210,7 +210,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
       func: new ContractFunction('getCurrentRewards'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -241,7 +241,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
       func: new ContractFunction('getMinimumStakingDays'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -272,7 +272,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
       func: new ContractFunction('getRewardsPerDayPercent'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -303,7 +303,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
       func: new ContractFunction('getStakingStatus'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
