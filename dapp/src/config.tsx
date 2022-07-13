@@ -69,7 +69,7 @@ export const voteOwnerAddress =
 // Market
 export const enableMarket = true;
 export const shopCollectionId1 =
-  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TESTSERUM-39a388';
+  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'DAWNBROS-09395f';
 export const shopMarketAddress1 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8'
