@@ -5,9 +5,9 @@ export const dAppName = 'TIKY';
 export const dAppLogo = process.env.PUBLIC_URL + '/new-logo-db.png';
 // Addresses
 export const contractAddress =
-  'erd1qqqqqqqqqqqqqpgqzau4u3scnqtthpu7p6fjp0fpwvpcagqtys5sezss7w';
+  'erd1qqqqqqqqqqqqqpgqrwcjwp6p6scxwzmlfk7w43wglklw5n02ys5syyjd3y';
 export const distributionAddress =
-  'erd1wd6ksxyzd4qge374azc2jp8pelv04g2atjeldkmc7ly7gpf3zg7qup2dns';
+  'erd13z5quh3dw9lnmjxpgpazhm8wja7arjgvx23v2rdql3ex84h023jqdry5we';
 // Token ids
 export const farmsPlanImg = process.env.PUBLIC_URL + '/farms_plan.png';
 export const farmsGraphImg = process.env.PUBLIC_URL + '/farms_graph.jpg';
