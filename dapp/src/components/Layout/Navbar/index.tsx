@@ -1,6 +1,12 @@
 import React from 'react';
 import { logout, useGetAccountInfo } from '@elrondnetwork/dapp-core';
-import { Navbar as BsNavbar, NavItem, Nav, Container } from 'react-bootstrap';
+import {
+  Navbar as BsNavbar,
+  NavItem,
+  Nav,
+  Container,
+  NavDropdown
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { dAppName, enableMarket, enableStaking, enableVote } from 'config';
 import { routeNames } from 'routes';
@@ -14,7 +20,8 @@ import {
   faPersonBooth,
   faStore,
   faCoins,
-  faChartBar
+  faChartBar,
+  faTractor
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -46,20 +53,36 @@ const Navbar = () => {
               <span className='linkText mr-2'>Board</span>
               <FontAwesomeIcon icon={faCircleUser} className='text mr-2' />
             </Link>
-            <Link
-              className='nav-link'
-              to={isLoggedIn ? routeNames.info : routeNames.home}
+
+            <NavDropdown
+              title={
+                <span>
+                  <span className='linkText mr-2'>Info</span>
+                  <FontAwesomeIcon icon={faCircleInfo} className='text mr-2' />
+                </span>
+              }
+              id='basic-nav-dropdown'
             >
-              <span className='linkText mr-2'>Info</span>
-              <FontAwesomeIcon icon={faCircleInfo} className='text mr-2' />
-            </Link>
-            <Link
-              className='nav-link'
-              to={isLoggedIn ? routeNames.stats : routeNames.home}
-            >
-              <span className='linkText mr-2'>Stats</span>
-              <FontAwesomeIcon icon={faChartBar} className='text mr-2' />
-            </Link>
+              <NavDropdown.Item>
+                <Link
+                  className='nav-link'
+                  to={isLoggedIn ? routeNames.info : routeNames.home}
+                >
+                  <span className='mr-2'>Farms &amp; FP</span>
+                  <FontAwesomeIcon icon={faTractor} className='text mr-2' />
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item href='#action/3.2'>
+                <Link
+                  className='nav-link'
+                  to={isLoggedIn ? routeNames.stats : routeNames.home}
+                >
+                  <span className='mr-2'>Stats</span>
+                  <FontAwesomeIcon icon={faChartBar} className='text mr-2' />
+                </Link>
+              </NavDropdown.Item>
+            </NavDropdown>
+
             {!!enableVote && (
               <Link
                 className='nav-link'
