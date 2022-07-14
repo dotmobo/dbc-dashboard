@@ -13,6 +13,7 @@ import StakeLegendary from 'pages/StakeLegendary';
 import Links from 'pages/Links';
 import Farms from './pages/Farms';
 import FloorPrice from 'pages/FloorPrice';
+import StakeGenesis from 'pages/StakeGenesis';
 
 export const routeNames = {
   home: '/',
@@ -23,6 +24,7 @@ export const routeNames = {
   market: '/market',
   stakedawn: '/stake',
   stakelegendary: '/stake-legendary',
+  stakegenesis: '/stake-genesis',
   stats: '/stats',
   links: '/links',
   transaction: '/transaction',
@@ -77,6 +79,12 @@ const routes: Array<any> = [
     path: routeNames.stakedawn,
     title: 'Stake Dawn',
     component: StakeDawn,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.stakegenesis,
+    title: 'Stake Genesis',
+    component: StakeGenesis,
     authenticatedRoute: true
   },
   {

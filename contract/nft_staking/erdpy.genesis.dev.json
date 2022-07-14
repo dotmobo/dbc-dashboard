@@ -1,0 +1,44 @@
+{
+    "configurations": {
+        "default": {
+            "proxy": "https://devnet-api.elrond.com",
+            "chainID": "D"
+        }
+    },
+    "contract":{
+        "deploy":{
+            "verbose": true,
+            "bytecode": "output/nft_staking.wasm",
+            "recall-nonce": true,
+            "metadata-payable": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:BEAK-35c061",
+                "10",
+                "str:DEADBROS-fa8f0f",
+                "25000000000000000000",
+                "3000000000000000000000000"
+            ],
+            "send": true,
+            "outfile": "deploy-testnet.interaction.json"
+        },
+        "upgrade":{
+            "verbose": true,
+            "bytecode": "output/nft_staking.wasm",
+            "recall-nonce": true,
+            "metadata-payable": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:BEAK-35c061",
+                "10",
+                "str:DEADBROS-fa8f0f",
+                "25000000000000000000",
+                "3000000000000000000000000"
+            ],
+            "send": true,
+            "outfile": "deploy-testnet.interaction.json"
+        }
+     }
+}

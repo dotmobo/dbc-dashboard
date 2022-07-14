@@ -25,7 +25,8 @@ import {
   faChartBar,
   faTractor,
   faLink,
-  faDollar
+  faDollar,
+  faBone,
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -127,6 +128,13 @@ const Navbar = () => {
                 >
                   <span className='mr-2'>Legendary</span>
                   <FontAwesomeIcon icon={faCrown} className='text mr-2' />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.stakegenesis : routeNames.home}
+                >
+                  <span className='mr-2'>Genesis</span>
+                  <FontAwesomeIcon icon={faBone} className='text mr-2' />
                 </NavDropdown.Item>
               </NavDropdown>
             )}

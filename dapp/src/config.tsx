@@ -113,5 +113,12 @@ export const nftStakingAddress2 =
 export const nftStakingCollection2 =
   elrondNetwork === ('devnet' as any) ? 'CLOTHES-35c061' : 'LDB-ada909';
 
+export const nftStakingAddress3 =
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqwvtn5jpsunya7ztlmfzv6wjt60m4tx6t0jpqhcfcww'
+    : 'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke';
+export const nftStakingCollection3 =
+  elrondNetwork === ('devnet' as any) ? 'BEAK-35c061' : 'DEADBROS-bf822f';
+
 export const nftStakingOwnerAddress =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
