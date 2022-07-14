@@ -13,7 +13,8 @@ import {
   faCircleInfo,
   faPersonBooth,
   faStore,
-  faCoins
+  faCoins,
+  faChartBar
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -51,6 +52,13 @@ const Navbar = () => {
             >
               <span className='linkText mr-2'>Info</span>
               <FontAwesomeIcon icon={faCircleInfo} className='text mr-2' />
+            </Link>
+            <Link
+              className='nav-link'
+              to={isLoggedIn ? routeNames.stats : routeNames.home}
+            >
+              <span className='linkText mr-2'>Stats</span>
+              <FontAwesomeIcon icon={faChartBar} className='text mr-2' />
             </Link>
             {!!enableVote && (
               <Link

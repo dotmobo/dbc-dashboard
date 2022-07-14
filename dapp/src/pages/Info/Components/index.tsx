@@ -2,7 +2,6 @@ import * as React from 'react';
 import FloorPrice from './FloorPrice';
 import Farms from './Farms';
 import Links from './Links';
-import Stats from './Stats';
 
 const Components = () => {
   return (
@@ -11,8 +10,6 @@ const Components = () => {
       <Farms />
       <hr />
       <FloorPrice />
-      <hr />
-      <Stats />
       <hr />
       <Links />
     </div>
