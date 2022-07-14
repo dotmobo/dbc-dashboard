@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Transactions from './Transactions';
 import Components from './Components';
 import { enableVote } from 'config';
 import TopInfo from 'components/TopInfo';
@@ -19,7 +18,6 @@ const Dashboard = () => {
               {!!enableVote && (
                 <div>
                   <Components />
-                  {/* <Transactions /> */}
                 </div>
               )}
               {!enableVote && (
