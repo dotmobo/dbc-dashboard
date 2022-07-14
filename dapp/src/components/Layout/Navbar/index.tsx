@@ -24,7 +24,8 @@ import {
   faSkull,
   faChartBar,
   faTractor,
-  faLink
+  faLink,
+  faDollar
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -67,10 +68,17 @@ const Navbar = () => {
             >
               <NavDropdown.Item
                 as={Link}
-                to={isLoggedIn ? routeNames.info : routeNames.home}
+                to={isLoggedIn ? routeNames.farms : routeNames.home}
               >
-                <span className='mr-2'>Farms &amp; FP</span>
+                <span className='mr-2'>Farms</span>
                 <FontAwesomeIcon icon={faTractor} className='text mr-2' />
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as={Link}
+                to={isLoggedIn ? routeNames.floorprice : routeNames.home}
+              >
+                <span className='mr-2'>Floor Price &amp; Mint</span>
+                <FontAwesomeIcon icon={faDollar} className='text mr-2' />
               </NavDropdown.Item>
               <NavDropdown.Item
                 as={Link}

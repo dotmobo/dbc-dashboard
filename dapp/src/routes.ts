@@ -1,7 +1,7 @@
 import { dAppName } from 'config';
 import withPageTitle from './components/PageTitle';
 import Dashboard from './pages/Dashboard';
-import Info from './pages/Info';
+import Info from './pages/Farms';
 import Dao from './pages/Dao';
 import Home from './pages/Home';
 import Transaction from './pages/Transaction';
@@ -11,11 +11,14 @@ import Stats from 'pages/Stats';
 import StakeDawn from 'pages/StakeDawn';
 import StakeLegendary from 'pages/StakeLegendary';
 import Links from 'pages/Links';
+import Farms from './pages/Farms';
+import FloorPrice from 'pages/FloorPrice';
 
 export const routeNames = {
   home: '/',
   dashboard: '/dashboard',
-  info: '/info',
+  farms: '/farms',
+  floorprice: '/floor-price',
   dao: '/dao',
   market: '/market',
   stakedawn: '/stake',
@@ -41,9 +44,15 @@ const routes: Array<any> = [
     authenticatedRoute: true
   },
   {
-    path: routeNames.info,
-    title: 'Info',
-    component: Info,
+    path: routeNames.farms,
+    title: 'Farms',
+    component: Farms,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.floorprice,
+    title: 'Floor Price',
+    component: FloorPrice,
     authenticatedRoute: true
   },
   {

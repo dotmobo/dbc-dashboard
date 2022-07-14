@@ -9,6 +9,8 @@ export const contractAddress =
 export const distributionAddress =
   'erd1wd6ksxyzd4qge374azc2jp8pelv04g2atjeldkmc7ly7gpf3zg7qup2dns';
 // Token ids
+export const farmsPlanImg = process.env.PUBLIC_URL + '/farms_plan.png';
+export const farmsGraphImg = process.env.PUBLIC_URL + '/farms_graph.jpg';
 export const lkFarmsNames =
   'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39,UTKWEGLDFL-082aec';
 export const nftsCollectionId =

@@ -2,7 +2,7 @@ import TopInfo from 'components/TopInfo';
 import * as React from 'react';
 import Components from './Components';
 
-const Dashboard = () => {
+const FloorPrice = () => {
   return (
     <div className='container py-4'>
       <div className='row'>
@@ -23,4 +23,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default FloorPrice;
