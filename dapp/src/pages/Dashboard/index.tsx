@@ -1,8 +1,6 @@
 import * as React from 'react';
-import Mint from './Mint';
-import TopInfo from './TopInfo';
-import Transactions from './Transactions';
 import Components from './Components';
+import TopInfo from 'components/TopInfo';
 
 const Dashboard = () => {
   return (
@@ -14,11 +12,9 @@ const Dashboard = () => {
               <div className='card rounded border-0 bg-primary'>
                 <div className='card-body text-center p-4'>
                   <TopInfo />
-                  {/* <Mint /> */}
                 </div>
               </div>
               <Components />
-              {/* <Transactions /> */}
             </div>
           </div>
         </div>

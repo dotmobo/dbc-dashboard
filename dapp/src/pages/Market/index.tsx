@@ -1,8 +1,7 @@
 import * as React from 'react';
-import TopInfo from './TopInfo';
-import Transactions from './Transactions';
 import Components from './Components';
 import { enableMarket } from 'config';
+import TopInfo from 'components/TopInfo';
 
 const Market = () => {
   return (
@@ -19,7 +18,6 @@ const Market = () => {
               {!!enableMarket && (
                 <div>
                   <Components />
-                  {/* <Transactions /> */}
                 </div>
               )}
               {!enableMarket && (

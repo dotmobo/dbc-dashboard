@@ -1,5 +1,5 @@
+import TopInfo from 'components/TopInfo';
 import * as React from 'react';
-import TopInfo from './TopInfo';
 import Components from './Components';
 
 const Dashboard = () => {

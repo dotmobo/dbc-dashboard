@@ -6,8 +6,10 @@ import Dao from './pages/Dao';
 import Home from './pages/Home';
 import Transaction from './pages/Transaction';
 import Market from 'pages/Market';
-import Stake from 'pages/Stake';
+import Stake from 'pages/StakeDawn';
 import Stats from 'pages/Stats';
+import StakeDawn from 'pages/StakeDawn';
+import StakeLegendary from 'pages/StakeLegendary';
 
 export const routeNames = {
   home: '/',
@@ -15,7 +17,8 @@ export const routeNames = {
   info: '/info',
   dao: '/dao',
   market: '/market',
-  stake: '/stake',
+  stakedawn: '/stake',
+  stakelegendary: '/stake-legendary',
   stats: '/stats',
   transaction: '/transaction',
   unlock: '/unlock',
@@ -60,9 +63,15 @@ const routes: Array<any> = [
     authenticatedRoute: true
   },
   {
-    path: routeNames.stake,
-    title: 'Stake',
-    component: Stake,
+    path: routeNames.stakedawn,
+    title: 'Stake Dawn',
+    component: StakeDawn,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.stakelegendary,
+    title: 'Stake Legendary',
+    component: StakeLegendary,
     authenticatedRoute: true
   },
   {

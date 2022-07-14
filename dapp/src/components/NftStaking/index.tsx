@@ -17,7 +17,7 @@ import {
   faCircle
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
+import { ReactComponent as DeadIcon } from '../../assets/img/dead.svg';
 import { floor, divide } from 'mathjs';
 import { orderBy, shuffle } from 'lodash-es';
 import LazyLoad from 'react-lazyload';

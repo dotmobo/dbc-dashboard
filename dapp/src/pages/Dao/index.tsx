@@ -1,8 +1,8 @@
 import * as React from 'react';
-import TopInfo from './TopInfo';
 import Transactions from './Transactions';
 import Components from './Components';
 import { enableVote } from 'config';
+import TopInfo from 'components/TopInfo';
 
 const Dashboard = () => {
   return (

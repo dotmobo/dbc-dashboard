@@ -20,6 +20,8 @@ import {
   faPersonBooth,
   faStore,
   faCoins,
+  faCrown,
+  faSkull,
   faChartBar,
   faTractor
 } from '@fortawesome/free-solid-svg-icons';
@@ -61,25 +63,20 @@ const Navbar = () => {
                   <FontAwesomeIcon icon={faCircleInfo} className='text mr-2' />
                 </span>
               }
-              id='basic-nav-dropdown'
             >
-              <NavDropdown.Item>
-                <Link
-                  className='nav-link'
-                  to={isLoggedIn ? routeNames.info : routeNames.home}
-                >
-                  <span className='mr-2'>Farms &amp; FP</span>
-                  <FontAwesomeIcon icon={faTractor} className='text mr-2' />
-                </Link>
+              <NavDropdown.Item
+                as={Link}
+                to={isLoggedIn ? routeNames.info : routeNames.home}
+              >
+                <span className='mr-2'>Farms &amp; FP</span>
+                <FontAwesomeIcon icon={faTractor} className='text mr-2' />
               </NavDropdown.Item>
-              <NavDropdown.Item href='#action/3.2'>
-                <Link
-                  className='nav-link'
-                  to={isLoggedIn ? routeNames.stats : routeNames.home}
-                >
-                  <span className='mr-2'>Stats</span>
-                  <FontAwesomeIcon icon={faChartBar} className='text mr-2' />
-                </Link>
+              <NavDropdown.Item
+                as={Link}
+                to={isLoggedIn ? routeNames.stats : routeNames.home}
+              >
+                <span className='mr-2'>Stats</span>
+                <FontAwesomeIcon icon={faChartBar} className='text mr-2' />
               </NavDropdown.Item>
             </NavDropdown>
 
@@ -93,13 +90,29 @@ const Navbar = () => {
               </Link>
             )}
             {!!enableStaking && (
-              <Link
-                className='nav-link'
-                to={isLoggedIn ? routeNames.stake : routeNames.home}
+              <NavDropdown
+                title={
+                  <span>
+                    <span className='linkText mr-2'>Stake</span>
+                    <FontAwesomeIcon icon={faCoins} className='text mr-2' />
+                  </span>
+                }
               >
-                <span className='linkText mr-2'>Stake</span>
-                <FontAwesomeIcon icon={faCoins} className='text mr-2' />
-              </Link>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.stakedawn : routeNames.home}
+                >
+                  <span className='mr-2'>Dawn</span>
+                  <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.stakelegendary : routeNames.home}
+                >
+                  <span className='mr-2'>Legendary</span>
+                  <FontAwesomeIcon icon={faCrown} className='text mr-2' />
+                </NavDropdown.Item>
+              </NavDropdown>
             )}
             {!!enableMarket && (
               <Link
