@@ -67,7 +67,7 @@ export const voteOwnerAddress =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 
 // Market
-export const enableMarket = true;
+export const enableMarket = false;
 export const shopCollectionId1 =
   elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'DAWNBROS-09395f';
 export const shopMarketAddress1 =
