@@ -1,7 +1,7 @@
 // Elrond Network
 export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
 // Application
-export const dAppName = 'DBC';
+export const dAppName = 'TIKY';
 export const dAppLogo = process.env.PUBLIC_URL + '/new-logo-db.png';
 // Addresses
 export const contractAddress =
@@ -14,15 +14,15 @@ export const farmsGraphImg = process.env.PUBLIC_URL + '/farms_graph.jpg';
 export const lkFarmsNames =
   'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39,UTKWEGLDFL-082aec';
 export const nftsCollectionId =
-  elrondNetwork === ('devnet' as any) ? 'BEAK-35c061' : 'DEADBROS-bf822f';
+  elrondNetwork === ('devnet' as any) ? 'BEAK-35c061' : 'TIKY-84fe8b';
 export const nftsSerumCollectionId =
-  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TESTSERUM-39a388';
+  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TIKY-84fe8b';
 export const nftsLegendaryCollectionId =
-  elrondNetwork === ('devnet' as any) ? 'CLOTHES-35c061' : 'LDB-ada909';
+  elrondNetwork === ('devnet' as any) ? 'CLOTHES-35c061' : 'TIKY-84fe8b';
 export const nftsDawnCollectionId =
-  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
+  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'TIKY-84fe8b';
 export const deadTokenId =
-  elrondNetwork === ('devnet' as any) ? 'DEADBROS-fa8f0f' : 'DEADBROS-388e63';
+  elrondNetwork === ('devnet' as any) ? 'DEADBROS-fa8f0f' : 'TKDY-5fd1c0';
 // Urls
 export const deadBrothersClubUrl = 'https://www.deadbrothers.club/';
 // Api
@@ -52,7 +52,7 @@ export const omniscientUrl2 = 'https://omniscient.tools/partners/dawn';
 export const esdtMarketUrl = 'https://esdt.market/app/esdt/listings';
 
 // Vote component
-export const enableVote = true;
+export const enableVote = false;
 export const voteAddress =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke'
@@ -93,7 +93,7 @@ export const shopOwnerAddress2 =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 
 // Staking
-export const enableStaking = true;
+export const enableStaking = false;
 export const enableTokenStaking = false;
 export const tokenStakingAddress =
   elrondNetwork === ('devnet' as any)
