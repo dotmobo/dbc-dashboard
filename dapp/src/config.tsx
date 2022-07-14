@@ -79,6 +79,17 @@ export const shopWithdrawData1 = 'withdraw';
 export const shopOwnerAddress1 =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 
+export const shopCollectionId2 =
+  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TIKY-84fe8b';
+export const shopMarketAddress2 =
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqmdlskg8ptzsxjk7npv8fx5vdx8l3xkvs0jpq6a900y'
+    : 'erd1qqqqqqqqqqqqqpgqnh9zqv73pjw7m09lflrucr7vcmx7my7u0jpqfkv7d6';
+export const shopMarketBuyFn2 = 'buy';
+export const shopWithdrawData2 = 'withdraw';
+export const shopOwnerAddress2 =
+  'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
+
 // Staking
 export const enableStaking = true;
 export const enableTokenStaking = false;

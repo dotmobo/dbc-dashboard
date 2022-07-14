@@ -38,6 +38,7 @@ interface Shop {
 }
 
 interface ShopType {
+  title: string;
   shopMarketAddress: string;
   shopOwnerAddress: string;
   shopMarketBuyFn: string;
@@ -47,6 +48,7 @@ interface ShopType {
 }
 
 const Shop = ({
+  title,
   shopMarketAddress,
   shopOwnerAddress,
   shopMarketBuyFn,
@@ -312,7 +314,7 @@ const Shop = ({
   return (
     <div>
       <h3>
-        Buy Item <FontAwesomeIcon icon={faShop} className='text' />
+        {title} <FontAwesomeIcon icon={faShop} className='text' />
         &nbsp;
         {items !== undefined && items.length > 0 && (
           <span>({items.length})</span>
