@@ -70,7 +70,7 @@ const Navbar = () => {
                 as={Link}
                 to={isLoggedIn ? routeNames.farms : routeNames.home}
               >
-                <span className='mr-2'>Farms</span>
+                <span className='mr-2'>Farms &amp; Funds</span>
                 <FontAwesomeIcon icon={faTractor} className='text mr-2' />
               </NavDropdown.Item>
               <NavDropdown.Item
