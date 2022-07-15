@@ -11,7 +11,7 @@ import { getTransactions } from 'apiRequests';
 import TransactionsList from './TransactionsList';
 import { StateType } from './types';
 
-const Transactions = (contractAddress: string) => {
+const Transactions = ({ contractAddress }: any) => {
   const {
     network: { apiAddress }
   } = useGetNetworkConfig();
