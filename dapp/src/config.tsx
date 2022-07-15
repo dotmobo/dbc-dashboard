@@ -2,7 +2,7 @@
 export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'TIKY';
-export const dAppLogo = process.env.PUBLIC_URL + '/new-logo-db.png';
+export const dAppLogo = 'https://img1.wsimg.com/isteam/ip/3feb75c6-9600-42a8-86e9-4f93249163fc/FUlDDKDWAAAobne.jpg';
 // Addresses
 export const contractAddress =
   'erd1qqqqqqqqqqqqqpgqrwcjwp6p6scxwzmlfk7w43wglklw5n02ys5syyjd3y';
