@@ -10,9 +10,9 @@ const Components = () => {
       <hr />
       <Rewards />
       <hr />
-      <Dead title='$DEAD' />
+      <Dead title='$TKDY' />
       <hr />
-      <Bros title='#DeadBrothers' />
+      <Bros title='#Tikidys' />
     </div>
   );
 };
