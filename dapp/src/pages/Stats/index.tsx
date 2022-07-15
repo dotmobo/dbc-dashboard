@@ -1,4 +1,5 @@
 import TopInfo from 'components/TopInfo';
+import { enableInfo } from 'config';
 import * as React from 'react';
 import Components from './Components';
 
@@ -14,7 +15,17 @@ const Stats = () => {
                   <TopInfo />
                 </div>
               </div>
-              <Components />
+              {!!enableInfo && (
+                <div>
+                  <Components />
+                </div>
+              )}
+              {!enableInfo && (
+                <div>
+                  <hr />
+                  <p>Stats is not currently available !</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
