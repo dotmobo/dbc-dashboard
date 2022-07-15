@@ -17,7 +17,7 @@ interface Dead {
   decimals: number;
 }
 
-const Dead = () => {
+const Dead = ({ title }: any) => {
   const { address, account } = useGetAccountInfo();
 
   const [dead, setDeadToken] = React.useState<Dead>();
@@ -47,7 +47,7 @@ const Dead = () => {
   return (
     <div>
       <h3>
-        My $DEAD Tokens <FontAwesomeIcon icon={faCoins} className='text' />
+        My {title} Tokens <FontAwesomeIcon icon={faCoins} className='text' />
       </h3>
       <div className='row'>
         <div className='col'>

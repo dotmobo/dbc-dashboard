@@ -37,7 +37,7 @@ interface Bro {
 
 export type TBrosList = Bro[];
 
-const Bros = () => {
+const Bros = ({ title }: any) => {
   const { address } = useGetAccountInfo();
 
   const [bros, setBrosList] = React.useState<TBrosList>();
@@ -83,7 +83,7 @@ const Bros = () => {
   return (
     <div>
       <h3>
-        My #DeadBrothers <FontAwesomeIcon icon={faSkull} className='text' />
+        My {title} <FontAwesomeIcon icon={faSkull} className='text' />
         &nbsp;
         {bros !== undefined && bros.length > 0 && <span>({bros.length})</span>}
       </h3>
