@@ -8,7 +8,13 @@ import {
   NavDropdown
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { dAppName, enableMarket, enableStaking, enableVote } from 'config';
+import {
+  dAppName,
+  enableInfo,
+  enableMarket,
+  enableStaking,
+  enableVote
+} from 'config';
 import { routeNames } from 'routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadbrothersLogo } from './../../../assets/img/deadbrothers.svg';
@@ -26,7 +32,7 @@ import {
   faTractor,
   faLink,
   faDollar,
-  faBone,
+  faBone
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -59,43 +65,48 @@ const Navbar = () => {
               <FontAwesomeIcon icon={faCircleUser} className='text mr-2' />
             </Link>
 
-            <NavDropdown
-              title={
-                <span>
-                  <span className='linkText mr-2'>Info</span>
-                  <FontAwesomeIcon icon={faCircleInfo} className='text mr-2' />
-                </span>
-              }
-            >
-              <NavDropdown.Item
-                as={Link}
-                to={isLoggedIn ? routeNames.farms : routeNames.home}
+            {!!enableInfo && (
+              <NavDropdown
+                title={
+                  <span>
+                    <span className='linkText mr-2'>Info</span>
+                    <FontAwesomeIcon
+                      icon={faCircleInfo}
+                      className='text mr-2'
+                    />
+                  </span>
+                }
               >
-                <span className='mr-2'>Farms &amp; Funds</span>
-                <FontAwesomeIcon icon={faTractor} className='text mr-2' />
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to={isLoggedIn ? routeNames.floorprice : routeNames.home}
-              >
-                <span className='mr-2'>Floor Price &amp; Mint</span>
-                <FontAwesomeIcon icon={faDollar} className='text mr-2' />
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to={isLoggedIn ? routeNames.stats : routeNames.home}
-              >
-                <span className='mr-2'>Stats</span>
-                <FontAwesomeIcon icon={faChartBar} className='text mr-2' />
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to={isLoggedIn ? routeNames.links : routeNames.home}
-              >
-                <span className='mr-2'>Links</span>
-                <FontAwesomeIcon icon={faLink} className='text mr-2' />
-              </NavDropdown.Item>
-            </NavDropdown>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.farms : routeNames.home}
+                >
+                  <span className='mr-2'>Farms &amp; Funds</span>
+                  <FontAwesomeIcon icon={faTractor} className='text mr-2' />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.floorprice : routeNames.home}
+                >
+                  <span className='mr-2'>Floor Price &amp; Mint</span>
+                  <FontAwesomeIcon icon={faDollar} className='text mr-2' />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.stats : routeNames.home}
+                >
+                  <span className='mr-2'>Stats</span>
+                  <FontAwesomeIcon icon={faChartBar} className='text mr-2' />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.links : routeNames.home}
+                >
+                  <span className='mr-2'>Links</span>
+                  <FontAwesomeIcon icon={faLink} className='text mr-2' />
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
 
             {!!enableVote && (
               <Link

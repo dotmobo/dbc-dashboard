@@ -34,6 +34,10 @@ export const elrondExplorerUrl =
   elrondNetwork === ('devnet' as any)
     ? 'https://devnet-explorer.elrond.com'
     : 'https://explorer.elrond.com';
+
+// info
+export const enableInfo = true;
+
 // deadrare and trustmarket
 export const deadRareUrl = 'https://deadrare.io';
 export const gatewayDeadRareUrl = 'https://gateway.deadrare.io';
