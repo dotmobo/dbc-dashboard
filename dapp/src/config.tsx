@@ -8,6 +8,8 @@ export const contractAddress =
   'erd1qqqqqqqqqqqqqpgqrwcjwp6p6scxwzmlfk7w43wglklw5n02ys5syyjd3y';
 export const distributionAddress =
   'erd13z5quh3dw9lnmjxpgpazhm8wja7arjgvx23v2rdql3ex84h023jqdry5we';
+export const farmsAddress =
+  'erd13z5quh3dw9lnmjxpgpazhm8wja7arjgvx23v2rdql3ex84h023jqdry5we';
 // Token ids
 export const farmsPlanImg = '';
 export const farmsGraphImg = '';
