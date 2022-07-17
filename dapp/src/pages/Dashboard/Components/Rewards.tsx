@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
-import { elrondApiUrl, distributionAddress } from 'config';
+import { elrondApiUrl, distributionAddress, elrondExplorerUrl } from 'config';
 import axios from 'axios';
 
 import { faGift } from '@fortawesome/free-solid-svg-icons';
@@ -73,6 +73,20 @@ const Rewards = () => {
         <FontAwesomeIcon icon={faGift} className='text' />
       </h3>
       <div className='row'>
+      <div className='col-12 mb-2'>
+          <span className='mr-1'>Distribution address:</span>
+          <span data-testid='distributionAddress'>
+            <a
+              href={elrondExplorerUrl + '/accounts/' + distributionAddress}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {distributionAddress.substring(0, 8) +
+                '...' +
+                distributionAddress.substring(distributionAddress.length - 4)}
+            </a>
+          </span>
+        </div>
         <div className='col'>
           {rewards === undefined && (
             <div>
