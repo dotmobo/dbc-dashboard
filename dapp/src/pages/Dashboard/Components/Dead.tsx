@@ -62,7 +62,9 @@ const Dead = ({ title }: any) => {
             dead.balance !== undefined &&
             dead.name !== undefined && (
               <div>
-                <DeadIcon className='mx-1' height={16} width={16} />
+                {dead.name.includes('DEAD') && (
+                  <DeadIcon className='mx-1' height={16} width={16} />
+                )}
                 <b>{dead.name}</b>:&nbsp;
                 {formatBigNumber(
                   floor(divide(dead.balance, 10 ** dead.decimals))
