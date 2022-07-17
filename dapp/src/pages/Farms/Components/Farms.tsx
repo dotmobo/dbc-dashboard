@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   elrondApiUrl,
   lkFarmsNames,
-  distributionAddress,
+  farmsAddress,
   elrondExplorerUrl
 } from 'config';
 import axios from 'axios';
@@ -27,10 +27,10 @@ const Farms = () => {
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
-    if (!!elrondApiUrl && !!distributionAddress && !!lkFarmsNames) {
+    if (!!elrondApiUrl && !!farmsAddress && !!lkFarmsNames) {
       axios
         .get<any>(
-          `${elrondApiUrl}/accounts/${distributionAddress}/nfts?collections=${lkFarmsNames}`
+          `${elrondApiUrl}/accounts/${farmsAddress}/nfts?collections=${lkFarmsNames}`
         )
         .then((response) => {
           setLKMexFarms(response.data);
@@ -98,15 +98,15 @@ const Farms = () => {
       <div className='row'>
         <div className='col-12 mb-2'>
           <span className='mr-1'>Farms address:</span>
-          <span data-testid='distributionAddress'>
+          <span data-testid='farmsAddress'>
             <a
-              href={elrondExplorerUrl + '/accounts/' + distributionAddress}
+              href={elrondExplorerUrl + '/accounts/' + farmsAddress}
               target='_blank'
               rel='noopener noreferrer'
             >
-              {distributionAddress.substring(0, 8) +
+              {farmsAddress.substring(0, 8) +
                 '...' +
-                distributionAddress.substring(distributionAddress.length - 4)}
+                farmsAddress.substring(farmsAddress.length - 4)}
             </a>
           </span>
         </div>
