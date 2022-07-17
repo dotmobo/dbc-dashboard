@@ -9,8 +9,8 @@ export const contractAddress =
 export const distributionAddress =
   'erd13z5quh3dw9lnmjxpgpazhm8wja7arjgvx23v2rdql3ex84h023jqdry5we';
 // Token ids
-export const farmsPlanImg = process.env.PUBLIC_URL + '/farms_plan.png';
-export const farmsGraphImg = process.env.PUBLIC_URL + '/farms_graph.jpg';
+export const farmsPlanImg = '';
+export const farmsGraphImg = '';
 export const lkFarmsNames =
   'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39,UTKWEGLDFL-082aec';
 export const nftsCollectionId =
@@ -37,9 +37,9 @@ export const elrondExplorerUrl =
 
 // info
 export const enableInfo = true;
-export const enableFloorPrice = true;
-export const enableStats = true;
-export const enableLinks = true;
+export const enableFloorPrice = false;
+export const enableStats = false;
+export const enableLinks = false;
 
 // deadrare and trustmarket
 export const deadRareUrl = 'https://deadrare.io';
