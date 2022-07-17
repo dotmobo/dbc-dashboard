@@ -13,6 +13,7 @@ import {
   enableInfo,
   enableMarket,
   enableStaking,
+  enableStats,
   enableVote
 } from 'config';
 import { routeNames } from 'routes';
@@ -91,13 +92,15 @@ const Navbar = () => {
                   <span className='mr-2'>Floor Price &amp; Mint</span>
                   <FontAwesomeIcon icon={faDollar} className='text mr-2' />
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to={isLoggedIn ? routeNames.stats : routeNames.home}
-                >
-                  <span className='mr-2'>Stats</span>
-                  <FontAwesomeIcon icon={faChartBar} className='text mr-2' />
-                </NavDropdown.Item>
+                {!!enableStats && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={isLoggedIn ? routeNames.stats : routeNames.home}
+                  >
+                    <span className='mr-2'>Stats</span>
+                    <FontAwesomeIcon icon={faChartBar} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
                 <NavDropdown.Item
                   as={Link}
                   to={isLoggedIn ? routeNames.links : routeNames.home}
