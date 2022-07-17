@@ -1,5 +1,5 @@
 import TopInfo from 'components/TopInfo';
-import { enableInfo } from 'config';
+import { enableInfo, enableLinks } from 'config';
 import * as React from 'react';
 import Components from './Components';
 
@@ -15,12 +15,12 @@ const Links = () => {
                   <TopInfo />
                 </div>
               </div>
-              {!!enableInfo && (
+              {!!enableInfo && !!enableLinks && (
                 <div>
                   <Components />
                 </div>
               )}
-              {!enableInfo && (
+              {(!enableInfo || !enableLinks) && (
                 <div>
                   <hr />
                   <p>Links is not currently available !</p>

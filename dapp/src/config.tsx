@@ -39,6 +39,7 @@ export const elrondExplorerUrl =
 export const enableInfo = true;
 export const enableFloorPrice = true;
 export const enableStats = true;
+export const enableLinks = true;
 
 // deadrare and trustmarket
 export const deadRareUrl = 'https://deadrare.io';
