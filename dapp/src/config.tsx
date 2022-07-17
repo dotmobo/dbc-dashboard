@@ -39,7 +39,15 @@ export const elrondExplorerUrl =
 export const enableInfo = true;
 export const enableFloorPrice = false;
 export const enableStats = false;
-export const enableLinks = false;
+export const enableLinks = true;
+
+// Links
+export const links = [
+  { name: 'Official website', url: 'https://tikidy.club/' },
+  { name: 'Twitter', url: 'https://www.twitter.com/Tikidy_NFT' },
+  { name: 'Discord', url: 'https://discord.gg/4wP9hAKDv2' },
+  { name: 'Linktree', url: 'https://linktr.ee/Tikidy' }
+];
 
 // deadrare and trustmarket
 export const deadRareUrl = 'https://deadrare.io';
