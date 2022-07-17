@@ -41,6 +41,16 @@ export const enableFloorPrice = true;
 export const enableStats = true;
 export const enableLinks = true;
 
+// Links
+export const links = [
+  { name: 'Official website', url: 'https://www.deadbrothers.club' },
+  { name: 'Twitter', url: 'https://twitter.com/dbrothersclub' },
+  { name: 'Discord', url: 'https://discord.gg/deadbrothersclub' },
+  { name: 'Telegram', url: 'https://t.me/deadbrothersclub' },
+  { name: 'Instagram', url: 'https://instagram.com/deadbrothers.club' },
+  { name: 'Linktree', url: 'https://linktr.ee/deadbrothersclub' }
+];
+
 // deadrare and trustmarket
 export const deadRareUrl = 'https://deadrare.io';
 export const gatewayDeadRareUrl = 'https://gateway.deadrare.io';
