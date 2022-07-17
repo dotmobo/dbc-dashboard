@@ -1,5 +1,5 @@
 import TopInfo from 'components/TopInfo';
-import { enableInfo } from 'config';
+import { enableFloorPrice, enableInfo } from 'config';
 import * as React from 'react';
 import Components from './Components';
 
@@ -15,12 +15,12 @@ const FloorPrice = () => {
                   <TopInfo />
                 </div>
               </div>
-              {!!enableInfo && (
+              {!!enableInfo && !!enableFloorPrice && (
                 <div>
                   <Components />
                 </div>
               )}
-              {!enableInfo && (
+              {(!enableInfo || !enableFloorPrice) && (
                 <div>
                   <hr />
                   <p>Floor Price is not currently available !</p>

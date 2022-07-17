@@ -10,6 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import {
   dAppName,
+  enableFloorPrice,
   enableInfo,
   enableMarket,
   enableStaking,
@@ -85,13 +86,15 @@ const Navbar = () => {
                   <span className='mr-2'>Farms &amp; Funds</span>
                   <FontAwesomeIcon icon={faTractor} className='text mr-2' />
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to={isLoggedIn ? routeNames.floorprice : routeNames.home}
-                >
-                  <span className='mr-2'>Floor Price &amp; Mint</span>
-                  <FontAwesomeIcon icon={faDollar} className='text mr-2' />
-                </NavDropdown.Item>
+                {!!enableFloorPrice && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={isLoggedIn ? routeNames.floorprice : routeNames.home}
+                  >
+                    <span className='mr-2'>Floor Price &amp; Mint</span>
+                    <FontAwesomeIcon icon={faDollar} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
                 {!!enableStats && (
                   <NavDropdown.Item
                     as={Link}
