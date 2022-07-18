@@ -27,6 +27,13 @@ export const deadTokenId =
   elrondNetwork === ('devnet' as any) ? 'DEADBROS-fa8f0f' : 'DEADBROS-388e63';
 // Urls
 export const deadBrothersClubUrl = 'https://www.deadbrothers.club/';
+// Mint
+export const nftsCollectionMintUrl = '';
+export const nftsCollectionMintName = 'GENESIS';
+export const nftsLegendaryCollectionMintUrl = '';
+export const nftsLegendaryCollectionMintName = 'LEGENDARY';
+export const nftsDawnCollectionMintUrl = 'https://xoxno.com/buy/DeadBrothersClub/DeadBrothersIDawnI';
+export const nftsDawnCollectionMintName = 'DAWN';
 // Api
 export const elrondApiUrl =
   elrondNetwork === ('devnet' as any)
