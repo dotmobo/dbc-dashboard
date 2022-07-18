@@ -78,7 +78,7 @@ const Dead = ({ title }: any) => {
             className='btn btn-primary mt-3 btn-sm'
             role='button'
             aria-pressed='true'
-            href={esdtMarketUrl}
+            href={esdtMarketUrl + '?swapToken=' + deadTokenId}
             target='_blank'
             rel='noopener noreferrer'
           >
