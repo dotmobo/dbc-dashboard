@@ -17,23 +17,20 @@ export const lkFarmsNames =
   'LKFARM-9d1ea8,EGLDMEXFL-ef2065,ITHWEGLDFL-332f38,SZPAY-9f1b39,UTKWEGLDFL-082aec';
 export const nftsCollectionId =
   elrondNetwork === ('devnet' as any) ? 'BEAK-35c061' : 'TIKY-84fe8b';
-export const nftsSerumCollectionId =
-  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TIKY-84fe8b';
-export const nftsLegendaryCollectionId =
-  elrondNetwork === ('devnet' as any) ? 'CLOTHES-35c061' : 'TIKY-84fe8b';
-export const nftsDawnCollectionId =
-  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'TIKY-84fe8b';
+export const nftsSerumCollectionId = null;
+export const nftsLegendaryCollectionId = null;
+export const nftsDawnCollectionId = null;
 export const deadTokenId =
   elrondNetwork === ('devnet' as any) ? 'DEADBROS-fa8f0f' : 'TKDY-5fd1c0';
 // Urls
 export const deadBrothersClubUrl = 'https://www.deadbrothers.club/';
 // Mint
-export const nftsCollectionMintUrl = '';
-export const nftsCollectionMintName = 'GENESIS';
+export const nftsCollectionMintUrl = 'https://xoxno.com/buy/QRTS-NATIONS/Tikidy';
+export const nftsCollectionMintName = 'TIKIDY';
 export const nftsLegendaryCollectionMintUrl = '';
-export const nftsLegendaryCollectionMintName = 'LEGENDARY';
-export const nftsDawnCollectionMintUrl = 'https://xoxno.com/buy/DeadBrothersClub/DeadBrothersIDawnI';
-export const nftsDawnCollectionMintName = 'DAWN';
+export const nftsLegendaryCollectionMintName = '';
+export const nftsDawnCollectionMintUrl = '';
+export const nftsDawnCollectionMintName = '';
 // Api
 export const elrondApiUrl =
   elrondNetwork === ('devnet' as any)
@@ -46,7 +43,7 @@ export const elrondExplorerUrl =
 
 // info
 export const enableInfo = true;
-export const enableFloorPrice = false;
+export const enableFloorPrice = true;
 export const enableStats = false;
 export const enableLinks = true;
 
