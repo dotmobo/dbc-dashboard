@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import {
   dAppName,
   enableFloorPrice,
+  enableGame,
   enableInfo,
   enableLinks,
   enableMarket,
@@ -35,7 +36,8 @@ import {
   faTractor,
   faLink,
   faDollar,
-  faBone
+  faBone,
+  faGamepad
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -167,6 +169,15 @@ const Navbar = () => {
                 <FontAwesomeIcon icon={faStore} className='text mr-2' />
               </Link>
             )}
+            {/* {!!enableGame && (
+              <Link
+                className='nav-link'
+                to={isLoggedIn ? routeNames.game : routeNames.home}
+              >
+                <span className='linkText mr-2'>Game</span>
+                <FontAwesomeIcon icon={faGamepad} className='text mr-2' />
+              </Link>
+            )} */}
           </Nav>
         </Container>
 

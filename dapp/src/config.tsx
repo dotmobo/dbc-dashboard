@@ -148,3 +148,8 @@ export const nftStakingCollection3 =
 
 export const nftStakingOwnerAddress =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
+
+export const enableGame = true;
+export const gameCart = process.env.PUBLIC_URL + '/spacedeadbro.js';
+export const gameLabel = process.env.PUBLIC_URL + '/spacedeadbro.png';
+
