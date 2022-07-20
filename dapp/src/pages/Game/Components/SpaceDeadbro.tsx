@@ -15,7 +15,6 @@ import {
   Carts,
   Fullscreen
 } from 'react-pico-8/buttons';
-import 'react-pico-8/styles.css';
 
 const SpaceDeadbro = ({ title, cart, label }: any) => {
   const account = useGetAccountInfo();
@@ -32,8 +31,8 @@ const SpaceDeadbro = ({ title, cart, label }: any) => {
         <div className='col-12'>
           <Pico8
             src={cart}
-            autoPlay={true}
-            legacyButtons={false}
+            autoPlay={false}
+            legacyButtons={true}
             hideCursor={false}
             center={true}
             blockKeys={true}
