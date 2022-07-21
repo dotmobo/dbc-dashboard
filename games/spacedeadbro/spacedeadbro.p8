@@ -3,7 +3,7 @@ version 29
 __lua__
 --space deadbro
 --mobo
-c_goal=10000
+c_goal=0
 c_ship_life=3
 c_ship_speed=2
 c_max_enemies=12
@@ -359,8 +359,8 @@ end
 function collide_boss(a,b)
 	return not (a.x>b.x+8
 		or a.y>b.y+8
-		or a.x+8*4<b.x
-		or a.y+8*4<b.y)
+		or a.x+8*3<b.x
+		or a.y+8*3<b.y)
 end
 
 -->8
@@ -457,7 +457,7 @@ end
 function draw_boss()
  palt(16)
 	for bo in all(boss) do
-		spr(4,bo.x,bo.y,4,4)
+		spr(4,bo.x,bo.y,3,3)
 		for i=1,bo.life/5 do
 			spr(8,16+i*8,0)
 		end
