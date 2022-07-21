@@ -211,7 +211,11 @@ function update_player()
 		-- boss animations
 		bo.a+=1
 		if bo.a%64==0 then
-			bo.s=8
+			if bo.s==4 then
+				bo.s=8
+			else
+				bo.s=4
+			end
 		end
 		if p.a%128==0 then
 			bo.s=4
@@ -236,10 +240,11 @@ function update_player()
 	-- player animations
 	p.a+=1
 	if p.a%64==0 then
-		p.s=17
-	end
-	if p.a%128==0 then
-		p.s=1
+		if p.s==1 then
+			p.s=17
+		else
+			p.s=1
+		end
 	end
 	-- love
 	for l in all(love) do
