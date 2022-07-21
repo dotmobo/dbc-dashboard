@@ -1,4 +1,4 @@
-import { gameCart, gameLabel } from 'config';
+import { gameCart } from 'config';
 import * as React from 'react';
 import Cart from './Cart';
 

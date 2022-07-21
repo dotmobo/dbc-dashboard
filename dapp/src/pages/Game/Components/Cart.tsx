@@ -6,21 +6,6 @@ import {
 } from '@elrondnetwork/dapp-core';
 import { faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Pico8 from 'react-pico-8';
-import {
-  Controls,
-  Reset,
-  Pause,
-  Sound,
-  Carts,
-  Fullscreen
-} from 'react-pico-8/buttons';
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile
-} from 'react-device-detect';
 
 const Cart = ({ title, cart }: any) => {
   const account = useGetAccountInfo();
