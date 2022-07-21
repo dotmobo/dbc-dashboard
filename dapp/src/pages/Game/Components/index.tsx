@@ -7,7 +7,7 @@ const Components = () => {
     <div className='col mt-4 col-md-12'>
       <div>
         <hr />
-        <Cart title='Space Deadbro' cart={gameCart} label={gameLabel} />
+        <Cart title='Space Deadbro' cart={gameCart} />
       </div>
     </div>
   );

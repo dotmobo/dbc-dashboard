@@ -22,7 +22,7 @@ import {
   isMobile
 } from 'react-device-detect';
 
-const Cart = ({ title, cart, label }: any) => {
+const Cart = ({ title, cart }: any) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { network } = useGetNetworkConfig();
@@ -35,26 +35,13 @@ const Cart = ({ title, cart, label }: any) => {
       </h3>
       <div className='row'>
         <div className='col-12'>
-          <BrowserView>
-            <Pico8
-              src={cart}
-              autoPlay={false}
-              legacyButtons={true}
-              hideCursor={false}
-              center={true}
-              blockKeys={true}
-              usePointer={true}
-              unpauseOnReset={true}
-              placeholder={label}
-            >
-              <Controls />
-              <Reset />
-              <Pause />
-              <Sound />
-              <Fullscreen />
-            </Pico8>
-          </BrowserView>
-          <MobileView>The game is not supported on mobile devices.</MobileView>
+          <iframe
+            src={cart}
+            allow='autoplay; fullscreen *; geolocation; microphone; camera; midi; monetization; xr-spatial-tracking; gamepad; gyroscope; accelerometer; xr; cross-origin-isolated'
+            scrolling='no'
+            width='100%'
+            height='680px'
+          ></iframe>
         </div>
       </div>
     </div>
