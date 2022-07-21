@@ -8,6 +8,30 @@ const Components = () => {
       <div>
         <hr />
         <Cart title='Space Deadbro' cart={gameCart} />
+        <div className='row'>
+          <div className='col-12'>
+            <p>
+              The Space Deadbro will save the Elrond community ! Reach 5000
+              points to kill the boss and win !
+            </p>
+          </div>
+          <div className='col-sm-12 col-md-6'>
+            <h4>Gamepad</h4>
+            <ul>
+              <li>A button to start</li>
+              <li>Left stick to move</li>
+              <li>X button to shoot</li>
+            </ul>
+          </div>
+          <div className='col-sm-12 col-md-6'>
+            <h4>Keyboard</h4>
+            <ul>
+              <li>C key to start</li>
+              <li>Arrows to move</li>
+              <li>X key to shoot</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
