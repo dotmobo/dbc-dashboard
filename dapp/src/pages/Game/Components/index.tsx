@@ -11,8 +11,8 @@ const Components = () => {
         <div className='row'>
           <div className='col-12'>
             <p>
-              The Space Deadbro will save the Elrond community ! Reach 5000
-              points to kill the boss and win !
+              The Space Deadbro will save the Elrond community ! Reach 10000
+              points to kill the boss and win ! Each coin gives you 500 points and each enemy gives you 100 points.
             </p>
           </div>
           <div className='col-sm-12 col-md-6'>
