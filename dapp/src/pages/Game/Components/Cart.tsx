@@ -15,8 +15,14 @@ import {
   Carts,
   Fullscreen
 } from 'react-pico-8/buttons';
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from 'react-device-detect';
 
-const SpaceDeadbro = ({ title, cart, label }: any) => {
+const Cart = ({ title, cart, label }: any) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { network } = useGetNetworkConfig();
@@ -29,27 +35,30 @@ const SpaceDeadbro = ({ title, cart, label }: any) => {
       </h3>
       <div className='row'>
         <div className='col-12'>
-          <Pico8
-            src={cart}
-            autoPlay={false}
-            legacyButtons={true}
-            hideCursor={false}
-            center={true}
-            blockKeys={true}
-            usePointer={true}
-            unpauseOnReset={true}
-            placeholder={label}
-          >
-            <Controls />
-            <Reset />
-            <Pause />
-            <Sound />
-            <Fullscreen />
-          </Pico8>
+          <BrowserView>
+            <Pico8
+              src={cart}
+              autoPlay={false}
+              legacyButtons={true}
+              hideCursor={false}
+              center={true}
+              blockKeys={true}
+              usePointer={true}
+              unpauseOnReset={true}
+              placeholder={label}
+            >
+              <Controls />
+              <Reset />
+              <Pause />
+              <Sound />
+              <Fullscreen />
+            </Pico8>
+          </BrowserView>
+          <MobileView>The game is not supported on mobile devices.</MobileView>
         </div>
       </div>
     </div>
   );
 };
 
-export default SpaceDeadbro;
+export default Cart;
