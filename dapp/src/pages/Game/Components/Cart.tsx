@@ -13,6 +13,12 @@ const Cart = ({ title, cart }: any) => {
   const { network } = useGetNetworkConfig();
   const { address } = account;
 
+  // Make a button to go fullscreen the iframe
+  const fullscreenButton = () => {
+    const iframe = document.getElementById('game-iframe') as HTMLIFrameElement;
+    iframe.requestFullscreen();
+  };
+
   return (
     <div>
       <h3>
@@ -20,7 +26,11 @@ const Cart = ({ title, cart }: any) => {
       </h3>
       <div className='row'>
         <div className='col-12'>
+          <button className='btn btn-primary' onClick={fullscreenButton}>
+            Play in fullscreen
+          </button>
           <iframe
+            id='game-iframe'
             src={cart}
             allow='autoplay; fullscreen *; geolocation; microphone; camera; midi; monetization; xr-spatial-tracking; gamepad; gyroscope; accelerometer; xr; cross-origin-isolated'
             scrolling='no'
