@@ -43,7 +43,6 @@ interface ShopType {
   shopOwnerAddress: string;
   shopMarketBuyFn: string;
   shopWithdrawData: string;
-  shopMarketCollectionId: string;
   shopMarketTokenId: string;
 }
 
@@ -53,7 +52,6 @@ const Shop = ({
   shopOwnerAddress,
   shopMarketBuyFn,
   shopWithdrawData,
-  shopMarketCollectionId,
   shopMarketTokenId
 }: ShopType) => {
   const account = useGetAccountInfo();
@@ -135,14 +133,16 @@ const Shop = ({
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
-    axios
-      .get<any>(
-        `${elrondApiUrl}/accounts/${shopMarketAddress}/nfts?size=10000&collections=${shopMarketCollectionId}`
-      )
-      .then((response) => {
-        setItemsList(shuffle(response.data));
-      });
-  }, [hasPendingTransactions]);
+    if (!!nftId) {
+      axios
+        .get<any>(
+          `${elrondApiUrl}/accounts/${shopMarketAddress}/nfts?size=10000&collections=${nftId}`
+        )
+        .then((response) => {
+          setItemsList(shuffle(response.data));
+        });
+    }
+  }, [hasPendingTransactions, nftId]);
 
   const { sendTransactions } = transactionServices;
 

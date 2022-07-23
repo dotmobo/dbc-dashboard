@@ -169,7 +169,7 @@ const Navbar = () => {
                 <FontAwesomeIcon icon={faStore} className='text mr-2' />
               </Link>
             )}
-            {/* {!!enableGame && (
+            {!!enableGame && (
               <Link
                 className='nav-link'
                 to={isLoggedIn ? routeNames.game : routeNames.home}
@@ -177,7 +177,7 @@ const Navbar = () => {
                 <span className='linkText mr-2'>Game</span>
                 <FontAwesomeIcon icon={faGamepad} className='text mr-2' />
               </Link>
-            )} */}
+            )}
           </Nav>
         </Container>
 

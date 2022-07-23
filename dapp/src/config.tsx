@@ -96,8 +96,6 @@ export const voteOwnerAddress =
 
 // Market
 export const enableMarket = true;
-export const shopCollectionId1 =
-  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'DAWNBROS-09395f';
 export const shopMarketAddress1 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8'
@@ -107,8 +105,6 @@ export const shopWithdrawData1 = 'withdraw';
 export const shopOwnerAddress1 =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 
-export const shopCollectionId2 =
-  elrondNetwork === ('devnet' as any) ? 'DEAD1-2d86a5' : 'TIKY-84fe8b';
 export const shopMarketAddress2 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqmdlskg8ptzsxjk7npv8fx5vdx8l3xkvs0jpq6a900y'
