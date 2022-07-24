@@ -146,6 +146,13 @@ const Navbar = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   as={Link}
+                  to={isLoggedIn ? routeNames.stakedawn2 : routeNames.home}
+                >
+                  <span className='mr-2'>Dawn 2</span>
+                  <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
                   to={isLoggedIn ? routeNames.stakelegendary : routeNames.home}
                 >
                   <span className='mr-2'>Legendary</span>

@@ -15,6 +15,7 @@ import Farms from './pages/Farms';
 import FloorPrice from 'pages/FloorPrice';
 import StakeGenesis from 'pages/StakeGenesis';
 import Game from 'pages/Game';
+import StakeDawn2 from 'pages/StakeDawn2';
 
 export const routeNames = {
   home: '/',
@@ -26,6 +27,7 @@ export const routeNames = {
   stakedawn: '/stake',
   stakelegendary: '/stake-legendary',
   stakegenesis: '/stake-genesis',
+  stakedawn2: '/stake-dawn-2',
   stats: '/stats',
   links: '/links',
   game: '/game',
@@ -93,6 +95,12 @@ const routes: Array<any> = [
     path: routeNames.stakelegendary,
     title: 'Stake Legendary',
     component: StakeLegendary,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.stakedawn2,
+    title: 'Stake Dawn 2',
+    component: StakeDawn2,
     authenticatedRoute: true
   },
   {
