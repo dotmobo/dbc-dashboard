@@ -180,6 +180,7 @@ const Navbar = () => {
             )}
             {!!enableGame && (
               <NavDropdown
+                className='navdropdown-right'
                 title={
                   <span>
                     <span className='linkText mr-2'>Play</span>
