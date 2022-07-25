@@ -37,7 +37,9 @@ import {
   faLink,
   faDollar,
   faBone,
-  faGamepad
+  faGamepad,
+  faSpaceShuttle,
+  faMask
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -177,13 +179,32 @@ const Navbar = () => {
               </Link>
             )}
             {!!enableGame && (
-              <Link
-                className='nav-link'
-                to={isLoggedIn ? routeNames.game : routeNames.home}
+              <NavDropdown
+                title={
+                  <span>
+                    <span className='linkText mr-2'>Play</span>
+                    <FontAwesomeIcon icon={faGamepad} className='text mr-2' />
+                  </span>
+                }
               >
-                <span className='linkText mr-2'>Game</span>
-                <FontAwesomeIcon icon={faGamepad} className='text mr-2' />
-              </Link>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.game : routeNames.home}
+                >
+                  <span className='mr-2'>Space Deadbro</span>
+                  <FontAwesomeIcon
+                    icon={faSpaceShuttle}
+                    className='text mr-2'
+                  />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.game2 : routeNames.home}
+                >
+                  <span className='mr-2'>Super Deadbro</span>
+                  <FontAwesomeIcon icon={faMask} className='text mr-2' />
+                </NavDropdown.Item>
+              </NavDropdown>
             )}
           </Nav>
         </Container>

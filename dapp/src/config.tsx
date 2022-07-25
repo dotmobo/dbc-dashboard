@@ -154,4 +154,5 @@ export const nftStakingOwnerAddress =
 
 export const enableGame = true;
 export const gameCart = process.env.PUBLIC_URL + '/spacedeadbro.html';
+export const gameCart2 = process.env.PUBLIC_URL + '/superdeadbro.html';
 

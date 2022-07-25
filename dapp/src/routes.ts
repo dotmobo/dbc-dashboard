@@ -15,6 +15,7 @@ import Farms from './pages/Farms';
 import FloorPrice from 'pages/FloorPrice';
 import StakeGenesis from 'pages/StakeGenesis';
 import Game from 'pages/Game';
+import Game2 from 'pages/Game2';
 import StakeDawn2 from 'pages/StakeDawn2';
 
 export const routeNames = {
@@ -31,6 +32,7 @@ export const routeNames = {
   stats: '/stats',
   links: '/links',
   game: '/game',
+  game2: '/game2',
   transaction: '/transaction',
   unlock: '/unlock',
   ledger: '/ledger',
@@ -119,6 +121,12 @@ const routes: Array<any> = [
     path: routeNames.game,
     title: 'Game',
     component: Game,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.game2,
+    title: 'Game 2',
+    component: Game2,
     authenticatedRoute: true
   }
 ];

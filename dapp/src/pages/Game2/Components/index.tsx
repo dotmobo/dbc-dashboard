@@ -1,4 +1,4 @@
-import { gameCart } from 'config';
+import { gameCart2 } from 'config';
 import * as React from 'react';
 import Cart from 'components/Cart';
 
@@ -7,12 +7,11 @@ const Components = () => {
     <div className='col mt-4 col-md-12'>
       <div>
         <hr />
-        <Cart title='Space Deadbro' cart={gameCart} />
+        <Cart title='Super Deadbro' cart={gameCart2} />
         <div className='row'>
           <div className='col-12'>
             <p>
-              The Space Deadbro will save the Elrond community ! Reach 10000
-              points to kill the boss and win ! Each coin gives you 500 points and each enemy gives you 100 points.
+              Keep Super Deadbro alive as long as possible! Accelerate to avoid the flying cars!
             </p>
           </div>
           <div className='col-sm-12 col-md-6'>
@@ -20,7 +19,7 @@ const Components = () => {
             <ul>
               <li>A button to start</li>
               <li>Left stick to move</li>
-              <li>X button to shoot</li>
+              <li>X button to accelerate</li>
             </ul>
           </div>
           <div className='col-sm-12 col-md-6'>
@@ -28,7 +27,7 @@ const Components = () => {
             <ul>
               <li>C key to start</li>
               <li>Arrows to move</li>
-              <li>X key to shoot</li>
+              <li>X key to accelerate</li>
             </ul>
           </div>
         </div>
