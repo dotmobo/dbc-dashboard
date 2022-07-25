@@ -7,7 +7,7 @@ export const dAppLogo = 'https://img1.wsimg.com/isteam/ip/3feb75c6-9600-42a8-86e
 export const contractAddress =
   'erd1qqqqqqqqqqqqqpgqrwcjwp6p6scxwzmlfk7w43wglklw5n02ys5syyjd3y';
 export const distributionAddress =
-  'erd13z5quh3dw9lnmjxpgpazhm8wja7arjgvx23v2rdql3ex84h023jqdry5we';
+  'erd1qqqqqqqqqqqqqpgq5j3wahajwehwja70v39074zzzjsq89lkdn3qp3j2f9';
 export const farmsAddress =
   'erd13z5quh3dw9lnmjxpgpazhm8wja7arjgvx23v2rdql3ex84h023jqdry5we';
 // Token ids
