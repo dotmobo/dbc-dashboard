@@ -39,7 +39,8 @@ import {
   faBone,
   faGamepad,
   faSpaceShuttle,
-  faMask
+  faMask,
+  faDog
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -204,6 +205,13 @@ const Navbar = () => {
                 >
                   <span className='mr-2'>Super Deadbro</span>
                   <FontAwesomeIcon icon={faMask} className='text mr-2' />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.game3 : routeNames.home}
+                >
+                  <span className='mr-2'>Deadbro&apos;s hound</span>
+                  <FontAwesomeIcon icon={faDog} className='text mr-2' />
                 </NavDropdown.Item>
               </NavDropdown>
             )}
