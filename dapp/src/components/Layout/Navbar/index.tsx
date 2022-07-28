@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import {
   dAppName,
   enableFloorPrice,
+  enableGame,
   enableInfo,
   enableLinks,
   enableMarket,
@@ -35,7 +36,11 @@ import {
   faTractor,
   faLink,
   faDollar,
-  faBone
+  faBone,
+  faGamepad,
+  faSpaceShuttle,
+  faMask,
+  faDog
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -144,6 +149,13 @@ const Navbar = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item
                   as={Link}
+                  to={isLoggedIn ? routeNames.stakedawn2 : routeNames.home}
+                >
+                  <span className='mr-2'>Dawn 2</span>
+                  <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
                   to={isLoggedIn ? routeNames.stakelegendary : routeNames.home}
                 >
                   <span className='mr-2'>Legendary</span>
@@ -166,6 +178,42 @@ const Navbar = () => {
                 <span className='linkText mr-2'>Market</span>
                 <FontAwesomeIcon icon={faStore} className='text mr-2' />
               </Link>
+            )}
+            {!!enableGame && (
+              <NavDropdown
+                className='navdropdown-right'
+                title={
+                  <span>
+                    <span className='linkText mr-2'>Play</span>
+                    <FontAwesomeIcon icon={faGamepad} className='text mr-2' />
+                  </span>
+                }
+              >
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.game : routeNames.home}
+                >
+                  <span className='mr-2'>Space Deadbro</span>
+                  <FontAwesomeIcon
+                    icon={faSpaceShuttle}
+                    className='text mr-2'
+                  />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.game2 : routeNames.home}
+                >
+                  <span className='mr-2'>Super Deadbro</span>
+                  <FontAwesomeIcon icon={faMask} className='text mr-2' />
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to={isLoggedIn ? routeNames.game3 : routeNames.home}
+                >
+                  <span className='mr-2'>Deadbro&apos;s hound</span>
+                  <FontAwesomeIcon icon={faDog} className='text mr-2' />
+                </NavDropdown.Item>
+              </NavDropdown>
             )}
           </Nav>
         </Container>

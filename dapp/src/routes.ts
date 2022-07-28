@@ -14,6 +14,10 @@ import Links from 'pages/Links';
 import Farms from './pages/Farms';
 import FloorPrice from 'pages/FloorPrice';
 import StakeGenesis from 'pages/StakeGenesis';
+import Game from 'pages/Game';
+import Game2 from 'pages/Game2';
+import StakeDawn2 from 'pages/StakeDawn2';
+import Game3 from 'pages/Game3';
 
 export const routeNames = {
   home: '/',
@@ -25,8 +29,12 @@ export const routeNames = {
   stakedawn: '/stake',
   stakelegendary: '/stake-legendary',
   stakegenesis: '/stake-genesis',
+  stakedawn2: '/stake-dawn-2',
   stats: '/stats',
   links: '/links',
+  game: '/game',
+  game2: '/game2',
+  game3: '/game3',
   transaction: '/transaction',
   unlock: '/unlock',
   ledger: '/ledger',
@@ -94,6 +102,12 @@ const routes: Array<any> = [
     authenticatedRoute: true
   },
   {
+    path: routeNames.stakedawn2,
+    title: 'Stake Dawn 2',
+    component: StakeDawn2,
+    authenticatedRoute: true
+  },
+  {
     path: routeNames.stats,
     title: 'Stats',
     component: Stats,
@@ -103,6 +117,24 @@ const routes: Array<any> = [
     path: routeNames.links,
     title: 'Links',
     component: Links,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.game,
+    title: 'Game',
+    component: Game,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.game2,
+    title: 'Game 2',
+    component: Game2,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.game3,
+    title: 'Game 3',
+    component: Game3,
     authenticatedRoute: true
   }
 ];
