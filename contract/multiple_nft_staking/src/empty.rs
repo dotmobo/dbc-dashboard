@@ -1,6 +1,7 @@
 #![no_std]
 
 elrond_wasm::imports!();
+use elrond_wasm::types::heap::Vec;
 
 mod stake_info;
 use stake_info::StakeInfo;
@@ -39,19 +40,20 @@ pub trait NftStaking {
 
     #[payable("*")]
     #[endpoint]
-    fn stake(
-        &self,
-        #[payment_token] payment_token: EgldOrEsdtTokenIdentifier,
-        #[payment_amount] payment_amount: BigUint,
-        #[payment_nonce] payment_nonce: u64,
-    ) -> SCResult<()> {
+    fn stake(&self) -> SCResult<()> {
+        let payments: ManagedVec<EsdtTokenPayment<Self::Api>> =
+            self.call_value().all_esdt_transfers();
+
         require!(self.staking_status().get(), "The staking is stopped");
-        require!(
-            payment_token == self.nft_identifier().get(),
-            "Invalid nft identifier"
-        );
-        require!(payment_nonce != 0, "Invalid nft nonce");
-        require!(payment_amount == 1, "You can only send 1 nft");
+
+        for payment in &payments {
+            require!(
+                payment.token_identifier == self.nft_identifier().get(),
+                "Invalid nft identifier"
+            );
+            require!(payment.token_nonce != 0, "Invalid nft nonce");
+            require!(payment.amount == 1, "You can only send 1 nft");
+        }
 
         let caller: ManagedAddress = self.blockchain().get_caller();
 
@@ -63,9 +65,14 @@ pub trait NftStaking {
         let cur_time: u64 = self.blockchain().get_block_timestamp();
         let unstake_time = cur_time + (self.minimum_staking_days().get() * 86400);
 
+        let mut vec_nonce: Vec<u64> = Vec::new();
+        for payment in &payments {
+            vec_nonce.push(payment.token_nonce);
+        }
+
         let stake_info = StakeInfo {
             address: self.blockchain().get_caller(),
-            nft_nonce: payment_nonce,
+            nft_nonce: vec_nonce,
             lock_time: cur_time,
             unstake_time: unstake_time,
         };
@@ -94,12 +101,16 @@ pub trait NftStaking {
         let nft_nonce = stake_info.nft_nonce;
 
         let amount = BigUint::from(1u32);
-        self.send().direct(
-            &caller,
-            &nft_identifier,
-            nft_nonce,
-            &amount
-        );
+
+        // for each nft nonce, send nft back to caller
+        for n in nft_nonce {
+            self.send().direct(
+                &caller,
+                &nft_identifier,
+                n,
+                &amount,
+            );
+        }
 
         self.staking_info(&caller).clear();
 
@@ -132,7 +143,7 @@ pub trait NftStaking {
         if from_time > stake_info.lock_time {
             staked_days = (from_time - stake_info.lock_time) / 86400;
         }
-        let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days;
+        let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days * nft_nonce.len() as u64;
 
         // check the supply
         require!(
@@ -232,16 +243,16 @@ pub trait NftStaking {
         if from_time > stake_info.lock_time {
             staked_days = (from_time - stake_info.lock_time) / 86400;
         }
-        let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days;
+        let rewards_amount = self.rewards_token_amount_per_day().get() * staked_days * stake_info.nft_nonce.len() as u64;
 
         return rewards_amount;
     }
 
     #[view(getNftNonce)]
-    fn get_nft_nonce(&self, address: &ManagedAddress) -> u64 {
+    fn get_nft_nonce(&self, address: &ManagedAddress) -> Vec<u64> {
         require!(!self.staking_info(&address).is_empty(), "You didn't stake!");
         let stake_info = self.staking_info(&address).get();
-        let nft_nonce: u64 = stake_info.nft_nonce;
+        let nft_nonce: Vec<u64> = stake_info.nft_nonce;
         return nft_nonce;
     }
 
