@@ -7,5 +7,7 @@ members = [
   "token_staking",
   "token_staking/meta",
   "nft_staking",
-  "nft_staking/meta"
+  "nft_staking/meta",
+  "multiple_nft_staking",
+  "multiple_nft_staking/meta"
 ]

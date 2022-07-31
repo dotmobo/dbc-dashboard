@@ -1,0 +1,14 @@
+[package]
+name = "multiple_nft_staking-meta"
+version = "0.0.0"
+edition = "2018"
+publish = false
+authors = [ "you",]
+
+[dev-dependencies]
+
+[dependencies.multiple_nft_staking]
+path = ".."
+
+[dependencies.elrond-wasm-debug]
+version = "0.34.1"
