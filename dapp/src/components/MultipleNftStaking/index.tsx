@@ -30,6 +30,7 @@ import {
   Query
 } from '@elrondnetwork/erdjs';
 import moment from 'moment';
+import { Form } from 'react-bootstrap';
 
 interface Bro {
   identifier: string;
@@ -74,7 +75,8 @@ const MultipleNftStaking = ({
   const [rewardsTokenTotalSupply, setRewardsTokenTotalSupply] =
     React.useState<number>();
   const [nbrOfStakers, setNbrOfStakers] = React.useState<number>();
-  const [nftNonce, setNftNonce] = React.useState<number>();
+  const [nftNonce, setNftNonce] = React.useState<number[]>();
+  const [checkedBros, setCheckedBros] = React.useState<any>(new Set<number>());
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -361,15 +363,17 @@ const MultipleNftStaking = ({
         const [encoded] = returnData;
         switch (encoded) {
           case undefined:
-            setNftNonce(0);
+            setNftNonce([]);
             break;
           case '':
-            setNftNonce(0);
+            setNftNonce([]);
             break;
           default: {
-            const decoded = Buffer.from(encoded, 'base64').toString('hex');
-            setNftNonce(parseInt(decoded, 16));
-            console.log(parseInt(decoded, 16));
+            const decoded: Uint8Array = Buffer.from(encoded, 'base64');
+            const filteredNumbers = Array.from(decoded).filter(
+              (x, i) => (i + 1) % 8 === 0
+            );
+            setNftNonce(filteredNumbers);
             break;
           }
         }
@@ -405,24 +409,30 @@ const MultipleNftStaking = ({
 
   const { sendTransactions } = transactionServices;
 
-  const sendStakeTransaction = async (bro: Bro) => {
+  const sendStakeTransaction = async (all_nonces: any) => {
+    let data =
+      'MultiESDTNFTTransfer@' +
+      new Address(nftStakingAddress).hex() +
+      '@' +
+      numtoHex(all_nonces.size);
+
+    all_nonces.forEach((nonce: number) => {
+      data +=
+        '@' +
+        strtoHex(nftStakingCollection) +
+        '@' +
+        numtoHex(nonce) +
+        '@' +
+        numtoHex(1);
+    });
+
+    data += '@' + strtoHex('stake');
+
     const stakeTransaction = {
       value: '0',
-      data:
-        'MultiESDTNFTTransfer@' +
-        new Address(nftStakingAddress).hex() +
-        '@' +
-        numtoHex(1) +
-        '@' +
-        strtoHex(bro.collection) +
-        '@' +
-        numtoHex(bro.nonce) +
-        '@' +
-        numtoHex(1) +
-        '@' +
-        strtoHex('stake'),
+      data: data,
       receiver: address,
-      gasLimit: 5000000 * 1
+      gasLimit: 5000000 * all_nonces.size
     };
     await refreshAccount();
 
@@ -468,7 +478,7 @@ const MultipleNftStaking = ({
       value: '0',
       data: 'unstake',
       receiver: nftStakingAddress,
-      gasLimit: '5000000'
+      gasLimit: 5000000 * (!!nftNonce ? nftNonce.length : 1)
     };
     await refreshAccount();
 
@@ -486,10 +496,21 @@ const MultipleNftStaking = ({
     }
   };
 
+  const handleChooseBro = (event: any, nonce: number) => {
+    const res = new Set(checkedBros);
+    if (event.target.checked) {
+      res.add(nonce);
+      setCheckedBros(res);
+    } else {
+      res.delete(nonce);
+      setCheckedBros(res);
+    }
+  };
+
   return (
     <div>
       <h3>
-        Stake a {name} <FontAwesomeIcon icon={faSkull} className='text' />
+        Stake {name} <FontAwesomeIcon icon={faSkull} className='text' />
       </h3>
       <div className='row'>
         <div className='col-12'>
@@ -580,19 +601,20 @@ const MultipleNftStaking = ({
         )}
         {stakeds !== undefined &&
           nftNonce !== undefined &&
-          stakeds.filter((x) => x.nonce === nftNonce).length === 0 && (
+          stakeds.filter((x) => nftNonce.includes(x.nonce)).length === 0 && (
             <div className='col'>
               <div>No staked {name} found !</div>
             </div>
           )}
         {stakeds !== undefined &&
-          stakeds.filter((x) => x.nonce === nftNonce).length > 0 &&
+          nftNonce !== undefined &&
+          stakeds.filter((x) => nftNonce.includes(x.nonce)).length > 0 &&
           stakeds
-            .filter((x) => x.nonce === nftNonce)
+            .filter((x) => nftNonce.includes(x.nonce))
             .map((bro) => (
               <div
                 key={bro.identifier}
-                className='col-12 col-sm-12 col-md-12 col-lg-12 mt-3 mx-auto'
+                className='col-6 col-sm-6 col-md-4 col-lg-4 mt-3 mx-auto'
               >
                 <LazyLoad height={200} offset={100} once>
                   <div className='card text-center nftStakeCard'>
@@ -604,77 +626,72 @@ const MultipleNftStaking = ({
                         className='nftStakedImg card-img-top'
                       />
                     </div>
-                    <div className='card-body'>
-                      {currentRewards !== undefined && (
-                        <div className='card-title'>
-                          <div>
-                            Claimable rewards:&nbsp;
-                            {formatBigNumber(
-                              floor(divide(currentRewards, 10 ** 18), 2) as any
-                            )}
-                            &nbsp;$DEAD
-                            <DeadIcon className='mx-1' height={16} width={16} />
-                          </div>
-                        </div>
-                      )}
-                      {!hasPendingTransactions &&
-                        currentRewards !== undefined &&
-                        unstakeTime !== undefined &&
-                        rewardsTokenTotalSupply !== undefined && (
-                          <div>
-                            <div className='w-100'></div>
-                            <button
-                              className='btn btn-primary ml-1 mt-2'
-                              disabled={
-                                currentRewards === 0 ||
-                                rewardsTokenTotalSupply <= currentRewards
-                              }
-                              onClick={() => sendClaimTransaction()}
-                            >
-                              CLAIM{' '}
-                              <FontAwesomeIcon
-                                icon={faDollarSign}
-                                className='text'
-                              />
-                            </button>
-                            <div className='w-100'></div>
-                            <button
-                              className='btn btn-primary ml-1 mt-2'
-                              disabled={moment
-                                .unix(unstakeTime)
-                                .isAfter(moment())}
-                              onClick={() => sendUnstakeTransaction()}
-                            >
-                              UNSTAKE{' '}
-                              <FontAwesomeIcon
-                                icon={faArrowDown}
-                                className='text'
-                              />
-                            </button>
-                          </div>
-                        )}
-                    </div>
-                    {lockTime !== undefined && unstakeTime !== undefined && (
-                      <div className='card-footer'>
-                        <small className='text-muted'>
-                          Lock date:&nbsp;
-                          {moment
-                            .unix(lockTime)
-                            .format('MMMM Do YYYY, h:mm:ss a')}
-                        </small>
-                        <br />
-                        <small className='text-muted'>
-                          Unstake date:&nbsp;
-                          {moment
-                            .unix(unstakeTime)
-                            .format('MMMM Do YYYY, h:mm:ss a')}
-                        </small>
-                      </div>
-                    )}
                   </div>
                 </LazyLoad>
               </div>
             ))}
+
+        {!hasPendingTransactions &&
+          currentRewards !== undefined &&
+          nftNonce !== undefined &&
+          nftNonce.length > 0 && (
+            <div className='col-12 mt-3'>
+              <div>
+                Claimable rewards:&nbsp;
+                {formatBigNumber(
+                  floor(divide(currentRewards, 10 ** 18), 2) as any
+                )}
+                &nbsp;$DEAD
+                <DeadIcon className='mx-1' height={16} width={16} />
+              </div>
+            </div>
+          )}
+        {!hasPendingTransactions &&
+          lockTime !== undefined &&
+          unstakeTime !== undefined &&
+          nftNonce !== undefined &&
+          nftNonce.length > 0 && (
+            <div className='col-12'>
+              <small className='text-muted'>
+                Lock date:&nbsp;
+                {moment.unix(lockTime).format('MMMM Do YYYY, h:mm:ss a')}
+              </small>
+              <br />
+              <small className='text-muted'>
+                Unstake date:&nbsp;
+                {moment.unix(unstakeTime).format('MMMM Do YYYY, h:mm:ss a')}
+              </small>
+            </div>
+          )}
+
+        {!hasPendingTransactions &&
+          nftNonce !== undefined &&
+          nftNonce.length > 0 && //TODO nonce
+          currentRewards !== undefined &&
+          unstakeTime !== undefined &&
+          rewardsTokenTotalSupply !== undefined && (
+            <div className='col-12 mt-3'>
+              <div className='w-100'></div>
+              <button
+                className='btn btn-primary ml-1 mt-2'
+                disabled={
+                  currentRewards === 0 ||
+                  rewardsTokenTotalSupply <= currentRewards
+                }
+                onClick={() => sendClaimTransaction()}
+              >
+                CLAIM <FontAwesomeIcon icon={faDollarSign} className='text' />
+              </button>
+              <div className='w-100'></div>
+              <button
+                className='btn btn-primary ml-1 mt-2'
+                disabled={moment.unix(unstakeTime).isAfter(moment())}
+                onClick={() => sendUnstakeTransaction()}
+              >
+                UNSTAKE <FontAwesomeIcon icon={faArrowDown} className='text' />
+              </button>
+            </div>
+          )}
       </div>
       <div className='row mt-3'>
         <div className='col-12'>
@@ -692,6 +709,22 @@ const MultipleNftStaking = ({
             <div>No {name} found in your wallet !</div>
           </div>
         )}
+        {stakeds !== undefined &&
+          checkedBros !== undefined &&
+          checkedBros.size > 0 &&
+          nftNonce !== undefined &&
+          nftNonce.length === 0 && //TODO nonce
+          !hasPendingTransactions && (
+            <div className='col-12'>
+              <div className='w-100'></div>
+              <button
+                className='btn btn-primary ml-1 mt-2'
+                onClick={() => sendStakeTransaction(checkedBros)}
+              >
+                STAKE <FontAwesomeIcon icon={faArrowUp} className='text' />
+              </button>
+            </div>
+          )}
         {bros !== undefined &&
           bros.length > 0 &&
           bros.map((bro) => (
@@ -701,6 +734,11 @@ const MultipleNftStaking = ({
             >
               <LazyLoad height={200} offset={100} once>
                 <div>
+                  {nftNonce !== undefined && nftNonce.length === 0 && (
+                    <Form.Check
+                      onChange={(e) => handleChooseBro(e, bro.nonce)}
+                    />
+                  )}
                   <b>{bro.name}</b>
                 </div>
                 <div className='nft-stake'>
@@ -712,21 +750,6 @@ const MultipleNftStaking = ({
                     />
                   </div>
                 </div>
-                {stakeds !== undefined &&
-                  nftNonce !== undefined &&
-                  stakeds.filter((x) => x.nonce === nftNonce).length === 0 &&
-                  !hasPendingTransactions && (
-                    <div>
-                      <div className='w-100'></div>
-                      <button
-                        className='btn btn-primary ml-1 mt-2'
-                        onClick={() => sendStakeTransaction(bro)}
-                      >
-                        STAKE{' '}
-                        <FontAwesomeIcon icon={faArrowUp} className='text' />
-                      </button>
-                    </div>
-                  )}
               </LazyLoad>
             </div>
           ))}
