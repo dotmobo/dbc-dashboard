@@ -1,5 +1,5 @@
 import TopInfo from 'components/TopInfo';
-import { enableInfo } from 'config';
+import { enableFarms, enableInfo } from 'config';
 import * as React from 'react';
 import Components from './Components';
 
@@ -15,12 +15,12 @@ const Farms = () => {
                   <TopInfo />
                 </div>
               </div>
-              {!!enableInfo && (
+              {!!enableInfo && !!enableFarms && (
                 <div>
                   <Components />
                 </div>
               )}
-              {!enableInfo && (
+              {(!enableInfo || !enableFarms) && (
                 <div>
                   <hr />
                   <p>Farms is not currently available !</p>
