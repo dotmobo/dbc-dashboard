@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import {
   dAppLogo,
   dAppName,
+  enableFarms,
   enableFloorPrice,
   enableGame,
   enableInfo,
@@ -98,13 +99,15 @@ const Navbar = () => {
                   </span>
                 }
               >
-                <NavDropdown.Item
-                  as={Link}
-                  to={isLoggedIn ? routeNames.farms : routeNames.home}
-                >
-                  <span className='mr-2'>Farms &amp; Funds</span>
-                  <FontAwesomeIcon icon={faTractor} className='text mr-2' />
-                </NavDropdown.Item>
+                {!!enableFarms && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={isLoggedIn ? routeNames.farms : routeNames.home}
+                  >
+                    <span className='mr-2'>Farms &amp; Funds</span>
+                    <FontAwesomeIcon icon={faTractor} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
                 {!!enableFloorPrice && (
                   <NavDropdown.Item
                     as={Link}

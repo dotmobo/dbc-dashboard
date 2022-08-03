@@ -43,6 +43,7 @@ export const elrondExplorerUrl =
 
 // info
 export const enableInfo = true;
+export const enableFarms = true;
 export const enableFloorPrice = true;
 export const enableStats = true;
 export const enableLinks = true;
