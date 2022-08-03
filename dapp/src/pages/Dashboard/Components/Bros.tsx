@@ -111,7 +111,7 @@ const Bros = ({ title }: any) => {
         )}
         {bros !== undefined && bros.length === 0 && (
           <div className='col'>
-            <div>No DeadBrothers found in your wallet !</div>
+            <div>No NFTs found in your wallet !</div>
           </div>
         )}
         {bros !== undefined &&

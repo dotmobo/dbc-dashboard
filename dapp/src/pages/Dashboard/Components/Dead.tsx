@@ -20,7 +20,7 @@ interface Dead {
 const Dead = ({ title }: any) => {
   const { address, account } = useGetAccountInfo();
 
-  const [dead, setDeadToken] = React.useState<Dead>();
+  const [dead, setDeadToken] = React.useState<Dead | null>();
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -31,11 +31,7 @@ const Dead = ({ title }: any) => {
       })
       .catch((error) => {
         if (error.response.status === 404) {
-          setDeadToken({
-            name: 'DEAD',
-            balance: 0,
-            decimals: 18
-          });
+          setDeadToken(null);
         }
       });
   }, []);
@@ -58,7 +54,9 @@ const Dead = ({ title }: any) => {
               </div>
             </div>
           )}
+          {dead === null && <div>Empty wallet</div>}
           {dead !== undefined &&
+            dead !== null &&
             dead.balance !== undefined &&
             dead.name !== undefined && (
               <div>
