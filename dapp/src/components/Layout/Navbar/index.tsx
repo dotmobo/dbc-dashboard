@@ -52,7 +52,8 @@ import {
   faGamepad,
   faSpaceShuttle,
   faMask,
-  faDog
+  faDog,
+  faPlane
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -255,6 +256,18 @@ const Navbar = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             )}
+            {/* Special link for Tikidy */}
+            <Link
+              className='nav-link'
+              to={routeNames.home}
+              onClick={(event) => {
+                event.preventDefault();
+                alert('Work in Progress');
+              }}
+            >
+              <span className='linkText mr-2'>Travel Forum</span>
+              <FontAwesomeIcon icon={faPlane} className='text mr-2' />
+            </Link>
           </Nav>
         </Container>
 
