@@ -1,18 +1,18 @@
 import * as React from 'react';
-import {
-  enableStaking,
-  enableTokenStaking,
-  nftStakingAddress,
-  nftStakingAddress4,
-  nftStakingCollection,
-  nftStakingCollection4,
-  tokenStakingAddress
-} from 'config';
-import TopInfo from 'components/TopInfo';
 import NftStaking from 'components/NftStaking';
 import TokenStaking from 'components/TokenStaking';
+import TopInfo from 'components/TopInfo';
+import {
+  enableNftStake1Solo1,
+  enableStaking,
+  enableTokenStaking,
+  nftStake1Solo1Address,
+  nftStake1Solo1Collection,
+  nftStake1Solo1Name,
+  tokenStakingAddress
+} from 'config';
 
-const StakeDawn2 = () => {
+const Stake1Solo1 = () => {
   return (
     <div className='container py-4'>
       <div className='row'>
@@ -31,17 +31,17 @@ const StakeDawn2 = () => {
                     <TokenStaking tokenStakingAddress={tokenStakingAddress} />
                   </div>
                 )}
-                {!!enableStaking && (
+                {!!enableStaking && !!enableNftStake1Solo1 && (
                   <div>
                     <hr />
                     <NftStaking
-                      name='#Dawn DB'
-                      nftStakingAddress={nftStakingAddress4}
-                      nftStakingCollection={nftStakingCollection4}
+                      name={nftStake1Solo1Name}
+                      nftStakingAddress={nftStake1Solo1Address}
+                      nftStakingCollection={nftStake1Solo1Collection}
                     />
                   </div>
                 )}
-                {!enableStaking && (
+                {(!enableStaking || !enableNftStake1Solo1) && (
                   <div>
                     <hr />
                     <p>Staking is not currently available !</p>
@@ -56,4 +56,4 @@ const StakeDawn2 = () => {
   );
 };
 
-export default StakeDawn2;
+export default Stake1Solo1;
