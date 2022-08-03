@@ -22,12 +22,14 @@ import {
   enableNftStake3Solo1,
   enableStaking,
   enableStats,
+  enableTokenStaking,
   enableVote,
   nftStake1Multiple1Name,
   nftStake1Solo1Name,
   nftStake1Solo2Name,
   nftStake2Solo1Name,
-  nftStake3Solo1Name
+  nftStake3Solo1Name,
+  tokenStakingName
 } from 'config';
 import { routeNames } from 'routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -195,6 +197,15 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake3Solo1Name}</span>
                     <FontAwesomeIcon icon={faBone} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
+                {!!enableTokenStaking && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={isLoggedIn ? routeNames.tokenstake1 : routeNames.home}
+                  >
+                    <span className='mr-2'>{tokenStakingName}</span>
+                    <FontAwesomeIcon icon={faCoins} className='text mr-2' />
                   </NavDropdown.Item>
                 )}
               </NavDropdown>
