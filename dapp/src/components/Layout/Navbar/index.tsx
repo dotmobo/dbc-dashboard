@@ -9,6 +9,7 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {
+  dAppLogo,
   dAppName,
   enableFloorPrice,
   enableGame,
@@ -33,7 +34,6 @@ import {
 } from 'config';
 import { routeNames } from 'routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ReactComponent as DappLogo } from './../../../assets/img/dapp_logo.svg';
 import {
   faRightToBracket,
   faPowerOff,
@@ -71,7 +71,7 @@ const Navbar = () => {
           className='d-flex align-items-center navbar-brand mr-0'
           to={isLoggedIn ? routeNames.dashboard : routeNames.home}
         >
-          <DappLogo className='dapp-logo' />
+          <img src={dAppLogo} alt={dAppName} height={25} />
           <span className='dapp-name text-muted'>{dAppName}</span>
         </Link>
 
