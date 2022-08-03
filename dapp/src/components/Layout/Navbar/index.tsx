@@ -15,9 +15,21 @@ import {
   enableInfo,
   enableLinks,
   enableMarket,
+  enableNftStake1Multiple1,
+  enableNftStake1Solo1,
+  enableNftStake1Solo2,
+  enableNftStake2Solo1,
+  enableNftStake3Solo1,
   enableStaking,
   enableStats,
-  enableVote
+  enableTokenStaking,
+  enableVote,
+  nftStake1Multiple1Name,
+  nftStake1Solo1Name,
+  nftStake1Solo2Name,
+  nftStake2Solo1Name,
+  nftStake3Solo1Name,
+  tokenStakingName
 } from 'config';
 import { routeNames } from 'routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -140,34 +152,62 @@ const Navbar = () => {
                   </span>
                 }
               >
-                <NavDropdown.Item
-                  as={Link}
-                  to={isLoggedIn ? routeNames.stakedawn : routeNames.home}
-                >
-                  <span className='mr-2'>Dawn</span>
-                  <FontAwesomeIcon icon={faSkull} className='text mr-2' />
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to={isLoggedIn ? routeNames.stakedawn2 : routeNames.home}
-                >
-                  <span className='mr-2'>Dawn 2</span>
-                  <FontAwesomeIcon icon={faSkull} className='text mr-2' />
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to={isLoggedIn ? routeNames.stakelegendary : routeNames.home}
-                >
-                  <span className='mr-2'>Legendary</span>
-                  <FontAwesomeIcon icon={faCrown} className='text mr-2' />
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to={isLoggedIn ? routeNames.stakegenesis : routeNames.home}
-                >
-                  <span className='mr-2'>Genesis</span>
-                  <FontAwesomeIcon icon={faBone} className='text mr-2' />
-                </NavDropdown.Item>
+                {!!enableNftStake1Solo1 && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={isLoggedIn ? routeNames.stake1solo1 : routeNames.home}
+                  >
+                    <span className='mr-2'>{nftStake1Solo1Name}</span>
+                    <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
+                {!!enableNftStake1Solo2 && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={isLoggedIn ? routeNames.stake1solo2 : routeNames.home}
+                  >
+                    <span className='mr-2'>{nftStake1Solo2Name}</span>
+                    <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
+                {!!enableNftStake1Multiple1 && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={
+                      isLoggedIn ? routeNames.stake1multiple1 : routeNames.home
+                    }
+                  >
+                    <span className='mr-2'>{nftStake1Multiple1Name}</span>
+                    <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
+                {!!enableNftStake2Solo1 && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={isLoggedIn ? routeNames.stake2solo1 : routeNames.home}
+                  >
+                    <span className='mr-2'>{nftStake2Solo1Name}</span>
+                    <FontAwesomeIcon icon={faCrown} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
+                {!!enableNftStake3Solo1 && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={isLoggedIn ? routeNames.stake3solo1 : routeNames.home}
+                  >
+                    <span className='mr-2'>{nftStake3Solo1Name}</span>
+                    <FontAwesomeIcon icon={faBone} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
+                {!!enableTokenStaking && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={isLoggedIn ? routeNames.tokenstake1 : routeNames.home}
+                  >
+                    <span className='mr-2'>{tokenStakingName}</span>
+                    <FontAwesomeIcon icon={faCoins} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
               </NavDropdown>
             )}
             {!!enableMarket && (

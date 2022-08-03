@@ -22,9 +22,10 @@ import converter from 'hex2dec';
 
 interface TokenStakingType {
   tokenStakingAddress: string;
+  name: string;
 }
 
-const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
+const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
   const account = useGetAccountInfo();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { network } = useGetNetworkConfig();
@@ -414,7 +415,7 @@ const TokenStaking = ({ tokenStakingAddress }: TokenStakingType) => {
   return (
     <div>
       <h3>
-        Stake $DEAD Tokens <FontAwesomeIcon icon={faCoins} className='text' />
+        Stake {name} Tokens <FontAwesomeIcon icon={faCoins} className='text' />
       </h3>
       <div className='row'>
         <div className='col-12'>

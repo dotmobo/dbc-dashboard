@@ -1,23 +1,23 @@
 import { dAppName } from 'config';
-import withPageTitle from './components/PageTitle';
-import Dashboard from './pages/Dashboard';
-import Info from './pages/Farms';
-import Dao from './pages/Dao';
-import Home from './pages/Home';
-import Transaction from './pages/Transaction';
-import Market from 'pages/Market';
-import Stake from 'pages/StakeDawn';
-import Stats from 'pages/Stats';
-import StakeDawn from 'pages/StakeDawn';
-import StakeLegendary from 'pages/StakeLegendary';
-import Links from 'pages/Links';
-import Farms from './pages/Farms';
 import FloorPrice from 'pages/FloorPrice';
-import StakeGenesis from 'pages/StakeGenesis';
 import Game from 'pages/Game';
 import Game2 from 'pages/Game2';
-import StakeDawn2 from 'pages/StakeDawn2';
 import Game3 from 'pages/Game3';
+import Links from 'pages/Links';
+import Market from 'pages/Market';
+import Stake1Multiple1 from 'pages/Stake1Multiple1';
+import Stake1Solo1 from 'pages/Stake1Solo1';
+import Stake1Solo2 from 'pages/Stake1Solo2';
+import Stake2Solo1 from 'pages/Stake2Solo1';
+import Stake3Solo1 from 'pages/Stake3Solo1';
+import Stats from 'pages/Stats';
+import TokenStake1 from 'pages/TokenStake1';
+import withPageTitle from './components/PageTitle';
+import Dao from './pages/Dao';
+import Dashboard from './pages/Dashboard';
+import Farms from './pages/Farms';
+import Home from './pages/Home';
+import Transaction from './pages/Transaction';
 
 export const routeNames = {
   home: '/',
@@ -26,10 +26,12 @@ export const routeNames = {
   floorprice: '/floor-price',
   dao: '/dao',
   market: '/market',
-  stakedawn: '/stake',
-  stakelegendary: '/stake-legendary',
-  stakegenesis: '/stake-genesis',
-  stakedawn2: '/stake-dawn-2',
+  stake1solo1: '/stake1solo1',
+  stake1solo2: '/stake1solo2',
+  stake1multiple1: '/stake1multiple1',
+  stake2solo1: '/stake2solo1',
+  stake3solo1: '/stake3solo1',
+  tokenstake1: '/tokenstake1',
   stats: '/stats',
   links: '/links',
   game: '/game',
@@ -84,27 +86,39 @@ const routes: Array<any> = [
     authenticatedRoute: true
   },
   {
-    path: routeNames.stakedawn,
-    title: 'Stake Dawn',
-    component: StakeDawn,
+    path: routeNames.stake1solo1,
+    title: 'Stake 1 Solo 1',
+    component: Stake1Solo1,
     authenticatedRoute: true
   },
   {
-    path: routeNames.stakegenesis,
-    title: 'Stake Genesis',
-    component: StakeGenesis,
+    path: routeNames.stake1solo2,
+    title: 'Stake 1 Solo 2',
+    component: Stake1Solo2,
     authenticatedRoute: true
   },
   {
-    path: routeNames.stakelegendary,
-    title: 'Stake Legendary',
-    component: StakeLegendary,
+    path: routeNames.stake1multiple1,
+    title: 'Stake 1 Multiple 1',
+    component: Stake1Multiple1,
     authenticatedRoute: true
   },
   {
-    path: routeNames.stakedawn2,
-    title: 'Stake Dawn 2',
-    component: StakeDawn2,
+    path: routeNames.stake2solo1,
+    title: 'Stake 2 Solo 1',
+    component: Stake2Solo1,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.stake3solo1,
+    title: 'Stake 3 Solo 1',
+    component: Stake3Solo1,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.tokenstake1,
+    title: 'Token Stake 1',
+    component: TokenStake1,
     authenticatedRoute: true
   },
   {

@@ -1,13 +1,15 @@
 import * as React from 'react';
+import NftStaking from 'components/NftStaking';
+import TopInfo from 'components/TopInfo';
 import {
   enableStaking,
-  nftStakingAddress3,
-  nftStakingCollection3
+  nftStake1Solo2Name,
+  nftStake1Solo2Address,
+  nftStake1Solo2Collection,
+  enableNftStake1Solo2
 } from 'config';
-import TopInfo from 'components/TopInfo';
-import NftStaking from 'components/NftStaking';
 
-const StakeGenesis = () => {
+const Stake1Solo2 = () => {
   return (
     <div className='container py-4'>
       <div className='row'>
@@ -20,17 +22,17 @@ const StakeGenesis = () => {
                 </div>
               </div>
               <div className='col mt-4 col-md-12'>
-                {!!enableStaking && (
+                {!!enableStaking && !!enableNftStake1Solo2 && (
                   <div>
                     <hr />
                     <NftStaking
-                      name='#Genesis DB'
-                      nftStakingAddress={nftStakingAddress3}
-                      nftStakingCollection={nftStakingCollection3}
+                      name={nftStake1Solo2Name}
+                      nftStakingAddress={nftStake1Solo2Address}
+                      nftStakingCollection={nftStake1Solo2Collection}
                     />
                   </div>
                 )}
-                {!enableStaking && (
+                {(!enableStaking || !enableNftStake1Solo2) && (
                   <div>
                     <hr />
                     <p>Staking is not currently available !</p>
@@ -45,4 +47,4 @@ const StakeGenesis = () => {
   );
 };
 
-export default StakeGenesis;
+export default Stake1Solo2;

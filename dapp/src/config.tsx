@@ -1,7 +1,7 @@
 // Elrond Network
 export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
 // Application
-export const dAppName = 'TIKY';
+export const dAppName = 'TIKIDY';
 export const dAppLogo = 'https://img1.wsimg.com/isteam/ip/3feb75c6-9600-42a8-86e9-4f93249163fc/FUlDDKDWAAAobne.jpg';
 // Addresses
 export const contractAddress =
@@ -112,36 +112,60 @@ export const shopOwnerAddress2 =
 // Staking
 export const enableStaking = false;
 export const enableTokenStaking = false;
+export const tokenStakingName = '$TKDY';
 export const tokenStakingAddress =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqhqs38zquy8e3zpfsgf46srrespmlapmv0jpqcg4np3'
     : 'SMART-CONTRACT-ADDRESS-FOR-TOKEN-STAKING';
-export const nftStakingAddress =
+
+// Dawn DB pool with a Solo NFT
+export const enableNftStake1Solo1 = true;
+export const nftStake1Solo1Name = 'Dawn #1';
+export const nftStake1Solo1Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqgus6jqr5vsdarny080crct0l42jwc8cu0jpqhe4u9r'
     : 'erd1qqqqqqqqqqqqqpgqdfjx4p3lld506l9uvurcz3z38wckqtjz0jpqygvq5m';
-export const nftStakingCollection =
+export const nftStake1Solo1Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 
-export const nftStakingAddress2 =
+// Legendary DB pool with a Solo NFT
+export const enableNftStake2Solo1 = true;
+export const nftStake2Solo1Name = 'Legendary #1';
+export const nftStake2Solo1Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgq790zcu9yw5j4ex3v0nkpvwwuf2fty98v0jpqzyj5ym'
     : 'erd1qqqqqqqqqqqqqpgq77adynv9m2hjjt2dst6vc9wzuxhlvq8a0jpqv845xj';
-export const nftStakingCollection2 =
+export const nftStake2Solo1Collection =
   elrondNetwork === ('devnet' as any) ? 'CLOTHES-35c061' : 'LDB-ada909';
 
-export const nftStakingAddress3 =
+// Genesis DB pool with a Solo NFT
+export const enableNftStake3Solo1 = true;
+export const nftStake3Solo1Name = 'Genesis #1';
+export const nftStake3Solo1Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqwvtn5jpsunya7ztlmfzv6wjt60m4tx6t0jpqhcfcww'
     : 'erd1qqqqqqqqqqqqqpgqtg0q4y6m477neffqk5qn3fpa83ws0ywz0jpq0u28ke';
-export const nftStakingCollection3 =
+export const nftStake3Solo1Collection =
   elrondNetwork === ('devnet' as any) ? 'BEAK-35c061' : 'DEADBROS-bf822f';
 
-export const nftStakingAddress4 =
+// Dawn DB pool with a Solo NFT
+export const enableNftStake1Solo2 = true;
+export const nftStake1Solo2Name = 'Dawn #2';
+export const nftStake1Solo2Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqga7ckpjkytnha5g8ep4k9zvd0s0nqvw90jpqxthmpq'
     : 'erd1qqqqqqqqqqqqqpgqjhq794tgtk9pxj33znwmgh3xj0u2kl400jpqd2ptpj';
-export const nftStakingCollection4 =
+export const nftStake1Solo2Collection =
+  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
+
+// Dawn DB pool with a Multiple NFT
+export const enableNftStake1Multiple1 = false;
+export const nftStake1Multiple1Name = 'Multiple Dawn #1';
+export const nftStake1Multiple1Address =
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqx9hz8skzv7rd6gcqzlrsxnwzaa6m4h870jpqcxngxt'
+    : 'SMART-CONTRACT-ADDRESS-FOR-MULTIPLE-STAKING';
+export const nftStake1Multiple1Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 
 export const nftStakingOwnerAddress =
