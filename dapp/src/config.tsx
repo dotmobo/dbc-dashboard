@@ -1,5 +1,5 @@
 // Elrond Network
-export const elrondNetwork = 'devnet'; // mainnet, testnet or devnet
+export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'DBC';
 export const dAppLogo = process.env.PUBLIC_URL + '/new-logo-db.png';
@@ -118,6 +118,7 @@ export const shopOwnerAddress2 =
 export const enableStaking = true;
 
 export const enableTokenStaking = false;
+export const tokenStakingName = '$DEAD';
 export const tokenStakingAddress =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqhqs38zquy8e3zpfsgf46srrespmlapmv0jpqcg4np3'
@@ -169,7 +170,7 @@ export const nftStake1Multiple1Name = 'Multiple Dawn #1';
 export const nftStake1Multiple1Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqx9hz8skzv7rd6gcqzlrsxnwzaa6m4h870jpqcxngxt'
-    : 'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
+    : 'SMART-CONTRACT-ADDRESS-FOR-MULTIPLE-STAKING';
 export const nftStake1Multiple1Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 

@@ -1,15 +1,14 @@
 import * as React from 'react';
-import NftStaking from 'components/NftStaking';
+import TokenStaking from 'components/TokenStaking';
 import TopInfo from 'components/TopInfo';
 import {
-  enableNftStake1Solo1,
   enableStaking,
-  nftStake1Solo1Address,
-  nftStake1Solo1Collection,
-  nftStake1Solo1Name
+  enableTokenStaking,
+  tokenStakingAddress,
+  tokenStakingName
 } from 'config';
 
-const Stake1Solo1 = () => {
+const TokenStake1 = () => {
   return (
     <div className='container py-4'>
       <div className='row'>
@@ -22,17 +21,16 @@ const Stake1Solo1 = () => {
                 </div>
               </div>
               <div className='col mt-4 col-md-12'>
-                {!!enableStaking && !!enableNftStake1Solo1 && (
+                {!!enableStaking && !!enableTokenStaking && (
                   <div>
                     <hr />
-                    <NftStaking
-                      name={nftStake1Solo1Name}
-                      nftStakingAddress={nftStake1Solo1Address}
-                      nftStakingCollection={nftStake1Solo1Collection}
+                    <TokenStaking
+                      name={tokenStakingName}
+                      tokenStakingAddress={tokenStakingAddress}
                     />
                   </div>
                 )}
-                {(!enableStaking || !enableNftStake1Solo1) && (
+                {(!enableStaking || !enableTokenStaking) && (
                   <div>
                     <hr />
                     <p>Staking is not currently available !</p>
@@ -47,4 +45,4 @@ const Stake1Solo1 = () => {
   );
 };
 
-export default Stake1Solo1;
+export default TokenStake1;
