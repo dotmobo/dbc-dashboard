@@ -2,7 +2,7 @@
 export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'TIKIDY';
-export const dAppLogo = 'https://img1.wsimg.com/isteam/ip/3feb75c6-9600-42a8-86e9-4f93249163fc/FUlDDKDWAAAobne.jpg';
+export const dAppLogo = process.env.PUBLIC_URL + 'coin_palm_tree_v3.0.png';
 // Addresses
 export const contractAddress =
   'erd1qqqqqqqqqqqqqpgqrwcjwp6p6scxwzmlfk7w43wglklw5n02ys5syyjd3y';
