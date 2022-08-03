@@ -33,7 +33,7 @@ import {
 } from 'config';
 import { routeNames } from 'routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ReactComponent as DeadbrothersLogo } from './../../../assets/img/deadbrothers.svg';
+import { ReactComponent as DappLogo } from './../../../assets/img/dapp_logo.svg';
 import {
   faRightToBracket,
   faPowerOff,
@@ -71,7 +71,7 @@ const Navbar = () => {
           className='d-flex align-items-center navbar-brand mr-0'
           to={isLoggedIn ? routeNames.dashboard : routeNames.home}
         >
-          <DeadbrothersLogo className='deadbrothers-logo ' />
+          <DappLogo className='dapp-logo' />
           <span className='dapp-name text-muted'>{dAppName}</span>
         </Link>
 
