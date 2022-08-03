@@ -15,7 +15,7 @@ const Footer = () => {
         >
           Made with <HeartIcon className='mx-1' /> by DeadBrothers Club.
         </a>
-        <span>Copyright © 2022 Tikidy - All Rights Reserved.</span>
+        <span>Copyright © 2022 DeadBrothers Club - All Rights Reserved.</span>
       </div>
     </footer>
   );
