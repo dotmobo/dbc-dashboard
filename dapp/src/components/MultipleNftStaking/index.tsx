@@ -495,6 +495,18 @@ const MultipleNftStaking = ({
     }
   };
 
+  const handleChooseall = (event: any) => {
+    if (event.target.checked) {
+      const res = new Set(checkedBros);
+      bros?.forEach((bro: any) => {
+        res.add(bro.nonce);
+      });
+      setCheckedBros(res);
+    } else {
+      setCheckedBros(new Set());
+    }
+  };
+
   return (
     <div>
       <h3>
@@ -693,6 +705,17 @@ const MultipleNftStaking = ({
           )}
         {bros !== undefined &&
           bros.length > 0 &&
+          nbrOfNftStaked !== undefined &&
+          nbrOfNftStaked === 0 && (
+            <div className='col-12 mt-3'>
+              <Form.Check
+                label='Select all'
+                onChange={(e) => handleChooseall(e)}
+              />
+            </div>
+          )}
+        {bros !== undefined &&
+          bros.length > 0 &&
           bros.map((bro) => (
             <div
               key={bro.identifier}
@@ -702,6 +725,8 @@ const MultipleNftStaking = ({
                 <div>
                   {nbrOfNftStaked !== undefined && nbrOfNftStaked === 0 && (
                     <Form.Check
+                      checked={checkedBros.has(bro.nonce)}
+                      label={'Select n°' + bro.nonce}
                       onChange={(e) => handleChooseBro(e, bro.nonce)}
                     />
                   )}
