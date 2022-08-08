@@ -102,7 +102,7 @@ export const shopWithdrawData1 = 'withdraw';
 export const shopOwnerAddress1 =
   'erd12xgyfxkp2xvtvxdm0yc65c97gmxa6p0ywa60nuxht6dgmu28g2kq6nph4g';
 
-export const enableShop2 = true;
+export const enableShop2 = false;
 export const shopMarketAddress2 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqmdlskg8ptzsxjk7npv8fx5vdx8l3xkvs0jpq6a900y'
