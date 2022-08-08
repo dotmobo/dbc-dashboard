@@ -93,6 +93,7 @@ export const voteOwnerAddress =
 // Market
 export const enableMarket = true;
 export const enableShop1 = true;
+export const shopMarketCurrency1 = '$TKDY';
 export const shopMarketAddress1 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8'
@@ -103,6 +104,7 @@ export const shopOwnerAddress1 =
   'erd12xgyfxkp2xvtvxdm0yc65c97gmxa6p0ywa60nuxht6dgmu28g2kq6nph4g';
 
 export const enableShop2 = false;
+export const shopMarketCurrency2 = '$TKDY';
 export const shopMarketAddress2 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqmdlskg8ptzsxjk7npv8fx5vdx8l3xkvs0jpq6a900y'
