@@ -7,6 +7,8 @@ import {
   shopMarketAddress2,
   shopMarketBuyFn1,
   shopMarketBuyFn2,
+  shopMarketCurrency1,
+  shopMarketCurrency2,
   shopOwnerAddress1,
   shopOwnerAddress2,
   shopWithdrawData1,
@@ -23,6 +25,7 @@ const Components = () => {
             <hr />
             <Shop
               title='Main Shop'
+              currency={shopMarketCurrency1}
               shopMarketAddress={shopMarketAddress1}
               shopOwnerAddress={shopOwnerAddress1}
               shopMarketBuyFn={shopMarketBuyFn1}
@@ -36,6 +39,7 @@ const Components = () => {
             <hr />
             <Shop
               title='Partner Shop'
+              currency={shopMarketCurrency2}
               shopMarketAddress={shopMarketAddress2}
               shopOwnerAddress={shopOwnerAddress2}
               shopMarketBuyFn={shopMarketBuyFn2}

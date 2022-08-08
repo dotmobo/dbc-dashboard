@@ -39,6 +39,7 @@ interface Shop {
 
 interface ShopType {
   title: string;
+  currency: string;
   shopMarketAddress: string;
   shopOwnerAddress: string;
   shopMarketBuyFn: string;
@@ -48,6 +49,7 @@ interface ShopType {
 
 const Shop = ({
   title,
+  currency,
   shopMarketAddress,
   shopOwnerAddress,
   shopMarketBuyFn,
@@ -428,8 +430,10 @@ const Shop = ({
                 <div>
                   <div className='mt-4'>
                     <b>Price</b>:&nbsp;
-                    {formatBigNumber(floor(divide(price, 10 ** 18)))} $DEAD
-                    <DeadIcon className='mx-1' height={16} width={16} />
+                    {formatBigNumber(floor(divide(price, 10 ** 18)))} {currency}
+                    {currency === '$DEAD' && (
+                      <DeadIcon className='mx-1' height={16} width={16} />
+                    )}
                   </div>
                   <div>
                     <b>Collection</b>:&nbsp;

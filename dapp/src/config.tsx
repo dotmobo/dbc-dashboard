@@ -1,5 +1,5 @@
 // Elrond Network
-export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
+export const elrondNetwork = 'devnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'DBC';
 export const dAppLogo = process.env.PUBLIC_URL + '/new-logo-db.png';
@@ -98,6 +98,7 @@ export const voteOwnerAddress =
 // Market
 export const enableMarket = true;
 export const enableShop1 = true;
+export const shopMarketCurrency1 = '$DEAD';
 export const shopMarketAddress1 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqzyjg9jdvphvtmwn5sjjz3y0n4jafkzxr0jpqnd0uq8'
@@ -108,6 +109,7 @@ export const shopOwnerAddress1 =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 
 export const enableShop2 = true;
+export const shopMarketCurrency2 = '$DEAD';
 export const shopMarketAddress2 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqmdlskg8ptzsxjk7npv8fx5vdx8l3xkvs0jpq6a900y'
