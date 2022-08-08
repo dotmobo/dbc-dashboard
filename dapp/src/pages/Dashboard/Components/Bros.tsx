@@ -17,7 +17,7 @@ import axios from 'axios';
 import {
   faBolt,
   faShoppingCart,
-  faSkull,
+  faPerson,
   faDownload,
   faCropSimple
 } from '@fortawesome/free-solid-svg-icons';
@@ -83,7 +83,7 @@ const Bros = ({ title }: any) => {
   return (
     <div>
       <h3>
-        My {title} <FontAwesomeIcon icon={faSkull} className='text' />
+        My {title} <FontAwesomeIcon icon={faPerson} className='text' />
         &nbsp;
         {bros !== undefined && bros.length > 0 && <span>({bros.length})</span>}
       </h3>
