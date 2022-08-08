@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {
   deadTokenId,
+  enableShop1,
+  enableShop2,
   shopMarketAddress1,
   shopMarketAddress2,
   shopMarketBuyFn1,
@@ -16,24 +18,32 @@ const Components = () => {
   return (
     <div className='col mt-4 col-md-12'>
       <div>
-        <hr />
-        <Shop
-          title='Dawn Shop'
-          shopMarketAddress={shopMarketAddress1}
-          shopOwnerAddress={shopOwnerAddress1}
-          shopMarketBuyFn={shopMarketBuyFn1}
-          shopWithdrawData={shopWithdrawData1}
-          shopMarketTokenId={deadTokenId}
-        />
-        <hr />
-        <Shop
-          title='Partner Shop'
-          shopMarketAddress={shopMarketAddress2}
-          shopOwnerAddress={shopOwnerAddress2}
-          shopMarketBuyFn={shopMarketBuyFn2}
-          shopWithdrawData={shopWithdrawData2}
-          shopMarketTokenId={deadTokenId}
-        />
+        {enableShop1 && (
+          <div>
+            <hr />
+            <Shop
+              title='Main Shop'
+              shopMarketAddress={shopMarketAddress1}
+              shopOwnerAddress={shopOwnerAddress1}
+              shopMarketBuyFn={shopMarketBuyFn1}
+              shopWithdrawData={shopWithdrawData1}
+              shopMarketTokenId={deadTokenId}
+            />
+          </div>
+        )}
+        {enableShop2 && (
+          <div>
+            <hr />
+            <Shop
+              title='Partner Shop'
+              shopMarketAddress={shopMarketAddress2}
+              shopOwnerAddress={shopOwnerAddress2}
+              shopMarketBuyFn={shopMarketBuyFn2}
+              shopWithdrawData={shopWithdrawData2}
+              shopMarketTokenId={deadTokenId}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
