@@ -36,6 +36,10 @@ pub trait NftStaking {
         if self.nbr_of_stakers().is_empty() {
             self.nbr_of_stakers().set(0);
         }
+        // if nbr of nft staked is empty, set it to 0
+        if self.nbr_of_nft_staked().is_empty() {
+            self.nbr_of_nft_staked().set(0);
+        }
     }
 
     #[payable("*")]
@@ -74,7 +78,6 @@ pub trait NftStaking {
             self.staking_info(&self.blockchain().get_caller())
                 .set(&stake_info);
             self.nbr_of_stakers().set(self.nbr_of_stakers().get() + 1);
-
         } else {
             let mut stake_info = self.staking_info(&caller).get();
             for payment in &payments {
@@ -85,8 +88,8 @@ pub trait NftStaking {
             stake_info.lock_time = cur_time;
             stake_info.unstake_time = unstake_time;
             self.staking_info(&caller).set(&stake_info);
-
         }
+        self.nbr_of_nft_staked().set(self.nbr_of_nft_staked().get() + payments.len() as u64);
 
         Ok(())
     }
@@ -105,6 +108,7 @@ pub trait NftStaking {
 
         let nft_identifier = self.nft_identifier().get();
         let nft_nonce = stake_info.nft_nonce;
+        let nbr_of_nonce: u64 = nft_nonce.len() as u64;
 
         let amount = BigUint::from(1u32);
 
@@ -120,8 +124,15 @@ pub trait NftStaking {
 
         self.staking_info(&caller).clear();
 
-        if self.nbr_of_stakers().get() > 0 {
+        if self.nbr_of_stakers().get() >= 1 {
             self.nbr_of_stakers().set(self.nbr_of_stakers().get() - 1);
+        } else {
+            self.nbr_of_stakers().set(0);
+        }
+        if self.nbr_of_nft_staked().get() >= nbr_of_nonce {
+            self.nbr_of_nft_staked().set(self.nbr_of_nft_staked().get() - nbr_of_nonce);
+        } else {
+            self.nbr_of_nft_staked().set(0);
         }
 
         Ok(())
@@ -313,4 +324,8 @@ pub trait NftStaking {
     #[view(getNbrOfStakers)]
     #[storage_mapper("nbr_of_stakers")]
     fn nbr_of_stakers(&self) -> SingleValueMapper<u64>;
+
+    #[view(getNbrOfNftStaked)]
+    #[storage_mapper("nbr_of_nft_staked")]
+    fn nbr_of_nft_staked(&self) -> SingleValueMapper<u64>;
 }

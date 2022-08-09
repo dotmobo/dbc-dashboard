@@ -77,6 +77,8 @@ const MultipleNftStaking = ({
     React.useState<number>();
   const [nbrOfStakers, setNbrOfStakers] = React.useState<number>();
   const [nbrOfNftStaked, setNbrOfNftStaked] = React.useState<number>();
+  const [nbrOfNftStakedByUser, setNbrOfNftStakedByUser] =
+    React.useState<number>();
   const [checkedBros, setCheckedBros] = React.useState<Set<number>>(
     new Set<number>()
   );
@@ -177,6 +179,37 @@ const MultipleNftStaking = ({
           default: {
             const decoded = Buffer.from(encoded, 'base64').toString('hex');
             setNbrOfStakers(parseInt(decoded, 16));
+            break;
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasPendingTransactions]);
+
+  React.useEffect(() => {
+    const query = new Query({
+      address: new Address(nftStakingAddress),
+      func: new ContractFunction('getNbrOfNftStaked'),
+      args: []
+    });
+    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
+        switch (encoded) {
+          case undefined:
+            setNbrOfNftStaked(0);
+            break;
+          case '':
+            setNbrOfNftStaked(0);
+            break;
+          default: {
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            setNbrOfNftStaked(parseInt(decoded, 16));
             break;
           }
         }
@@ -355,17 +388,17 @@ const MultipleNftStaking = ({
         const [encoded] = returnData;
         switch (encoded) {
           case undefined:
-            setNbrOfNftStaked(0);
+            setNbrOfNftStakedByUser(0);
             break;
           case '':
-            setNbrOfNftStaked(0);
+            setNbrOfNftStakedByUser(0);
             break;
           default: {
             const decoded: Uint8Array = Buffer.from(encoded, 'base64');
             const filteredNumbers = Array.from(decoded).filter(
               (x, i) => (i + 1) % 8 === 0
             );
-            setNbrOfNftStaked(filteredNumbers.length);
+            setNbrOfNftStakedByUser(filteredNumbers.length);
             break;
           }
         }
@@ -483,7 +516,7 @@ const MultipleNftStaking = ({
       value: '0',
       data: 'unstake',
       receiver: nftStakingAddress,
-      gasLimit: 5000000 * (!!nbrOfNftStaked ? nbrOfNftStaked : 1)
+      gasLimit: 5000000 * (!!nbrOfNftStakedByUser ? nbrOfNftStakedByUser : 1)
     };
     await refreshAccount();
 
@@ -550,7 +583,8 @@ const MultipleNftStaking = ({
           rewardsTokenAmountPerDay === undefined &&
           stakingStatus === undefined &&
           rewardsTokenTotalSupply === undefined &&
-          nbrOfStakers === undefined && (
+          nbrOfStakers === undefined &&
+          nbrOfNftStaked === undefined && (
             <div className='col'>
               <div className='spinner-border text-primary mr-2' role='status'>
                 <span className='sr-only'>Loading...</span>
@@ -561,7 +595,8 @@ const MultipleNftStaking = ({
           rewardsTokenAmountPerDay !== undefined &&
           stakingStatus !== undefined &&
           rewardsTokenTotalSupply !== undefined &&
-          nbrOfStakers !== undefined && (
+          nbrOfStakers !== undefined &&
+          nbrOfNftStaked !== undefined && (
             <div className='col'>
               <div className='card'>
                 <div className='card-header'>
@@ -601,9 +636,16 @@ const MultipleNftStaking = ({
                   </div>
                 </div>
                 <div className='card-footer'>
-                  <small className='text-muted'>
-                    {nbrOfStakers} stakers in the pool
-                  </small>
+                  <div>
+                    <small className='text-muted'>
+                      {nbrOfStakers} stakers in the pool
+                    </small>
+                  </div>
+                  <div>
+                    <small className='text-muted'>
+                      {nbrOfNftStaked} NFTs staked in the pool
+                    </small>
+                  </div>
                 </div>
               </div>
             </div>
@@ -613,25 +655,27 @@ const MultipleNftStaking = ({
         <div className='col-12'>
           <h4>Staked {name}</h4>
         </div>
-        {nbrOfNftStaked === undefined && (
+        {nbrOfNftStakedByUser === undefined && (
           <div className='col'>
             <div className='spinner-border text-primary mr-2' role='status'>
               <span className='sr-only'>Loading...</span>
             </div>
           </div>
         )}
-        {nbrOfNftStaked !== undefined && nbrOfNftStaked === 0 && (
+        {nbrOfNftStakedByUser !== undefined && nbrOfNftStakedByUser === 0 && (
           <div className='col'>
             <div>No staked {name} found !</div>
           </div>
         )}
-        {nbrOfNftStaked !== undefined && nbrOfNftStaked > 0 && (
+        {nbrOfNftStakedByUser !== undefined && nbrOfNftStakedByUser > 0 && (
           <div className='col-12 col-sm-12 col-md-12 col-lg-12 mt-3 mx-auto'>
             <div className='card text-center nftStakeCard'>
-              <div className='card-header'>{nbrOfNftStaked} NFTs staked</div>
+              <div className='card-header'>
+                {nbrOfNftStakedByUser} NFTs staked
+              </div>
               <div className='nftStakedDiv'>
                 <span className='badge badge-pill badge-primary mt-2 mb-2'>
-                  {nbrOfNftStaked}
+                  {nbrOfNftStakedByUser}
                 </span>
               </div>
               <div className='card-body'>
@@ -715,7 +759,7 @@ const MultipleNftStaking = ({
           bros.length > 0 &&
           checkedBros !== undefined &&
           checkedBros.size > 0 &&
-          nbrOfNftStaked !== undefined &&
+          nbrOfNftStakedByUser !== undefined &&
           !hasPendingTransactions && (
             <div className='col-12'>
               <div className='w-100'></div>
@@ -727,14 +771,16 @@ const MultipleNftStaking = ({
               </button>
             </div>
           )}
-        {bros !== undefined && bros.length > 0 && nbrOfNftStaked !== undefined && (
-          <div className='col-12 mt-3'>
-            <Form.Check
-              label='Select all'
-              onChange={(e) => handleChooseall(e)}
-            />
-          </div>
-        )}
+        {bros !== undefined &&
+          bros.length > 0 &&
+          nbrOfNftStakedByUser !== undefined && (
+            <div className='col-12 mt-3'>
+              <Form.Check
+                label='Select all'
+                onChange={(e) => handleChooseall(e)}
+              />
+            </div>
+          )}
         {bros !== undefined &&
           bros.length > 0 &&
           bros.map((bro) => (
@@ -744,7 +790,7 @@ const MultipleNftStaking = ({
             >
               <LazyLoad height={200} offset={100} once>
                 <div>
-                  {nbrOfNftStaked !== undefined && (
+                  {nbrOfNftStakedByUser !== undefined && (
                     <Form.Check
                       checked={checkedBros.has(bro.nonce)}
                       label={'Select n°' + bro.nonce}
