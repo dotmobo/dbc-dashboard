@@ -75,7 +75,9 @@ const MultipleNftStaking = ({
     React.useState<number>();
   const [nbrOfStakers, setNbrOfStakers] = React.useState<number>();
   const [nbrOfNftStaked, setNbrOfNftStaked] = React.useState<number>();
-  const [checkedBros, setCheckedBros] = React.useState<any>(new Set<number>());
+  const [checkedBros, setCheckedBros] = React.useState<Set<number>>(
+    new Set<number>()
+  );
 
   React.useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -397,14 +399,21 @@ const MultipleNftStaking = ({
 
   const { sendTransactions } = transactionServices;
 
-  const sendStakeTransaction = async (all_nonces: any) => {
+  const sendStakeTransaction = async () => {
+    // filter checkedBros with bros in wallet
+    Array.from(checkedBros).forEach((nonce) => {
+      if (!bros?.map((b) => b.nonce).includes(nonce)) {
+        checkedBros.delete(nonce);
+      }
+    });
+
     let data =
       'MultiESDTNFTTransfer@' +
       new Address(nftStakingAddress).hex() +
       '@' +
-      numtoHex(all_nonces.size);
+      numtoHex(checkedBros.size);
 
-    all_nonces.forEach((nonce: number) => {
+    checkedBros.forEach((nonce: number) => {
       data +=
         '@' +
         strtoHex(nftStakingCollection) +
@@ -420,7 +429,7 @@ const MultipleNftStaking = ({
       value: '0',
       data: data,
       receiver: address,
-      gasLimit: 5000000 * all_nonces.size
+      gasLimit: 5000000 * checkedBros.size
     };
     await refreshAccount();
 
@@ -462,6 +471,9 @@ const MultipleNftStaking = ({
   };
 
   const sendUnstakeTransaction = async () => {
+    // Clean checked bros when unstaking
+    setCheckedBros(new Set());
+
     const unstakeTransaction = {
       value: '0',
       data: 'unstake',
@@ -688,32 +700,30 @@ const MultipleNftStaking = ({
             <div>No {name} found in your wallet !</div>
           </div>
         )}
-        {checkedBros !== undefined &&
+        {bros !== undefined &&
+          bros.length > 0 &&
+          checkedBros !== undefined &&
           checkedBros.size > 0 &&
           nbrOfNftStaked !== undefined &&
-          nbrOfNftStaked === 0 &&
           !hasPendingTransactions && (
             <div className='col-12'>
               <div className='w-100'></div>
               <button
                 className='btn btn-primary ml-1 mt-2'
-                onClick={() => sendStakeTransaction(checkedBros)}
+                onClick={() => sendStakeTransaction()}
               >
                 STAKE <FontAwesomeIcon icon={faArrowUp} className='text' />
               </button>
             </div>
           )}
-        {bros !== undefined &&
-          bros.length > 0 &&
-          nbrOfNftStaked !== undefined &&
-          nbrOfNftStaked === 0 && (
-            <div className='col-12 mt-3'>
-              <Form.Check
-                label='Select all'
-                onChange={(e) => handleChooseall(e)}
-              />
-            </div>
-          )}
+        {bros !== undefined && bros.length > 0 && nbrOfNftStaked !== undefined && (
+          <div className='col-12 mt-3'>
+            <Form.Check
+              label='Select all'
+              onChange={(e) => handleChooseall(e)}
+            />
+          </div>
+        )}
         {bros !== undefined &&
           bros.length > 0 &&
           bros.map((bro) => (
@@ -723,7 +733,7 @@ const MultipleNftStaking = ({
             >
               <LazyLoad height={200} offset={100} once>
                 <div>
-                  {nbrOfNftStaked !== undefined && nbrOfNftStaked === 0 && (
+                  {nbrOfNftStaked !== undefined && (
                     <Form.Check
                       checked={checkedBros.has(bro.nonce)}
                       label={'Select n°' + bro.nonce}
