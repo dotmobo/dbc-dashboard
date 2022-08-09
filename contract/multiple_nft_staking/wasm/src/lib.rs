@@ -11,6 +11,7 @@ elrond_wasm_node::wasm_endpoints! {
         getCurrentRewards
         getLockTime
         getMinimumStakingDays
+        getNbrOfNftStaked
         getNbrOfStakers
         getNftIdentifier
         getNftNonce

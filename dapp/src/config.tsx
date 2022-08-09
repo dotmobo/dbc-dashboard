@@ -166,7 +166,7 @@ export const nftStake1Solo2Collection =
 // Dawn DB pool with a Multiple NFT
 export const enableNftStake1Multiple1 = false;
 export const nftStake1Multiple1Name = 'Multiple Dawn #1';
-export const nftStake1Multiple1Currency = '$DEAD';
+export const nftStake1Multiple1Currency = '$TKDY';
 export const nftStake1Multiple1Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqx9hz8skzv7rd6gcqzlrsxnwzaa6m4h870jpqcxngxt'
