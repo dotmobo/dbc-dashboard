@@ -57,30 +57,36 @@ pub trait NftStaking {
 
         let caller: ManagedAddress = self.blockchain().get_caller();
 
-        require!(
-            self.staking_info(&caller).is_empty(),
-            "You have already staked."
-        );
-
         let cur_time: u64 = self.blockchain().get_block_timestamp();
         let unstake_time = cur_time + (self.minimum_staking_days().get() * 86400);
 
-        let mut vec_nonce: Vec<u64> = Vec::new();
-        for payment in &payments {
-            vec_nonce.push(payment.token_nonce);
+        if self.staking_info(&caller).is_empty() {
+            let mut vec_nonce: Vec<u64> = Vec::new();
+            for payment in &payments {
+                vec_nonce.push(payment.token_nonce);
+            }
+            let stake_info = StakeInfo {
+                address: self.blockchain().get_caller(),
+                nft_nonce: vec_nonce,
+                lock_time: cur_time,
+                unstake_time: unstake_time,
+            };
+            self.staking_info(&self.blockchain().get_caller())
+                .set(&stake_info);
+            self.nbr_of_stakers().set(self.nbr_of_stakers().get() + 1);
+
+        } else {
+            let mut stake_info = self.staking_info(&caller).get();
+            for payment in &payments {
+                let mut vec_nonce: Vec<u64> = stake_info.nft_nonce.clone();
+                vec_nonce.push(payment.token_nonce);
+                stake_info.nft_nonce = vec_nonce;
+            }
+            stake_info.lock_time = cur_time;
+            stake_info.unstake_time = unstake_time;
+            self.staking_info(&caller).set(&stake_info);
+
         }
-
-        let stake_info = StakeInfo {
-            address: self.blockchain().get_caller(),
-            nft_nonce: vec_nonce,
-            lock_time: cur_time,
-            unstake_time: unstake_time,
-        };
-
-        self.staking_info(&self.blockchain().get_caller())
-            .set(&stake_info);
-
-        self.nbr_of_stakers().set(self.nbr_of_stakers().get() + 1);
 
         Ok(())
     }
