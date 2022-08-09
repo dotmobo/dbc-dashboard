@@ -45,12 +45,14 @@ export type TBrosList = Bro[];
 
 interface NftStakingType {
   name: string;
+  currency: string;
   nftStakingAddress: string;
   nftStakingCollection: string;
 }
 
 const MultipleNftStaking = ({
   name,
+  currency,
   nftStakingAddress,
   nftStakingCollection
 }: NftStakingType) => {
@@ -406,6 +408,9 @@ const MultipleNftStaking = ({
         checkedBros.delete(nonce);
       }
     });
+    if (checkedBros.size === 0) {
+      return;
+    }
 
     let data =
       'MultiESDTNFTTransfer@' +
@@ -573,8 +578,10 @@ const MultipleNftStaking = ({
                     {formatBigNumber(
                       floor(divide(rewardsTokenTotalSupply, 10 ** 18), 2) as any
                     )}
-                    &nbsp;$DEAD
-                    <DeadIcon className='mx-1' height={16} width={16} />
+                    &nbsp;{currency}
+                    {currency === '$DEAD' && (
+                      <DeadIcon className='mx-1' height={16} width={16} />
+                    )}
                   </div>
                   <div className='card-text'>
                     Rewards per day per NFT:&nbsp;
@@ -584,8 +591,10 @@ const MultipleNftStaking = ({
                         2
                       ) as any
                     )}
-                    &nbsp;$DEAD
-                    <DeadIcon className='mx-1' height={16} width={16} />
+                    &nbsp;{currency}
+                    {currency === '$DEAD' && (
+                      <DeadIcon className='mx-1' height={16} width={16} />
+                    )}
                   </div>
                   <div className='card-text'>
                     Minimum staking days: {minimumStakingDays}
@@ -633,8 +642,10 @@ const MultipleNftStaking = ({
                       {formatBigNumber(
                         floor(divide(currentRewards, 10 ** 18), 2) as any
                       )}
-                      &nbsp;$DEAD
-                      <DeadIcon className='mx-1' height={16} width={16} />
+                      &nbsp;{currency}
+                      {currency === '$DEAD' && (
+                        <DeadIcon className='mx-1' height={16} width={16} />
+                      )}
                     </div>
                   </div>
                 )}
