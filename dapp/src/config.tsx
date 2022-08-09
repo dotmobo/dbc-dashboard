@@ -187,3 +187,9 @@ export const enableGame = true;
 export const gameCart = process.env.PUBLIC_URL + '/spacedeadbro.html';
 export const gameCart2 = process.env.PUBLIC_URL + '/superdeadbro.html';
 export const gameCart3 = process.env.PUBLIC_URL + '/deadbroshound.html';
+
+// Swap
+export const swapDeadTokens =
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqtcrel2j644v6knspc2mz72sw05dymvpv0jpq49vcee'
+    : 'SMART-CONTRACT-ADDRESS-FOR-SWAP';

@@ -9,5 +9,7 @@ members = [
   "nft_staking",
   "nft_staking/meta",
   "multiple_nft_staking",
-  "multiple_nft_staking/meta"
+  "multiple_nft_staking/meta",
+  "swap_esdt",
+  "swap_esdt/meta"
 ]
