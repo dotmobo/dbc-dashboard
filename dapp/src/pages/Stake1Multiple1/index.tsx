@@ -6,7 +6,8 @@ import {
   nftStake1Multiple1Name,
   nftStake1Multiple1Address,
   nftStake1Multiple1Collection,
-  enableNftStake1Multiple1
+  enableNftStake1Multiple1,
+  nftStake1Multiple1Currency
 } from 'config';
 
 const Stake1Multiple1 = () => {
@@ -27,6 +28,7 @@ const Stake1Multiple1 = () => {
                     <hr />
                     <MultipleNftStaking
                       name={nftStake1Multiple1Name}
+                      currency={nftStake1Multiple1Currency}
                       nftStakingAddress={nftStake1Multiple1Address}
                       nftStakingCollection={nftStake1Multiple1Collection}
                     />
