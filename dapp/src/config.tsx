@@ -7,7 +7,7 @@ export const dAppLogo = process.env.PUBLIC_URL + '/new-logo-db.png';
 export const contractAddress =
   'erd1qqqqqqqqqqqqqpgqzau4u3scnqtthpu7p6fjp0fpwvpcagqtys5sezss7w';
 export const distributionAddress =
-  'erd1wd6ksxyzd4qge374azc2jp8pelv04g2atjeldkmc7ly7gpf3zg7qup2dns';
+  'erd1qqqqqqqqqqqqqpgq5j3wahajwehwja70v39074zzzjsq89lkdn3qp3j2f9';
 export const farmsAddress =
   'erd1wd6ksxyzd4qge374azc2jp8pelv04g2atjeldkmc7ly7gpf3zg7qup2dns';
 // Token ids
