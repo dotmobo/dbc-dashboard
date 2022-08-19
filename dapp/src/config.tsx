@@ -66,7 +66,7 @@ export const deadRareUrl = 'https://deadrare.io';
 export const gatewayDeadRareUrl = 'https://gateway.deadrare.io';
 export const deadRareIconUrl = process.env.PUBLIC_URL + '/deadrare.webp';
 export const trustMarketUrl = 'https://xoxno.com';
-export const gatewayTrustMarket = 'https://xoxnoapi.azureedge.net';
+export const gatewayTrustMarket = 'https://api.xoxno.com';
 export const trustMarketIconUrl = process.env.PUBLIC_URL + '/trust.png';
 // Frame it
 export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
