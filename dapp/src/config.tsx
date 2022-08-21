@@ -178,6 +178,17 @@ export const nftStake1Multiple1Address =
 export const nftStake1Multiple1Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'ESGM-c5b30c';
 
+// Genesis DB pool with a Multiple NFT
+export const enableNftStake3Multiple1 = false;
+export const nftStake3Multiple1Name = 'Multiple Genesis #1';
+export const nftStake3Multiple1Currency = '$DEAD';
+export const nftStake3Multiple1Address =
+  elrondNetwork === ('devnet' as any)
+    ? 'erd1qqqqqqqqqqqqqpgqx9hz8skzv7rd6gcqzlrsxnwzaa6m4h870jpqcxngxt'
+    : 'SMART-CONTRACT-ADDRESS-FOR-MULTIPLE-STAKING';
+export const nftStake3Multiple1Collection =
+  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DEADBROS-bf822f';
+
 export const nftStakingOwnerAddress =
   'erd1aczgtydxvnrd7t6gxfz6vgg4kzndqs93h8awr4dh8ya7pwtn6auquh9u5x';
 
