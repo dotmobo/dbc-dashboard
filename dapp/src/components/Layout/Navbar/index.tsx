@@ -21,6 +21,7 @@ import {
   enableNftStake1Solo1,
   enableNftStake1Solo2,
   enableNftStake2Solo1,
+  enableNftStake3Multiple1,
   enableNftStake3Solo1,
   enableStaking,
   enableStats,
@@ -30,6 +31,7 @@ import {
   nftStake1Solo1Name,
   nftStake1Solo2Name,
   nftStake2Solo1Name,
+  nftStake3Multiple1Name,
   nftStake3Solo1Name,
   tokenStakingName
 } from 'config';
@@ -201,6 +203,17 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake3Solo1Name}</span>
                     <FontAwesomeIcon icon={faBone} className='text mr-2' />
+                  </NavDropdown.Item>
+                )}
+                {!!enableNftStake3Multiple1 && (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={
+                      isLoggedIn ? routeNames.stake3multiple1 : routeNames.home
+                    }
+                  >
+                    <span className='mr-2'>{nftStake3Multiple1Name}</span>
+                    <FontAwesomeIcon icon={faSkull} className='text mr-2' />
                   </NavDropdown.Item>
                 )}
                 {!!enableTokenStaking && (
