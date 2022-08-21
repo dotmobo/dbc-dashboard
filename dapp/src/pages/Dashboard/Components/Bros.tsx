@@ -158,14 +158,25 @@ const Bros = ({ title }: any) => {
                 </div>
                 <div>
                   <div className='w-100'></div>
-                  <button
+                  <a
+                    className='btn btn-primary ml-1 mt-2'
+                    role='button'
+                    aria-pressed='true'
+                    href={bro.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    DOWNLOAD&nbsp;
+                    <FontAwesomeIcon icon={faDownload} className='text' />
+                  </a>
+                  {/* <button
                     className='btn btn-primary ml-1 mt-2'
                     onClick={() => downloadImg(bro)}
                   >
                     DOWNLOAD&nbsp;
                     <FontAwesomeIcon icon={faDownload} className='text' />
                   </button>
-                  {/* <div className='w-100'></div>
+                  <div className='w-100'></div>
                   <a
                     className='btn btn-primary ml-1 mt-2'
                     role='button'
