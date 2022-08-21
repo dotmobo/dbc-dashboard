@@ -53,7 +53,8 @@ import {
   faGamepad,
   faSpaceShuttle,
   faMask,
-  faDog
+  faDog,
+  faPerson
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -181,7 +182,7 @@ const Navbar = () => {
                     }
                   >
                     <span className='mr-2'>{nftStake1Multiple1Name}</span>
-                    <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                    <FontAwesomeIcon icon={faPerson} className='text mr-2' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake2Solo1 && (
