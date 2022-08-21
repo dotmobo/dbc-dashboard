@@ -1,0 +1,44 @@
+{
+    "configurations": {
+        "default": {
+            "proxy": "https://api.elrond.com",
+            "chainID": "1"
+        }
+    },
+    "contract":{
+        "deploy":{
+            "verbose": true,
+            "bytecode": "output/multiple_nft_staking.wasm",
+            "recall-nonce": true,
+            "metadata-payable": true,
+            "pem": "../../wallet/wallet-esg.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:ESGF-????",
+                "6",
+                "str:ESG-892328",
+                "6000000000000000000",
+                "2817810000000000000000000"
+            ],
+            "send": true,
+            "outfile": "deploy.interaction.json"
+        },
+        "upgrade":{
+            "verbose": true,
+            "bytecode": "output/multiple_nft_staking.wasm",
+            "recall-nonce": true,
+            "metadata-payable": true,
+            "pem": "../../wallet/wallet-esg.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:ESGF-????",
+                "6",
+                "str:ESG-892328",
+                "6000000000000000000",
+                "2817810000000000000000000"
+            ],
+            "send": true,
+            "outfile": "deploy.interaction.json"
+        }
+     }
+}

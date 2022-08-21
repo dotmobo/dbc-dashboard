@@ -56,9 +56,10 @@ import {
   faSpaceShuttle,
   faMask,
   faDog,
-  faPerson,
+  faMars,
   faHouseChimneyUser,
-  faPersonArrowUpFromLine
+  faPersonArrowUpFromLine,
+  faVenus
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -186,7 +187,7 @@ const Navbar = () => {
                     }
                   >
                     <span className='mr-2'>{nftStake1Multiple1Name}</span>
-                    <FontAwesomeIcon icon={faPerson} className='text mr-2' />
+                    <FontAwesomeIcon icon={faMars} className='text mr-2' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake2Solo1 && (
@@ -215,7 +216,7 @@ const Navbar = () => {
                     }
                   >
                     <span className='mr-2'>{nftStake3Multiple1Name}</span>
-                    <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                    <FontAwesomeIcon icon={faVenus} className='text mr-2' />
                   </NavDropdown.Item>
                 )}
                 {!!enableTokenStaking && (

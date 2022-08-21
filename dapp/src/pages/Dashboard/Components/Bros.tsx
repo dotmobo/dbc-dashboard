@@ -20,7 +20,7 @@ import {
   faPerson,
   faDownload,
   faCropSimple,
-  faPersonDress
+  faVenusMars
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { floor } from 'mathjs';
@@ -84,8 +84,7 @@ const Bros = ({ title }: any) => {
   return (
     <div>
       <h3>
-        My {title} <FontAwesomeIcon icon={faPerson} className='text' />
-        <FontAwesomeIcon icon={faPersonDress} className='text' />
+        My {title} <FontAwesomeIcon icon={faVenusMars} className='text' />
         &nbsp;
         {bros !== undefined && bros.length > 0 && <span>({bros.length})</span>}
       </h3>
