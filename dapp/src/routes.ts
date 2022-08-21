@@ -9,6 +9,7 @@ import Stake1Multiple1 from 'pages/Stake1Multiple1';
 import Stake1Solo1 from 'pages/Stake1Solo1';
 import Stake1Solo2 from 'pages/Stake1Solo2';
 import Stake2Solo1 from 'pages/Stake2Solo1';
+import Stake3Multiple1 from 'pages/Stake3Multiple1';
 import Stake3Solo1 from 'pages/Stake3Solo1';
 import Stats from 'pages/Stats';
 import TokenStake1 from 'pages/TokenStake1';
@@ -31,6 +32,7 @@ export const routeNames = {
   stake1multiple1: '/stake1multiple1',
   stake2solo1: '/stake2solo1',
   stake3solo1: '/stake3solo1',
+  stake3multiple1: '/stake3multiple1',
   tokenstake1: '/tokenstake1',
   stats: '/stats',
   links: '/links',
@@ -113,6 +115,12 @@ const routes: Array<any> = [
     path: routeNames.stake3solo1,
     title: 'Stake 3 Solo 1',
     component: Stake3Solo1,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.stake3multiple1,
+    title: 'Stake 3 Multiple 1',
+    component: Stake3Multiple1,
     authenticatedRoute: true
   },
   {
