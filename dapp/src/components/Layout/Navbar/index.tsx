@@ -56,7 +56,9 @@ import {
   faSpaceShuttle,
   faMask,
   faDog,
-  faPerson
+  faPerson,
+  faHouseChimneyUser,
+  faPersonArrowUpFromLine
 } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
@@ -85,8 +87,8 @@ const Navbar = () => {
               className='nav-link'
               to={isLoggedIn ? routeNames.dashboard : routeNames.home}
             >
-              <span className='linkText mr-2'>Board</span>
-              <FontAwesomeIcon icon={faCircleUser} className='text mr-2' />
+              <span className='linkText mr-2'>Home</span>
+              <FontAwesomeIcon icon={faHouseChimneyUser} className='text mr-2' />
             </Link>
 
             {!!enableInfo && (
@@ -154,7 +156,7 @@ const Navbar = () => {
                 title={
                   <span>
                     <span className='linkText mr-2'>Stake</span>
-                    <FontAwesomeIcon icon={faCoins} className='text mr-2' />
+                    <FontAwesomeIcon icon={faPersonArrowUpFromLine} className='text mr-2' />
                   </span>
                 }
               >

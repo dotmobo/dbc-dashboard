@@ -43,9 +43,9 @@ export const elrondExplorerUrl =
     : 'https://explorer.elrond.com';
 
 // info
-export const enableInfo = true;
+export const enableInfo = false;
 export const enableFarms = false;
-export const enableFloorPrice = true;
+export const enableFloorPrice = false;
 export const enableStats = false;
 export const enableLinks = false;
 
@@ -169,7 +169,7 @@ export const nftStake1Solo2Collection =
 
 // Dawn DB pool with a Multiple NFT
 export const enableNftStake1Multiple1 = true;
-export const nftStake1Multiple1Name = 'Multiple ESG Male #1';
+export const nftStake1Multiple1Name = 'Sentry Guards - M';
 export const nftStake1Multiple1Currency = '$ESG';
 export const nftStake1Multiple1Address =
   elrondNetwork === ('devnet' as any)

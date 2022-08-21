@@ -12,7 +12,7 @@ const Components = () => {
       <hr />
       <Dead title='$ESG' />
       <hr />
-      <Bros title='Elrond Sentry Guards' />
+      <Bros title='Sentry Guards' />
     </div>
   );
 };
