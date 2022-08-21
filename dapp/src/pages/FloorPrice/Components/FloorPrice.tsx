@@ -125,19 +125,6 @@ const FloorPrice = ({ collectionId, title, mintUrl }: any) => {
                   BUY&nbsp;
                   <FontAwesomeIcon icon={faShoppingCart} className='text' />
                 </a>
-                {!!mintUrl && (
-                  <a
-                    className='btn btn-primary ml-3 mt-1 btn-sm'
-                    role='button'
-                    aria-pressed='true'
-                    href={mintUrl}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    MINT&nbsp;
-                    <FontAwesomeIcon icon={faCandyCane} className='text' />
-                  </a>
-                )}
               </div>
             )}
           {floorPriceDawnFI === undefined && (
@@ -164,6 +151,19 @@ const FloorPrice = ({ collectionId, title, mintUrl }: any) => {
                   BUY&nbsp;
                   <FontAwesomeIcon icon={faCropSimple} className='text' />
                 </a>
+                {!!mintUrl && (
+                  <a
+                    className='btn btn-primary ml-3 mt-1 btn-sm'
+                    role='button'
+                    aria-pressed='true'
+                    href={mintUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    MINT&nbsp;
+                    <FontAwesomeIcon icon={faCandyCane} className='text' />
+                  </a>
+                )}
               </div>
             )}
         </div>

@@ -7,12 +7,12 @@ import { enableVote } from 'config';
 const Components = () => {
   return (
     <div className='col mt-4 col-md-12'>
+      {/* <hr />
+      <Rewards /> */}
       <hr />
-      <Rewards />
+      <Dead title='$ESG' />
       <hr />
-      <Dead title='$DEAD' />
-      <hr />
-      <Bros title='#DeadBrothers' />
+      <Bros title='Elrond Sentry Guards' />
     </div>
   );
 };
