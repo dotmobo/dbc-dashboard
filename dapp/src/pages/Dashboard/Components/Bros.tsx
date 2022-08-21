@@ -165,7 +165,7 @@ const Bros = ({ title }: any) => {
                     DOWNLOAD&nbsp;
                     <FontAwesomeIcon icon={faDownload} className='text' />
                   </button>
-                  <div className='w-100'></div>
+                  {/* <div className='w-100'></div>
                   <a
                     className='btn btn-primary ml-1 mt-2'
                     role='button'
@@ -200,7 +200,7 @@ const Bros = ({ title }: any) => {
                   >
                     FRAMEIT&nbsp;
                     <FontAwesomeIcon icon={faCropSimple} className='text' />
-                  </a>
+                  </a> */}
                 </div>
               </LazyLoad>
             </div>
