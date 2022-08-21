@@ -80,7 +80,7 @@ const Dead = ({ title }: any) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            SWAP&nbsp;
+            EXCHANGE&nbsp;
             <FontAwesomeIcon icon={faArrowRightArrowLeft} className='text' />
           </a>
         </div>

@@ -69,14 +69,14 @@ const Navbar = () => {
   const isLoggedIn = Boolean(address);
 
   return (
-    <BsNavbar className='bg-white border-bottom px-4 py-3'>
+    <BsNavbar className='bg-primary border-bottom px-4 py-3' variant='dark'>
       <div className='container-fluid'>
         <Link
           className='d-flex align-items-center navbar-brand mr-0'
           to={isLoggedIn ? routeNames.dashboard : routeNames.home}
         >
           <img src={dAppLogo} alt={dAppName} height={25} />
-          <span className='dapp-name text-muted'>{dAppName}</span>
+          <span className='dapp-name text-white'>{dAppName}</span>
         </Link>
 
         <Container>

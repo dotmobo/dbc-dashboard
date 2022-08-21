@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className='text-center mt-2 mb-3'>
       <div>
-        <a
+        {/* <a
           {...{
             target: '_blank'
           }}
@@ -14,7 +14,7 @@ const Footer = () => {
           href={deadBrothersClubUrl}
         >
           Made with <HeartIcon className='mx-1' /> by DeadBrothers Club.
-        </a>
+        </a> */}
         <span>Copyright © 2022 Elrond Sentry Guards - All Rights Reserved.</span>
       </div>
     </footer>
