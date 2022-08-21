@@ -14,7 +14,7 @@
             "pem": "../../wallet/wallet-esg.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:ESGF-????",
+                "str:ESGF-7490e7",
                 "6",
                 "str:ESG-892328",
                 "6000000000000000000",
@@ -31,7 +31,7 @@
             "pem": "../../wallet/wallet-esg.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:ESGF-????",
+                "str:ESGF-7490e7",
                 "6",
                 "str:ESG-892328",
                 "6000000000000000000",

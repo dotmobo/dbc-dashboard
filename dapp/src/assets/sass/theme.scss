@@ -18,7 +18,9 @@ Override Bootstrap variables only above.
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/darkly/bootswatch";
 
-div.unlock-page_card, div.wallect-connect-login_card,
+div.unlock-page_card, div.wallect-connect-login_card, // login and unlock
+div.progress > div.d-flex.position-absolute.w-100, // transactions wip
+div.modal-content, // start transactions
 div.modal-container.dapp-core-ui-component.modal > .modal-dialog > .modal-content > .card {
   background-color: #303030 !important;
 }

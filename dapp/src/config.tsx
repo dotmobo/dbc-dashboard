@@ -2,7 +2,8 @@
 export const elrondNetwork = 'mainnet'; // mainnet, testnet or devnet
 // Application
 export const dAppName = 'ESG';
-export const dAppLogo = process.env.PUBLIC_URL + '/elrond-sentry-guards-logo.webp';
+export const dAppLogo =
+  process.env.PUBLIC_URL + '/elrond-sentry-guards-logo.webp';
 // Addresses
 export const contractAddress =
   'erd1qqqqqqqqqqqqqpgq3pcmct4d6g649khxyjem4wmdfc3h9tfprvcsps34yh';
@@ -19,7 +20,8 @@ export const nftsCollectionId =
   elrondNetwork === ('devnet' as any) ? 'BEAK-35c061' : 'ESGM-c5b30c';
 export const nftsSerumCollectionId = null;
 export const nftsLegendaryCollectionId = null;
-export const nftsDawnCollectionId = null;
+export const nftsDawnCollectionId =
+  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'ESGF-7490e7';
 export const deadTokenId =
   elrondNetwork === ('devnet' as any) ? 'DEADBROS-fa8f0f' : 'ESG-892328';
 // Urls
@@ -179,15 +181,15 @@ export const nftStake1Multiple1Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'ESGM-c5b30c';
 
 // Genesis DB pool with a Multiple NFT
-export const enableNftStake3Multiple1 = false;
+export const enableNftStake3Multiple1 = true;
 export const nftStake3Multiple1Name = 'Sentry Guards - F';
 export const nftStake3Multiple1Currency = '$ESG';
 export const nftStake3Multiple1Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqx9hz8skzv7rd6gcqzlrsxnwzaa6m4h870jpqcxngxt'
-    : 'erd1qqqqqqqqqqqqqpgqmhyuywj7pdxygymmz4qxvc6e6x9mppfn6auqfsn5vn';
+    : 'erd1qqqqqqqqqqqqqpgq8pvaauv99zjseanmxadmrq9vrl6g66pq6auqmpz8x8';
 export const nftStake3Multiple1Collection =
-  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'ESGM-c5b30c';
+  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'ESGF-7490e7';
 
 export const nftStakingOwnerAddress =
   'erd1aczgtydxvnrd7t6gxfz6vgg4kzndqs93h8awr4dh8ya7pwtn6auquh9u5x';
