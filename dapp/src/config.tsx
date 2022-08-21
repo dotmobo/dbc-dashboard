@@ -118,7 +118,7 @@ export const shopOwnerAddress2 =
   'erd1aczgtydxvnrd7t6gxfz6vgg4kzndqs93h8awr4dh8ya7pwtn6auquh9u5x';
 
 // Staking
-export const enableStaking = false;
+export const enableStaking = true;
 
 export const enableTokenStaking = false;
 export const tokenStakingName = '$ESG';
@@ -168,13 +168,13 @@ export const nftStake1Solo2Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 
 // Dawn DB pool with a Multiple NFT
-export const enableNftStake1Multiple1 = false;
+export const enableNftStake1Multiple1 = true;
 export const nftStake1Multiple1Name = 'Multiple ESG Male #1';
 export const nftStake1Multiple1Currency = '$ESG';
 export const nftStake1Multiple1Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqx9hz8skzv7rd6gcqzlrsxnwzaa6m4h870jpqcxngxt'
-    : 'SMART-CONTRACT-ADDRESS-FOR-MULTIPLE-STAKING';
+    : 'erd1qqqqqqqqqqqqqpgqmhyuywj7pdxygymmz4qxvc6e6x9mppfn6auqfsn5vn';
 export const nftStake1Multiple1Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'ESGM-c5b30c';
 

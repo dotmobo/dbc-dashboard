@@ -14,7 +14,8 @@ import {
   faSkull,
   faArrowDown,
   faArrowUp,
-  faCircle
+  faCircle,
+  faPerson
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactComponent as DeadIcon } from '../../assets/img/dead.svg';
@@ -560,7 +561,7 @@ const MultipleNftStaking = ({
   return (
     <div>
       <h3>
-        Stake {name} <FontAwesomeIcon icon={faSkull} className='text' />
+        Stake {name} <FontAwesomeIcon icon={faPerson} className='text' />
       </h3>
       <div className='row'>
         <div className='col-12'>
