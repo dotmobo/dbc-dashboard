@@ -763,6 +763,9 @@ const MultipleNftStaking = ({
           nbrOfNftStakedByUser !== undefined &&
           !hasPendingTransactions && (
             <div className='col-12'>
+              <div className='alert alert-warning' role='alert'>
+                Don&apos;t forget to withdraw your rewards before staking more NFTs, because that process reset your rewards.
+              </div>
               <div className='w-100'></div>
               <button
                 className='btn btn-primary ml-1 mt-2'
