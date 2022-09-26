@@ -187,7 +187,7 @@ export const nftStake3Multiple1Currency = '$DEAD';
 export const nftStake3Multiple1Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqx9hz8skzv7rd6gcqzlrsxnwzaa6m4h870jpqcxngxt'
-    : 'SMART-CONTRACT-ADDRESS-FOR-MULTIPLE-STAKING';
+    : 'erd1qqqqqqqqqqqqqpgqjujfsg2nk9xlnr8r9nx902vmxu6y2k4m0jpqe2r92f';
 export const nftStake3Multiple1Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DEADBROS-bf822f';
 
