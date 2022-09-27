@@ -165,7 +165,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake1Solo1Name}</span>
                     <FontAwesomeIcon icon={faSkull} className='text mr-2' />
-                    <FontAwesomeIcon icon={faCircle} className='running-on' />
+                    <FontAwesomeIcon icon={faCircle} className='running-off' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake1Solo2 && (
@@ -175,7 +175,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake1Solo2Name}</span>
                     <FontAwesomeIcon icon={faSkull} className='text mr-2' />
-                    <FontAwesomeIcon icon={faCircle} className='running-on' />
+                    <FontAwesomeIcon icon={faCircle} className='running-off' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake1Multiple1 && (
@@ -206,7 +206,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake3Solo1Name}</span>
                     <FontAwesomeIcon icon={faBone} className='text mr-2' />
-                    <FontAwesomeIcon icon={faCircle} className='running-on' />
+                    <FontAwesomeIcon icon={faCircle} className='running-off' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake3Multiple1 && (
