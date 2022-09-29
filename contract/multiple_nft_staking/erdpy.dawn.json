@@ -14,11 +14,11 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DEADBROS-bf822f",
-                "7",
+                "str:DAWNBROS-09395f",
+                "5",
                 "str:DEADBROS-388e63",
-                "3000000000000000000",
-                "1095000000000000000000000"
+                "6000000000000000000",
+                "2350000000000000000000000"
             ],
             "send": true,
             "outfile": "deploy.interaction.json"
@@ -31,11 +31,11 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DEADBROS-bf822f",
-                "7",
+                "str:DAWNBROS-09395f",
+                "5",
                 "str:DEADBROS-388e63",
-                "3000000000000000000",
-                "1095000000000000000000000"
+                "6000000000000000000",
+                "2350000000000000000000000"
             ],
             "send": true,
             "outfile": "deploy.interaction.json"

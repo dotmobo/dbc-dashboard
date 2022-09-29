@@ -1,8 +1,8 @@
 {
     "configurations": {
         "default": {
-            "proxy": "https://api.elrond.com",
-            "chainID": "1"
+            "proxy": "https://devnet-api.elrond.com",
+            "chainID": "D"
         }
     },
     "contract":{
@@ -14,14 +14,14 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DEADBROS-bf822f",
-                "7",
-                "str:DEADBROS-388e63",
-                "3000000000000000000",
-                "1095000000000000000000000"
+                "str:BACKGROUND-35c061",
+                "0",
+                "str:DEADBROS-fa8f0f",
+                "10000000000000000000",
+                "6000000000000000000000000"
             ],
             "send": true,
-            "outfile": "deploy.interaction.json"
+            "outfile": "deploy-testnet.interaction.json"
         },
         "upgrade":{
             "verbose": true,
@@ -31,14 +31,14 @@
             "pem": "../../wallet/wallet-owner.pem",
             "gas-limit": 59999999,
             "arguments": [
-                "str:DEADBROS-bf822f",
-                "7",
-                "str:DEADBROS-388e63",
-                "3000000000000000000",
-                "1095000000000000000000000"
+                "str:BACKGROUND-35c061",
+                "0",
+                "str:DEADBROS-fa8f0f",
+                "10000000000000000000",
+                "6000000000000000000000000"
             ],
             "send": true,
-            "outfile": "deploy.interaction.json"
+            "outfile": "deploy-testnet.interaction.json"
         }
      }
 }

@@ -717,6 +717,7 @@ const NftStaking = ({
                       <div className='w-100'></div>
                       <button
                         className='btn btn-primary ml-1 mt-2'
+                        disabled={!stakingStatus}
                         onClick={() => sendStakeTransaction(bro)}
                       >
                         STAKE{' '}
