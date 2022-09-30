@@ -170,7 +170,7 @@ export const nftStake1Solo2Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 
 // Dawn DB pool with a Multiple NFT
-export const enableNftStake1Multiple1 = false;
+export const enableNftStake1Multiple1 = true;
 export const nftStake1Multiple1Name = 'Multiple Dawn #1';
 export const nftStake1Multiple1Currency = '$DEAD';
 export const nftStake1Multiple1Address =
@@ -181,7 +181,7 @@ export const nftStake1Multiple1Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 
 // Genesis DB pool with a Multiple NFT
-export const enableNftStake3Multiple1 = false;
+export const enableNftStake3Multiple1 = true;
 export const nftStake3Multiple1Name = 'Multiple Genesis #1';
 export const nftStake3Multiple1Currency = '$DEAD';
 export const nftStake3Multiple1Address =
