@@ -1,0 +1,30 @@
+*.pyc
+
+# Packages
+*.egg
+!/tests/**/*.egg
+/*.egg-info
+/dist/*
+build
+_build
+.cache
+*.so
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.pytest_cache
+
+# IDEs
+.DS_Store
+.idea/*
+.python-version
+.vscode/*
+
+# Venv
+.venv
+
+# Generated files
+*.csv
