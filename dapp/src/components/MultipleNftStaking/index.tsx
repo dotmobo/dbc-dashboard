@@ -467,7 +467,7 @@ const MultipleNftStaking = ({
       value: '0',
       data: data,
       receiver: address,
-      gasLimit: 5000000 * checkedBros.size
+      gasLimit: 7000000 * checkedBros.size
     };
     await refreshAccount();
 
@@ -490,7 +490,7 @@ const MultipleNftStaking = ({
       value: '0',
       data: 'claim',
       receiver: nftStakingAddress,
-      gasLimit: 5000000
+      gasLimit: 7000000
     };
     await refreshAccount();
 
@@ -516,7 +516,7 @@ const MultipleNftStaking = ({
       value: '0',
       data: 'unstake',
       receiver: nftStakingAddress,
-      gasLimit: 5000000 * (!!nbrOfNftStakedByUser ? nbrOfNftStakedByUser : 1)
+      gasLimit: 7000000 * (!!nbrOfNftStakedByUser ? nbrOfNftStakedByUser : 1)
     };
     await refreshAccount();
 
