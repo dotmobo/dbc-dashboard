@@ -44,6 +44,7 @@ import {
   faCircleUser,
   faCircleInfo,
   faPersonBooth,
+  faPerson,
   faStore,
   faCoins,
   faCrown,
@@ -187,7 +188,7 @@ const Navbar = () => {
                     }
                   >
                     <span className='mr-2'>{nftStake1Multiple1Name}</span>
-                    <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                    <FontAwesomeIcon icon={faPerson} className='text mr-2' />
                     <FontAwesomeIcon icon={faCircle} className='running-on' />
                   </NavDropdown.Item>
                 )}

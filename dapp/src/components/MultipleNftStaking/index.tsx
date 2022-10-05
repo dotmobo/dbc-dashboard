@@ -11,7 +11,7 @@ import axios from 'axios';
 
 import {
   faDollarSign,
-  faSkull,
+  faPerson,
   faArrowDown,
   faArrowUp,
   faCircle
@@ -560,7 +560,7 @@ const MultipleNftStaking = ({
   return (
     <div>
       <h3>
-        Stake {name} <FontAwesomeIcon icon={faSkull} className='text' />
+        Stake {name} <FontAwesomeIcon icon={faPerson} className='text' />
       </h3>
       <div className='row'>
         <div className='col-12'>
