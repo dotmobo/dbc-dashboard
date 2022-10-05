@@ -7,45 +7,27 @@ def run():
     config = configparser.ConfigParser()
     config.read("config.ini")
     api_url = config["api"]["url"]
-    dawn_sc = config["sc"]["dawn"]
-    genesis_sc = config["sc"]["genesis"]
-    dawn_url = "{}/accounts/{}/transactions?size=10000&status=success&order=asc&function=stake%2Cunstake".format(
-        api_url, dawn_sc
-    )
-    genesis_url = "{}/accounts/{}/transactions?size=10000&status=success&order=asc&function=stake%2Cunstake".format(
-        api_url, genesis_sc
+    tikidy_sc = config["sc"]["tikidy"]
+    tikidy_url = "{}/accounts/{}/transactions?size=10000&status=success&order=asc&function=stake%2Cunstake".format(
+        api_url, tikidy_sc
     )
 
-    print("Generating stakers report for Dawn")
+    print("Generating stakers report for tikidy")
     print("=================================")
-    print("SC: {}\n".format(dawn_sc))
-    dawn_resume = []
-    dawn_response = requests.get(dawn_url)
-    for tx in dawn_response.json():
+    print("SC: {}\n".format(tikidy_sc))
+    tikidy_resume = []
+    tikidy_response = requests.get(tikidy_url)
+    for tx in tikidy_response.json():
         fun = tx.get("function")
         sender = tx.get("sender")
         nbr = len(tx.get("action").get("arguments").get("transfers"))
         if fun == "stake":
-            dawn_resume.append((sender, nbr, "Dawn"))
+            tikidy_resume.append((sender, nbr, "Tikidy"))
         elif fun == "unstake":
-            dawn_resume = list(filter(lambda x: x[0] != sender, dawn_resume))
-
-    print("Generating stakers report for Genesis")
-    print("=====================================")
-    print("SC: {}\n".format(genesis_sc))
-    genesis_resume = []
-    genesis_response = requests.get(genesis_url)
-    for tx in genesis_response.json():
-        fun = tx.get("function")
-        sender = tx.get("sender")
-        nbr = len(tx.get("action").get("arguments").get("transfers"))
-        if fun == "stake":
-            genesis_resume.append((sender, nbr, "Genesis"))
-        elif fun == "unstake":
-            genesis_resume = list(filter(lambda x: x[0] != sender, genesis_resume))
+            tikidy_resume = list(filter(lambda x: x[0] != sender, tikidy_resume))
 
     # Fusion of both
-    resume = dawn_resume + genesis_resume
+    resume = tikidy_resume
 
     # List to csv
     csv = "type,address,nfts\n"
