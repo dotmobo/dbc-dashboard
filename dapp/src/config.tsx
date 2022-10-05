@@ -115,7 +115,7 @@ export const shopOwnerAddress2 =
   'erd1ef2v6ls0l54zvzpqncd3t3unaycwc4a59zjr3k7x6xvc74f20jpq80knvd';
 
 // Staking
-export const enableStaking = false;
+export const enableStaking = true;
 export const enableTokenStaking = false;
 export const tokenStakingName = '$TKDY';
 export const tokenStakingAddress =
@@ -124,7 +124,7 @@ export const tokenStakingAddress =
     : 'SMART-CONTRACT-ADDRESS-FOR-TOKEN-STAKING';
 
 // Dawn DB pool with a Solo NFT
-export const enableNftStake1Solo1 = true;
+export const enableNftStake1Solo1 = false;
 export const nftStake1Solo1Name = 'Dawn #1';
 export const nftStake1Solo1Address =
   elrondNetwork === ('devnet' as any)
@@ -134,7 +134,7 @@ export const nftStake1Solo1Collection =
   elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
 
 // Legendary DB pool with a Solo NFT
-export const enableNftStake2Solo1 = true;
+export const enableNftStake2Solo1 = false;
 export const nftStake2Solo1Name = 'Legendary #1';
 export const nftStake2Solo1Address =
   elrondNetwork === ('devnet' as any)
@@ -144,7 +144,7 @@ export const nftStake2Solo1Collection =
   elrondNetwork === ('devnet' as any) ? 'CLOTHES-35c061' : 'LDB-ada909';
 
 // Genesis DB pool with a Solo NFT
-export const enableNftStake3Solo1 = true;
+export const enableNftStake3Solo1 = false;
 export const nftStake3Solo1Name = 'Genesis #1';
 export const nftStake3Solo1Address =
   elrondNetwork === ('devnet' as any)
@@ -154,7 +154,7 @@ export const nftStake3Solo1Collection =
   elrondNetwork === ('devnet' as any) ? 'BEAK-35c061' : 'DEADBROS-bf822f';
 
 // Dawn DB pool with a Solo NFT
-export const enableNftStake1Solo2 = true;
+export const enableNftStake1Solo2 = false;
 export const nftStake1Solo2Name = 'Dawn #2';
 export const nftStake1Solo2Address =
   elrondNetwork === ('devnet' as any)
@@ -165,17 +165,17 @@ export const nftStake1Solo2Collection =
 
 // Dawn DB pool with a Multiple NFT
 export const enableNftStake1Multiple1 = true;
-export const nftStake1Multiple1Name = 'Multiple Dawn #1';
+export const nftStake1Multiple1Name = 'Tikidy #1';
 export const nftStake1Multiple1Currency = '$TKDY';
 export const nftStake1Multiple1Address =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqx9hz8skzv7rd6gcqzlrsxnwzaa6m4h870jpqcxngxt'
-    : 'erd1qqqqqqqqqqqqqpgqj9qmw2vu74cacceyteuqjlrykr5j6jqz0jpqapxc4k';
+    : 'erd1qqqqqqqqqqqqqpgqmvxjkhw05rszkprdz9htgws78rp70l3ag2kqtaup0u';
 export const nftStake1Multiple1Collection =
-  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'DAWNBROS-09395f';
+  elrondNetwork === ('devnet' as any) ? 'BACKGROUND-35c061' : 'TIKY-84fe8b';
 
 // Genesis DB pool with a Multiple NFT
-export const enableNftStake3Multiple1 = true;
+export const enableNftStake3Multiple1 = false;
 export const nftStake3Multiple1Name = 'Multiple Genesis #1';
 export const nftStake3Multiple1Currency = '$DEAD';
 export const nftStake3Multiple1Address =
