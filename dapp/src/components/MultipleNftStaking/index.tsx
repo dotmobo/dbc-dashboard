@@ -490,7 +490,7 @@ const MultipleNftStaking = ({
       value: '0',
       data: 'claim',
       receiver: nftStakingAddress,
-      gasLimit: 10000000
+      gasLimit: 10000000 * (!!nbrOfNftStakedByUser ? nbrOfNftStakedByUser : 1)
     };
     await refreshAccount();
 
