@@ -48,7 +48,7 @@ const Rewards = () => {
   const getRewardName = (reward: Reward) => {
     return reward.action === undefined
       ? 'EGLD'
-      : reward.action?.arguments?.transfers[0]?.name;
+      : reward.action?.arguments?.transfers?.[0]?.name;
   };
 
   const getRewardValue = (reward: Reward) => {
@@ -57,9 +57,9 @@ const Rewards = () => {
       : formatBigNumber(
           floor(
             divide(
-              parseInt(reward.action?.arguments?.transfers[0]?.value),
-              !!reward.action?.arguments?.transfers[0]?.decimals
-                ? 10 ** reward.action?.arguments?.transfers[0]?.decimals
+              parseInt(reward.action?.arguments?.transfers?.[0]?.value),
+              !!reward.action?.arguments?.transfers?.[0]?.decimals
+                ? 10 ** reward.action?.arguments?.transfers?.[0]?.decimals
                 : 1
             )
           )
@@ -73,7 +73,7 @@ const Rewards = () => {
         <FontAwesomeIcon icon={faGift} className='text' />
       </h3>
       <div className='row'>
-      <div className='col-12 mb-2'>
+        <div className='col-12 mb-2'>
           <span className='mr-1'>Distribution address:</span>
           <span data-testid='distributionAddress'>
             <a
@@ -104,25 +104,29 @@ const Rewards = () => {
           {rewards !== undefined && rewards.length > 0 && (
             <div>
               <i>Since {getLastMonday().format('YYYY-MM-DD')}:</i>
-              {rewards.map((reward: any) => (
-                <div key={reward.txHash}>
-                  {reward.action?.arguments?.transfers[0]?.name === 'DEAD' && (
-                    <DeadIcon className='mx-1' height={16} width={16} />
-                  )}
-                  {reward.action?.arguments?.transfers[0]?.name ===
-                    'LockedMEX' && (
-                    <MexIcon className='mx-1' height={16} width={16} />
-                  )}
-                  {reward.action?.arguments?.transfers[0]?.name === 'ZPAY' && (
-                    <ZPayIcon className='mx-1' height={16} width={16} />
-                  )}
-                  {reward.action === undefined && (
-                    <EgldIcon className='mx-1' height={16} width={16} />
-                  )}
-                  {getRewardName(reward)}:&nbsp;
-                  {getRewardValue(reward)}
-                </div>
-              ))}
+              {rewards
+                .filter((r) => !!r.action?.arguments?.transfers?.[0]?.name)
+                .map((reward: any) => (
+                  <div key={reward.txHash}>
+                    {reward.action?.arguments?.transfers?.[0]?.name ===
+                      'DEAD' && (
+                      <DeadIcon className='mx-1' height={16} width={16} />
+                    )}
+                    {reward.action?.arguments?.transfers?.[0]?.name ===
+                      'LockedMEX' && (
+                      <MexIcon className='mx-1' height={16} width={16} />
+                    )}
+                    {reward.action?.arguments?.transfers?.[0]?.name ===
+                      'ZPAY' && (
+                      <ZPayIcon className='mx-1' height={16} width={16} />
+                    )}
+                    {reward.action === undefined && (
+                      <EgldIcon className='mx-1' height={16} width={16} />
+                    )}
+                    {getRewardName(reward)}:&nbsp;
+                    {getRewardValue(reward)}
+                  </div>
+                ))}
             </div>
           )}
         </div>

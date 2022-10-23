@@ -38,9 +38,6 @@ const FloorPrice = ({ collectionId, title, mintUrl }: any) => {
       method: 'post',
       data: {
         query: `{floorPrice(collection: "${collectionId}")}`
-      },
-      headers: {
-        Referer: 'https://xoxno.com'
       }
     }).then((response) => {
       setfloorPriceDR(response.data.data);

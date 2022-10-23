@@ -40,6 +40,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faRightToBracket,
   faPowerOff,
+  faCircle,
   faCircleUser,
   faCircleInfo,
   faPersonBooth,
@@ -168,6 +169,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake1Solo1Name}</span>
                     <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                    <FontAwesomeIcon icon={faCircle} className='running-off' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake1Solo2 && (
@@ -177,6 +179,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake1Solo2Name}</span>
                     <FontAwesomeIcon icon={faSkull} className='text mr-2' />
+                    <FontAwesomeIcon icon={faCircle} className='running-off' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake1Multiple1 && (
@@ -188,6 +191,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake1Multiple1Name}</span>
                     <FontAwesomeIcon icon={faMars} className='text mr-2' />
+                    <FontAwesomeIcon icon={faCircle} className='running-on' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake2Solo1 && (
@@ -197,6 +201,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake2Solo1Name}</span>
                     <FontAwesomeIcon icon={faCrown} className='text mr-2' />
+                    <FontAwesomeIcon icon={faCircle} className='running-on' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake3Solo1 && (
@@ -206,6 +211,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake3Solo1Name}</span>
                     <FontAwesomeIcon icon={faBone} className='text mr-2' />
+                    <FontAwesomeIcon icon={faCircle} className='running-off' />
                   </NavDropdown.Item>
                 )}
                 {!!enableNftStake3Multiple1 && (
@@ -217,6 +223,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{nftStake3Multiple1Name}</span>
                     <FontAwesomeIcon icon={faVenus} className='text mr-2' />
+                    <FontAwesomeIcon icon={faCircle} className='running-on' />
                   </NavDropdown.Item>
                 )}
                 {!!enableTokenStaking && (
@@ -226,6 +233,7 @@ const Navbar = () => {
                   >
                     <span className='mr-2'>{tokenStakingName}</span>
                     <FontAwesomeIcon icon={faCoins} className='text mr-2' />
+                    <FontAwesomeIcon icon={faCircle} className='running-on' />
                   </NavDropdown.Item>
                 )}
               </NavDropdown>
