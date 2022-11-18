@@ -24,8 +24,8 @@ def run():
     for tx in dawn_response.json():
         fun = tx.get("function")
         sender = tx.get("sender")
-        nbr = len(tx.get("action").get("arguments").get("transfers"))
         if fun == "stake":
+            nbr = len(tx.get("action").get("arguments").get("transfers"))
             dawn_resume.append((sender, nbr, "Dawn"))
         elif fun == "unstake":
             dawn_resume = list(filter(lambda x: x[0] != sender, dawn_resume))
@@ -38,8 +38,8 @@ def run():
     for tx in genesis_response.json():
         fun = tx.get("function")
         sender = tx.get("sender")
-        nbr = len(tx.get("action").get("arguments").get("transfers"))
         if fun == "stake":
+            nbr = len(tx.get("action").get("arguments").get("transfers"))
             genesis_resume.append((sender, nbr, "Genesis"))
         elif fun == "unstake":
             genesis_resume = list(filter(lambda x: x[0] != sender, genesis_resume))
