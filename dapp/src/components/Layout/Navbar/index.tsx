@@ -69,7 +69,7 @@ const Navbar = () => {
   const isLoggedIn = Boolean(address);
 
   return (
-    <BsNavbar className='bg-white border-bottom px-4 py-3'>
+    <BsNavbar className='bg-primary border-bottom px-4 py-3' variant='dark'>
       <div className='container-fluid'>
         <Link
           className='d-flex align-items-center navbar-brand mr-0'

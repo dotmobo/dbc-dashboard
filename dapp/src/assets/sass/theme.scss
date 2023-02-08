@@ -1,21 +1,32 @@
 /* Bootstrap overrides
 -------------------------------------------------- */
 
-$body: #000;
-$headings-font-weight: 300 !important;
-$primary: #7711d0;
-$light: #faf5fe;
+// $body: #000;
+// $headings-font-weight: 300 !important;
+$primary: #000;
+// $light: #faf5fe;
 
-$headings-font-weight: 300 !important;
-$a: #7711d0;
+// $headings-font-weight: 300 !important;
+// $a: #7711d0;
 
 /* Do not move the imports from here.
 Override Bootstrap variables only above.
 -------------------------------------------------- */
 
 // Bootstrap
+@import "~bootswatch/dist/darkly/variables";
+@import "~bootstrap/scss/bootstrap";
+@import "~bootswatch/dist/darkly/bootswatch";
 
-@import '~bootstrap/scss/bootstrap.scss';
+div.unlock-page_card, div.wallect-connect-login_card, // login and unlock
+div.progress > div.d-flex.position-absolute.w-100, // transactions wip
+div.modal-content, // start transactions
+div.modal-container.dapp-core-ui-component.modal > .modal-dialog > .modal-content > .card {
+  background-color: #303030 !important;
+}
+button.custom-class-for-modals_closeBtn {
+  color: #fff !important;
+}
 
 @import '~bootstrap/scss/reboot';
 
@@ -372,10 +383,10 @@ footer {
     line-height: 1.155rem;
 
     a {
-      color: $black;
+      color: $white;
 
       &:hover {
-        color: $black;
+        color: $white;
       }
 
       #heart {
