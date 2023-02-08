@@ -73,8 +73,8 @@ export const gatewayFrameIt = 'https://api.frameit.gg/api/v1/nftcollection';
 export const frameItIconUrl = process.env.PUBLIC_URL + '/frameit.png';
 export const frameItUrl = 'https://www.frameit.gg';
 // Omniscient
-export const omniscientUrl1 = 'https://omniscient.tools/partners/DEADBROS-bf822f/analytics';
-export const omniscientUrl2 = 'https://omniscient.tools/partners/DAWNBROS-09395f/analytics';
+export const omniscientUrl1 = 'https://www.omniscient.tools/partners/DEADBROS-bf822f/analytics';
+export const omniscientUrl2 = 'https://www.omniscient.tools/partners/DAWNBROS-09395f/analytics';
 // Esdt market
 export const esdtMarketUrl = 'https://esdt.market/app/esdt/listings';
 
