@@ -18,6 +18,11 @@ export const UnlockRoute: () => JSX.Element = () => {
     }
   }, [isLoggedIn]);
 
+  const commonProps = {
+    callbackRoute: routeNames.dashboard,
+    nativeAuth: true // optional
+  };
+
   return (
     <div className='home d-flex flex-fill align-items-center'>
       <div className='m-auto' data-testid='unlockPage'>
@@ -27,22 +32,22 @@ export const UnlockRoute: () => JSX.Element = () => {
             <p className='mb-4'>pick a login method</p>
 
             <ExtensionLoginButton
-              callbackRoute={routeNames.dashboard}
               loginButtonText={'Extension'}
+              {...commonProps}
             />
             <WebWalletLoginButton
-              callbackRoute={routeNames.dashboard}
               loginButtonText={'Web wallet'}
+              {...commonProps}
             />
             <LedgerLoginButton
               loginButtonText={'Ledger'}
-              callbackRoute={routeNames.dashboard}
               className={'test-class_name'}
+              {...commonProps}
             />
             <WalletConnectLoginButton
-              callbackRoute={routeNames.dashboard}
               loginButtonText={'Maiar'}
               isWalletConnectV2={true}
+              {...commonProps}
             />
           </div>
         </div>
