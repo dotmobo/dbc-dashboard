@@ -6,7 +6,7 @@
   "license": "GPL-3.0-or-later",
   "repository": "@elrondnetwork/dapp-template",
   "dependencies": {
-    "@elrondnetwork/dapp-core": "1.1.21",
+    "@elrondnetwork/dapp-core": "1.3.8",
     "@elrondnetwork/erdjs": "9.2.6",
     "@types/hex2dec": "^1.1.2",
     "@types/lodash-es": "^4.17.6",
