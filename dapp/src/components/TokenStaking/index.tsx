@@ -10,7 +10,6 @@ import {
   Address,
   AddressValue,
   ContractFunction,
-  ProxyProvider,
   Query
 } from '@elrondnetwork/erdjs';
 import { faCircle, faCoins } from '@fortawesome/free-solid-svg-icons';
@@ -19,6 +18,7 @@ import { floor, divide } from 'mathjs';
 import moment from 'moment';
 import { deadTokenId, elrondExplorerUrl } from 'config';
 import converter from 'hex2dec';
+import { ProxyNetworkProvider } from '@elrondnetwork/erdjs-network-providers/out';
 
 interface TokenStakingType {
   tokenStakingAddress: string;
@@ -56,7 +56,9 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
       func: new ContractFunction('getStakingTokenId'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -87,7 +89,9 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
       func: new ContractFunction('getMinimumStakingAmount'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -118,7 +122,9 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
       func: new ContractFunction('getStakeAmount'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -149,7 +155,9 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
       func: new ContractFunction('getLockTime'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -180,7 +188,9 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
       func: new ContractFunction('getUnstakeTime'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -211,7 +221,9 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
       func: new ContractFunction('getCurrentRewards'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -242,7 +254,9 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
       func: new ContractFunction('getMinimumStakingDays'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -273,7 +287,9 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
       func: new ContractFunction('getRewardsPerDayPercent'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -304,7 +320,9 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
       func: new ContractFunction('getStakingStatus'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {

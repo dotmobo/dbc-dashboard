@@ -6,12 +6,7 @@ import {
   useGetNetworkConfig,
   useGetPendingTransactions
 } from '@elrondnetwork/dapp-core';
-import {
-  Address,
-  ContractFunction,
-  ProxyProvider,
-  Query
-} from '@elrondnetwork/erdjs';
+import { Address, ContractFunction, Query } from '@elrondnetwork/erdjs';
 import {
   faShop,
   faMoneyBillTransfer,
@@ -27,6 +22,7 @@ import LazyLoad from 'react-lazyload';
 import { elrondApiUrl, elrondExplorerUrl } from 'config';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 import converter from 'hex2dec';
+import { ProxyNetworkProvider } from '@elrondnetwork/erdjs-network-providers/out';
 
 interface Shop {
   identifier: string;
@@ -77,7 +73,9 @@ const Shop = ({
       func: new ContractFunction('getPrice'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -108,7 +106,9 @@ const Shop = ({
       func: new ContractFunction('getNftIdentifier'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
