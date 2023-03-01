@@ -1,5 +1,6 @@
 import React from 'react';
-import { DappUI, useGetLoginInfo } from '@elrondnetwork/dapp-core';
+import { useGetLoginInfo } from '@elrondnetwork/dapp-core/hooks';
+import * as DappUI from '@elrondnetwork/dapp-core/UI';
 import { routeNames } from 'routes';
 
 export const UnlockRoute: () => JSX.Element = () => {
@@ -41,6 +42,7 @@ export const UnlockRoute: () => JSX.Element = () => {
             <WalletConnectLoginButton
               callbackRoute={routeNames.dashboard}
               loginButtonText={'Maiar'}
+              isWalletConnectV2={true}
             />
           </div>
         </div>

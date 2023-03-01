@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  refreshAccount,
-  transactionServices,
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
-} from '@elrondnetwork/dapp-core';
+} from '@elrondnetwork/dapp-core/hooks';
+import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
+import { sendTransactions } from '@elrondnetwork/dapp-core/services';
 import {
   Address,
   AddressValue,
@@ -365,8 +365,6 @@ const TokenStaking = ({ tokenStakingAddress, name }: TokenStakingType) => {
     }
     return result;
   }
-
-  const { sendTransactions } = transactionServices;
 
   const sendStakeTransaction = async () => {
     const stakeTransaction = {

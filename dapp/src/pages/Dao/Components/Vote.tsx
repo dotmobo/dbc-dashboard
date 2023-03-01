@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  refreshAccount,
-  transactionServices,
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
-} from '@elrondnetwork/dapp-core';
+} from '@elrondnetwork/dapp-core/hooks';
+import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
+import { sendTransactions } from '@elrondnetwork/dapp-core/services';
 import {
   Address,
   AddressValue,
@@ -227,8 +227,6 @@ const Vote = ({
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
-
-  const { sendTransactions } = transactionServices;
 
   const sendYesTransaction = async () => {
     const yesTransaction = {

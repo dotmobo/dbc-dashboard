@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
+import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks';
 import {
   contractAddress,
   deadRareUrl,
