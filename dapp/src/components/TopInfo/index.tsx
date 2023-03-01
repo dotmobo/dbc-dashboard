@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks';
-import * as DappUI from '@elrondnetwork/dapp-core/UI';
+import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
+import * as DappUI from '@multiversx/sdk-dapp/UI';
 import {
   elrondExplorerUrl,
 } from 'config';

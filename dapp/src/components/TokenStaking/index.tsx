@@ -3,22 +3,22 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
-} from '@elrondnetwork/dapp-core/hooks';
-import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
-import { sendTransactions } from '@elrondnetwork/dapp-core/services';
+} from '@multiversx/sdk-dapp/hooks';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils';
+import { sendTransactions } from '@multiversx/sdk-dapp/services';
 import {
   Address,
   AddressValue,
   ContractFunction,
   Query
-} from '@elrondnetwork/erdjs';
+} from '@multiversx/sdk-core';
 import { faCircle, faCoins } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { floor, divide } from 'mathjs';
 import moment from 'moment';
 import { deadTokenId, elrondExplorerUrl } from 'config';
 import converter from 'hex2dec';
-import { ProxyNetworkProvider } from '@elrondnetwork/erdjs-network-providers/out';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 
 interface TokenStakingType {
   tokenStakingAddress: string;

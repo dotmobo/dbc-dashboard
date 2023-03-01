@@ -2,10 +2,10 @@ import React from 'react';
 import {
   useGetAccountInfo,
   useGetNetworkConfig
-} from '@elrondnetwork/dapp-core/hooks';
-import * as DappUI from '@elrondnetwork/dapp-core/UI';
-import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
-import { useGetActiveTransactionsStatus } from '@elrondnetwork/dapp-core/hooks';
+} from '@multiversx/sdk-dapp/hooks';
+import * as DappUI from '@multiversx/sdk-dapp/UI';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils';
+import { useGetActiveTransactionsStatus } from '@multiversx/sdk-dapp/hooks';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
 import TransactionsList from './TransactionsList';

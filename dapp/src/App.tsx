@@ -1,6 +1,6 @@
 import React from 'react';
-import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
-import * as DappUI from '@elrondnetwork/dapp-core/UI';
+import { DappProvider } from '@multiversx/sdk-dapp/wrappers';
+import * as DappUI from '@multiversx/sdk-dapp/UI';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import Layout from 'components/Layout';
 import PageNotFound from 'pages/PageNotFound';

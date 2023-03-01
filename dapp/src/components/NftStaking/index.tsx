@@ -3,9 +3,9 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
-} from '@elrondnetwork/dapp-core/hooks';
-import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
-import { sendTransactions } from '@elrondnetwork/dapp-core/services';
+} from '@multiversx/sdk-dapp/hooks';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils';
+import { sendTransactions } from '@multiversx/sdk-dapp/services';
 import { elrondApiUrl, elrondExplorerUrl } from 'config';
 import axios from 'axios';
 
@@ -27,9 +27,9 @@ import {
   BytesValue,
   ContractFunction,
   Query
-} from '@elrondnetwork/erdjs';
+} from '@multiversx/sdk-core';
 import moment from 'moment';
-import { ProxyNetworkProvider } from '@elrondnetwork/erdjs-network-providers/out';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 
 interface Bro {
   identifier: string;

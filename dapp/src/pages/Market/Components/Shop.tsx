@@ -3,10 +3,10 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
-} from '@elrondnetwork/dapp-core/hooks';
-import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
-import { sendTransactions } from '@elrondnetwork/dapp-core/services';
-import { Address, ContractFunction, Query } from '@elrondnetwork/erdjs';
+} from '@multiversx/sdk-dapp/hooks';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils';
+import { sendTransactions } from '@multiversx/sdk-dapp/services';
+import { Address, ContractFunction, Query } from '@multiversx/sdk-core';
 import {
   faShop,
   faMoneyBillTransfer,
@@ -22,7 +22,7 @@ import LazyLoad from 'react-lazyload';
 import { elrondApiUrl, elrondExplorerUrl } from 'config';
 import { ReactComponent as DeadIcon } from '../../../assets/img/dead.svg';
 import converter from 'hex2dec';
-import { ProxyNetworkProvider } from '@elrondnetwork/erdjs-network-providers/out';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 
 interface Shop {
   identifier: string;

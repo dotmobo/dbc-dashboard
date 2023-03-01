@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks';
+import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
 import { deadTokenId, elrondApiUrl, esdtMarketUrl } from 'config';
 import axios from 'axios';
 
