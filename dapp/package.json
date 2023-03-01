@@ -6,6 +6,7 @@
   "license": "GPL-3.0-or-later",
   "repository": "@elrondnetwork/dapp-template",
   "dependencies": {
+    "@babel/runtime": "^7.21.0",
     "@fortawesome/fontawesome-svg-core": "6.1.0",
     "@fortawesome/free-solid-svg-icons": "6.1.0",
     "@fortawesome/react-fontawesome": "0.1.18",
@@ -37,6 +38,7 @@
     "@types/react": "^17.0.7"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "start-testnet": "npm run copy-testnet-config & npm run start",
     "start-devnet": "npm run copy-devnet-config & npm run start",
