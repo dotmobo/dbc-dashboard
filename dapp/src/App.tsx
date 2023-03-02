@@ -7,15 +7,12 @@ import PageNotFound from 'pages/PageNotFound';
 import { routeNames } from 'routes';
 import routes from 'routes';
 import { elrondNetwork } from 'config';
+import UnlockRoute from 'pages/UnlockPage';
 
 const environment = elrondNetwork;
 
-const {
-  TransactionsToastList,
-  SignTransactionsModals,
-  NotificationModal,
-  DappCorePages: { UnlockPage }
-} = DappUI;
+const { TransactionsToastList, SignTransactionsModals, NotificationModal } =
+  DappUI;
 
 const App = () => {
   return (
@@ -33,10 +30,7 @@ const App = () => {
           <NotificationModal />
           <SignTransactionsModals className='custom-class-for-modals' />
           <Routes>
-            <Route
-              path={routeNames.unlock}
-              element={<UnlockPage loginRoute={routeNames.dashboard} />}
-            />
+            <Route path={routeNames.unlock} element={<UnlockRoute />} />
             {routes.map((route: any, index: number) => (
               <Route
                 path={route.path}
