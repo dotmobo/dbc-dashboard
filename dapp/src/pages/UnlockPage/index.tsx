@@ -29,14 +29,14 @@ export const UnlockRoute: () => JSX.Element = () => {
         <div className='card my-4 text-center'>
           <div className='card-body py-4 px-2 px-sm-2 mx-lg-4'>
             <h4 className='mb-4'>Login</h4>
-            <p className='mb-4'>pick a login method</p>
+            <p className='mb-4'>Pick a login method</p>
 
             <ExtensionLoginButton
-              loginButtonText={'Extension'}
+              loginButtonText={'Defi Wallet'}
               {...commonProps}
             />
             <WebWalletLoginButton
-              loginButtonText={'Web wallet'}
+              loginButtonText={'Web Wallet'}
               {...commonProps}
             />
             <LedgerLoginButton
@@ -45,7 +45,7 @@ export const UnlockRoute: () => JSX.Element = () => {
               {...commonProps}
             />
             <WalletConnectLoginButton
-              loginButtonText={'Maiar'}
+              loginButtonText={'xPortal App'}
               isWalletConnectV2={true}
               {...commonProps}
             />
