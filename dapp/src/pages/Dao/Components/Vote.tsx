@@ -1,18 +1,17 @@
 import * as React from 'react';
 import {
-  refreshAccount,
-  transactionServices,
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
-} from '@elrondnetwork/dapp-core';
+} from '@multiversx/sdk-dapp/hooks';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils';
+import { sendTransactions } from '@multiversx/sdk-dapp/services';
 import {
   Address,
   AddressValue,
   ContractFunction,
-  ProxyProvider,
   Query
-} from '@elrondnetwork/erdjs';
+} from '@multiversx/sdk-core';
 import {
   faCircleQuestion,
   faPersonBooth,
@@ -27,6 +26,7 @@ import { divide, floor } from 'mathjs';
 import { ProgressBar } from 'react-bootstrap';
 import { elrondExplorerUrl } from 'config';
 import converter from 'hex2dec';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 
 interface VoteType {
   voteAddress: string;
@@ -69,7 +69,9 @@ const Vote = ({
       func: new ContractFunction('getQuestion'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -100,7 +102,9 @@ const Vote = ({
       func: new ContractFunction('getInProgress'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -131,7 +135,9 @@ const Vote = ({
       func: new ContractFunction('getYes'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -162,7 +168,9 @@ const Vote = ({
       func: new ContractFunction('getNo'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -193,7 +201,9 @@ const Vote = ({
       func: new ContractFunction('getMyAmount'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -217,8 +227,6 @@ const Vote = ({
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
-
-  const { sendTransactions } = transactionServices;
 
   const sendYesTransaction = async () => {
     const yesTransaction = {

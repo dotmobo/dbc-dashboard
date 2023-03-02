@@ -3,7 +3,7 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
-} from '@elrondnetwork/dapp-core';
+} from '@multiversx/sdk-dapp/hooks';
 import { faGamepad } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

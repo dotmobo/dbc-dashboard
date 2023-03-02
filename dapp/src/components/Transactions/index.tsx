@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   useGetAccountInfo,
-  DappUI,
-  transactionServices,
-  refreshAccount,
   useGetNetworkConfig
-} from '@elrondnetwork/dapp-core';
+} from '@multiversx/sdk-dapp/hooks';
+import * as DappUI from '@multiversx/sdk-dapp/UI';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils';
+import { useGetActiveTransactionsStatus } from '@multiversx/sdk-dapp/hooks';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
 import TransactionsList from './TransactionsList';
@@ -15,8 +15,7 @@ const Transactions = ({ contractAddress }: any) => {
   const {
     network: { apiAddress }
   } = useGetNetworkConfig();
-  const { success, fail, hasActiveTransactions } =
-    transactionServices.useGetActiveTransactionsStatus();
+  const { success, fail, pending } = useGetActiveTransactionsStatus();
 
   const [state, setState] = React.useState<StateType>({
     transactions: [],
@@ -25,7 +24,7 @@ const Transactions = ({ contractAddress }: any) => {
   const account = useGetAccountInfo();
 
   const fetchData = () => {
-    if (success || fail || !hasActiveTransactions) {
+    if (success || fail || !pending) {
       getTransactions({
         apiAddress,
         address: account.address,
@@ -41,7 +40,7 @@ const Transactions = ({ contractAddress }: any) => {
     }
   };
 
-  React.useEffect(fetchData, [success, fail, hasActiveTransactions]);
+  React.useEffect(fetchData, [success, fail, pending]);
 
   const { transactions } = state;
 

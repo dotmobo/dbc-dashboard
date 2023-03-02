@@ -1,5 +1,6 @@
 import React from 'react';
-import { logout, useGetAccountInfo } from '@elrondnetwork/dapp-core';
+import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
+import { logout } from '@multiversx/sdk-dapp/utils';
 import {
   Navbar as BsNavbar,
   NavItem,

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  refreshAccount,
-  transactionServices,
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions
-} from '@elrondnetwork/dapp-core';
+} from '@multiversx/sdk-dapp/hooks';
+import { refreshAccount } from '@multiversx/sdk-dapp/utils';
+import { sendTransactions } from '@multiversx/sdk-dapp/services';
 import { elrondApiUrl, elrondExplorerUrl } from 'config';
 import axios from 'axios';
 
@@ -26,10 +26,10 @@ import {
   AddressValue,
   BytesValue,
   ContractFunction,
-  ProxyProvider,
   Query
-} from '@elrondnetwork/erdjs';
+} from '@multiversx/sdk-core';
 import moment from 'moment';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
 
 interface Bro {
   identifier: string;
@@ -106,7 +106,9 @@ const NftStaking = ({
       func: new ContractFunction('getStakingStatus'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -137,7 +139,9 @@ const NftStaking = ({
       func: new ContractFunction('getRewardsTokenTotalSupply'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -168,7 +172,9 @@ const NftStaking = ({
       func: new ContractFunction('getNbrOfStakers'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -199,7 +205,9 @@ const NftStaking = ({
       func: new ContractFunction('getLockTime'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -230,7 +238,9 @@ const NftStaking = ({
       func: new ContractFunction('getUnstakeTime'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -261,7 +271,9 @@ const NftStaking = ({
       func: new ContractFunction('getMinimumStakingDays'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -292,7 +304,9 @@ const NftStaking = ({
       func: new ContractFunction('getRewardsTokenAmountPerDay'),
       args: []
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -323,7 +337,9 @@ const NftStaking = ({
       func: new ContractFunction('getCurrentRewards'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -354,7 +370,9 @@ const NftStaking = ({
       func: new ContractFunction('getNftNonce'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress, { timeout: 3000 });
+    const proxy = new ProxyNetworkProvider(network.apiAddress, {
+      timeout: 3000
+    });
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -401,8 +419,6 @@ const NftStaking = ({
   const formatBigNumber = (x: number) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
-
-  const { sendTransactions } = transactionServices;
 
   const sendStakeTransaction = async (bro: Bro) => {
     const stakeTransaction = {
