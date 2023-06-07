@@ -27,7 +27,7 @@ const Components = () => {
             voteWithdrawData={voteWithdrawData}
             deadTokenId={deadTokenId}
           />
-          {/* <hr />
+          <hr />
           <Vote
             voteAddress={voteAddress2}
             voteOwnerAddress={voteOwnerAddress}
@@ -36,7 +36,7 @@ const Components = () => {
             voteFinishData={voteFinishData}
             voteWithdrawData={voteWithdrawData}
             deadTokenId={deadTokenId}
-          /> */}
+          />
         </div>
       )}
     </div>

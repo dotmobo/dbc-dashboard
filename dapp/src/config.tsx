@@ -87,7 +87,7 @@ export const voteAddress =
 export const voteAddress2 =
   elrondNetwork === ('devnet' as any)
     ? 'erd1qqqqqqqqqqqqqpgqqwz83uqnh2gcjylscwv088f364y9dmn70jpqz8w7dj'
-    : 'PUT_YOUR_ADDRESS_HERE';
+    : 'erd1qqqqqqqqqqqqqpgqm7yvj26zgnjxffc00flhu0wg3fjuxzcc0jpqhl6yxa';
 export const voteYesData = 'vote_yes';
 export const voteNoData = 'vote_no';
 export const voteFinishData = 'finish_vote';

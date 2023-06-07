@@ -1,0 +1,36 @@
+{
+    "configurations": {
+        "default": {
+            "proxy": "https://api.elrond.com",
+            "chainID": "1"
+        }
+    },
+    "contract":{
+        "deploy":{
+            "verbose": true,
+            "bytecode": "output/vote.wasm",
+            "recall-nonce": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:Should we use the 100 EGLD funds to launch the new 3D collection instead of refunding minters ?",
+                "str:DEADBROS-388e63"
+            ],
+            "send": true,
+            "outfile": "deploy.interaction.json"
+        },
+        "upgrade":{
+            "verbose": true,
+            "bytecode": "output/vote.wasm",
+            "recall-nonce": true,
+            "pem": "../../wallet/wallet-owner.pem",
+            "gas-limit": 59999999,
+            "arguments": [
+                "str:Should we use the 100 EGLD funds to launch the new 3D collection instead of refunding minters ?",
+                "str:DEADBROS-388e63"
+            ],
+            "send": true,
+            "outfile": "deploy.interaction.json"
+        }
+     }
+}
